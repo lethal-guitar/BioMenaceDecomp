@@ -13,8 +13,7 @@ Only the episode 1 Shareware EXE v1.1 is currently covered - the original versio
 
 All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). About half of the player control code has also been recreated. However, all the actor logic (enemies, items, interactive objects etc.) is still missing.
 
-Overall, about 75 % of all code and 92 % of all data has been recreated.
-Out of that, only 27 % of the game-specific code has been done so far.
+Overall, about 78 % of all code and 92 % of all data has been recreated.
 
 Some variables and functions don't have meaningful names yet, and many places use magic numbers instead of enum values/constants.
 
@@ -23,8 +22,8 @@ Some variables and functions don't have meaningful names yet, and many places us
 
 | What | Bytes | % done |
 | --- | --- | --- |
-| All code | 99,783 / 131,744 | 75.7 % |
-| Game logic code | 12,166 / 44,127 | 27.6 % |
+| All code | 102,663 / 131,744 | 77.9 % |
+| Game logic code | 15,046 / 44,127 | 34.1 % |
 | Data | 82,880 / 89,984 | 92.1 % |
 
 
