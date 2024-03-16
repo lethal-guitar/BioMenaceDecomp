@@ -22,10 +22,10 @@
 
 
 Uint32 dword_3FA52;
-Uint16 word_3FA56;
+Uint16 invincible;
 Uint16 word_3FA66;
-Sint16 word_3FA68;
-Sint16 word_3FA6A;
+Sint16 doorx;
+Sint16 doory;
 Uint16 word_3FA6C;
 Uint8 byte_3FA6E;
 
@@ -56,10 +56,9 @@ Sint16 TABLE2[] = { -8, 0, 8 };
 
 extern statetype far s_player_dying;
 extern statetype far s_player_dead;
-extern statetype far s_player_3;
+extern statetype far s_player_fireball;
 extern statetype far s_player_shielded1;
 extern statetype far s_player_shielded2;
-extern statetype far s_player_43;
 extern statetype far s_player_standing;
 extern statetype far s_player_5;
 extern statetype far s_player_6;
@@ -71,7 +70,7 @@ extern statetype far s_player_interact2;
 extern statetype far s_player_opendoor1;
 extern statetype far s_player_opendoor2;
 extern statetype far s_player_crouching;
-extern statetype far s_player_throw_crouched;
+extern statetype far s_player_place_mine;
 extern statetype far s_player_climbing_idle;
 extern statetype far s_player_climbing1;
 extern statetype far s_player_climbing2;
@@ -85,54 +84,55 @@ extern statetype far s_player_throwing_grenade3;
 extern statetype far s_player_throwing_grenade_air1;
 extern statetype far s_player_throwing_grenade_air2;
 extern statetype far s_player_throwing_grenade_air3;
-extern statetype far s_player_falling1;
-extern statetype far s_player_falling2;
-extern statetype far s_player_falling3;
-extern statetype far s_player_71;
-extern statetype far s_player_72;
-extern statetype far s_player_73;
-extern statetype far s_player_74;
-extern statetype far s_player_75;
-extern statetype far s_player_76;
-extern statetype far s_player_77;
-extern statetype far s_player_78;
-extern statetype far s_player_79;
-extern statetype far s_player_80;
-extern statetype far s_player_81;
-extern statetype far s_player_82;
-extern statetype far s_player_83;
-extern statetype far s_player_84;
-extern statetype far s_player_85;
+extern statetype far s_player_in_air1;
+extern statetype far s_player_in_air2;
+extern statetype far s_player_in_air3;
+extern statetype far s_player_shoot_single1;
+extern statetype far s_player_shoot_single2;
+extern statetype far s_player_shoot_single3;
+extern statetype far s_player_shoot_single_air1;
+extern statetype far s_player_shoot_single_air2;
+extern statetype far s_player_shoot_single_air3;
+extern statetype far s_player_shoot_single_crouch1;
+extern statetype far s_player_shoot_single_crouch2;
+extern statetype far s_player_shoot_single_crouch3;
+extern statetype far s_player_shoot1;
+extern statetype far s_player_shoot2;
+extern statetype far s_player_shoot_crouch1;
+extern statetype far s_player_shoot_crouch2;
+extern statetype far s_player_shoot_air1;
+extern statetype far s_player_shoot_air2;
 extern statetype far s_seg197;
 
 void sub_1E21D(Sint16 x, Sint16 y, Sint16 t);
-void sub_1A6F6(objtype* ob);
-void sub_1A8DF(objtype* ob);
-void sub_1ADB5(objtype* ob);
-void sub_1BAE8(objtype* ob);
+void OpenDoor(objtype* ob);
+void SnakeShootThink(objtype* ob);
+void SnakeDyingThink(objtype* ob);
+void R_Dying(objtype* ob);
 void SnakeStandThink(objtype* ob);
-void sub_1AE0A(objtype* ob, objtype* hit);
-void sub_1B85B(objtype* ob);
-void sub_1B8BB(objtype* ob);
-void sub_1BD88(objtype* ob, objtype* hit);
+void SnakeContactShielded(objtype* ob, objtype* hit);
+void R_OnGround(objtype* ob);
+void R_Walking(objtype* ob);
+void SnakeContact(objtype* ob, objtype* hit);
+void SnakeContact2(objtype* ob, objtype* hit);
 void R_PlayerInAir(objtype* ob);
-void sub_1B26A(objtype* ob);
-void sub_1B597(objtype* ob);
-void sub_1B75A(objtype* ob);
-void sub_1A7DF(objtype* ob);
-void sub_1A86D(objtype* ob);
-void sub_1AA6B(objtype* ob);
+void SnakeWalkThink(objtype* ob);
+void SnakeClimbIdleThink(objtype* ob);
+void SnakeShootSingleThink(objtype* ob);
+void SnakeShootSingleThink2(objtype* ob);
+void SnakeShootSingleCrouchThink(objtype* ob);
+void SnakeShootCrouchThink(objtype* ob);
 void SnakeClimbThink(objtype* ob);
-void sub_19E35(objtype* ob);
-void sub_1B43E(objtype* ob);
-void sub_1AB6F(objtype* ob);
-void sub_1A9E3(objtype* ob);
-void sub_1B6D6(objtype* ob);
+void SnakeInteractThink(objtype* ob);
+void SnakeAirThink(objtype* ob);
+void SnakeShootAirThink(objtype* ob);
+void SnakeShootAirThink2(objtype* ob);
+void CheckFallOffLadder(objtype* ob);
 
 void AlignPlayer(objtype* ob);
 void SnakeThrow(objtype* ob);
 void WarpToDoorDest(objtype* ob);
-void FinishPlayerDeath(objtype* ob);
+void SnakeDeadThink(objtype* ob);
 
 void ShowCompatibilityInfoMessage();
 void BossDialog();
@@ -140,29 +140,29 @@ void BossDialog();
 statetype far s_player_dying = {
   PLAYER_DYING1_SPR, PLAYER_DYING1_SPR,
   think, false, ps_none, 0, 0, 0,
-  sub_1ADB5, NULL, sub_1BAE8, &s_player_dead};
+  SnakeDyingThink, NULL, R_Dying, &s_player_dead};
 
 statetype far s_player_dead = {
   PLAYER_DYING2_SPR, PLAYER_DYING2_SPR,
   step, false, ps_none, 50, 0, 0,
-  FinishPlayerDeath, NULL, R_Draw, &s_player_dead};
+  SnakeDeadThink, NULL, R_Draw, &s_player_dead};
 
-statetype far s_player_3 = {
+statetype far s_player_fireball = {
   PLAYER_DYING1_SPR, PLAYER_DYING1_SPR,
   step, false, ps_tofloor, 20, 0, 0,
-  NULL, sub_1B848, R_Draw, &s_player_standing};
+  NULL, SnakeContact2, R_Draw, &s_player_standing};
 
 statetype far s_player_shielded1 = {
   PLAYER_SHIELDED1_L_SPR, PLAYER_SHIELDED1_R_SPR,
   stepthink, false, ps_tofloor, 10, 0, 0,
-  SnakeStandThink, sub_1AE0A, R_Draw, &s_player_shielded2};
+  SnakeStandThink, SnakeContactShielded, R_Draw, &s_player_shielded2};
 
 statetype far s_player_shielded2 = {
   PLAYER_SHIELDED2_L_SPR, PLAYER_SHIELDED2_R_SPR,
   stepthink, false, ps_tofloor, 10, 0, 0,
-  SnakeStandThink, sub_1AE0A, R_Draw, &s_player_shielded1};
+  SnakeStandThink, SnakeContactShielded, R_Draw, &s_player_shielded1};
 
-statetype far s_player_43 = {
+statetype far s_player_unused = {
   PLAYER_DYING1_SPR, PLAYER_DYING1_SPR,
   step, false, ps_none, 15, 0, 0,
   NULL, NULL, R_Draw, &s_player_standing};
@@ -170,12 +170,12 @@ statetype far s_player_43 = {
 statetype far s_player_standing = {
   PLAYER_STANDING_L_SPR, PLAYER_STANDING_R_SPR,
   stepthink, false, ps_tofloor, 4, 0, 16,
-  SnakeStandThink, sub_1B848, sub_1B85B, &s_player_standing};
+  SnakeStandThink, SnakeContact2, R_OnGround, &s_player_standing};
 
 statetype far s_player_5 = {
   PLAYER_STANDING_L_SPR, PLAYER_STANDING_R_SPR,
   step, false, ps_tofloor, 1, 0, 0,
-  sub_19E35, NULL, sub_1B85B, &s_player_standing};
+  SnakeInteractThink, NULL, R_OnGround, &s_player_standing};
 
 statetype far s_player_6 = {
   PLAYER_STANDING_L_SPR, PLAYER_STANDING_R_SPR,
@@ -200,29 +200,29 @@ statetype far s_player_enter_door2 = {
 statetype far s_player_interact1 = {
   PLAYER_INTERACTING_SPR, PLAYER_INTERACTING_SPR,
   step, false, ps_tofloor, 8, 0, 0,
-  sub_19E35, NULL, sub_1B85B, &s_player_interact2};
+  SnakeInteractThink, NULL, R_OnGround, &s_player_interact2};
 
 statetype far s_player_interact2 = {
   PLAYER_INTERACTING_SPR, PLAYER_INTERACTING_SPR,
   step, false, ps_tofloor, 8, 0, 0,
-  NULL, NULL, sub_1B85B, &s_player_standing};
+  NULL, NULL, R_OnGround, &s_player_standing};
 
 statetype far s_player_opendoor1 = {
   PLAYER_INTERACTING_SPR, PLAYER_INTERACTING_SPR,
   step, false, ps_tofloor, 30, 0, 0,
-  NULL, sub_1B848, sub_1B85B, &s_player_opendoor2};
+  NULL, SnakeContact2, R_OnGround, &s_player_opendoor2};
 
 statetype far s_player_opendoor2 = {
   PLAYER_INTERACTING_SPR, PLAYER_INTERACTING_SPR,
   step, false, ps_tofloor, 1, 0, 0,
-  sub_1A6F6, sub_1B848, sub_1B85B, &s_player_standing};
+  OpenDoor, SnakeContact2, R_OnGround, &s_player_standing};
 
 statetype far s_player_crouching = {
   PLAYER_CROUCH_L_SPR, PLAYER_CROUCH_R_SPR,
   stepthink, false, ps_tofloor, 4, 0, 16,
-  SnakeStandThink, sub_1B848, sub_1B85B, &s_player_crouching};
+  SnakeStandThink, SnakeContact2, R_OnGround, &s_player_crouching};
 
-statetype far s_player_throw_crouched = {
+statetype far s_player_place_mine = {
   PLAYER_CROUCH_L_SPR, PLAYER_CROUCH_R_SPR,
   step, false, ps_tofloor, 30, 0, 0,
   SnakeThrow, NULL, R_Draw, &s_player_standing};
@@ -230,161 +230,161 @@ statetype far s_player_throw_crouched = {
 statetype far s_player_climbing_idle = {
   PLAYER_CLIMBING1_SPR, PLAYER_CLIMBING1_SPR,
   think, false, ps_none, 0, 0, 0,
-  sub_1B597, sub_1B848, R_Draw, &s_player_climbing_idle};
+  SnakeClimbIdleThink, SnakeContact2, R_Draw, &s_player_climbing_idle};
 
 statetype far s_player_climbing1 = {
   PLAYER_CLIMBING1_SPR, PLAYER_CLIMBING1_SPR,
   slidethink, false, ps_none, 8, 0, 16,
-  SnakeClimbThink, sub_1B848, R_Draw, &s_player_climbing2};
+  SnakeClimbThink, SnakeContact2, R_Draw, &s_player_climbing2};
 
 statetype far s_player_climbing2 = {
   PLAYER_CLIMBING2_SPR, PLAYER_CLIMBING2_SPR,
   slidethink, false, ps_none, 8, 0, 16,
-  SnakeClimbThink, sub_1B848, R_Draw, &s_player_climbing1};
+  SnakeClimbThink, SnakeContact2, R_Draw, &s_player_climbing1};
 
 //seg58
 statetype far s_player_walking1 = {
   PLAYER_WALKING1_L_SPR, PLAYER_WALKING1_R_SPR,
   slidethink, true, ps_tofloor, 6, 24, 0,
-  sub_1B26A, sub_1B848, sub_1B8BB, &s_player_walking2};
+  SnakeWalkThink, SnakeContact2, R_Walking, &s_player_walking2};
 
 statetype far s_player_walking2 = {
   PLAYER_WALKING2_L_SPR, PLAYER_WALKING2_R_SPR,
   slidethink, true, ps_tofloor, 6, 24, 0,
-  sub_1B26A, sub_1B848, sub_1B8BB, &s_player_walking3};
+  SnakeWalkThink, SnakeContact2, R_Walking, &s_player_walking3};
 
 statetype far s_player_walking3 = {
   PLAYER_WALKING3_L_SPR, PLAYER_WALKING3_R_SPR,
   slidethink, true, ps_tofloor, 6, 24, 0,
-  sub_1B26A, sub_1B848, sub_1B8BB, &s_player_walking4};
+  SnakeWalkThink, SnakeContact2, R_Walking, &s_player_walking4};
 
 statetype far s_player_walking4 = {
   PLAYER_WALKING4_L_SPR, PLAYER_WALKING4_R_SPR,
   slidethink, true, ps_tofloor, 6, 24, 0,
-  sub_1B26A, sub_1B848, sub_1B8BB, &s_player_walking1};
+  SnakeWalkThink, SnakeContact2, R_Walking, &s_player_walking1};
 
 //seg62
 statetype far s_player_throwing_grenade1 = {
   PLAYER_THROW1_L_SPR, PLAYER_THROW1_R_SPR,
   step, true, ps_tofloor, 20, 0, 0,
-  NULL, sub_1B848, sub_1B85B, &s_player_throwing_grenade2};
+  NULL, SnakeContact2, R_OnGround, &s_player_throwing_grenade2};
 
 statetype far s_player_throwing_grenade2 = {
   PLAYER_THROW2_L_SPR, PLAYER_THROW2_R_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  SnakeThrow, sub_1B848, sub_1B85B, &s_player_throwing_grenade3};
+  SnakeThrow, SnakeContact2, R_OnGround, &s_player_throwing_grenade3};
 
 statetype far s_player_throwing_grenade3 = {
   PLAYER_THROW1_L_SPR, PLAYER_THROW1_R_SPR,
   step, true, ps_tofloor, 6, 0, 0,
-  NULL, sub_1B848, sub_1B85B, &s_player_standing};
+  NULL, SnakeContact2, R_OnGround, &s_player_standing};
 
 statetype far s_player_throwing_grenade_air1 = {
   PLAYER_IN_AIR_THROW1_L_SPR, PLAYER_IN_AIR_THROW1_R_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, sub_1BD88, R_PlayerInAir, &s_player_throwing_grenade_air2};
+  T_Projectile, SnakeContact, R_PlayerInAir, &s_player_throwing_grenade_air2};
 
 statetype far s_player_throwing_grenade_air2 = {
   PLAYER_IN_AIR_THROW2_L_SPR, PLAYER_IN_AIR_THROW2_R_SPR,
   step, false, ps_none, 3, 0, 0,
-  SnakeThrow, sub_1BD88, R_PlayerInAir, &s_player_throwing_grenade_air3};
+  SnakeThrow, SnakeContact, R_PlayerInAir, &s_player_throwing_grenade_air3};
 
 statetype far s_player_throwing_grenade_air3 = {
   PLAYER_IN_AIR_THROW1_L_SPR, PLAYER_IN_AIR_THROW1_R_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, sub_1BD88, R_PlayerInAir, &s_player_falling1};
+  T_Projectile, SnakeContact, R_PlayerInAir, &s_player_in_air1};
 
 //68
-statetype far s_player_falling1 = {
+statetype far s_player_in_air1 = {
   PLAYER_IN_AIR_L_SPR, PLAYER_IN_AIR_R_SPR,
   think, false, ps_none, 0, 0, 0,
-  sub_1B43E, sub_1BD88, R_PlayerInAir, &s_player_falling2};
+  SnakeAirThink, SnakeContact, R_PlayerInAir, &s_player_in_air2};
 
-statetype far s_player_falling2 = {
+statetype far s_player_in_air2 = {
   PLAYER_IN_AIR_L_SPR, PLAYER_IN_AIR_R_SPR,
   think, false, ps_none, 0, 0, 0,
-  sub_1B43E, sub_1BD88, R_PlayerInAir, &s_player_falling3};
+  SnakeAirThink, SnakeContact, R_PlayerInAir, &s_player_in_air3};
 
-statetype far s_player_falling3 = {
+statetype far s_player_in_air3 = {
   PLAYER_IN_AIR_L_SPR, PLAYER_IN_AIR_R_SPR,
   think, false, ps_none, 0, 0, 0,
-  sub_1B43E, sub_1BD88, R_PlayerInAir, &s_player_standing};
+  SnakeAirThink, SnakeContact, R_PlayerInAir, &s_player_standing};
 
-statetype far s_player_71 = {
+statetype far s_player_shoot_single1 = {
   PLAYER_SHOOT1_L_SPR, PLAYER_SHOOT1_R_SPR,
   step, false, ps_tofloor, 5, 0, 0,
-  sub_1B75A, sub_1B848, R_Draw, &s_player_72};
+  SnakeShootSingleThink, SnakeContact2, R_Draw, &s_player_shoot_single2};
 
-statetype far s_player_72 = {
+statetype far s_player_shoot_single2 = {
   PLAYER_SHOOT2_L_SPR, PLAYER_SHOOT2_R_SPR,
   step, false, ps_tofloor, 5, 0, 0,
-  sub_1A7DF, sub_1B848, R_Draw, &s_player_73};
+  SnakeShootSingleThink2, SnakeContact2, R_Draw, &s_player_shoot_single3};
 
-statetype far s_player_73 = {
+statetype far s_player_shoot_single3 = {
   PLAYER_SHOOT1_L_SPR, PLAYER_SHOOT1_R_SPR,
   step, false, ps_tofloor, 5, 0, 0,
-  NULL, sub_1B848, R_Draw, &s_player_standing};
+  NULL, SnakeContact2, R_Draw, &s_player_standing};
 
-statetype far s_player_74 = {
+statetype far s_player_shoot_single_air1 = {
   PLAYER_IN_AIR_L_SPR, PLAYER_IN_AIR_R_SPR,
   stepthink, false, ps_none, 9, 0, 0,
-  sub_1B43E, sub_1BD88, R_PlayerInAir, &s_player_75};
+  SnakeAirThink, SnakeContact, R_PlayerInAir, &s_player_shoot_single_air2};
 
-statetype far s_player_75 = {
+statetype far s_player_shoot_single_air2 = {
   PLAYER_IN_AIR_SHOOT_L_SPR, PLAYER_IN_AIR_SHOOT_R_SPR,
   step, false, ps_none, 1, 0, 0,
-  sub_1A7DF, sub_1BD88, R_PlayerInAir, &s_player_76};
+  SnakeShootSingleThink2, SnakeContact, R_PlayerInAir, &s_player_shoot_single_air3};
 
-statetype far s_player_76 = {
+statetype far s_player_shoot_single_air3 = {
   PLAYER_IN_AIR_L_SPR, PLAYER_IN_AIR_R_SPR,
   stepthink, false, ps_none, 5, 0, 0,
-  sub_1B43E, sub_1BD88, R_PlayerInAir, &s_player_falling1};
+  SnakeAirThink, SnakeContact, R_PlayerInAir, &s_player_in_air1};
 
-statetype far s_player_77 = {
+statetype far s_player_shoot_single_crouch1 = {
   PLAYER_CROUCH_L_SPR, PLAYER_CROUCH_R_SPR,
   step, false, ps_tofloor, 5, 0, 0,
-  sub_1B75A, sub_1B848, R_Draw, &s_player_78};
+  SnakeShootSingleThink, SnakeContact2, R_Draw, &s_player_shoot_single_crouch2};
 
-statetype far s_player_78 = {
+statetype far s_player_shoot_single_crouch2 = {
   PLAYER_CROUCH_SHOOT_L_SPR, PLAYER_CROUCH_SHOOT_R_SPR,
   step, false, ps_tofloor, 5, 0, 0,
-  sub_1A86D, sub_1B848, R_Draw, &s_player_79};
+  SnakeShootSingleCrouchThink, SnakeContact2, R_Draw, &s_player_shoot_single_crouch3};
 
-statetype far s_player_79 = {
+statetype far s_player_shoot_single_crouch3 = {
   PLAYER_CROUCH_L_SPR, PLAYER_CROUCH_R_SPR,
   step, false, ps_tofloor, 5, 0, 0,
-  NULL, sub_1B848, R_Draw, &s_player_crouching};
+  NULL, SnakeContact2, R_Draw, &s_player_crouching};
 
 //seg80
-statetype far s_player_80 = {
+statetype far s_player_shoot1 = {
   PLAYER_SHOOT1_L_SPR, PLAYER_SHOOT1_R_SPR,
   step, false, ps_tofloor, 2, 0, 0,
-  NULL, sub_1BD88, R_Draw, &s_player_81};
+  NULL, SnakeContact, R_Draw, &s_player_shoot2};
 
-statetype far s_player_81 = {
+statetype far s_player_shoot2 = {
   PLAYER_SHOOT2_L_SPR, PLAYER_SHOOT2_R_SPR,
   step, false, ps_tofloor, 2, 0, 0,
-  sub_1A8DF, sub_1BD88, R_Draw, &s_player_80};
+  SnakeShootThink, SnakeContact, R_Draw, &s_player_shoot1};
 
-statetype far s_player_82 = {
+statetype far s_player_shoot_crouch1 = {
   PLAYER_CROUCH_L_SPR, PLAYER_CROUCH_R_SPR,
   step, false, ps_tofloor, 2, 0, 0,
-  NULL, sub_1BD88, R_Draw, &s_player_83};
+  NULL, SnakeContact, R_Draw, &s_player_shoot_crouch2};
 
-statetype far s_player_83 = {
+statetype far s_player_shoot_crouch2 = {
   PLAYER_CROUCH_SHOOT_L_SPR, PLAYER_CROUCH_SHOOT_R_SPR,
   step, false, ps_tofloor, 2, 0, 0,
-  sub_1AA6B, sub_1BD88, R_Draw, &s_player_82};
+  SnakeShootCrouchThink, SnakeContact, R_Draw, &s_player_shoot_crouch1};
 
-statetype far s_player_84 = {
+statetype far s_player_shoot_air1 = {
   PLAYER_IN_AIR_L_SPR, PLAYER_IN_AIR_R_SPR,
   stepthink, false, ps_none, 3, 0, 0,
-  sub_1AB6F, sub_1BD88, R_PlayerInAir, &s_player_85};
+  SnakeShootAirThink, SnakeContact, R_PlayerInAir, &s_player_shoot_air2};
 
-statetype far s_player_85 = {
+statetype far s_player_shoot_air2 = {
   PLAYER_IN_AIR_SHOOT_L_SPR, PLAYER_IN_AIR_SHOOT_R_SPR,
   step, false, ps_none, 1, 0, 0,
-  sub_1A9E3, sub_1BD88, R_PlayerInAir, &s_player_84};
+  SnakeShootAirThink2, SnakeContact, R_PlayerInAir, &s_player_shoot_air1};
 
 // seg86
 
@@ -435,7 +435,7 @@ void SpawnPlayer(Sint16 x, Sint16 y, Sint16 xdir)
 
   player->health = gamestate.maxhealth;
 
-  word_3FA56 = 0;
+  invincible = 0;
   byte_3FA6E = 0;
 
   NewState(player, &s_player_standing);
@@ -468,7 +468,7 @@ boolean CheckInteraction(objtype* ob)
 
     if (ob->x != temp)
     {
-      ob->unk1[0] = temp;
+      ob->temp1 = temp;
       ob->state = &s_player_lineup;
     }
     else
@@ -486,7 +486,7 @@ boolean CheckInteraction(objtype* ob)
 
     if (ob->x != temp)
     {
-      ob->unk1[0] = temp;
+      ob->temp1 = temp;
       ob->state = &s_player_lineup;
     }
     else
@@ -591,7 +591,7 @@ boolean CheckAttachToLadder(objtype* ob)
   {
     xtry = CONVERT_TILE_TO_GLOBAL(offset) + -8*PIXGLOBAL - ob->x;
     ytry = c.yaxis * 32;
-    ob->unk4 = offset;
+    ob->temp4 = offset;
     ob->needtoclip = cl_midclip;
     ob->state = &s_player_climbing1;
 
@@ -602,7 +602,7 @@ boolean CheckAttachToLadder(objtype* ob)
 }
 
 
-boolean sub_19C27(objtype* ob)
+boolean CheckJump(objtype* ob)
 {
   if (c.xaxis)
   {
@@ -617,7 +617,7 @@ boolean sub_19C27(objtype* ob)
     ob->yspeed = -40;
     ob->needtoclip = cl_midclip;
     word_3FA6C = 16;
-    ob->state = &s_player_falling1;
+    ob->state = &s_player_in_air1;
     ob->ydir = 1;
     button0held = true;
     dword_3FA52 = TimeCount;
@@ -633,7 +633,7 @@ void AlignPlayer(objtype* ob)
 {
   Sint16 var1;
 
-  var1 = ob->unk1[1] - ob->x;
+  var1 = ob->temp2 - ob->x;
 
   if (var1 < 0)
   {
@@ -655,7 +655,7 @@ void AlignPlayer(objtype* ob)
   }
 
   xtry = var1;
-  ob->unk1[0] = 0;
+  ob->temp1 = 0;
 
   if (!CheckInteraction(ob))
   {
@@ -676,7 +676,7 @@ void SnakeThrow(objtype* ob)
   }
 
   if (ob->state == &s_player_throwing_grenade2 ||
-      ob->state == &s_player_throw_crouched)
+      ob->state == &s_player_place_mine)
   {
     return;
   }
@@ -717,7 +717,7 @@ void WarpToDoorDest(objtype* ob)
 }
 
 
-void sub_19E35(objtype* ob)
+void SnakeInteractThink(objtype* ob)
 {
   Uint16 intile, maptile, newtile, info, sx, sy, tileoff;
   Uint16 far *map;
@@ -821,7 +821,7 @@ void sub_19E35(objtype* ob)
       break;
 
     case 14:
-      if (gamestate.nuke != 1)
+      if (gamestate.nukestate != ns_collected)
       {
         ShowHelpMessage("You don't have a nuclear bomb!\n");
         SD_PlaySound(SND_NOKEY);
@@ -830,7 +830,7 @@ void sub_19E35(objtype* ob)
 
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
       SD_PlaySound(SND_24);
-      gamestate.nuke = 2;
+      gamestate.nukestate = ns_placed;
 
       VW_FixRefreshBuffer();
       US_CenterWindow(35, 3);
@@ -883,7 +883,7 @@ found:
           if (otherobj->obclass == 13)
           {
             otherobj->state = &s_seg197;
-            otherobj->temp1 = true;
+            otherobj->var1 = true;
             word_391C0 = true;
             return;
           }
@@ -1049,54 +1049,55 @@ found:
 }
 
 
-#pragma argsused
-void sub_1A6F6(objtype* ob)
+void OpenDoor(objtype* ob)
 {
   Uint16 x;
   Uint16 y;
   Uint16 info;
 
-  if (word_3FA68 <= 0 || word_3FA6A <= 0)
+  (void)ob;
+
+  if (doorx <= 0 || doory <= 0)
     return;
 
-  if (*(mapsegs[1] + mapbwidthtable[word_3FA6A] / 2 + word_3FA68) == 0)
+  if (*(mapsegs[1] + mapbwidthtable[doory] / 2 + doorx) == 0)
     return;
 
   SD_PlaySound(19);
 
-  info = *(mapsegs[2] + mapbwidthtable[word_3FA6A] / 2 + word_3FA68);
+  info = *(mapsegs[2] + mapbwidthtable[doory] / 2 + doorx);
   x = info >> 8;
   y = info & 0xFF;
-  RF_MapToMap(x, y, word_3FA68 - 1, word_3FA6A - 1, 2, 3);
+  RF_MapToMap(x, y, doorx - 1, doory - 1, 2, 3);
 
-  info = *(mapsegs[2] + mapbwidthtable[word_3FA6A] / 2 + word_3FA68);
+  info = *(mapsegs[2] + mapbwidthtable[doory] / 2 + doorx);
   x = info >> 8;
   y = info & 0xFF;
 
   if (x == 1 && y != 0)
   {
-    sub_21473(word_3FA68, word_3FA6A - 1, y);
+    sub_21473(doorx, doory - 1, y);
   }
 
-  word_3FA68 = 0;
-  word_3FA6A = 0;
+  doorx = 0;
+  doory = 0;
 }
 
 
-void sub_1A7DF(objtype* ob)
+void SnakeShootSingleThink2(objtype* ob)
 {
-  if (gamestate.difficulty == gd_Easy && gamestate.var23 == 0)
+  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == 0)
   {
-    gamestate.var20 = 1;
-    gamestate.var21 = 3;
+    gamestate.rapidfire = 1;
+    gamestate.ammoinclip = 3;
 
     if (!ob->hitnorth)
     {
-      ChangeState(player, &s_player_84);
+      ChangeState(player, &s_player_shoot_air1);
     }
     else
     {
-      ChangeState(player, &s_player_80);
+      ChangeState(player, &s_player_shoot1);
     }
   }
   else if (ob->xdir == 1)
@@ -1110,14 +1111,14 @@ void sub_1A7DF(objtype* ob)
 }
 
 
-void sub_1A86D(objtype* ob)
+void SnakeShootSingleCrouchThink(objtype* ob)
 {
-  if (gamestate.difficulty == gd_Easy && gamestate.var23 == 0)
+  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == 0)
   {
-    gamestate.var20 = 1;
-    gamestate.var21 = 3;
+    gamestate.rapidfire = 1;
+    gamestate.ammoinclip = 3;
 
-    ChangeState(player, &s_player_82);
+    ChangeState(player, &s_player_shoot_crouch1);
   }
   else if (ob->xdir == 1)
   {
@@ -1130,15 +1131,15 @@ void sub_1A86D(objtype* ob)
 }
 
 
-void sub_1A8DF(objtype* ob)
+void SnakeShootThink(objtype* ob)
 {
-  if (gamestate.var21 <= 0)
+  if (gamestate.ammoinclip <= 0)
   {
     ChangeState(player, &s_player_standing);
 
     if (gamestate.difficulty == gd_Easy)
     {
-      gamestate.var21 = 3;
+      gamestate.ammoinclip = 3;
     }
 
     return;
@@ -1167,14 +1168,14 @@ void sub_1A8DF(objtype* ob)
       xtry = 0;
       ytry = 0;
       word_3FA6C = 16;
-      ob->state = &s_player_85;
+      ob->state = &s_player_shoot_air2;
       button0held = true;
       gamestate.riding = NULL;
       return;
     }
     else if (c.yaxis == 1)
     {
-      ChangeState(player, &s_player_83);
+      ChangeState(player, &s_player_shoot_crouch2);
     }
   }
 
@@ -1189,15 +1190,15 @@ void sub_1A8DF(objtype* ob)
 }
 
 
-void sub_1A9E3(objtype* ob)
+void SnakeShootAirThink2(objtype* ob)
 {
-  if (gamestate.var21 <= 0)
+  if (gamestate.ammoinclip <= 0)
   {
-    ChangeState(player, &s_player_falling1);
+    ChangeState(player, &s_player_in_air1);
 
     if (gamestate.difficulty == gd_Easy)
     {
-      gamestate.var21 = 3;
+      gamestate.ammoinclip = 3;
     }
 
     return;
@@ -1205,7 +1206,7 @@ void sub_1A9E3(objtype* ob)
 
   if (!button1held)
   {
-    ChangeState(player, &s_player_falling1);
+    ChangeState(player, &s_player_in_air1);
   }
 
   if (ob->xdir == 1)
@@ -1219,15 +1220,15 @@ void sub_1A9E3(objtype* ob)
 }
 
 
-void sub_1AA6B(objtype* ob)
+void SnakeShootCrouchThink(objtype* ob)
 {
-  if (gamestate.var21 <= 0)
+  if (gamestate.ammoinclip <= 0)
   {
     ChangeState(player, &s_player_crouching);
 
     if (gamestate.difficulty == gd_Easy)
     {
-      gamestate.var21 = 3;
+      gamestate.ammoinclip = 3;
     }
 
     return;
@@ -1251,14 +1252,14 @@ void sub_1AA6B(objtype* ob)
       xtry = 0;
       ytry = 0;
       word_3FA6C = 16;
-      ob->state = &s_player_85;
+      ob->state = &s_player_shoot_air2;
       button0held = true;
       gamestate.riding = NULL;
       return;
     }
     else if (c.yaxis != 1)
     {
-      ChangeState(player, &s_player_81);
+      ChangeState(player, &s_player_shoot2);
     }
   }
 
@@ -1278,7 +1279,7 @@ void sub_1AA6B(objtype* ob)
 }
 
 
-void sub_1AB6F(objtype* ob)
+void SnakeShootAirThink(objtype* ob)
 {
   if (word_3FA6C)
   {
@@ -1356,7 +1357,7 @@ void sub_1ACA4(objtype* ob)
   word_3FA6C = 16;
   button0held = true;
   gamestate.riding = NULL;
-  ob->state = &s_player_falling1;
+  ob->state = &s_player_in_air1;
 }
 
 
@@ -1364,9 +1365,9 @@ void DamagePlayer(objtype* ob, Sint16 damage)
 {
   if (godmode) return;
 
-  if (gamestate.var15)
+  if (gamestate.hasrobopal)
   {
-    gamestate.var15 = false;
+    gamestate.hasrobopal = false;
   }
 
   if (player->state == &s_player_dying || player->state == &s_player_dead)
@@ -1390,13 +1391,13 @@ void DamagePlayer(objtype* ob, Sint16 damage)
   }
   else
   {
-    word_3FA56 = 50;
+    invincible = 50;
     SD_PlaySound(1);
   }
 }
 
 
-void sub_1ADB5(objtype* ob)
+void SnakeDyingThink(objtype* ob)
 {
   if (word_3FA6C)
   {
@@ -1418,19 +1419,20 @@ void sub_1ADB5(objtype* ob)
 }
 
 
-void FinishPlayerDeath(objtype* ob)
+void SnakeDeadThink(objtype* ob)
 {
+  (void)ob;
   playstate = ex_died;
 }
 
 
-void sub_1AE0A(objtype* ob, objtype* hit)
+void SnakeContactShielded(objtype* ob, objtype* hit)
 {
-  if (hit->temp1 && !hit->temp4 && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->var1 && !hit->dmgflash && hit->obclass != 21 && hit->obclass != 27)
   {
     sub_1D2B5(hit, 5);
     SD_PlaySound(7);
-    hit->temp4 = 25;
+    hit->dmgflash = 25;
   }
 
   ob++;     // shut up compiler
@@ -1517,7 +1519,7 @@ void SnakeStandThink(objtype* ob)
   if (downbutton && word_391C6 >= 35)
   {
     // Invincibility
-    word_3FA56 = 99;
+    invincible = 99;
     word_391C8 = 0;
     word_391C6 = 0;
   }
@@ -1535,11 +1537,11 @@ void SnakeStandThink(objtype* ob)
 
     if (firebutton)
     {
-      if (gamestate.var1[0] > 0)
+      if (gamestate.explosives.landmines > 0)
       {
         if (!gamestate.riding)
         {
-          ob->state = &s_player_throw_crouched;
+          ob->state = &s_player_place_mine;
         }
       }
       else
@@ -1561,13 +1563,13 @@ void SnakeStandThink(objtype* ob)
       ob->xspeed = ob->xdir * 16;
     }
 
-    if (gamestate.var21 > 0 && gamestate.var20 == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
     {
-      ob->state = &s_player_84;
+      ob->state = &s_player_shoot_air1;
     }
     else
     {
-      ob->state = &s_player_74;
+      ob->state = &s_player_shoot_single_air1;
     }
 
     return;
@@ -1587,7 +1589,7 @@ void SnakeStandThink(objtype* ob)
         SD_PlaySound(21);
       }
 
-      ChangeState(ob, &s_player_3);
+      ChangeState(ob, &s_player_fireball);
       word_391C8 = 0;
       word_391C4 = 0;
       return;
@@ -1617,13 +1619,13 @@ void SnakeStandThink(objtype* ob)
 
     if (downbutton)
     {
-      if (gamestate.var21 > 0 && gamestate.var20 == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
       {
-        ob->state = &s_player_82;
+        ob->state = &s_player_shoot_crouch1;
       }
       else
       {
-        ob->state = &s_player_77;
+        ob->state = &s_player_shoot_single_crouch1;
       }
 
       return;
@@ -1631,11 +1633,11 @@ void SnakeStandThink(objtype* ob)
 
     if (upbutton)
     {
-      if (gamestate.var1[0] > 0)
+      if (gamestate.explosives.landmines > 0)
       {
         if (!gamestate.riding)
         {
-          ob->state = &s_player_throw_crouched;
+          ob->state = &s_player_place_mine;
         }
       }
       else
@@ -1646,13 +1648,13 @@ void SnakeStandThink(objtype* ob)
       return;
     }
 
-    if (gamestate.var21 > 0 && gamestate.var20 == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
     {
-      ob->state = &s_player_80;
+      ob->state = &s_player_shoot1;
     }
     else
     {
-      ob->state = &s_player_71;
+      ob->state = &s_player_shoot_single1;
     }
 
     return;
@@ -1719,7 +1721,7 @@ void SnakeStandThink(objtype* ob)
 }
 
 
-void sub_1B26A(objtype* ob)
+void SnakeWalkThink(objtype* ob)
 {
   Sint16 startwalking;
 
@@ -1748,11 +1750,11 @@ void sub_1B26A(objtype* ob)
 
     if (firebutton)
     {
-      if (gamestate.var1[0] > 0)
+      if (gamestate.explosives.landmines > 0)
       {
         if (!gamestate.riding)
         {
-          ob->state = &s_player_throw_crouched;
+          ob->state = &s_player_place_mine;
         }
       }
       else
@@ -1770,13 +1772,13 @@ void sub_1B26A(objtype* ob)
 
     ob->xspeed = ob->xdir * 16;
 
-    if (gamestate.var21 > 0 && gamestate.var20 == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
     {
-      ob->state = &s_player_84;
+      ob->state = &s_player_shoot_air1;
     }
     else
     {
-      ob->state = &s_player_74;
+      ob->state = &s_player_shoot_single_air1;
     }
 
     return;
@@ -1788,13 +1790,13 @@ void sub_1B26A(objtype* ob)
 
     if (downbutton)
     {
-      if (gamestate.var21 > 0 && gamestate.var20 == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
       {
-        ob->state = &s_player_82;
+        ob->state = &s_player_shoot_crouch1;
       }
       else
       {
-        ob->state = &s_player_77;
+        ob->state = &s_player_shoot_single_crouch1;
       }
 
       return;
@@ -1802,11 +1804,11 @@ void sub_1B26A(objtype* ob)
 
     if (upbutton)
     {
-      if (gamestate.var1[0] > 0)
+      if (gamestate.explosives.landmines > 0)
       {
         if (!gamestate.riding)
         {
-          ob->state = &s_player_throw_crouched;
+          ob->state = &s_player_place_mine;
         }
       }
       else
@@ -1817,13 +1819,13 @@ void sub_1B26A(objtype* ob)
       return;
     }
 
-    if (gamestate.var21 > 0 && gamestate.var20 == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
     {
-      ob->state = &s_player_80;
+      ob->state = &s_player_shoot1;
     }
     else
     {
-      ob->state = &s_player_71;
+      ob->state = &s_player_shoot_single1;
     }
 
     return;
@@ -1863,7 +1865,7 @@ void sub_1B26A(objtype* ob)
 }
 
 
-void sub_1B43E(objtype* ob)
+void SnakeAirThink(objtype* ob)
 {
   if (word_3FA6C)
   {
@@ -1889,7 +1891,7 @@ void sub_1B43E(objtype* ob)
 
     if (word_3FA6C == 0)
     {
-      ob->unk1[1] = false;
+      ob->temp2 = false;
       ob->state = ob->state->nextstate;
     }
   }
@@ -1897,10 +1899,10 @@ void sub_1B43E(objtype* ob)
   {
     DoGravity(ob);
 
-    if (ob->yspeed > 0 && !ob->unk1[1])
+    if (ob->yspeed > 0 && !ob->temp2)
     {
       ob->state = ob->state->nextstate;
-      ob->unk1[1] = true;
+      ob->temp2 = true;
     }
   }
 
@@ -1920,7 +1922,7 @@ void sub_1B43E(objtype* ob)
 
     if (firebutton)
     {
-      if (gamestate.var1[0] <= 0)
+      if (gamestate.explosives.landmines <= 0)
       {
         ob->state = &s_player_throwing_grenade_air1;
       }
@@ -1935,7 +1937,7 @@ void sub_1B43E(objtype* ob)
 
     if (c.yaxis == -1)
     {
-      if (gamestate.var1[0] <= 0)
+      if (gamestate.explosives.landmines <= 0)
       {
         ob->state = &s_player_throwing_grenade_air1;
       }
@@ -1946,13 +1948,13 @@ void sub_1B43E(objtype* ob)
     }
     else
     {
-      if (gamestate.var21 > 0 && gamestate.var20 == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
       {
-        ob->state = &s_player_84;
+        ob->state = &s_player_shoot_air1;
       }
       else
       {
-        ob->state = &s_player_74;
+        ob->state = &s_player_shoot_single_air1;
       }
     }
   }
@@ -1964,16 +1966,16 @@ void sub_1B43E(objtype* ob)
 }
 
 
-void sub_1B597(objtype* ob)
+void SnakeClimbIdleThink(objtype* ob)
 {
   Uint16 far* map;
 
-  if (sub_19C27(ob))
+  if (CheckJump(ob))
   {
     return;
   }
 
-  map = mapsegs[1] + mapbwidthtable[ob->tiletop] / 2 + ob->unk4;
+  map = mapsegs[1] + mapbwidthtable[ob->tiletop] / 2 + ob->temp4;
 
   switch (c.yaxis)
   {
@@ -1993,7 +1995,7 @@ void sub_1B597(objtype* ob)
     case 1:
       ob->state = &s_player_climbing2;
       ob->ydir = 1;
-      sub_1B6D6(ob);
+      CheckFallOffLadder(ob);
       break;
   }
 }
@@ -2003,12 +2005,12 @@ void SnakeClimbThink(objtype* ob)
 {
   Uint16 far* map;
 
-  if (sub_19C27(ob))
+  if (CheckJump(ob))
   {
     return;
   }
 
-  map = mapsegs[1] + mapbwidthtable[ob->tiletop] / 2 + ob->unk4;
+  map = mapsegs[1] + mapbwidthtable[ob->tiletop] / 2 + ob->temp4;
   if ((tinf[INTILE + *map] & 0x7F) != INTILE_LADDER && c.yaxis != 1)
   {
     ytry = 0;
@@ -2029,28 +2031,28 @@ void SnakeClimbThink(objtype* ob)
 
       case 1:
         ob->ydir = 1;
-        sub_1B6D6(ob);
+        CheckFallOffLadder(ob);
         break;
     }
   }
 }
 
 
-void sub_1B6D6(objtype* ob)
+void CheckFallOffLadder(objtype* ob)
 {
   Uint16 far* map;
 
-  if (sub_19C27(ob))
+  if (CheckJump(ob))
   {
     return;
   }
 
-  map = mapsegs[1] + mapbwidthtable[ob->tilebottom] / 2 + ob->unk4;
+  map = mapsegs[1] + mapbwidthtable[ob->tilebottom] / 2 + ob->temp4;
   if ((tinf[INTILE + *map] & 0x7F) != INTILE_LADDER)
   {
-    ob->state = &s_player_falling3;
+    ob->state = &s_player_in_air3;
     word_3FA6C = 0;
-    ob->unk1[1] = 1;
+    ob->temp2 = 1;
     ob->xspeed = TABLE2[c.xaxis];
     ob->yspeed = 0;
     ob->needtoclip = cl_midclip;
@@ -2060,7 +2062,7 @@ void sub_1B6D6(objtype* ob)
 }
 
 
-void sub_1B75A(objtype* ob)
+void SnakeShootSingleThink(objtype* ob)
 {
   if (leftbutton)
   {
@@ -2075,15 +2077,15 @@ void sub_1B75A(objtype* ob)
   if (button0 && !button0held)
   {
     sub_1ACA4(ob);
-    ob->state = &s_player_75;
+    ob->state = &s_player_shoot_single_air2;
   }
   else if (downbutton)
   {
-    ob->state = &s_player_78;
+    ob->state = &s_player_shoot_single_crouch2;
   }
   else
   {
-    ob->state = &s_player_72;
+    ob->state = &s_player_shoot_single2;
   }
 }
 
@@ -2111,20 +2113,19 @@ void KillPlayer(void)
 }
 
 
-#pragma argsused
-void sub_1B848(objtype* ob, objtype* hit)
+void SnakeContact2(objtype* ob, objtype* hit)
 {
-  sub_1BD88(ob, hit);
+  SnakeContact(ob, hit);
 }
 
 
-void sub_1B85B(objtype* ob)
+void R_OnGround(objtype* ob)
 {
   if (!ob->hitnorth)
   {
     ob->xspeed = ob->xdir * 8;
-    ChangeState(ob, &s_player_falling3);
-    ob->unk1[1] = true;
+    ChangeState(ob, &s_player_in_air3);
+    ob->temp2 = true;
     word_3FA6C = 0;
   }
 
@@ -2133,19 +2134,19 @@ void sub_1B85B(objtype* ob)
     ob->x,
     ob->y,
     ob->shapenum,
-    ob->temp4 ? maskdraw : spritedraw,
+    ob->dmgflash ? maskdraw : spritedraw,
     ob->priority);
 }
 
 
-void sub_1B8BB(objtype* ob)
+void R_Walking(objtype* ob)
 {
   if (!ob->hitnorth)
   {
     ob->xspeed = ob->xdir * 8;
     ob->yspeed = 0;
-    ChangeState(ob, &s_player_falling3);
-    ob->unk1[1] = true;
+    ChangeState(ob, &s_player_in_air3);
+    ob->temp2 = true;
     word_3FA6C = 0;
   }
   else if (ob->hiteast || ob->hitwest)
@@ -2158,7 +2159,7 @@ void sub_1B8BB(objtype* ob)
     ob->x,
     ob->y,
     ob->shapenum,
-    ob->temp4 ? maskdraw : spritedraw,
+    ob->dmgflash ? maskdraw : spritedraw,
     ob->priority);
 }
 
@@ -2193,7 +2194,7 @@ void R_PlayerInAir(objtype* ob)
   {
     if (ob->hitnorth != 23 || !word_3FA6C)
     {
-      ob->unk1[0] = ob->unk1[1] = 0;
+      ob->temp1 = ob->temp2 = 0;
 
       if (ob->state == &s_player_throwing_grenade_air1)
       {
@@ -2207,25 +2208,25 @@ void R_PlayerInAir(objtype* ob)
       {
         ChangeState(ob, &s_player_throwing_grenade3);
       }
-      else if (ob->state == &s_player_74)
+      else if (ob->state == &s_player_shoot_single_air1)
       {
-        ChangeState(ob, &s_player_71);
+        ChangeState(ob, &s_player_shoot_single1);
       }
-      else if (ob->state == &s_player_75)
+      else if (ob->state == &s_player_shoot_single_air2)
       {
-        ChangeState(ob, &s_player_72);
+        ChangeState(ob, &s_player_shoot_single2);
       }
-      else if (ob->state == &s_player_76)
+      else if (ob->state == &s_player_shoot_single_air3)
       {
-        ChangeState(ob, &s_player_73);
+        ChangeState(ob, &s_player_shoot_single3);
       }
-      else if (ob->state == &s_player_84)
+      else if (ob->state == &s_player_shoot_air1)
       {
-        ChangeState(ob, &s_player_80);
+        ChangeState(ob, &s_player_shoot1);
       }
-      else if (ob->state == &s_player_85)
+      else if (ob->state == &s_player_shoot_air2)
       {
-        ChangeState(ob, &s_player_81);
+        ChangeState(ob, &s_player_shoot2);
       }
       else
       {
@@ -2239,12 +2240,12 @@ void R_PlayerInAir(objtype* ob)
     ob->x,
     ob->y,
     ob->shapenum,
-    ob->temp4 ? maskdraw : spritedraw,
+    ob->dmgflash ? maskdraw : spritedraw,
     ob->priority);
 }
 
 
-void sub_1BAE8(objtype* ob)
+void R_Dying(objtype* ob)
 {
   if (ob->hiteast || ob->hitwest)
   {
@@ -2261,7 +2262,7 @@ void sub_1BAE8(objtype* ob)
     ob->x,
     ob->y,
     ob->shapenum,
-    ob->temp4 ? maskdraw : spritedraw,
+    ob->dmgflash ? maskdraw : spritedraw,
     ob->priority);
 }
 
@@ -2297,14 +2298,14 @@ void CheckInTiles(objtype *ob)
               gamestate.var40 = true;
             }
 
-            word_3FA68 = x;
-            word_3FA6A = y;
+            doorx = x;
+            doory = y;
             break;
 
           case 2:
             if (ob->health > 0)
             {
-              if (word_3FA56 == 0)
+              if (invincible == 0)
               {
                 DamagePlayer(ob, 1);
               }

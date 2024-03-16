@@ -193,10 +193,15 @@ typedef enum {
   PLAYER_IN_AIR_SHOOT_R_SPR,   // 102
   PLAYER_IN_AIR_L_SPR,         // 103
   PLAYER_IN_AIR_SHOOT_L_SPR,   // 104
+  GRENADE_GREEN1_SPR,          // 105
+                               //
+  GRENADE_RED1_SPR = 142,            // 142
 
   // TODO
 
   END_LUMP(PLAYER_LUMP_END, __PLAYEREND)
+
+  SCOREBOXSPR = 405,
 
   // last sprite ID
   PLACEHOLDER = 409,

@@ -63,7 +63,7 @@ char* levelnames[GAMELEVELS] = {
   "Mangle's Last Stand",
 };
 
-char far farbss_placeholder1[1312];
+char far farbss_placeholder1[1216];
 
 // seg128
 char far HOSTAGEDLG1[] =

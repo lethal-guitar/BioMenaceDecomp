@@ -34,7 +34,7 @@
 
 extern Uint16 word_391BC;
 extern Uint16 word_399FA;
-extern Uint16 word_3FA56;
+extern Uint16 invincible;
 extern Uint16 word_3FA66;
 extern Uint8 byte_3FA6E;
 
@@ -126,16 +126,16 @@ void NewGame(void)
     gamestate.nextextra = 20000;
     gamestate.lives = 3;
     gamestate.gems = 0;
-    gamestate.nuke = false;
+    gamestate.nukestate = ns_none;
     gamestate.var16 = 0;
   }
 
   gamestate.maxhealth = 4;
-  gamestate.var20 = 0;
-  gamestate.var23 = 0;
-  memset(gamestate.var1, 0, sizeof(gamestate.var1));
-  gamestate.var21 = 0;
-  gamestate.var22 = 0;
+  gamestate.rapidfire = 0;
+  gamestate.ammotype = 0;
+  memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
+  gamestate.ammoinclip = 0;
+  gamestate.clips = 0;
   gamestate.blueshard = false;
   gamestate.greenshard = false;
   gamestate.redshard = false;
@@ -144,7 +144,7 @@ void NewGame(void)
   gamestate.var14 = 0;
   gamestate.specialkey = false;
   gamestate.radpill = false;
-  gamestate.var24 = 0;
+  gamestate.hostagerescued = false;
   gamestate.secretlevelgem = false;
 }
 
@@ -192,9 +192,9 @@ void ResetGame(void)
 
   if (restartgame != gd_Continue)
   {
-    if (word_3A77C == true)
+    if (wantspractice == true)
     {
-      word_389A0 = gamestate.mapon;
+      practicerestoremap = gamestate.mapon;
 
       VW_FixRefreshBuffer();
       US_CenterWindow(26, 3);
@@ -215,14 +215,14 @@ void ResetGame(void)
         }
       }
 
-      word_3A77C = false;
-      word_389A2 = 500;
+      wantspractice = false;
+      practicetimer = 500;
     }
     else
     {
-      if (word_389A2 >= 0)
+      if (practicetimer >= 0)
       {
-        word_389A2 = -1;
+        practicetimer = -1;
       }
     }
 
@@ -231,7 +231,7 @@ void ResetGame(void)
   else if (loadedgame)
   {
     playstate = ex_loadedgame;
-    word_389A2 = -1;
+    practicetimer = -1;
   }
 
   VW_FadeOut();
@@ -252,8 +252,8 @@ boolean SaveTheGame(Sint16 handle)
   gametype state;
 
   gamestate.riding = NULL;
-  word_389A2 = -1;
-  word_3A77C = 0;
+  practicetimer = -1;
+  wantspractice = 0;
 
   memcpy(&state, &gamestate, sizeof(gamestate));
   memset(&state.keyitems, 0, sizeof(state.keyitems));
@@ -265,12 +265,12 @@ boolean SaveTheGame(Sint16 handle)
   state.var14 = 0;
   state.specialkey = false;
   state.radpill = false;
-  state.var15 = 0;
-  state.var24 = 0;
-  state.var22 = 0;
-  state.var21 = 0;
-  state.var23 = 0;
-  memset(&state.var1, 0, sizeof(state.var1));
+  state.hasrobopal = false;
+  state.hostagerescued = false;
+  state.clips = 0;
+  state.ammoinclip = 0;
+  state.ammotype = 0;
+  memset(&state.explosives, 0, sizeof(state.explosives));
 
   switch (state.difficulty)
   {
@@ -315,8 +315,8 @@ boolean LoadTheGame(Sint16 handle)
 
   playstate = ex_loadedgame;
   player->health = gamestate.maxhealth;
-  word_389A2 = -1;
-  word_3A77C = 0;
+  practicetimer = -1;
+  wantspractice = 0;
   return true;
 }
 
@@ -484,7 +484,7 @@ boolean RespawnPlayer(void)
     }
 
     gamestate.maxhealth = player->health;
-    word_3FA56 = 50;
+    invincible = 50;
     byte_3FA6E = 0;
     return true;
   }
@@ -553,12 +553,12 @@ loaded:
   gamestate.var14 = 0;
   gamestate.specialkey = false;
   gamestate.radpill = false;
-  gamestate.var15 = 0;
-  gamestate.var24 = 0;
-  gamestate.var22 = 0;
-  gamestate.var21 = 0;
-  gamestate.var23 = 0;
-  memset(gamestate.var1, 0, sizeof(gamestate.var1));
+  gamestate.hasrobopal = false;
+  gamestate.hostagerescued = false;
+  gamestate.clips = 0;
+  gamestate.ammoinclip = 0;
+  gamestate.ammotype = 0;
+  memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
 
   word_3FA66 = 0;
 

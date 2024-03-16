@@ -162,6 +162,12 @@ typedef enum
   // TODO
   nothing,         //  0
   playerobj,       //  1
+  inertobj,        //  2
+  pickupobj   =  6,
+  hostageobj  = 12,
+  platformobj = 14,
+  robopalobj  = 16,
+  bounderobj  = 22,
   NUMCLASSTYPES
 } classtype;
 
@@ -198,23 +204,35 @@ typedef struct objstruct
   Uint16 left, top, right, bottom, midx;
   Uint16 tileleft, tiletop, tileright, tilebottom, tilemidx;
   Sint16 hitnorth, hiteast, hitsouth, hitwest;
-  Sint16 temp1, temp2, health, temp4;
-  Sint16 unk1[2]; // TODO
-  Sint16 unk3;
-  Sint16 unk4;
-  Sint16 unk5;
-  Sint16 unk6;
-  Sint16 unk7;
+  Sint16 var1;
+  Sint16 var2;
+  Sint16 health;
+  Sint16 dmgflash;
+  Sint16 temp1;
+  Sint16 temp2;
+  Sint16 temp3;
+  Sint16 temp4;
+  Sint16 temp5;
+  Sint16 temp6;
+  Sint16 temp7;
   void *sprite;
   struct objstruct *next, *prev;
 } objtype;
+
+#define AMMO_SUPERBULLET 3
+#define AMMO_PLASMABOLT  4
+
 
 typedef struct
 {
   Sint32 score;
   Sint32 nextextra;
   Sint16 mapon;
-  Sint8 var1[3]; // TODO
+  struct {
+    Sint8 landmines;
+    Sint8 grenades;
+    Sint8 redgrenades;
+  } explosives;
   struct {
     Sint16 keycards;
     Sint16 keys;
@@ -224,21 +242,21 @@ typedef struct
   boolean redshard;
   boolean cyanshard;
   boolean specialkey;
-  boolean nuke;
+  enum { ns_none, ns_collected, ns_placed } nukestate;
   boolean radpill;
   boolean exitkey;
   boolean var14;
-  Sint16 var15;
-  Uint8 var16;
+  boolean hasrobopal;
+  Sint8 var16;
   Sint8 lives;
   Sint8 gems;
   Sint8 maxhealth;
   Sint8 difficulty;
-  Sint8 var20;
-  Sint8 var21;
-  Sint8 var22;
-  Sint8 var23;
-  Sint16 var24;
+  Sint8 rapidfire;
+  Sint8 ammoinclip;
+  Sint8 clips;
+  Sint8 ammotype;
+  boolean hostagerescued;
   boolean secretlevelgem;
   Sint16 var26;
   Sint16 var27;
@@ -414,7 +432,7 @@ extern statetype far sc_badstate;
 
 void DamagePlayer(objtype* ob, Sint16 amount);
 void KillPlayer(void);
-void sub_1B848(objtype* o1, objtype* o2);
+void SnakeContact2(objtype* o1, objtype* o2);
 void HandleRiding(objtype *ob);
 void CheckInTiles(objtype *ob);
 
@@ -442,8 +460,8 @@ extern statetype far s_player_standing;
 
 extern boolean word_3899A;
 extern boolean word_3899C;
-extern boolean word_389A0;
-extern boolean word_389A2;
+extern boolean practicerestoremap;
+extern boolean practicetimer;
 extern Uint16 playerrestorex;
 extern Uint16 playerrestorey;
 extern Sint16 word_389A8;

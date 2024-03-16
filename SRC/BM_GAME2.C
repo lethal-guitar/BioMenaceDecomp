@@ -72,7 +72,7 @@ Sint16 inactivatetop;
 Sint16 inactivatebottom;
 
 extern Sint16 word_391C8;
-extern Uint16 word_3FA56;
+extern Uint16 invincible;
 extern Sint16 word_3FA6E;
 extern Uint8 byte_3FA6E;
 
@@ -339,7 +339,7 @@ void DrawStatusWindow(void)
     VWB_DrawTile8(200, 128, 28);
   }
 
-  if (gamestate.nuke == true)
+  if (gamestate.nukestate == ns_collected)
   {
     VWB_DrawTile8(208, 128, 29);
   }
@@ -365,13 +365,13 @@ void DrawStatusWindow(void)
   US_Print(buffer);
   VWB_Bar(119, 127, 26, 10, NUMBERBACK);
 
-  if (gamestate.var20 == 1 && gamestate.var21 > 3)
+  if (gamestate.rapidfire == 1 && gamestate.ammoinclip > 3)
   {
-    PrintNumbers(128, 128, 2, 0, gamestate.var22 + 1);
+    PrintNumbers(128, 128, 2, 0, gamestate.clips + 1);
   }
   else
   {
-    PrintNumbers(128, 128, 2, 0, gamestate.var22);
+    PrintNumbers(128, 128, 2, 0, gamestate.clips);
   }
 
   // draw the tiles for "PRESS A KEY":
@@ -559,7 +559,7 @@ void ScrollScreen(objtype *ob)
     yscroll = CONVERT_PIXEL_TO_GLOBAL(pix);
   }
 
-  if (ob->state->contact == sub_1B848)
+  if (ob->state->contact == SnakeContact2)
   {
     yscroll += ob->ymove;
 
@@ -1080,12 +1080,12 @@ void PlayLoop(void)
         continue;
       }
 
-      if (obj->temp4)
+      if (obj->dmgflash)
       {
-        obj->temp4 = obj->temp4 - tics;
-        if (obj->temp4 < 0)
+        obj->dmgflash = obj->dmgflash - tics;
+        if (obj->dmgflash < 0)
         {
-          obj->temp4 = 0;
+          obj->dmgflash = 0;
         }
       }
 
@@ -1109,11 +1109,11 @@ void PlayLoop(void)
     }
 
     // Blink player sprite during invulnerability frames
-    if (word_3FA56)
+    if (invincible)
     {
-      word_3FA56--;
+      invincible--;
 
-      if (word_3FA56 & 1)
+      if (invincible & 1)
       {
         RF_RemoveSprite(&player->sprite);
       }
@@ -1124,8 +1124,8 @@ void PlayLoop(void)
           spritedraw, 1);
       }
 
-      if ((word_3FA56 <= 100 || word_3FA56 >= 102) &&
-          word_3FA56 < 100)
+      if ((invincible <= 100 || invincible >= 102) &&
+          invincible < 100)
       {
         if (curmusic != gamestate.mapon)
         {
@@ -1133,9 +1133,9 @@ void PlayLoop(void)
         }
       }
 
-      if (word_3FA56 <= 0)
+      if (invincible <= 0)
       {
-        word_3FA56 = 0;
+        invincible = 0;
       }
     }
 
@@ -1144,13 +1144,13 @@ void PlayLoop(void)
       CheckInTiles(player);
     }
 
-    if (player->unk7 > 0)
+    if (player->temp7 > 0)
     {
-      player->unk7--;
+      player->temp7--;
 
-      if (player->unk7 <= 0)
+      if (player->temp7 <= 0)
       {
-        player->unk7 = 0;
+        player->temp7 = 0;
       }
     }
 
@@ -1212,20 +1212,20 @@ void PlayLoop(void)
     }
 
     // Practice mode
-    if (word_389A2 == 0)
+    if (practicetimer == 0)
     {
-      word_389A2 = -1;
+      practicetimer = -1;
       NewGame();
-      gamestate.mapon = word_389A0;
+      gamestate.mapon = practicerestoremap;
       playstate = ex_resetgame;
       gamestate.score = 0;
       US_ControlPanel(0);
       ingame = false;
       GameIsDirty = false;
     }
-    else if (word_389A2 > 0)
+    else if (practicetimer > 0)
     {
-      word_389A2--;
+      practicetimer--;
     }
   } while (playstate == ex_stillplaying);
 

@@ -1781,7 +1781,7 @@ void R_Draw(objtype *ob)
     ob->x,
     ob->y,
     ob->shapenum,
-    ob->temp4 ? maskdraw : spritedraw,
+    ob->dmgflash ? maskdraw : spritedraw,
     ob->priority);
 }
 
@@ -1799,49 +1799,49 @@ void R_Walk(objtype *ob)
   if (ob->xdir == 1 && ob->hitwest)
   {
     ob->x -= ob->xmove;
-    if (!ob->unk7)
+    if (!ob->temp7)
     {
       ob->xdir = -1;
     }
     ob->nothink = US_RndT() >> 5;
     ChangeState(ob, ob->state);
-    if (!ob->unk7)
+    if (!ob->temp7)
     {
-      ob->unk7 = 10;
+      ob->temp7 = 10;
     }
   }
   else if (ob->xdir == -1 && ob->hiteast)
   {
     ob->x -= ob->xmove;
-    if (!ob->unk7)
+    if (!ob->temp7)
     {
       ob->xdir = 1;
     }
     ob->nothink = US_RndT() >> 5;
     ChangeState(ob, ob->state);
-    if (!ob->unk7)
+    if (!ob->temp7)
     {
-      ob->unk7 = 10;
+      ob->temp7 = 10;
     }
   }
   else if (!ob->hitnorth)
   {
-    if (!ob->unk7)
+    if (!ob->temp7)
     {
       ob->xdir = -ob->xdir;
       ChangeState(ob, ob->state);
     }
     ob->x -= ob->xmove << 1;
     ob->nothink = US_RndT() >> 3;
-    if (!ob->unk7)
+    if (!ob->temp7)
     {
-      ob->unk7 = 10;
+      ob->temp7 = 10;
     }
   }
 
-  if (ob->unk7 > 0)
+  if (ob->temp7 > 0)
   {
-    ob->unk7--;
+    ob->temp7--;
   }
 
   RF_PlaceSprite(
@@ -1849,7 +1849,7 @@ void R_Walk(objtype *ob)
     ob->x,
     ob->y,
     ob->shapenum,
-    ob->temp4 ? maskdraw : spritedraw,
+    ob->dmgflash ? maskdraw : spritedraw,
     ob->priority);
 }
 
@@ -1893,7 +1893,7 @@ void R_WalkNormal(objtype *ob)
     ob->x,
     ob->y,
     ob->shapenum,
-    ob->temp4 ? maskdraw : spritedraw,
+    ob->dmgflash ? maskdraw : spritedraw,
     ob->priority);
 }
 

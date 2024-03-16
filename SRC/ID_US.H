@@ -95,7 +95,7 @@ extern  boolean   ingame,   // Set by game code if a game is in progress
           NoWait,
           HighScoresDirty;
 extern  char    *abortprogram;  // Set to error msg if program is dying
-extern boolean word_3A77C;
+extern boolean wantspractice;
 extern  GameDiff  restartgame;  // Normally gd_Continue, else starts game
 extern  word    PrintX,PrintY;  // Current printing location in the window
 extern  word    WindowX,WindowY,// Current location of window

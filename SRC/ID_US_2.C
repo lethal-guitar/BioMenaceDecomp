@@ -38,12 +38,12 @@
 //      Special imports
 extern  boolean         showscorebox;
 void  USL_CheckSavedGames(void);
-extern int word_389A2;
+extern int practicetimer;
 
 //      Global variables
     boolean         ingame,abortgame,loadedgame;
     boolean helpmessages = true;
-    boolean word_3A77C = false;
+    boolean wantspractice = false;
     ScanCode firescan = sc_Enter;
     GameDiff        restartgame = gd_Continue;
     boolean GameIsDirty;
@@ -606,7 +606,7 @@ USL_ConfirmComm(UComm comm)
   case uc_SEasy:
   case uc_SNormal:
   case uc_SHard:
-    if (word_389A2 > 0)
+    if (practicetimer > 0)
       s1 = "LEAVING PRACTICE GAME";
     else
       s1 = "YOU'RE IN A GAME";
@@ -616,16 +616,16 @@ USL_ConfirmComm(UComm comm)
       dialog = true;
     break;
   case uc_SPractice:
-    if (word_389A2 > 0)
+    if (practicetimer > 0)
       s1 = "LEAVING PRACTICE GAME";
     else
       s1 = "YOU'RE IN A GAME";
 
     s2 = "PRESS Y FOR NEW GAME";
-    if (ingame && GameIsDirty && word_389A2 <= 0)
+    if (ingame && GameIsDirty && practicetimer <= 0)
       dialog = true;
     else
-      word_3A77C = true;
+      wantspractice = true;
     break;
   }
 
@@ -1378,7 +1378,7 @@ USL_SetControlValues(void)
     rooti[2].flags |= ui_Disabled;  // Save Game
     rooti[5].flags |= ui_Disabled;  // End Game
   }
-  if (word_389A2 != -1)
+  if (practicetimer != -1)
   {
     // Can't save game while in practice mode
     rooti[2].flags |= ui_Disabled;
@@ -1453,7 +1453,7 @@ USL_HandleComm(UComm comm)
     restartgame = gd_Hard;
     break;
   case uc_SPractice:
-    word_3A77C = true;
+    wantspractice = true;
     restartgame = gd_Easy;
     break;
 

@@ -518,9 +518,9 @@ void CheckKeys(void)
 
     if (showscorebox)
     {
-      *((Sint32*)&scoreobj->unk1) = -1;
-      scoreobj->unk3 = -1;
-      scoreobj->unk4 = -1;
+      *((Sint32*)&scoreobj->temp1) = -1;
+      scoreobj->temp3 = -1;
+      scoreobj->temp4 = -1;
     }
 
     IN_ClearKeysDown();
@@ -550,7 +550,7 @@ void CheckKeys(void)
       VW_FixRefreshBuffer();
       StopMusic();
 
-      if (LastScan == sc_F7 && word_389A2 == -1)
+      if (LastScan == sc_F7 && practicetimer == -1)
       {
         US_ControlPanel(1);
       }
@@ -573,10 +573,10 @@ void CheckKeys(void)
 
       if (showscorebox)
       {
-        *((Sint32*)&scoreobj->unk1) = -1;
-        /*scoreobj->unk1 = -1;*/
-        scoreobj->unk3 = -1;
-        scoreobj->unk4 = -1;
+        *((Sint32*)&scoreobj->temp1) = -1;
+        /*scoreobj->temp1 = -1;*/
+        scoreobj->temp3 = -1;
+        scoreobj->temp4 = -1;
       }
 
       IN_ClearKeysDown();
