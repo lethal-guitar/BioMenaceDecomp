@@ -31,7 +31,7 @@ boolean singlestep, godmode;
 boolean debugok;
 
 Uint16 extravbls;
-Sint16 word_3FA2A;
+boolean jumpcheat;
 
 
 //===========================================================================

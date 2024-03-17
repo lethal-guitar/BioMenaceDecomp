@@ -26,12 +26,12 @@ Uint16 invincible;
 Uint16 word_3FA66;
 Sint16 doorx;
 Sint16 doory;
-Uint16 word_3FA6C;
+Uint16 jumptime;
 Uint8 byte_3FA6E;
 
 boolean upbutton, downbutton, leftbutton, rightbutton, button0, button1, firebutton;
 
-extern boolean word_3FA2A;
+extern boolean jumpcheat;
 extern boolean godmode;
 extern boolean button0held, button1held, fireheld;
 
@@ -616,7 +616,7 @@ boolean CheckJump(objtype* ob)
     ob->xspeed = TABLE2[c.xaxis];
     ob->yspeed = -40;
     ob->needtoclip = cl_midclip;
-    word_3FA6C = 16;
+    jumptime = 16;
     ob->state = &s_player_in_air1;
     ob->ydir = 1;
     button0held = true;
@@ -1167,7 +1167,7 @@ void SnakeShootThink(objtype* ob)
       ob->yspeed = -41;
       xtry = 0;
       ytry = 0;
-      word_3FA6C = 16;
+      jumptime = 16;
       ob->state = &s_player_shoot_air2;
       button0held = true;
       gamestate.riding = NULL;
@@ -1251,7 +1251,7 @@ void SnakeShootCrouchThink(objtype* ob)
       ob->yspeed = -41;
       xtry = 0;
       ytry = 0;
-      word_3FA6C = 16;
+      jumptime = 16;
       ob->state = &s_player_shoot_air2;
       button0held = true;
       gamestate.riding = NULL;
@@ -1281,26 +1281,26 @@ void SnakeShootCrouchThink(objtype* ob)
 
 void SnakeShootAirThink(objtype* ob)
 {
-  if (word_3FA6C)
+  if (jumptime)
   {
-    if (word_3FA6C < tics)
+    if (jumptime < tics)
     {
-      ytry = ob->yspeed * word_3FA6C;
-      word_3FA6C = 0;
+      ytry = ob->yspeed * jumptime;
+      jumptime = 0;
     }
     else
     {
       ytry = ob->yspeed * tics;
     }
 
-    if (!word_3FA2A)
+    if (!jumpcheat)
     {
-      word_3FA6C = word_3FA6C - tics;
+      jumptime = jumptime - tics;
     }
 
     if (!c.button0)
     {
-      word_3FA6C = 0;
+      jumptime = 0;
     }
   }
   else
@@ -1354,7 +1354,7 @@ void sub_1ACA4(objtype* ob)
   ob->yspeed = -41;
   xtry = 0;
   ytry = 0;
-  word_3FA6C = 16;
+  jumptime = 16;
   button0held = true;
   gamestate.riding = NULL;
   ob->state = &s_player_in_air1;
@@ -1399,17 +1399,17 @@ void DamagePlayer(objtype* ob, Sint16 damage)
 
 void SnakeDyingThink(objtype* ob)
 {
-  if (word_3FA6C)
+  if (jumptime)
   {
-    if (word_3FA6C < tics)
+    if (jumptime < tics)
     {
-      ytry = ob->yspeed * word_3FA6C;
-      word_3FA6C = 0;
+      ytry = ob->yspeed * jumptime;
+      jumptime = 0;
     }
     else
     {
       ytry = ob->yspeed * tics;
-      word_3FA6C = word_3FA6C - tics;
+      jumptime = jumptime - tics;
     }
   }
   else
@@ -1867,29 +1867,29 @@ void SnakeWalkThink(objtype* ob)
 
 void SnakeAirThink(objtype* ob)
 {
-  if (word_3FA6C)
+  if (jumptime)
   {
-    if (word_3FA6C < tics)
+    if (jumptime < tics)
     {
-      ytry = ob->yspeed * word_3FA6C;
-      word_3FA6C = 0;
+      ytry = ob->yspeed * jumptime;
+      jumptime = 0;
     }
     else
     {
       ytry = ob->yspeed * tics;
     }
 
-    if (!word_3FA2A)
+    if (!jumpcheat)
     {
-      word_3FA6C = word_3FA6C - tics;
+      jumptime = jumptime - tics;
     }
 
     if (!c.button0)
     {
-      word_3FA6C = 0;
+      jumptime = 0;
     }
 
-    if (word_3FA6C == 0)
+    if (jumptime == 0)
     {
       ob->temp2 = false;
       ob->state = ob->state->nextstate;
@@ -2051,7 +2051,7 @@ void CheckFallOffLadder(objtype* ob)
   if ((tinf[INTILE + *map] & 0x7F) != INTILE_LADDER)
   {
     ob->state = &s_player_in_air3;
-    word_3FA6C = 0;
+    jumptime = 0;
     ob->temp2 = 1;
     ob->xspeed = TABLE2[c.xaxis];
     ob->yspeed = 0;
@@ -2105,7 +2105,7 @@ void KillPlayer(void)
   player->yspeed = -41;
   xtry = 0;
   ytry = 0;
-  word_3FA6C = 16;
+  jumptime = 16;
   button0held = true;
   gamestate.riding = NULL;
   word_391C2 = true;
@@ -2126,7 +2126,7 @@ void R_OnGround(objtype* ob)
     ob->xspeed = ob->xdir * 8;
     ChangeState(ob, &s_player_in_air3);
     ob->temp2 = true;
-    word_3FA6C = 0;
+    jumptime = 0;
   }
 
   RF_PlaceSprite(
@@ -2147,7 +2147,7 @@ void R_Walking(objtype* ob)
     ob->yspeed = 0;
     ChangeState(ob, &s_player_in_air3);
     ob->temp2 = true;
-    word_3FA6C = 0;
+    jumptime = 0;
   }
   else if (ob->hiteast || ob->hitwest)
   {
@@ -2187,12 +2187,12 @@ void R_PlayerInAir(objtype* ob)
       ob->yspeed = 0;
     }
 
-    word_3FA6C = 0;
+    jumptime = 0;
   }
 
   if (ob->hitnorth)
   {
-    if (ob->hitnorth != 23 || !word_3FA6C)
+    if (ob->hitnorth != 23 || !jumptime)
     {
       ob->temp1 = ob->temp2 = 0;
 

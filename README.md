@@ -34,7 +34,7 @@ Some variables and functions don't have meaningful names yet, and many places us
 * Fully decompile `B1_PLAY2.C`
 * Fully decompile `ScanInfoPlane` function in `BM_SPEC.C`
 * Decompile `B1_ACT{1,2,3}.C`
-* Make BSS variable order match perfectly in `BM_GAME3.C` and `BM_PLAY1.C`
+* Make BSS variable order match perfectly in `BM_PLAY1.C`
 * Assign meaningful names to all functions and variables
 * Do registered version episode 1
 * Do episode 2
