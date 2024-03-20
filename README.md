@@ -4,12 +4,12 @@ This is a (heavily work in progress) decompilation/source code reconstruction of
 released by Apogee Software in 1993 for MS-DOS.
 
 Based on [K1n9_Duk3's reconstruction of Commander Keen 4 source code](https://github.com/sparky4/keen4-6).
-BioMenace uses the same engine and thus shares a lot of code with the 2nd Keen trilogy.
+BioMenace uses the same engine and thus shares a lot of code with the 2nd Keen trilogy. Almost all of the game logic is completely unique to this game though.
 
 
 ## Current state
 
-Only the episode 1 Shareware EXE v1.1 is currently covered - the original version, not the freeware release (which contains registered version episode 1).
+Only the episode 1 Shareware EXE (v1.1) is currently covered - the original version, not the freeware release (which contains registered version episode 1).
 
 All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). About half of the player control code has also been recreated. However, all the actor logic (enemies, items, interactive objects etc.) is still missing.
 
