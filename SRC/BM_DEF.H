@@ -459,7 +459,7 @@ extern statetype far s_player_standing;
 extern boolean word_3899A;
 extern boolean word_3899C;
 extern boolean practicerestoremap;
-extern boolean practicetimer;
+extern Sint16 practicetimer;
 extern Uint16 playerrestorex;
 extern Uint16 playerrestorey;
 extern Sint16 word_389A8;
