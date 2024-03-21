@@ -20,9 +20,11 @@
 
 #include "BM_DEF.H"
 
+
 #define PLACESPRITE \
   RF_PlaceSprite(&ob->sprite, ob->x, ob->y, ob->shapenum, \
     ob->dmgflash ? maskdraw : spritedraw, ob->priority);
+
 
 Uint16 bounceangle[8][8] = {
   { 0,  0,  0,  0,  0,  0,  0,  0},
@@ -39,6 +41,7 @@ Sint16 bonuspoints[] = {
   100, 200, 500, 800, 1000, 1500, 2000, 5000, 20000, 50000
 };
 
+
 Uint8 unktime;
 Uint16 colorstep;
 Sint16 doordestx;
@@ -50,9 +53,9 @@ extern Sint16 word_399F8;
 extern boolean robopalfire;
 
 extern statetype far s_score;
-extern statetype far s_87;
-extern statetype far s_88;
-extern statetype far s_89;
+extern statetype far s_bulletimpact1;
+extern statetype far s_bulletimpact2;
+extern statetype far s_bulletimpact3;
 extern statetype far s_90;
 extern statetype far s_91;
 extern statetype far s_92;
@@ -69,20 +72,20 @@ extern statetype far s_102;
 extern statetype far s_103;
 extern statetype far s_104;
 extern statetype far s_105;
-extern statetype far s_106;
-extern statetype far s_107;
-extern statetype far s_108;
-extern statetype far s_109;
-extern statetype far s_110;
-extern statetype far s_111;
-extern statetype far s_112;
-extern statetype far s_113;
-extern statetype far s_114;
-extern statetype far s_115;
-extern statetype far s_116;
-extern statetype far s_117;
-extern statetype far s_118;
-extern statetype far s_119;
+extern statetype far s_grenade1;
+extern statetype far s_grenade2;
+extern statetype far s_grenade3;
+extern statetype far s_grenade4;
+extern statetype far s_redgrenade1;
+extern statetype far s_redgrenade2;
+extern statetype far s_redgrenade3;
+extern statetype far s_redgrenade4;
+extern statetype far s_grenadeexplosion1;
+extern statetype far s_grenadeexplosion2;
+extern statetype far s_grenadeexplosion3;
+extern statetype far s_grenadeexplosion4;
+extern statetype far s_grenadeexplosion5;
+extern statetype far s_grenadeexplosion6;
 extern statetype far s_120;
 extern statetype far s_121;
 extern statetype far s_lasershot;
@@ -100,6 +103,7 @@ extern statetype far s_200;
 extern statetype far s_201;
 extern statetype far s_225;
 
+void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
 void SpawnLaserShot(Uint16 x, Uint16 y, Sint16 dir);
 void sub_1d9a4(objtype* ob);
 void sub_1de52(objtype* ob, objtype* hit);
@@ -115,22 +119,21 @@ void ExplodeShot(objtype* ob);
 void T_Shot(objtype* ob);
 void R_Shot(objtype* ob);
 void R_SuperPlasmaBolt(objtype* ob);
-void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
 
 
 statetype far s_score = { /* 30d00 */
   0, 0, think, false, ps_none, 0, 0, 0,
   NULL, NULL, NULL, NULL};
 
-statetype far s_87 = { /* 30d20 */
+statetype far s_bulletimpact1 = { /* 30d20 */
   129, 129, step, false, ps_none, 5, 0, 0,
-  NULL, NULL, R_Draw, &s_88};
+  NULL, NULL, R_Draw, &s_bulletimpact2};
 
-statetype far s_88 = { /* 30d40 */
+statetype far s_bulletimpact2 = { /* 30d40 */
   130, 130, step, false, ps_none, 5, 0, 0,
-  NULL, NULL, R_Draw, &s_89};
+  NULL, NULL, R_Draw, &s_bulletimpact3};
 
-statetype far s_89 = { /* 30d60 */
+statetype far s_bulletimpact3 = { /* 30d60 */
   131, 131, step, false, ps_none, 5, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
@@ -198,59 +201,59 @@ statetype far s_105 = { /* 30f60 */
   124, 128, stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, sub_1de52, sub_1dea7, &s_102};
 
-statetype far s_106 = { /* 30f80 */
+statetype far s_grenade1 = { /* 30f80 */
   105, 105, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_107};
+  T_Projectile, C_Grenade, R_Grenade, &s_grenade2};
 
-statetype far s_107 = { /* 30fa0 */
+statetype far s_grenade2 = { /* 30fa0 */
   106, 106, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_108};
+  T_Projectile, C_Grenade, R_Grenade, &s_grenade3};
 
-statetype far s_108 = { /* 30fc0 */
+statetype far s_grenade3 = { /* 30fc0 */
   107, 107, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_109};
+  T_Projectile, C_Grenade, R_Grenade, &s_grenade4};
 
-statetype far s_109 = { /* 30fe0 */
+statetype far s_grenade4 = { /* 30fe0 */
   108, 108, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_106};
+  T_Projectile, C_Grenade, R_Grenade, &s_grenade1};
 
-statetype far s_110 = { /* 31000 */
+statetype far s_redgrenade1 = { /* 31000 */
   109, 109, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_111};
+  T_Projectile, C_Grenade, R_Grenade, &s_redgrenade2};
 
-statetype far s_111 = { /* 31020 */
+statetype far s_redgrenade2 = { /* 31020 */
   110, 110, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_112};
+  T_Projectile, C_Grenade, R_Grenade, &s_redgrenade3};
 
-statetype far s_112 = { /* 31040 */
+statetype far s_redgrenade3 = { /* 31040 */
   111, 111, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_113};
+  T_Projectile, C_Grenade, R_Grenade, &s_redgrenade4};
 
-statetype far s_113 = { /* 31060 */
+statetype far s_redgrenade4 = { /* 31060 */
   112, 112, stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, C_Grenade, R_Grenade, &s_110};
+  T_Projectile, C_Grenade, R_Grenade, &s_redgrenade1};
 
-statetype far s_114 = { /* 31080 */
+statetype far s_grenadeexplosion1 = { /* 31080 */
   115, 115, step, false, ps_none, 10, 0, 0,
-  T_GrenadeExplosion, C_GrenadeExplosion, R_Draw, &s_115};
+  T_GrenadeExplosion, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion2};
 
-statetype far s_115 = { /* 310a0 */
+statetype far s_grenadeexplosion2 = { /* 310a0 */
   116, 116, step, false, ps_none, 10, 0, 0,
-  NULL, C_GrenadeExplosion, R_Draw, &s_116};
+  NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion3};
 
-statetype far s_116 = { /* 310c0 */
+statetype far s_grenadeexplosion3 = { /* 310c0 */
   117, 117, step, false, ps_none, 10, 0, 0,
-  NULL, C_GrenadeExplosion, R_Draw, &s_117};
+  NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion4};
 
-statetype far s_117 = { /* 310e0 */
+statetype far s_grenadeexplosion4 = { /* 310e0 */
   118, 118, step, false, ps_none, 10, 0, 0,
-  NULL, C_GrenadeExplosion, R_Draw, &s_118};
+  NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion5};
 
-statetype far s_118 = { /* 31100 */
+statetype far s_grenadeexplosion5 = { /* 31100 */
   119, 119, step, false, ps_none, 10, 0, 0,
-  NULL, C_GrenadeExplosion, R_Draw, &s_119};
+  NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion6};
 
-statetype far s_119 = { /* 31120 */
+statetype far s_grenadeexplosion6 = { /* 31120 */
   120, 120, step, false, ps_none, 10, 0, 0,
   NULL, C_GrenadeExplosion, R_Draw, NULL};
 
@@ -928,7 +931,7 @@ void MemDrawChar(Sint16 char8, Uint8 far *dest, Uint16 width, Uint16 planesize)
   asm mov bx,[width]
   asm dec bx
 
-  planeloop:
+planeloop:
 
   asm mov di,[WORD PTR dest]
 
@@ -979,13 +982,8 @@ void ShiftScore (void)
 
 void ResetScoreBox(void)
 {
-  scoreobj->temp1 =
-  scoreobj->temp2 =
-  scoreobj->temp3 =
-  scoreobj->temp4 =
-  scoreobj->temp5 =
-  scoreobj->temp6 =
-  scoreobj->temp7 = -1;
+  scoreobj->temp1 = scoreobj->temp2 = scoreobj->temp3 = scoreobj->temp4 =
+    scoreobj->temp5 = scoreobj->temp6 = scoreobj->temp7 = -1;
 // PLACEHOLDER
 "99";
 "99";
@@ -1146,7 +1144,7 @@ void SpawnBulletImpact(Uint16 x, Uint16 y)
   }
   else
   {
-    NewState(new, &s_87);
+    NewState(new, &s_bulletimpact1);
   }
 }
 
@@ -1806,10 +1804,10 @@ void ThrowGrenade(Uint16 x, Uint16 y, Direction dir)
 
   if (new->temp7)
   {
-    NewState(new, &s_110);
+    NewState(new, &s_redgrenade1);
     new->active = ac_allways;
 
-    if (!StatePositionOk(new, &s_110))
+    if (!StatePositionOk(new, &s_redgrenade1))
     {
       new->hitnorth = 1;
     }
@@ -1817,9 +1815,9 @@ void ThrowGrenade(Uint16 x, Uint16 y, Direction dir)
     return;
   }
 
-  NewState(new, &s_106);
+  NewState(new, &s_grenade1);
 
-  if (!StatePositionOk(new, &s_106))
+  if (!StatePositionOk(new, &s_grenade1))
   {
     new->hitnorth = 1;
   }
@@ -1842,10 +1840,10 @@ void C_Grenade(objtype* ob, objtype* hit)
 {
   if (hit->var1 && hit->obclass != 21)
   {
-    FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, 12);
-    FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, 16);
+    FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_East + 10);
+    FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
 
-    ChangeState(ob, &s_114);
+    ChangeState(ob, &s_grenadeexplosion1);
 
     ob->obclass = 5;
 
@@ -1996,8 +1994,8 @@ void R_Grenade(objtype* ob)
     {
       if (ob->temp7)
       {
-        FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, 12);
-        FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, 16);
+        FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_East + 10);
+        FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
 
         ob->obclass = 5;
         ob->needtoclip = true;
@@ -2009,12 +2007,12 @@ void R_Grenade(objtype* ob)
       }
       else
       {
-        FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, 12);
-        FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, 16);
+        FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_East + 10);
+        FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
 
         ob->obclass = 5;
 
-        ChangeState(ob, &s_114);
+        ChangeState(ob, &s_grenadeexplosion1);
       }
 
       return;
@@ -2224,7 +2222,7 @@ void R_SuperPlasmaBolt(objtype* ob)
 {
   if (ob->hitnorth || ob->hitsouth || ob->hiteast || ob->hitwest)
   {
-    ChangeState(ob, &s_114);
+    ChangeState(ob, &s_grenadeexplosion1);
   }
 
   PLACESPRITE

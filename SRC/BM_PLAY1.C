@@ -1343,7 +1343,7 @@ void PollControls(void)
 }
 
 
-void sub_1ACA4(objtype* ob)
+void Jump(objtype* ob)
 {
   word_391BA = 0;
   SD_PlaySound(11);
@@ -1553,7 +1553,7 @@ void SnakeStandThink(objtype* ob)
   if (cmdjump && !button0held && cmdfire && !button1held)
   {
     word_391C6 = 0;
-    sub_1ACA4(ob);
+    Jump(ob);
 
     if (startwalking)
     {
@@ -1581,8 +1581,8 @@ void SnakeStandThink(objtype* ob)
       // Fireball Weapon
       for (i = 0; i < 3; i++)
       {
-        FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, 22);
-        FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, 26);
+        FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, dir_East + 20);
+        FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, dir_West + 20);
         SD_PlaySound(21);
       }
 
@@ -1670,7 +1670,7 @@ void SnakeStandThink(objtype* ob)
     }
 
     word_391C6 = 0;
-    sub_1ACA4(ob);
+    Jump(ob);
 
     if (startwalking)
     {
@@ -1765,7 +1765,7 @@ void SnakeWalkThink(objtype* ob)
 
   if (cmdjump && !button0held && cmdfire && !button1held)
   {
-    sub_1ACA4(ob);
+    Jump(ob);
 
     ob->xspeed = ob->xdir * 16;
 
@@ -1830,7 +1830,7 @@ void SnakeWalkThink(objtype* ob)
 
   if (cmdjump && !button0held)
   {
-    sub_1ACA4(ob);
+    Jump(ob);
 
     if (startwalking)
     {
@@ -2073,7 +2073,7 @@ void SnakeShootSingleThink(objtype* ob)
 
   if (cmdjump && !button0held)
   {
-    sub_1ACA4(ob);
+    Jump(ob);
     ob->state = &s_player_shoot_single_air2;
   }
   else if (cmddown)
