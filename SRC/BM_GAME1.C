@@ -530,7 +530,7 @@ loaded:
   colorstep = 0;
   word_399FA = 0;
   word_391BC = 0;
-  word_389A8 = 999;
+  bosshealth = 999;
   SD_WaitSoundDone();
 
 

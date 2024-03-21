@@ -31,7 +31,7 @@ enum {
 };
 
 boolean lumpneeded[NUMLUMPS];
-boolean robopalfire;
+boolean firerobopal;
 
 Uint16 lumpstart[] = {
   CONTROLS_LUMP_START,

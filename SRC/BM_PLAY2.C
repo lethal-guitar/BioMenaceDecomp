@@ -50,7 +50,9 @@ Uint16 jumptime;
 
 extern Uint16 invincible;
 extern Sint16 word_399F8;
-extern boolean robopalfire;
+extern Sint16 unknown;
+extern Sint16 word_389AA;
+extern boolean firerobopal;
 
 extern statetype far s_score;
 extern statetype far s_bulletimpact1;
@@ -984,14 +986,401 @@ void ResetScoreBox(void)
 {
   scoreobj->temp1 = scoreobj->temp2 = scoreobj->temp3 = scoreobj->temp4 =
     scoreobj->temp5 = scoreobj->temp6 = scoreobj->temp7 = -1;
-// PLACEHOLDER
-"99";
-"99";
 }
 
 
 void UpdateScore(objtype *ob)
 {
+  char str[10];
+  char* ch;
+  spritetype _seg* block;
+  Uint8 far* dest;
+  Uint8 far* dest2;
+  Uint16 i, width;
+  boolean isodd;
+  Uint16 length, planesize, number;
+  boolean changed;
+
+  changed = false;
+
+  if (!showscorebox || gamestate.mapon == 12 || gamestate.mapon == 13)
+    return;
+
+  //
+  // score changed, or practice timer active
+  //
+  if (
+    (gamestate.score>>16) != ob->temp1 ||
+    (Uint16)gamestate.score != ob->temp2 ||
+    practicetimer > 0)
+  {
+    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    width = block->width[0];
+    planesize = block->planesize[0];
+    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      planesize + width*4;
+
+    if (practicetimer > 0)
+    {
+      ltoa(practicetimer / 33, str, 10);
+    }
+    else
+    {
+      ltoa(gamestate.score, str, 10);
+    }
+
+    // erase leading spaces
+    length = strlen(str);
+    for (i=7; i>length; i--)
+      MemDrawChar(0, dest+=CHARWIDTH, width, planesize);
+
+    // draw digits
+    ch = str;
+    while (*ch)
+      MemDrawChar(*ch++ - '0'+1, dest+=CHARWIDTH, width, planesize);
+
+    // draw "TIME LEFT" label
+    if (practicetimer > 0)
+    {
+      dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+        planesize + width*4 + CHARWIDTH;
+      dest -= CHARWIDTH;
+
+      for (i=1; i < 6; i++)
+        MemDrawChar(i + 59, dest+=CHARWIDTH, width, planesize);
+    }
+
+    ShiftScore();
+    ob->needtoreact = true;
+    ob->temp1 = gamestate.score>>16;
+    ob->temp2 = gamestate.score;
+    changed = true;
+  }
+
+  //
+  // health changed
+  //
+  number = player->health;
+  if (number != ob->temp6)
+  {
+    if (number > 8)
+      number = 8;
+
+    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    width = block->width[0];
+    planesize = block->planesize[0];
+    dest2 = dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      planesize + width*4 + 8*CHARWIDTH;
+
+    for (i=4; i > 0; i--)
+      MemDrawChar(0, dest2 += CHARWIDTH, width, planesize);
+
+    if (number > 0)
+    {
+      for (i = 1; i <= number; i++)
+      {
+        isodd = i & 1;
+
+        if (isodd)
+        {
+          if (i == 1)
+            dest += CHARWIDTH;
+
+          MemDrawChar(31, dest, width, planesize);
+        }
+        else
+        {
+          MemDrawChar(21, dest, width, planesize);
+          dest += CHARWIDTH;
+        }
+      }
+    }
+
+    ShiftScore();
+    ob->needtoreact = true;
+    ob->temp6 = player->health;
+    changed = true;
+  }
+
+  //
+  // explosives type changed
+  //
+  if (gamestate.explosives.landmines > 0)
+    number = gamestate.explosives.landmines;
+  else if (gamestate.explosives.redgrenades > 0)
+    number = gamestate.explosives.redgrenades;
+  else
+    number = gamestate.explosives.grenades;
+  if (number != ob->temp3)
+  {
+    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    width = block->width[0];
+    planesize = block->planesize[0];
+    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      + planesize + width*20 + 4*CHARWIDTH;
+
+    if (gamestate.explosives.landmines > 0)
+      MemDrawChar(35, dest, width, planesize);
+    else if (gamestate.explosives.redgrenades > 0)
+      MemDrawChar(57, dest, width, planesize);
+    else
+      MemDrawChar(58, dest, width, planesize);
+
+    ShiftScore();
+    ob->needtoreact = true;
+    changed = true;
+  }
+
+  //
+  // explosives amount changed
+  //
+  if (gamestate.explosives.landmines > 0)
+    number = gamestate.explosives.landmines;
+  else if (gamestate.explosives.redgrenades > 0)
+    number = gamestate.explosives.redgrenades;
+  else
+    number = gamestate.explosives.grenades;
+  if (number != ob->temp3)
+  {
+    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    width = block->width[0];
+    planesize = block->planesize[0];
+    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      + planesize + width*20 + 5*CHARWIDTH;
+
+    if (number > 99)
+      strcpy(str, "99");
+    else
+      ltoa(number, str, 10);
+
+    // erase leading spaces
+    length = strlen(str);
+    for (i=2;i >length;i --)
+      MemDrawChar(0, dest+=CHARWIDTH, width, planesize);
+
+    // draw digits
+    ch = str;
+    while (*ch)
+      MemDrawChar(*ch++ - '0'+1, dest+=CHARWIDTH, width, planesize);
+
+    ShiftScore();
+    ob->needtoreact = true;
+
+    if (gamestate.explosives.landmines)
+      ob->temp3 = gamestate.explosives.landmines;
+    else if (gamestate.explosives.redgrenades)
+      ob->temp3 = gamestate.explosives.redgrenades;
+    else
+      ob->temp3 = gamestate.explosives.grenades;
+
+    changed = true;
+  }
+
+  //
+  // ammo type changed
+  //
+  if (gamestate.ammotype != ob->temp7)
+  {
+    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    width = block->width[0];
+    planesize = block->planesize[0];
+    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      + planesize + width*20 + 9*CHARWIDTH;
+
+    if (gamestate.ammotype == 0)
+      MemDrawChar(33, dest, width, planesize);
+    else if (gamestate.ammotype == AMMO_SUPERBULLET)
+      MemDrawChar(34, dest, width, planesize);
+    else if (gamestate.ammotype == AMMO_PLASMABOLT)
+      MemDrawChar(59, dest, width, planesize);
+
+    ShiftScore();
+    ob->needtoreact = true;
+    ob->temp7 = gamestate.ammotype;
+    changed = true;
+  }
+
+  //
+  // ammo changed
+  //
+  number = gamestate.ammoinclip;
+  if (gamestate.difficulty == gd_Easy && gamestate.ammoinclip <= 3 &&
+      gamestate.ammotype == 0)
+  {
+    number = 0;
+  }
+
+  if (number != ob->temp5)
+  {
+    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    width = block->width[0];
+    planesize = block->planesize[0];
+    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      + planesize + width*20 + 10*CHARWIDTH;
+
+    if (number > 99)
+      strcpy(str, "99");
+    else
+      ltoa(number, str, 10);
+
+    // erase leading spaces
+    length = strlen(str);
+    for (i=2;i >length;i --)
+      MemDrawChar(0, dest+=CHARWIDTH, width, planesize);
+
+    ch = str;
+    if (number > 0)
+    {
+      // draw digits
+      while (*ch)
+        MemDrawChar(*ch++ - '0'+1, dest+=CHARWIDTH, width, planesize);
+    }
+    else
+    {
+      // draw ".."
+      MemDrawChar(*ch++ - '0'+20, dest, width, planesize);
+      MemDrawChar(0, dest+=CHARWIDTH, width, planesize);
+    }
+
+    ShiftScore();
+    ob->needtoreact = true;
+
+    if (gamestate.difficulty == gd_Easy)
+    {
+      ob->temp5 = -1;
+    }
+    else
+    {
+      ob->temp5 = gamestate.ammoinclip;
+    }
+
+    changed = true;
+  }
+
+  //
+  // lives changed
+  //
+  if (gamestate.lives != ob->temp4)
+  {
+    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    width = block->width[0];
+    planesize = block->planesize[0];
+    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      + planesize + width*20 + 2*CHARWIDTH;
+
+    if (gamestate.lives > 9)
+    {
+      MemDrawChar(10, dest, width, planesize);
+    }
+    else
+    {
+      MemDrawChar(gamestate.lives + 1, dest, width, planesize);
+    }
+
+    ShiftScore();
+    ob->needtoreact = true;
+    ob->temp4 = gamestate.lives;
+    changed = true;
+  }
+
+  //
+  // boss health bar changed
+  //
+  if (bosshealth > 0)
+  {
+    if (!unknown)
+      unknown = 1;
+
+    number = bosshealth / unknown;
+
+    if (number != word_389AA)
+    {
+      if (number > 20)
+        number = 20;
+
+      if (number <= 0)
+        number = 1;
+
+      block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+      width = block->width[0];
+      planesize = block->planesize[0];
+      dest2 = dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+        + planesize + width*32 - 1*CHARWIDTH;
+      dest2 += 3*CHARWIDTH;
+
+      if (bosshealth == 999)
+      {
+        // clear health bar to empty
+        bosshealth = -1;
+        MemDrawChar(72, dest += CHARWIDTH, width, planesize);
+
+        for (i = 0; i < 12; i++)
+        {
+          MemDrawChar(71, dest += CHARWIDTH, width, planesize);
+        }
+      }
+      else
+      {
+        // draw "BOSS" label
+        for (i = 0; i < 3; i++)
+        {
+          MemDrawChar(i + 66, dest += CHARWIDTH, width, planesize);
+        }
+
+        dest = dest2;
+
+        // clear bar
+        for (i = 0; i < 10; i++)
+        {
+          MemDrawChar(71, dest2 += CHARWIDTH, width, planesize);
+        }
+
+        // draw bar
+        if (number > 0)
+        {
+          for (i = 1; i <= number; i++)
+          {
+            isodd = i & 1;
+
+            if (isodd)
+            {
+              if (i == 1)
+                dest += CHARWIDTH;
+
+              MemDrawChar(70, dest, width, planesize);
+            }
+            else
+            {
+              MemDrawChar(69, dest, width, planesize);
+              dest += CHARWIDTH;
+            }
+          }
+        }
+      }
+
+      ShiftScore();
+      ob->needtoreact = true;
+      changed = true;
+    }
+  }
+
+  if (ob->x != originxglobal || ob->y != originyglobal)
+  {
+    ob->x = originxglobal;
+    ob->y = originyglobal;
+    changed = true;
+  }
+
+  if (changed)
+  {
+    RF_PlaceSprite(
+       &ob->sprite,
+       ob->x + 4*PIXGLOBAL,
+       ob->y + 4*PIXGLOBAL,
+       SCOREBOXSPR,
+       spritedraw,
+       3);
+  }
 }
 
 
@@ -1059,7 +1448,7 @@ void DealDamage(objtype* ob, Sint16 amount)
         ob->var1 = 0;
         SD_PlaySound(23);
         ob->obclass = inertobj;
-        word_389A8 = 999;
+        bosshealth = 999;
         break;
 
       case 33:
@@ -1068,7 +1457,7 @@ void DealDamage(objtype* ob, Sint16 amount)
         sub_21473(ob->tilemidx, ob->tiletop, 26);
         StartMusic(14);
         word_399F8 = true;
-        word_389A8 = 999;
+        bosshealth = 999;
         break;
 
       case 34:
@@ -1188,7 +1577,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
     if ((gamestate.ammoinclip & 1) && gamestate.hasrobopal)
     {
-      robopalfire = true;
+      firerobopal = true;
     }
   }
   else
@@ -1215,7 +1604,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
     if (gamestate.hasrobopal)
     {
-      robopalfire = true;
+      firerobopal = true;
     }
   }
 

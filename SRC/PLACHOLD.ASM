@@ -4,6 +4,6 @@ MODEL	MEDIUM,C
 
 CODESEG
 
-placeholder	db 21921 dup (90h)
+placeholder	db 19519 dup (90h)
 
 END

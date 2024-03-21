@@ -462,7 +462,7 @@ extern boolean practicerestoremap;
 extern Sint16 practicetimer;
 extern Uint16 playerrestorex;
 extern Uint16 playerrestorey;
-extern Sint16 word_389A8;
+extern Sint16 bosshealth;
 extern Sint16 word_389AA;
 extern Sint16 nagtimer;
 
