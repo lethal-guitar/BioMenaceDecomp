@@ -31,7 +31,7 @@ enum {
 };
 
 boolean lumpneeded[NUMLUMPS];
-Uint16 unusedw;
+boolean robopalfire;
 
 Uint16 lumpstart[] = {
   CONTROLS_LUMP_START,
@@ -63,7 +63,6 @@ char* levelnames[GAMELEVELS] = {
   "Mangle's Last Stand",
 };
 
-char far farbss_placeholder1[1216];
 
 // seg128
 char far HOSTAGEDLG1[] =
@@ -248,7 +247,7 @@ char far BOSSDIALOG12[] =
   "have with all these others!\n"
   "Prepare to die, sub-creature!\n\n";
 
-char far farbss_placeholder2[5792];
+char far farbss_placeholder2[5536];
 
 void ScanInfoPlane(void)
 {

@@ -35,8 +35,8 @@
 extern Uint16 word_391BC;
 extern Uint16 word_399FA;
 extern Uint16 invincible;
-extern Uint16 word_3FA66;
-extern Uint8 byte_3FA6E;
+extern Uint16 colorstep;
+extern Uint8 unktime;
 
 Uint16 fadecount;
 Sint16 mapon;
@@ -291,7 +291,7 @@ boolean SaveTheGame(Sint16 handle)
       break;
   }
 
-  word_3FA66 = 0;
+  colorstep = 0;
   if (!CA_FarWrite(handle, (byte far *)&state, sizeof(state)))
     return false;
 
@@ -485,7 +485,7 @@ boolean RespawnPlayer(void)
 
     gamestate.maxhealth = player->health;
     invincible = 50;
-    byte_3FA6E = 0;
+    unktime = 0;
     return true;
   }
 
@@ -527,7 +527,7 @@ restart:
   SetupGameLevel(true);
 
 loaded:
-  word_3FA66 = 0;
+  colorstep = 0;
   word_399FA = 0;
   word_391BC = 0;
   word_389A8 = 999;
@@ -560,7 +560,7 @@ loaded:
   gamestate.ammotype = 0;
   memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
 
-  word_3FA66 = 0;
+  colorstep = 0;
 
   VW_FixRefreshBuffer();
 

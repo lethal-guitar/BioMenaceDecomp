@@ -440,8 +440,6 @@ extern char *levelnames[GAMELEVELS];
 
 void ScanInfoPlane(void);
 
-extern statetype s_score;
-extern statetype s_demo;
 void SpawnScore(void);
 void ResetScoreBox(void);
 void UpdateScore(objtype *ob);

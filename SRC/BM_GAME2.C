@@ -74,7 +74,7 @@ Sint16 inactivatebottom;
 extern Sint16 word_391C8;
 extern Uint16 invincible;
 extern Sint16 word_3FA6E;
-extern Uint8 byte_3FA6E;
+extern Uint8 unktime;
 
 
 Sint16 MUSIC_TABLE[21] = {
@@ -980,12 +980,12 @@ void PlayLoop(void)
 
     PollControls();
 
-    if (byte_3FA6E > 0)
+    if (unktime > 0)
     {
-      byte_3FA6E--;
-      if (byte_3FA6E <= 0)
+      unktime--;
+      if (unktime <= 0)
       {
-        byte_3FA6E = 0;
+        unktime = 0;
       }
     }
 

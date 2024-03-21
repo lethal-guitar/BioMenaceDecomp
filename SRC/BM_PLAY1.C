@@ -21,15 +21,17 @@
 #include "BM_DEF.H"
 
 
-Uint32 dword_3FA52;
+Uint32 leavepoletime;
 Uint16 invincible;
-Uint16 word_3FA66;
-Sint16 doorx;
-Sint16 doory;
-Uint16 jumptime;
-Uint8 byte_3FA6E;
 
-boolean upbutton, downbutton, leftbutton, rightbutton, button0, button1, firebutton;
+boolean cmdup, cmddown, cmdleft, cmdright;
+boolean cmdjump, cmdfire, firebutton;
+
+extern Uint16 colorstep;
+extern Sint16 doordestx;
+extern Sint16 doordesty;
+extern Uint16 jumptime;
+extern Uint8 unktime;
 
 extern boolean jumpcheat;
 extern boolean godmode;
@@ -102,9 +104,9 @@ extern statetype far s_player_shoot_crouch1;
 extern statetype far s_player_shoot_crouch2;
 extern statetype far s_player_shoot_air1;
 extern statetype far s_player_shoot_air2;
-extern statetype far s_seg197;
+extern statetype far s_167;
 
-void sub_1E21D(Sint16 x, Sint16 y, Sint16 t);
+void ThrowGrenade(Uint16 x, Uint16 y, Direction dir);
 void OpenDoor(objtype* ob);
 void SnakeShootThink(objtype* ob);
 void SnakeDyingThink(objtype* ob);
@@ -128,12 +130,15 @@ void SnakeAirThink(objtype* ob);
 void SnakeShootAirThink(objtype* ob);
 void SnakeShootAirThink2(objtype* ob);
 void CheckFallOffLadder(objtype* ob);
-
 void AlignPlayer(objtype* ob);
 void SnakeThrow(objtype* ob);
 void WarpToDoorDest(objtype* ob);
 void SnakeDeadThink(objtype* ob);
 
+void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
+void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage);
+void DealDamage(objtype* ob, Sint16 amount);
+void SpawnSuperPlasmaBolt(Uint16 x, Uint16 y, Sint16 dir);
 void ShowCompatibilityInfoMessage();
 void BossDialog();
 
@@ -389,14 +394,6 @@ statetype far s_player_shoot_air2 = {
 // seg86
 
 
-//seg197
-statetype far s_seg197 = {
-  // TODO
-  348, 350,
-  think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, NULL, &s_seg197};
-
-
 void SpawnPlayer(Sint16 x, Sint16 y, Sint16 xdir)
 {
   player->obclass = playerobj;
@@ -436,7 +433,7 @@ void SpawnPlayer(Sint16 x, Sint16 y, Sint16 xdir)
   player->health = gamestate.maxhealth;
 
   invincible = 0;
-  byte_3FA6E = 0;
+  unktime = 0;
 
   NewState(player, &s_player_standing);
 
@@ -566,11 +563,11 @@ boolean CheckAttachToLadder(objtype* ob)
   Uint16 offset;
   Uint16 far* map;
 
-  if (TimeCount < dword_3FA52)
+  if (TimeCount < leavepoletime)
   {
-    dword_3FA52 = 0;
+    leavepoletime = 0;
   }
-  else if (TimeCount - dword_3FA52 < 19)
+  else if (TimeCount - leavepoletime < 19)
   {
     return false;
   }
@@ -602,7 +599,7 @@ boolean CheckAttachToLadder(objtype* ob)
 }
 
 
-boolean CheckJump(objtype* ob)
+boolean CheckJumpOffLadder(objtype* ob)
 {
   if (c.xaxis)
   {
@@ -613,14 +610,14 @@ boolean CheckJump(objtype* ob)
   {
     SD_PlaySound(11);
 
-    ob->xspeed = TABLE2[c.xaxis];
+    ob->xspeed = TABLE2[c.xaxis + 1];
     ob->yspeed = -40;
     ob->needtoclip = cl_midclip;
     jumptime = 16;
     ob->state = &s_player_in_air1;
     ob->ydir = 1;
     button0held = true;
-    dword_3FA52 = TimeCount;
+    leavepoletime = TimeCount;
 
     return true;
   }
@@ -633,7 +630,7 @@ void AlignPlayer(objtype* ob)
 {
   Sint16 var1;
 
-  var1 = ob->temp2 - ob->x;
+  var1 = ob->temp1 - ob->x;
 
   if (var1 < 0)
   {
@@ -668,11 +665,11 @@ void SnakeThrow(objtype* ob)
 {
   if (ob->xdir > 0)
   {
-    sub_1E21D(ob->x + 24*PIXGLOBAL, ob->y, 2);
+    ThrowGrenade(ob->x + 24*PIXGLOBAL, ob->y, dir_East);
   }
   else
   {
-    sub_1E21D(ob->x, ob->y, 6);
+    ThrowGrenade(ob->x, ob->y, dir_West);
   }
 
   if (ob->state == &s_player_throwing_grenade2 ||
@@ -882,7 +879,7 @@ found:
         {
           if (otherobj->obclass == 13)
           {
-            otherobj->state = &s_seg197;
+            otherobj->state = &s_167;
             otherobj->var1 = true;
             word_391C0 = true;
             return;
@@ -1003,15 +1000,15 @@ found:
     map = mapsegs[2] + mapbwidthtable[sy]/2 + sx;
     tile = *map;
 
-    word_3FA66++;
+    colorstep++;
 
-    if (sx - word_3FA66 == 0 && word_3FA66 != 5)
+    if (sx - colorstep == 0 && colorstep != 5)
     {
       return;
     }
     else
     {
-      if (word_3FA66 == 5)
+      if (colorstep == 5)
       {
         tileoff = mapbwidthtable[ob->tilebottom]/2 + ob->tilemidx;
         info = mapsegs[2][tileoff];
@@ -1025,7 +1022,7 @@ found:
         sx = info >> 8;
         sy = info & 0xFF;
 
-        word_3FA66 = 0;
+        colorstep = 0;
       }
 
       for (y = sy; y < sy + 1; y++)
@@ -1057,30 +1054,30 @@ void OpenDoor(objtype* ob)
 
   (void)ob;
 
-  if (doorx <= 0 || doory <= 0)
+  if (doordestx <= 0 || doordesty <= 0)
     return;
 
-  if (*(mapsegs[1] + mapbwidthtable[doory] / 2 + doorx) == 0)
+  if (*(mapsegs[1] + mapbwidthtable[doordesty] / 2 + doordestx) == 0)
     return;
 
   SD_PlaySound(19);
 
-  info = *(mapsegs[2] + mapbwidthtable[doory] / 2 + doorx);
+  info = *(mapsegs[2] + mapbwidthtable[doordesty] / 2 + doordestx);
   x = info >> 8;
   y = info & 0xFF;
-  RF_MapToMap(x, y, doorx - 1, doory - 1, 2, 3);
+  RF_MapToMap(x, y, doordestx - 1, doordesty - 1, 2, 3);
 
-  info = *(mapsegs[2] + mapbwidthtable[doory] / 2 + doorx);
+  info = *(mapsegs[2] + mapbwidthtable[doordesty] / 2 + doordestx);
   x = info >> 8;
   y = info & 0xFF;
 
   if (x == 1 && y != 0)
   {
-    sub_21473(doorx, doory - 1, y);
+    sub_21473(doordestx, doordesty - 1, y);
   }
 
-  doorx = 0;
-  doory = 0;
+  doordestx = 0;
+  doordesty = 0;
 }
 
 
@@ -1102,11 +1099,11 @@ void SnakeShootSingleThink2(objtype* ob)
   }
   else if (ob->xdir == 1)
   {
-    sub_1D51D(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
   }
   else
   {
-    sub_1D51D(ob->left, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->left, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
   }
 }
 
@@ -1122,11 +1119,11 @@ void SnakeShootSingleCrouchThink(objtype* ob)
   }
   else if (ob->xdir == 1)
   {
-    sub_1D51D(ob->right, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->right, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
   }
   else
   {
-    sub_1D51D(ob->left, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->left, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
   }
 }
 
@@ -1181,11 +1178,11 @@ void SnakeShootThink(objtype* ob)
 
   if (ob->xdir == 1)
   {
-    sub_1D51D(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
   }
   else
   {
-    sub_1D51D(ob->left, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->left, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
   }
 }
 
@@ -1211,11 +1208,11 @@ void SnakeShootAirThink2(objtype* ob)
 
   if (ob->xdir == 1)
   {
-    sub_1D51D(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
   }
   else
   {
-    sub_1D51D(ob->left, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->left, ob->y + 12*PIXGLOBAL, ob->xdir, 1);
   }
 }
 
@@ -1270,11 +1267,11 @@ void SnakeShootCrouchThink(objtype* ob)
 
   if (ob->xdir == 1)
   {
-    sub_1D51D(ob->right, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->right, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
   }
   else
   {
-    sub_1D51D(ob->left, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
+    FireBullet(ob->left, ob->y + 28*PIXGLOBAL, ob->xdir, 1);
   }
 }
 
@@ -1322,26 +1319,26 @@ void SnakeShootAirThink(objtype* ob)
 
 void PollControls(void)
 {
-  upbutton = downbutton = leftbutton = rightbutton = false;
+  cmdup = cmddown = cmdleft = cmdright = false;
 
   IN_ReadControl(0, &c);
 
-  if (c.xaxis == -1) leftbutton = true;
-  if (c.xaxis ==  1) rightbutton = true;
-  if (c.yaxis == -1) upbutton = true;
-  if (c.yaxis ==  1) downbutton = true;
+  if (c.xaxis == -1) cmdleft = true;
+  if (c.xaxis ==  1) cmdright = true;
+  if (c.yaxis == -1) cmdup = true;
+  if (c.yaxis ==  1) cmddown = true;
 
-  button0 = c.button0;
-  button1 = c.button1;
+  cmdjump = c.button0;
+  cmdfire = c.button1;
 
   if (DemoMode != demo_Playback)
   {
     firebutton = Keyboard[firescan];
   }
 
-  if (!upbutton) upheld = false;
-  if (!button0) button0held = false;
-  if (!button1) button1held = false;
+  if (!cmdup) upheld = false;
+  if (!cmdjump) button0held = false;
+  if (!cmdfire) button1held = false;
   if (!firebutton) fireheld = false;
 }
 
@@ -1383,10 +1380,10 @@ void DamagePlayer(objtype* ob, Sint16 damage)
 
   if (ob->health <= 0)
   {
-    sub_1D7E4(ob, ob->x, ob->y, 0);
-    sub_1D7E4(ob, ob->x, ob->y, 4);
-    sub_1D7E4(ob, ob->x, ob->y, 2);
-    sub_1D7E4(ob, ob->x, ob->y, 6);
+    ChunkBloom(ob, ob->x, ob->y, dir_North);
+    ChunkBloom(ob, ob->x, ob->y, dir_South);
+    ChunkBloom(ob, ob->x, ob->y, dir_East);
+    ChunkBloom(ob, ob->x, ob->y, dir_West);
     KillPlayer();
   }
   else
@@ -1430,7 +1427,7 @@ void SnakeContactShielded(objtype* ob, objtype* hit)
 {
   if (hit->var1 && !hit->dmgflash && hit->obclass != 21 && hit->obclass != 27)
   {
-    sub_1D2B5(hit, 5);
+    DealDamage(hit, 5);
     SD_PlaySound(7);
     hit->dmgflash = 25;
   }
@@ -1468,7 +1465,7 @@ void SnakeStandThink(objtype* ob)
 
   startwalking = false;
 
-  if (leftbutton)
+  if (cmdleft)
   {
     if (ob->xdir == -1)
     {
@@ -1483,7 +1480,7 @@ void SnakeStandThink(objtype* ob)
     }
   }
 
-  if (rightbutton)
+  if (cmdright)
   {
     if (ob->xdir == 1)
     {
@@ -1498,7 +1495,7 @@ void SnakeStandThink(objtype* ob)
     }
   }
 
-  if (upbutton && !upheld)
+  if (cmdup && !upheld)
   {
     word_391C6++;
     if (word_391C6 >= 75)
@@ -1510,13 +1507,13 @@ void SnakeStandThink(objtype* ob)
     word_391C4 = 0;
     word_391C8 = 3;
 
-    if (button0 && !button0held)
+    if (cmdjump && !button0held)
     {
       word_391C8 = 25;
     }
   }
 
-  if (downbutton && word_391C6 >= 35)
+  if (cmddown && word_391C6 >= 35)
   {
     // Invincibility
     invincible = 99;
@@ -1553,7 +1550,7 @@ void SnakeStandThink(objtype* ob)
     }
   }
 
-  if (button0 && !button0held && button1 && !button1held)
+  if (cmdjump && !button0held && cmdfire && !button1held)
   {
     word_391C6 = 0;
     sub_1ACA4(ob);
@@ -1575,7 +1572,7 @@ void SnakeStandThink(objtype* ob)
     return;
   }
 
-  if (button1 && !button1held)
+  if (cmdfire && !button1held)
   {
     button1held = true;
 
@@ -1584,8 +1581,8 @@ void SnakeStandThink(objtype* ob)
       // Fireball Weapon
       for (i = 0; i < 3; i++)
       {
-        sub_1DD25(ob->midx, ob->y + 8*PIXGLOBAL, 22);
-        sub_1DD25(ob->midx, ob->y + 8*PIXGLOBAL, 26);
+        FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, 22);
+        FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, 26);
         SD_PlaySound(21);
       }
 
@@ -1600,11 +1597,11 @@ void SnakeStandThink(objtype* ob)
       // Super Plasma Bolt
       if (ob->xdir == 1)
       {
-        sub_1EA04(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir);
+        SpawnSuperPlasmaBolt(ob->right, ob->y + 12*PIXGLOBAL, ob->xdir);
       }
       else
       {
-        sub_1EA04(ob->left - 48*PIXGLOBAL, ob->y + 12*PIXGLOBAL, ob->xdir);
+        SpawnSuperPlasmaBolt(ob->left - 48*PIXGLOBAL, ob->y + 12*PIXGLOBAL, ob->xdir);
       }
 
       DamagePlayer(ob, 1);
@@ -1617,7 +1614,7 @@ void SnakeStandThink(objtype* ob)
       word_391C6 = 0;
     }
 
-    if (downbutton)
+    if (cmddown)
     {
       if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
       {
@@ -1631,7 +1628,7 @@ void SnakeStandThink(objtype* ob)
       return;
     }
 
-    if (upbutton)
+    if (cmdup)
     {
       if (gamestate.explosives.landmines > 0)
       {
@@ -1660,7 +1657,7 @@ void SnakeStandThink(objtype* ob)
     return;
   }
 
-  if (button0 && !button0held)
+  if (cmdjump && !button0held)
   {
     if (word_391C4 >= 5)
     {
@@ -1683,12 +1680,12 @@ void SnakeStandThink(objtype* ob)
     return;
   }
 
-  if (upbutton && CheckAttachToLadder(ob))
+  if (cmdup && CheckAttachToLadder(ob))
   {
     return;
   }
 
-  if (upbutton && !upheld && CheckInteraction(ob))
+  if (cmdup && !upheld && CheckInteraction(ob))
   {
     upheld = true;
     return;
@@ -1702,7 +1699,7 @@ void SnakeStandThink(objtype* ob)
     return;
   }
 
-  if (downbutton)
+  if (cmddown)
   {
     word_391C6 = 0;
 
@@ -1732,13 +1729,13 @@ void SnakeWalkThink(objtype* ob)
 
   startwalking = false;
 
-  if (leftbutton)
+  if (cmdleft)
   {
     startwalking = true;
     ob->xdir = -1;
   }
 
-  if (rightbutton)
+  if (cmdright)
   {
     startwalking = true;
     ob->xdir = 1;
@@ -1766,7 +1763,7 @@ void SnakeWalkThink(objtype* ob)
     }
   }
 
-  if (button0 && !button0held && button1 && !button1held)
+  if (cmdjump && !button0held && cmdfire && !button1held)
   {
     sub_1ACA4(ob);
 
@@ -1784,11 +1781,11 @@ void SnakeWalkThink(objtype* ob)
     return;
   }
 
-  if (button1 && !button1held)
+  if (cmdfire && !button1held)
   {
     button1held = true;
 
-    if (downbutton)
+    if (cmddown)
     {
       if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
       {
@@ -1802,7 +1799,7 @@ void SnakeWalkThink(objtype* ob)
       return;
     }
 
-    if (upbutton)
+    if (cmdup)
     {
       if (gamestate.explosives.landmines > 0)
       {
@@ -1831,7 +1828,7 @@ void SnakeWalkThink(objtype* ob)
     return;
   }
 
-  if (button0 && !button0held)
+  if (cmdjump && !button0held)
   {
     sub_1ACA4(ob);
 
@@ -1843,7 +1840,7 @@ void SnakeWalkThink(objtype* ob)
     return;
   }
 
-  if (upbutton && !upheld && CheckInteraction(ob))
+  if (cmdup && !upheld && CheckInteraction(ob))
   {
     upheld = true;
     return;
@@ -1851,7 +1848,7 @@ void SnakeWalkThink(objtype* ob)
 
   if (!startwalking)
   {
-    if (downbutton)
+    if (cmddown)
     {
       ob->state = &s_player_crouching;
     }
@@ -1931,7 +1928,7 @@ void SnakeAirThink(objtype* ob)
     }
   }
 
-  if (button1 && !button1held)
+  if (cmdfire && !button1held)
   {
     button1held = true;
 
@@ -1970,7 +1967,7 @@ void SnakeClimbIdleThink(objtype* ob)
 {
   Uint16 far* map;
 
-  if (CheckJump(ob))
+  if (CheckJumpOffLadder(ob))
   {
     return;
   }
@@ -2005,7 +2002,7 @@ void SnakeClimbThink(objtype* ob)
 {
   Uint16 far* map;
 
-  if (CheckJump(ob))
+  if (CheckJumpOffLadder(ob))
   {
     return;
   }
@@ -2042,7 +2039,7 @@ void CheckFallOffLadder(objtype* ob)
 {
   Uint16 far* map;
 
-  if (CheckJump(ob))
+  if (CheckJumpOffLadder(ob))
   {
     return;
   }
@@ -2053,7 +2050,7 @@ void CheckFallOffLadder(objtype* ob)
     ob->state = &s_player_in_air3;
     jumptime = 0;
     ob->temp2 = 1;
-    ob->xspeed = TABLE2[c.xaxis];
+    ob->xspeed = TABLE2[c.xaxis + 1];
     ob->yspeed = 0;
     ob->needtoclip = cl_midclip;
     ob->tilebottom--;
@@ -2064,22 +2061,22 @@ void CheckFallOffLadder(objtype* ob)
 
 void SnakeShootSingleThink(objtype* ob)
 {
-  if (leftbutton)
+  if (cmdleft)
   {
     ob->xdir = -1;
   }
 
-  if (rightbutton)
+  if (cmdright)
   {
     ob->xdir = 1;
   }
 
-  if (button0 && !button0held)
+  if (cmdjump && !button0held)
   {
     sub_1ACA4(ob);
     ob->state = &s_player_shoot_single_air2;
   }
-  else if (downbutton)
+  else if (cmddown)
   {
     ob->state = &s_player_shoot_single_crouch2;
   }
@@ -2298,8 +2295,8 @@ void CheckInTiles(objtype *ob)
               gamestate.var40 = true;
             }
 
-            doorx = x;
-            doory = y;
+            doordestx = x;
+            doordesty = y;
             break;
 
           case 2:

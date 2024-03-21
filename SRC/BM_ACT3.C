@@ -19,3 +19,7 @@
  */
 
 // PLACEHOLDER
+
+void SpawnLandMine()
+{
+}
