@@ -247,7 +247,6 @@ char far BOSSDIALOG12[] =
   "have with all these others!\n"
   "Prepare to die, sub-creature!\n\n";
 
-char far farbss_placeholder2[5536];
 
 void ScanInfoPlane(void)
 {
