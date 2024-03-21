@@ -11,9 +11,9 @@ BioMenace uses the same engine and thus shares a lot of code with the 2nd Keen t
 
 Only the episode 1 Shareware EXE (v1.1) is currently covered - the original version, not the freeware release (which contains registered version episode 1).
 
-All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). About half of the player control code has also been recreated. However, all the actor logic (enemies, items, interactive objects etc.) is still missing.
+All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). Most of the player control code has also been recreated. However, all the actor logic (enemies, items, interactive objects etc.) is still missing.
 
-Overall, about 78 % of all code and 92 % of all data has been recreated.
+Overall, about 83 % of all code and 94 % of all data has been recreated.
 
 Some variables and functions don't have meaningful names yet, and many places use magic numbers instead of enum values/constants.
 
@@ -22,19 +22,18 @@ Some variables and functions don't have meaningful names yet, and many places us
 
 | What | Bytes | % done |
 | --- | --- | --- |
-| All code | 102,663 / 131,744 | 77.9 % |
-| Game logic code | 15,046 / 44,127 | 34.1 % |
-| Data | 82,880 / 89,984 | 92.1 % |
+| All code | 109,369 / 131,744 | 83.02 % |
+| Game logic code | 21,752 / 44,127 | 49.29 % |
+| Data | 84,448 / 89,984 | 93.85 % |
 
 
 ### TODO
 
 * Complete `GRAPHBM1.H`
 * Complete `AUDIOBM1.H`
-* Fully decompile `B1_PLAY2.C`
+* Decompile `UpdateScore` function in `BM_PLAY2.C`
 * Fully decompile `ScanInfoPlane` function in `BM_SPEC.C`
-* Decompile `B1_ACT{1,2,3}.C`
-* Make BSS variable order match perfectly in `BM_PLAY1.C`
+* Decompile `BM_ACT{1,2,3}.C`
 * Assign meaningful names to all functions and variables
 * Do registered version episode 1
 * Do episode 2
