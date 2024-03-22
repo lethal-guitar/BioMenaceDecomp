@@ -56,22 +56,22 @@ extern statetype far s_score;
 extern statetype far s_bulletimpact1;
 extern statetype far s_bulletimpact2;
 extern statetype far s_bulletimpact3;
-extern statetype far s_90;
-extern statetype far s_91;
-extern statetype far s_92;
-extern statetype far s_93;
-extern statetype far s_94;
-extern statetype far s_95;
-extern statetype far s_96;
-extern statetype far s_97;
-extern statetype far s_98;
-extern statetype far s_99;
-extern statetype far s_100;
-extern statetype far s_101;
-extern statetype far s_102;
-extern statetype far s_103;
-extern statetype far s_104;
-extern statetype far s_105;
+extern statetype far s_gib_bone1;
+extern statetype far s_gib_bone2;
+extern statetype far s_gib_eyeball1;
+extern statetype far s_gib_eyeball2;
+extern statetype far s_gib_flesh1;
+extern statetype far s_gib_flesh2;
+extern statetype far s_gibs_on_floor;
+extern statetype far s_metal_debris1;
+extern statetype far s_metal_debris2;
+extern statetype far s_metal_debris3;
+extern statetype far s_metal_debris4;
+extern statetype far s_metal_debris_on_floor;
+extern statetype far s_fireball1;
+extern statetype far s_fireball2;
+extern statetype far s_fireball3;
+extern statetype far s_fireball4;
 extern statetype far s_grenade1;
 extern statetype far s_grenade2;
 extern statetype far s_grenade3;
@@ -86,14 +86,14 @@ extern statetype far s_grenadeexplosion3;
 extern statetype far s_grenadeexplosion4;
 extern statetype far s_grenadeexplosion5;
 extern statetype far s_grenadeexplosion6;
-extern statetype far s_120;
-extern statetype far s_121;
+extern statetype far s_robopalrocket1;
+extern statetype far s_robopalrocket2;
 extern statetype far s_lasershot;
 extern statetype far s_superplasmabolt;
-extern statetype far s_124;
-extern statetype far s_125;
-extern statetype far s_126;
-extern statetype far s_127;
+extern statetype far s_rocketimpact1;
+extern statetype far s_rocketimpact2;
+extern statetype far s_plasmaboltimpact1;
+extern statetype far s_plasmaboltimpact2;
 
 extern statetype far s_player_place_mine;
 extern statetype far s_173;
@@ -105,9 +105,9 @@ extern statetype far s_225;
 
 void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
 void SpawnLaserShot(Uint16 x, Uint16 y, Sint16 dir);
-void sub_1d9a4(objtype* ob);
-void sub_1de52(objtype* ob, objtype* hit);
-void sub_1dea7(objtype* ob);
+void R_Chunk(objtype* ob);
+void C_Fireball(objtype* ob, objtype* hit);
+void R_Fireball(objtype* ob);
 void T_GrenadeExplosion(objtype* ob);
 void sub_1e34c(objtype* ob);
 void C_Grenade(objtype* ob, objtype* hit);
@@ -137,69 +137,69 @@ statetype far s_bulletimpact3 = { /* 30d60 */
   131, 131, step, false, ps_none, 5, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_90 = { /* 30d80 */
+statetype far s_gib_bone1 = { /* 30d80 */
   134, 134, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_91};
+  T_Projectile, NULL, R_Chunk, &s_gib_bone2};
 
-statetype far s_91 = { /* 30da0 */
+statetype far s_gib_bone2 = { /* 30da0 */
   135, 135, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_90};
+  T_Projectile, NULL, R_Chunk, &s_gib_bone1};
 
-statetype far s_92 = { /* 30dc0 */
+statetype far s_gib_eyeball1 = { /* 30dc0 */
   136, 136, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_93};
+  T_Projectile, NULL, R_Chunk, &s_gib_eyeball2};
 
-statetype far s_93 = { /* 30de0 */
+statetype far s_gib_eyeball2 = { /* 30de0 */
   137, 137, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_92};
+  T_Projectile, NULL, R_Chunk, &s_gib_eyeball1};
 
-statetype far s_94 = { /* 30e00 */
+statetype far s_gib_flesh1 = { /* 30e00 */
   138, 138, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_95};
+  T_Projectile, NULL, R_Chunk, &s_gib_flesh2};
 
-statetype far s_95 = { /* 30e20 */
+statetype far s_gib_flesh2 = { /* 30e20 */
   139, 139, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_94};
+  T_Projectile, NULL, R_Chunk, &s_gib_flesh1};
 
-statetype far s_96 = { /* 30e40 */
+statetype far s_gibs_on_floor = { /* 30e40 */
   132, 133, stepthink, false, ps_none, 100, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_97 = { /* 30e60 */
+statetype far s_metal_debris1 = { /* 30e60 */
   146, 150, stepthink, false, ps_none, 8, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_98};
+  T_Projectile, NULL, R_Chunk, &s_metal_debris2};
 
-statetype far s_98 = { /* 30e80 */
+statetype far s_metal_debris2 = { /* 30e80 */
   147, 151, stepthink, false, ps_none, 8, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_99};
+  T_Projectile, NULL, R_Chunk, &s_metal_debris3};
 
-statetype far s_99 = { /* 30ea0 */
+statetype far s_metal_debris3 = { /* 30ea0 */
   148, 152, stepthink, false, ps_none, 8, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_100};
+  T_Projectile, NULL, R_Chunk, &s_metal_debris4};
 
-statetype far s_100 = { /* 30ec0 */
+statetype far s_metal_debris4 = { /* 30ec0 */
   149, 153, stepthink, false, ps_none, 8, 0, 0,
-  T_Projectile, NULL, sub_1d9a4, &s_97};
+  T_Projectile, NULL, R_Chunk, &s_metal_debris1};
 
-statetype far s_101 = { /* 30ee0 */
+statetype far s_metal_debris_on_floor = { /* 30ee0 */
   149, 153, stepthink, false, ps_none, 100, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_102 = { /* 30f00 */
+statetype far s_fireball1 = { /* 30f00 */
   121, 125, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, sub_1de52, sub_1dea7, &s_103};
+  T_Projectile, C_Fireball, R_Fireball, &s_fireball2};
 
-statetype far s_103 = { /* 30f20 */
+statetype far s_fireball2 = { /* 30f20 */
   122, 126, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, sub_1de52, sub_1dea7, &s_104};
+  T_Projectile, C_Fireball, R_Fireball, &s_fireball3};
 
-statetype far s_104 = { /* 30f40 */
+statetype far s_fireball3 = { /* 30f40 */
   123, 127, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, sub_1de52, sub_1dea7, &s_105};
+  T_Projectile, C_Fireball, R_Fireball, &s_fireball4};
 
-statetype far s_105 = { /* 30f60 */
+statetype far s_fireball4 = { /* 30f60 */
   124, 128, stepthink, false, ps_none, 6, 0, 0,
-  T_Projectile, sub_1de52, sub_1dea7, &s_102};
+  T_Projectile, C_Fireball, R_Fireball, &s_fireball1};
 
 statetype far s_grenade1 = { /* 30f80 */
   105, 105, stepthink, false, ps_none, 10, 0, 0,
@@ -257,13 +257,13 @@ statetype far s_grenadeexplosion6 = { /* 31120 */
   120, 120, step, false, ps_none, 10, 0, 0,
   NULL, C_GrenadeExplosion, R_Draw, NULL};
 
-statetype far s_120 = { /* 31140 */
+statetype far s_robopalrocket1 = { /* 31140 */
   393, 391, slide, false, ps_none, 6, 64, 64,
-  T_Shot, C_Shot, R_Shot, &s_121};
+  T_Shot, C_Shot, R_Shot, &s_robopalrocket2};
 
-statetype far s_121 = { /* 31160 */
+statetype far s_robopalrocket2 = { /* 31160 */
   394, 392, slide, false, ps_none, 6, 64, 64,
-  T_Shot, C_Shot, R_Shot, &s_120};
+  T_Shot, C_Shot, R_Shot, &s_robopalrocket1};
 
 statetype far s_lasershot = { /* 31180 */
   63, 63, slide, false, ps_none, 6, 64, 64,
@@ -273,19 +273,19 @@ statetype far s_superplasmabolt = { /* 311a0 */
   65, 64, slide, false, ps_none, 2, 64, 64,
   T_Shot, C_LaserShot, R_SuperPlasmaBolt, &s_superplasmabolt};
 
-statetype far s_124 = { /* 311c0 */
+statetype far s_rocketimpact1 = { /* 311c0 */
   395, 395, step, false, ps_none, 12, 0, 0,
-  NULL, NULL, R_Draw, &s_125};
+  NULL, NULL, R_Draw, &s_rocketimpact2};
 
-statetype far s_125 = { /* 311e0 */
+statetype far s_rocketimpact2 = { /* 311e0 */
   396, 396, step, false, ps_none, 12, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_126 = { /* 31200 */
+statetype far s_plasmaboltimpact1 = { /* 31200 */
   57, 57, step, false, ps_none, 12, 0, 0,
-  NULL, NULL, R_Draw, &s_127};
+  NULL, NULL, R_Draw, &s_plasmaboltimpact2};
 
-statetype far s_127 = { /* 31220 */
+statetype far s_plasmaboltimpact2 = { /* 31220 */
   58, 58, step, false, ps_none, 12, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
@@ -1376,7 +1376,7 @@ void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir)
     case 41:
     case 42:
       new->temp1 = true;
-      NewState(new, &s_97);
+      NewState(new, &s_metal_debris1);
       break;
 
     default:
@@ -1384,22 +1384,22 @@ void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir)
 
       if (temp < 85)
       {
-        NewState(new, &s_90);
+        NewState(new, &s_gib_bone1);
       }
       else if (temp > 85 && temp < 170)
       {
-        NewState(new, &s_92);
+        NewState(new, &s_gib_eyeball1);
       }
       else
       {
-        NewState(new, &s_94);
+        NewState(new, &s_gib_flesh1);
       }
       break;
   }
 }
 
 
-void sub_1d9a4(objtype* ob)
+void R_Chunk(objtype* ob)
 {
   Uint16 wall, absx, absy, angle, newangle;
   Uint32 speed;
@@ -1523,11 +1523,11 @@ void sub_1d9a4(objtype* ob)
 
       if (!ob->temp1)
       {
-        ChangeState(ob, &s_96);
+        ChangeState(ob, &s_gibs_on_floor);
       }
       else
       {
-        ChangeState(ob, &s_101);
+        ChangeState(ob, &s_metal_debris_on_floor);
       }
 
       return;
@@ -1590,11 +1590,11 @@ void FragBloom(Uint16 x, Uint16 y, Direction dir)
       Quit("FragBloom: Bad dir!");
   }
 
-  NewState(new, &s_102);
+  NewState(new, &s_fireball1);
 }
 
 
-void sub_1de52(objtype* ob, objtype* hit)
+void C_Fireball(objtype* ob, objtype* hit)
 {
   if (
     !hit->var1 || hit->dmgflash || hit->obclass == 21 || hit->obclass == 20 ||
@@ -1610,7 +1610,7 @@ void sub_1de52(objtype* ob, objtype* hit)
 }
 
 
-void sub_1dea7(objtype* ob)
+void R_Fireball(objtype* ob)
 {
   Uint16 wall, absx, absy, angle, newangle;
   Uint32 speed;
@@ -2048,7 +2048,7 @@ void SpawnShot(Uint16 x, Uint16 y, Sint16 dir)
       Quit("SpawnShot: Bad dir!");
   }
 
-  NewState(new, &s_120);
+  NewState(new, &s_robopalrocket1);
 }
 
 
@@ -2123,7 +2123,7 @@ void C_Shot(objtype* ob, objtype* hit)
   if (hit->var1 && hit->obclass != 21 && hit->obclass != 27)
   {
     DealDamage(hit, 1);
-    ChangeState(ob, &s_124);
+    ChangeState(ob, &s_rocketimpact1);
   }
 
   ob++;
@@ -2137,7 +2137,7 @@ void C_LaserShot(objtype* ob, objtype* hit)
     if (ob->temp7 == 1)
     {
       DealDamage(hit, 5);
-      ChangeState(ob, &s_126);
+      ChangeState(ob, &s_plasmaboltimpact1);
     }
     else
     {
@@ -2155,11 +2155,11 @@ void ExplodeShot(objtype* ob)
 
   if (ob->temp7 == 1)
   {
-    ChangeState(ob, &s_126);
+    ChangeState(ob, &s_plasmaboltimpact1);
   }
   else
   {
-    ChangeState(ob, &s_124);
+    ChangeState(ob, &s_rocketimpact1);
   }
 
   SD_PlaySound(30);
