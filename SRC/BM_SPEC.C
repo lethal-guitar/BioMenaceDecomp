@@ -25,8 +25,36 @@
 #include "BM_DEF.H"
 
 enum {
-  CONTROLS_LUMP,     //  0
-  PLAYER_LUMP,
+  CONTROLS_LUMP = 0,
+  PLAYER_LUMP = 1,
+  HOSTAGE_LUMP = 2,
+  SLUG_LUMP = 3,
+  BRAWLER_LUMP = 5,
+  CEILING_WALKER_LUMP = 6,
+  BOMB_LUMP = 7,
+  SPITTER_SNAKE_LUMP = 8,
+  FIRE_IMP_LUMP = 9,
+  GHOSTLY_SLUG_LUMP = 10,
+  SEWER_MUTANT_LUMP = 11,
+  LUMP_12 = 12,
+  CRAWLING_SLIME_LUMP = 13,
+  HEDGEHOG_LUMP = 14,
+  LUMP_15 = 15,
+  SKULLMAN_LUMP = 16,
+  LUMP_17 = 17,
+  BOUNCE_BOT_LUMP = 18,
+  ELEVATOR_LUMP = 19,
+  LASER_TURRET_LUMP = 21,
+  LASER_GUNNER_LUMP = 22,
+  LUMP_24 = 24,
+  LUMP_25 = 25,
+  LUMP_26 = 26,
+  LUMP_27 = 27,
+  LUMP_28 = 28,
+  LUMP_29 = 29,
+  INTRO_LUMP = 30,
+  LUMP_31 = 31,
+  RESPAWN_BEACON_LUMP = 32,
   NUMLUMPS = 33
 };
 
@@ -281,22 +309,337 @@ void ScanInfoPlane(void)
           lumpneeded[PLAYER_LUMP] = true;
           break;
 
+        case 3:
+          SpawnSlug(x, y);
+          lumpneeded[SLUG_LUMP] = true;
+          new->active = ac_no;
+          break;
+
+        case 4:
+          SpawnFireImp(x, y);
+          lumpneeded[FIRE_IMP_LUMP] = true;
+          new->active = ac_no;
+          break;
+
+        case 5:
+          SpawnGhostlySlug(x, y);
+          lumpneeded[GHOSTLY_SLUG_LUMP] = true;
+          new->active = ac_no;
+          break;
+
+        case 7:
+          SpawnSewerMutant(x, y);
+          lumpneeded[SEWER_MUTANT_LUMP] = true;
+          break;
+
+        case 8:
+          SpawnCrawlingSlime(x, y);
+          lumpneeded[CRAWLING_SLIME_LUMP] = true;
+          break;
+
+        case 9:
+          SpawnPickup(x, y, 9);
+          lumpneeded[PLAYER_LUMP] = true;
+          new->active = ac_no;
+          break;
+
+        case 10:
+          SpawnBrawler(x, y);
+          lumpneeded[BRAWLER_LUMP] = true;
+          break;
+
+        case 11:
+          SpawnCeilingWalker(x, y);
+          lumpneeded[CEILING_WALKER_LUMP] = true;
+          break;
+
+        case 12:
+          SpawnSpitterSnake(x, y);
+          lumpneeded[SPITTER_SNAKE_LUMP] = true;
+          break;
+
+        case 13:
+          SpawnHedgehog(x, y);
+          lumpneeded[HEDGEHOG_LUMP] = true;
+          break;
+
+        case 16:
+          SpawnPickup(x, y, 16);
+          new->active = ac_no;
+          break;
+
+        case 17:
+          SpawnPickup(x, y, 17);
+          new->active = ac_no;
+          break;
+
+        case 18:
+          SpawnPickup(x, y, 18);
+          new->active = ac_no;
+          break;
+
+        case 19:
+          SpawnPickup(x, y, 19);
+          new->active = ac_no;
+          break;
+
+        case 20:
+          SpawnPickup(x, y, 20);
+          new->active = ac_no;
+          break;
+
+        case 21:
+          SpawnPickup(x, y, 21);
+          new->active = ac_no;
+          break;
+
+        case 22:
+          SpawnPickup(x, y, 22);
+          new->active = ac_no;
+          break;
+
+        case 23:
+          SpawnPickup(x, y, 23);
+          new->active = ac_no;
+          break;
+
+        case 24:
+          SpawnPickup(x, y, 24);
+          new->active = ac_no;
+          break;
+
+        case 25:
+          SpawnPickup(x, y, 25);
+          new->active = ac_no;
+          break;
+
+        case 26:
+          SpawnPickup(x, y, 26);
+          new->active = ac_no;
+          break;
+
+        case 27:
+          SpawnPickup(x, y, 27);
+          new->active = ac_no;
+          break;
+
+        case 28:
+          SpawnPickup(x, y, 28);
+          new->active = ac_no;
+          break;
+
+        case 29:
+          SpawnPickup(x, y, 29);
+          new->active = ac_no;
+          break;
+
+        case 30:
+          SpawnPickup(x, y, 30);
+          new->active = ac_no;
+          break;
+
+        case 31:
+          SpawnHostage(x, y, 0);
+          lumpneeded[HOSTAGE_LUMP] = true;
+          break;
+
+        case 32:
+          SpawnHostage(x, y, 1);
+          lumpneeded[HOSTAGE_LUMP] = true;
+          break;
+
         case 33:
-          RF_SetScrollBlock(x, y, 1);
+          SpawnHostage(x, y, 2);
+          lumpneeded[HOSTAGE_LUMP] = true;
           break;
 
         case 34:
-          RF_SetScrollBlock(x, y, 0);
+          RF_SetScrollBlock(x, y, true);
           break;
+
+        case 35:
+          RF_SetScrollBlock(x, y, false);
+          break;
+
+        case 36:
+          SpawnPickup(x, y, 36);
+          lumpneeded[PLAYER_LUMP] = true;
+          break;
+
+        case 37:
+          SpawnPickup(x, y, 37);
+          lumpneeded[PLAYER_LUMP] = true;
+          break;
+
+        case 38:
+          SpawnPickup(x, y, 38);
+          lumpneeded[PLAYER_LUMP] = true;
+          break;
+
+        case 39:
+          SpawnPickup(x, y, 39);
+          lumpneeded[PLAYER_LUMP] = true;
+          break;
+
+        case 40:
+          SpawnSkullman(x, y);
+          lumpneeded[SKULLMAN_LUMP] = true;
+          break;
+
+        case 41:
+          SpawnSkullmanHand(x, y, 0);
+          lumpneeded[SKULLMAN_LUMP] = true;
+          break;
+
+        case 42:
+          SpawnSkullmanHand(x, y, 1);
+          lumpneeded[SKULLMAN_LUMP] = true;
+          break;
+
+        case 43:
+          SpawnAsteroid(x, y);
+          lumpneeded[INTRO_LUMP] = true;
+          break;
+
+        case 44:
+          SpawnDrMangleHologram(x, y);
+          lumpneeded[LUMP_17] = true;
+          break;
+
+        case 45:
+          SpawnDrMangle(x, y);
+          lumpneeded[LUMP_17] = true;
+          break;
+
+        case 46:
+          SpawnBounceBot(x, y);
+          lumpneeded[BOUNCE_BOT_LUMP] = true;
+          break;
+
+        case 48:
+          SpawnLaserTurret(x, y);
+          lumpneeded[LASER_TURRET_LUMP] = true;
+          break;
+
+        case 49:
+          SpawnLaserGunner(x, y);
+          lumpneeded[LASER_GUNNER_LUMP] = true;
+          break;
+
+        case 51:
+          SpawnBomb(x, y);
+          lumpneeded[BOMB_LUMP] = true;
+          break;
+
+        case 52:
+          SpawnPickup(x, y, 52);
+          new->active = ac_no;
+          break;
+
+        case 53:
+          SpawnPickup(x, y, 53);
+          new->active = ac_no;
+          break;
+
+        case 54:
+          SpawnPickup(x, y, 54);
+          new->active = ac_no;
+          break;
+
+        case 55:
+          SpawnRespawnBeacon(x, y);
+          lumpneeded[RESPAWN_BEACON_LUMP] = true;
+          break;
+
+        case 66:
+        case 67:
+        case 68:
+        case 69:
+          SpawnElevator(x, y, info - 66);
+          lumpneeded[ELEVATOR_LUMP] = true;
+          break;
+
+        case 72:
+          SpawnSparkShooter(x, y);
+          lumpneeded[LUMP_24] = true;
+          break;
+
+        case 74:
+          SpawnRobopal(x, y);
+          lumpneeded[LUMP_26] = true;
+          break;
+
+        case 75:
+          SpawnPickup(x, y, 75);
+          new->active = ac_no;
+          break;
+
+        case 76:
+          SpawnPickup(x, y, 76);
+          new->active = ac_no;
+          break;
+
+        case 77:
+          SpawnPickup(x, y, 77);
+          new->active = ac_no;
+          break;
+
+        case 78:
+          SpawnPickup(x, y, 78);
+          new->active = ac_no;
+          break;
+
+        case 79:
+          SpawnPickup(x, y, 79);
+          new->active = ac_no;
+          break;
+
+        case 80:
+          SpawnTankBot(x, y);
+          lumpneeded[LUMP_29] = true;
+          break;
+
+        case 81:
+          SpawnPushBlock(x, y);
+          lumpneeded[LUMP_25] = true;
+          break;
+
+        case 82:
+          SpawnSlimeDropper(x, y);
+          lumpneeded[LUMP_12] = true;
+          break;
+
+        case 83:
+          SpawnHelicopter(x, y, 0);
+          lumpneeded[LUMP_31] = true;
+          break;
+
+        case 87:
+          SpawnCrusher(x, y);
+          lumpneeded[LUMP_27] = true;
+          break;
+
+        case 88:
+          SpawnFallingBlock(x, y);
+          lumpneeded[LUMP_28] = true;
+          break;
+
+        case 89:
+          SpawnApogeeLogo(x, y, 0);
+          lumpneeded[INTRO_LUMP] = true;
+          break;
+      }
+
+      if (new->active != ac_allways)
+      {
+        new->active = ac_no;
       }
     }
   }
 
-  for (ob = player; ob; ob = ob->next)
-  {
-    if (ob->active != ac_allways)
-      ob->active = ac_no;
-  }
+
+  CA_MarkGrChunk(SCOREBOXSPR);
+  SpawnScoreBox();
 
   for (i = 0; i < NUMLUMPS; i++)
   {

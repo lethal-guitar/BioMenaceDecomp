@@ -1155,7 +1155,7 @@ void PlayLoop(void)
     // scroll the screen and update the score box
     //
     ScrollScreen(player);
-    UpdateScore(scoreobj);
+    UpdateScoreBox(scoreobj);
     if (loadedgame)
     {
       loadedgame = false;

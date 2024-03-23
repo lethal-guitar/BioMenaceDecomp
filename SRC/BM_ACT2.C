@@ -33,10 +33,6 @@ Sint16 TABLE7[] = {
 Sint16 word_399F8 = -2;
 Sint16 word_399FA = 0;
 
-void sub_21473()
-{
-}
-
 void placeholder2(void)
 {
   "Continue from beacons when you get killed.\n";
@@ -726,6 +722,10 @@ void sub_213a2()
 {
 }
 
+void SpawnPickup()
+{
+}
+
 
 void sub_21639()
 {
@@ -733,6 +733,11 @@ void sub_21639()
 
 
 void sub_21654()
+{
+}
+
+
+void SpawnRobopal(Sint16 x, Sint16 y)
 {
 }
 
@@ -748,6 +753,16 @@ void sub_218a8()
 
 
 void sub_219ab()
+{
+}
+
+
+void SpawnSlug(Sint16 x, Sint16 y)
+{
+}
+
+
+void SpawnGhostlySlug(Sint16 x, Sint16 y)
 {
 }
 
@@ -782,12 +797,21 @@ void sub_21e19()
 }
 
 
+void SpawnBomb(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_21f41()
 {
 }
 
 
 void sub_21ffd()
+{
+}
+
+void SpawnFireImp(Sint16 x, Sint16 y)
 {
 }
 
@@ -808,6 +832,11 @@ void sub_22148()
 
 
 void sub_22213()
+{
+}
+
+
+void SpawnHedgehog(Sint16 x, Sint16 y)
 {
 }
 
@@ -837,7 +866,17 @@ void sub_2245d()
 }
 
 
+void SpawnBrawler(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_22540()
+{
+}
+
+
+void SpawnCeilingWalker(Sint16 x, Sint16 y)
 {
 }
 
@@ -853,6 +892,11 @@ void sub_2274a()
 
 
 void sub_227bc()
+{
+}
+
+
+void SpawnCrawlingSlime(Sint16 x, Sint16 y)
 {
 }
 

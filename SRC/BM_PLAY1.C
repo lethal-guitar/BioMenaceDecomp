@@ -1073,7 +1073,7 @@ void OpenDoor(objtype* ob)
 
   if (x == 1 && y != 0)
   {
-    sub_21473(doordestx, doordesty - 1, y);
+    SpawnPickup(doordestx, doordesty - 1, y);
   }
 
   doordestx = 0;

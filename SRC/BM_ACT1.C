@@ -627,7 +627,22 @@ void sub_1fca6()
 }
 
 
+void SpawnElevator(Sint16 x, Sint16 y, Sint16 type)
+{
+}
+
+
+void SpawnApogeeLogo(Sint16 x, Sint16 y, Direction dir)
+{
+}
+
+
 void sub_2018a()
+{
+}
+
+
+void SpawnHelicopter(Sint16 x, Sint16 y)
 {
 }
 
@@ -667,6 +682,11 @@ void sub_2089a()
 }
 
 
+void SpawnSpitterSnake(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_2097e()
 {
 }
@@ -681,6 +701,10 @@ void sub_20a42()
 {
 }
 
+void SpawnSewerMutant(Sint16 x, Sint16 y)
+{
+}
+
 
 void sub_20b93()
 {
@@ -688,6 +712,15 @@ void sub_20b93()
 
 
 void sub_20c43()
+{
+}
+
+void SpawnHostage(Sint16 x, Sint16 y, Sint16 type)
+{
+}
+
+
+void SpawnDrMangleHologram(Sint16 x, Sint16 y)
 {
 }
 
@@ -703,6 +736,10 @@ void sub_20f20()
 
 
 void sub_2106d()
+{
+}
+
+void SpawnDrMangle(Sint16 x, Sint16 y)
 {
 }
 
@@ -726,5 +763,3 @@ void placeholder(void)
 {
   "Goplat moved to a bad spot: ";
 }
-
-void sub_22A0D() {}

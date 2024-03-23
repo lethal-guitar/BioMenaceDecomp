@@ -164,10 +164,24 @@ typedef enum
   playerobj,       //  1
   inertobj,        //  2
   pickupobj   =  6,
+  slugobj     =  7,
+  brawlerobj  =  9,
+  ceilingwalkerobj = 10,
+  spittersnakeobj  = 11,
   hostageobj  = 12,
   platformobj = 14,
   robopalobj  = 16,
+  lasergunnerobj  = 19,
   bounderobj  = 22,
+  bouncebotobj  = 23,
+  laserturretobj  = 28,
+  sewermutantobj = 31,
+  hedgehogobj = 32,
+  skullmanobj = 33,
+  skullmanhandobj = 34,
+  bombobj = 36,
+  crawlingslimeobj = 39,
+  fireimpobj  = 40,
   NUMCLASSTYPES
 } classtype;
 
@@ -440,9 +454,9 @@ extern char *levelnames[GAMELEVELS];
 
 void ScanInfoPlane(void);
 
-void SpawnScore(void);
+void SpawnScoreBox(void);
 void ResetScoreBox(void);
-void UpdateScore(objtype *ob);
+void UpdateScoreBox(objtype *ob);
 
 extern statetype far s_player_standing;
 

@@ -18,13 +18,20 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// PLACEHOLDER
+#include "BM_DEF.H"
 
-void SpawnLandMine()
+
+void sub_2291e()
 {
 }
 
-void sub_2291e()
+
+void SpawnBigExplosion(Sint16 x, Sint16 y)
+{
+}
+
+
+void SpawnTankBot(Sint16 x, Sint16 y)
 {
 }
 
@@ -69,6 +76,11 @@ void sub_22fa5()
 }
 
 
+void SpawnLaserGunner(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_230fe()
 {
 }
@@ -89,6 +101,11 @@ void sub_23254()
 }
 
 
+void SpawnPushBlock(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_2334c()
 {
 }
@@ -104,6 +121,11 @@ void sub_233de()
 }
 
 
+void SpawnFallingBlock(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_234b7()
 {
 }
@@ -115,6 +137,11 @@ void sub_234ed()
 
 
 void sub_2351f()
+{
+}
+
+
+void SpawnCrusher(Sint16 x, Sint16 y)
 {
 }
 
@@ -139,12 +166,22 @@ void sub_2365a()
 }
 
 
+void SpawnBounceBot(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_2370e()
 {
 }
 
 
 void sub_237bf()
+{
+}
+
+
+void SpawnSlimeDropper(Sint16 x, Sint16 y)
 {
 }
 
@@ -164,6 +201,11 @@ void sub_239b3()
 }
 
 
+void SpawnLaserTurret(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_23aa2()
 {
 }
@@ -174,12 +216,27 @@ void sub_23b07()
 }
 
 
+void SpawnAsteroid(Sint16 x, Sint16 y)
+{
+}
+
+
+void SpawnLandMine(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_23d3f()
 {
 }
 
 
 void sub_23dc4()
+{
+}
+
+
+void SpawnSkullmanHand(Sint16 x, Sint16 y, Sint16 t)
 {
 }
 
@@ -219,7 +276,17 @@ void sub_240d4()
 }
 
 
+void SpawnSkullman(Sint16 x, Sint16 y)
+{
+}
+
+
 void sub_241cb()
+{
+}
+
+
+void SpawnSparkShooter(Sint16 x, Sint16 y)
 {
 }
 
@@ -234,7 +301,11 @@ void sub_24372()
 }
 
 
-void sub_24446()
+void SpawnRespawnBeacon(Sint16 x, Sint16 y)
 {
 }
 
+
+void sub_24446()
+{
+}

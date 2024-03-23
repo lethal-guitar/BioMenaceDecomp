@@ -817,7 +817,7 @@ void SnakeContact(objtype* ob, objtype* hit)
       hit->obclass = pickupobj;
       hit->ydir = -1;
       ChangeState(hit, &s_173);
-      sub_21473(ob->tilemidx, ob->tiletop, 80);
+      SpawnPickup(ob->tilemidx, ob->tiletop, 80);
       break;
 
     case 29:
@@ -900,7 +900,7 @@ void SnakeContact(objtype* ob, objtype* hit)
 }
 
 
-void SpawnScore(void)
+void SpawnScoreBox(void)
 {
   scoreobj->obclass = inertobj;
   scoreobj->active = ac_allways;
@@ -989,7 +989,7 @@ void ResetScoreBox(void)
 }
 
 
-void UpdateScore(objtype *ob)
+void UpdateScoreBox(objtype *ob)
 {
   char str[10];
   char* ch;
@@ -1454,7 +1454,7 @@ void DealDamage(objtype* ob, Sint16 amount)
       case 33:
         points = 5000;
         ob->var1 = 0;
-        sub_21473(ob->tilemidx, ob->tiletop, 26);
+        SpawnPickup(ob->tilemidx, ob->tiletop, 26);
         StartMusic(14);
         word_399F8 = true;
         bosshealth = 999;
@@ -1478,7 +1478,7 @@ void DealDamage(objtype* ob, Sint16 amount)
       ob->obclass == 36 ||
       ob->obclass == 41)
     {
-      sub_22A0D(ob->x, ob->y + 16*PIXGLOBAL);
+      SpawnBigExplosion(ob->x, ob->y + 16*PIXGLOBAL);
       goto loc_1d3c6;
     }
     else
