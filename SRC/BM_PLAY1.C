@@ -1005,40 +1005,40 @@ found:
     if (sx - colorstep == 0 && colorstep != 5)
     {
       return;
+      return;
+    }
+
+    if (colorstep == 5)
+    {
+      tileoff = mapbwidthtable[ob->tilebottom]/2 + ob->tilemidx;
+      info = mapsegs[2][tileoff];
+      sx = info >> 8;
+      sy = info & 0xFF;
     }
     else
     {
-      if (colorstep == 5)
-      {
-        tileoff = mapbwidthtable[ob->tilebottom]/2 + ob->tilemidx;
-        info = mapsegs[2][tileoff];
-        sx = info >> 8;
-        sy = info & 0xFF;
-      }
-      else
-      {
-        tileoff = mapbwidthtable[ob->tiletop]/2 + ob->tilemidx;
-        info = mapsegs[2][tileoff];
-        sx = info >> 8;
-        sy = info & 0xFF;
+      tileoff = mapbwidthtable[ob->tiletop]/2 + ob->tilemidx;
+      info = mapsegs[2][tileoff];
+      sx = info >> 8;
+      sy = info & 0xFF;
 
-        colorstep = 0;
-      }
+      colorstep = 0;
+    }
 
-      for (y = sy; y < sy + 1; y++)
+    for (y = sy; y < sy + 1; y++)
+    {
+      map = mapsegs[1] + mapbwidthtable[y]/2 + sx - (y != sy);
+      for (x = sx - (y != sy); x < mapwidth; x++)
       {
-        map = mapsegs[1] + mapbwidthtable[y]/2 + sx - (y != sy);
-        for (x = sx - (y != sy); x < mapwidth; x++)
-        {
-          tile = *(map++);
-          manim = tinf[MANIM + tile];
-          if (!manim)
-            continue;
+        tile = *(map++);
+        manim = tinf[MANIM + tile];
+        if (!manim)
+          goto nextY;
 
-          tile += manim;
-          RF_MemToMap(&tile, 1, x, y, 1, 1);
-        }
+        tile += manim;
+        RF_MemToMap(&tile, 1, x, y, 1, 1);
       }
+nextY:;
     }
 
     return;
@@ -1288,11 +1288,11 @@ void SnakeShootAirThink(objtype* ob)
     else
     {
       ytry = ob->yspeed * tics;
-    }
 
-    if (!jumpcheat)
-    {
-      jumptime = jumptime - tics;
+      if (!jumpcheat)
+      {
+        jumptime = jumptime - tics;
+      }
     }
 
     if (!c.button0)
@@ -1704,12 +1704,9 @@ void SnakeStandThink(objtype* ob)
     word_391C6 = 0;
 
     if (CheckAttachToLadder(ob))
-    {
-    }
-    else
-    {
-      ob->state = &s_player_crouching;
-    }
+      return;
+
+    ob->state = &s_player_crouching;
   }
   else
   {
@@ -1874,11 +1871,11 @@ void SnakeAirThink(objtype* ob)
     else
     {
       ytry = ob->yspeed * tics;
-    }
 
-    if (!jumpcheat)
-    {
-      jumptime = jumptime - tics;
+      if (!jumpcheat)
+      {
+        jumptime = jumptime - tics;
+      }
     }
 
     if (!c.button0)

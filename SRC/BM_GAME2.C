@@ -1124,13 +1124,10 @@ void PlayLoop(void)
           spritedraw, 1);
       }
 
-      if ((invincible <= 100 || invincible >= 102) &&
-          invincible < 100)
+      if ((invincible > 100 && invincible < 102) ||
+          (invincible < 100 && curmusic != gamestate.mapon))
       {
-        if (curmusic != gamestate.mapon)
-        {
-          StartMusic(gamestate.mapon);
-        }
+        StartMusic(gamestate.mapon);
       }
 
       if (invincible <= 0)
