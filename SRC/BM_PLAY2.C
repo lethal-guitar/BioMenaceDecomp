@@ -101,9 +101,9 @@ extern statetype far s_player_place_mine;
 extern statetype far s_173;
 extern statetype far s_176;
 extern statetype far s_186;
+extern statetype far s_199;
 extern statetype far s_200;
-extern statetype far s_201;
-extern statetype far s_225;
+extern statetype far s_253;
 
 void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
 void SpawnLaserShot(Uint16 x, Uint16 y, Sint16 dir);
@@ -1529,7 +1529,7 @@ void SpawnBulletImpact(Uint16 x, Uint16 y)
   if (gamestate.ammotype == AMMO_SUPERBULLET ||
       gamestate.ammotype == AMMO_PLASMABOLT)
   {
-    NewState(new, &s_225);
+    NewState(new, &s_253);
   }
   else
   {
@@ -1635,7 +1635,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
         switch (ob->obclass)
         {
           case 40:
-            if (ob->state == &s_200 || ob->state == &s_201)
+            if (ob->state == &s_199 || ob->state == &s_200)
             {
               return;
             }
