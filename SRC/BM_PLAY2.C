@@ -18,12 +18,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include "BM_ACT.H"
 #include "BM_DEF.H"
-
-
-#define PLACESPRITE \
-  RF_PlaceSprite(&ob->sprite, ob->x, ob->y, ob->shapenum, \
-    ob->dmgflash ? maskdraw : spritedraw, ob->priority);
 
 
 Uint16 bounceangle[8][8] = {

@@ -18,6 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include "BM_ACT.H"
 #include "BM_DEF.H"
 
 
@@ -2123,13 +2124,7 @@ void R_OnGround(objtype* ob)
     jumptime = 0;
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 
@@ -2148,13 +2143,7 @@ void R_Walking(objtype* ob)
     ChangeState(ob, &s_player_standing);
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 
@@ -2229,13 +2218,7 @@ void R_PlayerInAir(objtype* ob)
     }
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 
@@ -2251,13 +2234,7 @@ void R_Dying(objtype* ob)
     ChangeState(ob, &s_player_dead);
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 

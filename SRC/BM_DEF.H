@@ -169,6 +169,7 @@ typedef enum
   ceilingwalkerobj = 10,
   spittersnakeobj  = 11,
   hostageobj  = 12,
+  drmangleobj  = 13,
   platformobj = 14,
   robopalobj  = 16,
   lasergunnerobj  = 19,
@@ -182,6 +183,7 @@ typedef enum
   bombobj = 36,
   crawlingslimeobj = 39,
   fireimpobj  = 40,
+  helicopterobj  = 41,
   NUMCLASSTYPES
 } classtype;
 

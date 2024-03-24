@@ -18,7 +18,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include "BM_ACT.H"
 #include "BM_DEF.H"
+
 
 Sint16 TABLE6[] = { 0, 1, 0, -1, 1, 1, -1, -1, -1, 0, 1, 0, -1, 1, 1, -1 };
 
@@ -208,7 +210,7 @@ extern statetype far s_308;
 
 void sub_1fca6();
 void sub_2018a();
-void sub_2041b();
+void T_GoPlat();
 void sub_20628();
 void sub_2068c();
 void sub_20739();
@@ -310,15 +312,15 @@ statetype far s_129 = { /* 32270 */
 
 statetype far s_130 = { /* 32290 */
   352, 352, stepthink, false, ps_none, 1, 0, 0,
-  sub_2041b, NULL, sub_20628, &s_130};
+  T_GoPlat, NULL, sub_20628, &s_130};
 
 statetype far s_131 = { /* 322b0 */
   351, 351, stepthink, false, ps_none, 10, 0, 0,
-  sub_2041b, NULL, sub_20628, &s_130};
+  T_GoPlat, NULL, sub_20628, &s_130};
 
 statetype far s_132 = { /* 322d0 */
   351, 351, stepthink, false, ps_none, 1, 0, 0,
-  sub_2041b, NULL, sub_2068c, &s_130};
+  T_GoPlat, NULL, sub_2068c, &s_130};
 
 statetype far s_133 = { /* 322f0 */
   355, 357, step, false, ps_tofloor, 10, 128, 0,
@@ -472,6 +474,8 @@ statetype far s_170 = { /* 32790 */
   346, 346, think, false, ps_tofloor, 0, 0, 0,
   NULL, NULL, R_Draw, &s_170};
 
+// -------------------
+
 statetype far s_171 = { /* 327b0 */
   0, 0, step, false, ps_none, 20, 0, 0,
   sub_21639, NULL, R_Draw, &s_172};
@@ -622,18 +626,204 @@ statetype far s_207 = { /* 32c30 */
 
 
 
-void sub_1fca6()
+void sub_1fca6(objtype* ob)
 {
+  Uint16 wall, absx, absy, angle, newangle;
+  Uint32 speed;
+
+  PLACESPRITE;
+
+  if (ob->hiteast || ob->hitwest)
+  {
+    ob->xspeed = -ob->xspeed/2;
+  }
+
+  wall = ob->hitnorth;
+  if (wall)
+  {
+    if (ob->yspeed < 0)
+      ob->yspeed = 0;
+
+    absx = abs(ob->xspeed);
+    absy = ob->yspeed;
+    if (absx>absy)
+    {
+      if (absx>absy*2)  // 22 degrees
+      {
+        angle = 0;
+        speed = absx*286; // x*sqrt(5)/2
+      }
+      else        // 45 degrees
+      {
+        angle = 1;
+        speed = absx*362; // x*sqrt(2)
+      }
+    }
+    else
+    {
+      if (absy>absx*2)  // 90 degrees
+      {
+        angle = 3;
+        speed = absy*256;
+      }
+      else
+      {
+        angle = 2;    // 67 degrees
+        speed = absy*286; // y*sqrt(5)/2
+      }
+    }
+    if (ob->xspeed > 0)
+      angle = 7-angle;
+
+    speed >>= 1;
+    newangle = bounceangle[ob->hitnorth][angle];
+    switch (newangle)
+    {
+    case 0:
+      ob->xspeed = speed / 286;
+      ob->yspeed = -ob->xspeed / 2;
+      break;
+    case 1:
+      ob->xspeed = speed / 362;
+      ob->yspeed = -ob->xspeed;
+      break;
+    case 2:
+      ob->yspeed = -(speed / 286);
+      ob->xspeed = -ob->yspeed / 2;
+      break;
+    case 3:
+
+    case 4:
+      ob->xspeed = 0;
+      ob->yspeed = -(speed / 256);
+      break;
+    case 5:
+      ob->yspeed = -(speed / 286);
+      ob->xspeed = ob->yspeed / 2;
+      break;
+    case 6:
+      ob->xspeed = ob->yspeed = -(speed / 362);
+      break;
+    case 7:
+      ob->xspeed = -(speed / 286);
+      ob->yspeed = ob->xspeed / 2;
+      break;
+
+    case 8:
+      ob->xspeed = -(speed / 286);
+      ob->yspeed = -ob->xspeed / 2;
+      break;
+    case 9:
+      ob->xspeed = -(speed / 362);
+      ob->yspeed = -ob->xspeed;
+      break;
+    case 10:
+      ob->yspeed = speed / 286;
+      ob->xspeed = -ob->yspeed / 2;
+      break;
+    case 11:
+
+    case 12:
+      ob->xspeed = 0;
+      ob->yspeed = -(speed / 256);
+      break;
+    case 13:
+      ob->yspeed = speed / 286;
+      ob->xspeed = ob->yspeed / 2;
+      break;
+    case 14:
+      ob->xspeed = speed / 362;
+      ob->yspeed = speed / 362;
+      break;
+    case 15:
+      ob->xspeed = speed / 286;
+      ob->yspeed = ob->xspeed / 2;
+      break;
+    }
+
+    if (speed < 256*16)
+    {
+      RemoveObj(ob);
+
+      return;
+    }
+  }
 }
 
 
 void SpawnElevator(Sint16 x, Sint16 y, Sint16 type)
 {
+  GetNewObj(false);
+
+  new->obclass = platformobj;
+  new->active = ac_allways;
+  new->priority = 1;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y);
+
+  switch (type)
+  {
+    case 0:
+      new->xdir = 0;
+      new->ydir = -1;
+      break;
+
+    case 1:
+      new->xdir = 1;
+      new->ydir = 0;
+      break;
+
+    case 2:
+      new->xdir = 0;
+      new->ydir = 1;
+      break;
+
+    case 3:
+      new->xdir = -1;
+      new->ydir = 0;
+      break;
+
+  }
+
+  NewState(new, &s_128);
 }
 
 
-void SpawnApogeeLogo(Sint16 x, Sint16 y, Direction dir)
+void SpawnApogeeLogo(Sint16 x, Sint16 y, Sint16 type)
 {
+  GetNewObj(false);
+
+  new->obclass = platformobj;
+  new->active = ac_allways;
+  new->priority = 0;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y);
+
+  switch (type)
+  {
+    case 0:
+      new->xdir = 0;
+      new->ydir = -1;
+      break;
+
+    case 1:
+      new->xdir = 1;
+      new->ydir = 0;
+      break;
+
+    case 2:
+      new->xdir = 0;
+      new->ydir = 1;
+      break;
+
+    case 3:
+      new->xdir = -1;
+      new->ydir = 0;
+      break;
+
+  }
+
+  NewState(new, &s_129);
 }
 
 
@@ -642,13 +832,142 @@ void sub_2018a()
 }
 
 
-void SpawnHelicopter(Sint16 x, Sint16 y)
+void SpawnHelicopter(Sint16 x, Sint16 y, Sint16 u)
 {
+  GetNewObj(false);
+
+  new->obclass = helicopterobj;
+  new->active = ac_allways;
+  new->priority = 3;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y);
+  new->xdir = 0;
+  new->ydir = 1;
+  new->needtoclip = cl_noclip;
+  new->var1 = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 50;
+      break;
+
+    default:
+      new->health = 25;
+      break;
+  }
+
+  new->temp6 = 15;
+  new->temp7 = 40;
+
+  NewState(new, &s_130);
+
+  *(mapsegs[2] + mapbwidthtable[y]/2 + x) = u + 58;
+
+  new->temp1 = u;
+  new->temp2 = 0x100;
 }
 
 
-void sub_2041b()
+void T_GoPlat(objtype* ob)
 {
+  Uint16 move;
+  Uint16 tx, ty;
+  Sint16 dir;
+
+  //
+  // this code could be executed twice during the same frame because the
+  // object's animation/state changed during that frame, so don't update
+  // anything if we already have movement for the current frame i.e. the
+  // update code has already been executed this frame
+  //
+  if (!xtry && !ytry)
+  {
+    move = tics * 12;
+    if (ob->temp2 > move)
+    {
+      ob->temp2 = ob->temp2 - move;
+
+      dir = pdirx[ob->temp1];
+      if (dir == 1)
+      {
+        xtry = xtry + move;
+      }
+      else if (dir == -1)
+      {
+        xtry = xtry + -move;
+      }
+
+      dir = pdiry[ob->temp1];
+      if (dir == 1)
+      {
+        ytry = ytry + move;
+      }
+      else if (dir == -1)
+      {
+        ytry = ytry + -move;
+      }
+    }
+    else
+    {
+      dir = pdirx[ob->temp1];
+      if (dir == 1)
+      {
+        xtry += ob->temp2;
+      }
+      else if (dir == -1)
+      {
+        xtry += -ob->temp2;
+      }
+
+      dir = pdiry[ob->temp1];
+      if (dir == 1)
+      {
+        ytry += ob->temp2;
+      }
+      else if (dir == -1)
+      {
+        ytry += -ob->temp2;
+      }
+
+      tx = CONVERT_GLOBAL_TO_TILE(ob->x + xtry);
+      ty = CONVERT_GLOBAL_TO_TILE(ob->y + ytry);
+      ob->temp1 = *(mapsegs[2]+mapbwidthtable[ty]/2 + tx) - DIRARROWSTART;
+      if (ob->temp1 < arrow_North || ob->temp1 > arrow_None)
+      {
+        char error[60] = "Goplat moved to a bad spot: ";
+        char buf[5] = "";
+
+        strcat(error, itoa(ob->x, buf, 16));
+        strcat(error, ",");
+        strcat(error, itoa(ob->y, buf, 16));
+        Quit(error);
+      }
+
+      move -= ob->temp2;
+      ob->temp2 = TILEGLOBAL - move;
+
+      dir = pdirx[ob->temp1];
+      if (dir == 1)
+      {
+        xtry = xtry + move;
+      }
+      else if (dir == -1)
+      {
+        xtry = xtry - move;
+      }
+
+      dir = pdiry[ob->temp1];
+      if (dir == 1)
+      {
+        ytry = ytry + move;
+      }
+      else if (dir == -1)
+      {
+        ytry = ytry - move;
+      }
+    }
+  }
 }
 
 
@@ -684,11 +1003,37 @@ void sub_2089a()
 
 void SpawnSpitterSnake(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = spittersnakeobj;
+  new->active = ac_allways;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 8*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+  new->var1 = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 6;
+      break;
+
+    default:
+      new->health = 3;
+      break;
+  }
+
+  new->temp6 = 15;
+  new->temp7 = 40;
+
+  NewState(new, &s_137);
 }
 
 
-void sub_2097e()
+void sub_2097e(objtype* ob)
 {
+  ob->state = &s_137;
 }
 
 
@@ -701,8 +1046,30 @@ void sub_20a42()
 {
 }
 
+
 void SpawnSewerMutant(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = sewermutantobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 32*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+  new->var1 = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 30;
+      break;
+
+    default:
+      new->health = 15;
+      break;
+  }
+
+  NewState(new, &s_145);
 }
 
 
@@ -717,11 +1084,45 @@ void sub_20c43()
 
 void SpawnHostage(Sint16 x, Sint16 y, Sint16 type)
 {
+  GetNewObj(false);
+
+  new->obclass = hostageobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 24*PIXGLOBAL;
+
+  switch (type)
+  {
+    case 0:
+      NewState(new, &s_150);
+      break;
+
+    case 1:
+      NewState(new, &s_152);
+      break;
+
+    case 2:
+      NewState(new, &s_154);
+      break;
+  }
+
+  new->hitnorth = 1;
+  new->var1 = false;
 }
 
 
 void SpawnDrMangleHologram(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = drmangleobj;
+  new->active = ac_allways;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 16*PIXGLOBAL;
+  NewState(new, &s_156);
+  new->priority = 3;
+  new->var1 = false;
+  new->needtoclip = cl_noclip;
+  word_391C0 = false;
 }
 
 
@@ -739,8 +1140,28 @@ void sub_2106d()
 {
 }
 
+
 void SpawnDrMangle(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = drmangleobj;
+  new->active = ac_allways;
+  new->priority = 2;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 24*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+
+  NewState(new, &s_163);
+
+  new->hitnorth = 1;
+  new->ticcount = US_RndT() / 32;
+
+  new->var1 = false;
+  new->health = bosshealth = 200;
+  word_389AA = -1;
+  word_3CB80 = bosshealth / 20 - 1;
 }
 
 
@@ -749,17 +1170,27 @@ void sub_2117b()
 }
 
 
-void sub_21324()
+void sub_21324(objtype* ob)
 {
+  gamestate.mapon = 11;
+  ob->hitnorth = 1;
+  ob->state = &s_170;
+  ob->dmgflash = 0;
+  playstate = ex_completed;
 }
 
 
-void sub_2134e()
+void sub_2134e(objtype* ob)
 {
-}
+  if (ob->hitsouth)
+  {
+    ob->yspeed = 0;
+  }
 
+  if (ob->hitnorth)
+  {
+    ChangeState(ob, &s_165);
+  }
 
-void placeholder(void)
-{
-  "Goplat moved to a bad spot: ";
+  PLACESPRITE;
 }
