@@ -11,9 +11,9 @@ BioMenace uses the same engine and thus shares a lot of code with the 2nd Keen t
 
 Only the episode 1 Shareware EXE (v1.1) is currently covered - the original version, not the freeware release (which contains registered version episode 1).
 
-All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). Most of the player control code has also been recreated. However, practically all of the actor logic (enemies, items, interactive objects etc.) is still missing.
+All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). The player control code has also been recreated. However, practically all of the actor logic (enemies, items, interactive objects etc.) is still missing.
 
-Overall, about 85 % of the code has been recreated.
+Overall, about 90 % of the code has been recreated.
 
 Some variables and functions don't have meaningful names yet, and many places use magic numbers instead of enum values/constants.
 
@@ -22,8 +22,8 @@ Some variables and functions don't have meaningful names yet, and many places us
 
 | What | Bytes | % done |
 | --- | --- | --- |
-| All code | 112,225 / 131,744 | 85.18 % |
-| Game logic code | 24,608 / 44,127 | 55.77 % |
+| All code | 113,941 / 131,744 | 89.98 % |
+| Game logic code | 26,324 / 44,127 | 59.66 % |
 | Data | 89,984 / 89,984 | 100 % |
 
 
@@ -31,7 +31,6 @@ Some variables and functions don't have meaningful names yet, and many places us
 
 * Complete `GRAPHBM1.H`
 * Complete `AUDIOBM1.H`
-* Fully decompile `ScanInfoPlane` function in `BM_SPEC.C`
 * Decompile `BM_ACT{1,2,3}.C`
 * Assign meaningful names to all functions and variables
 * Do registered version episode 1
