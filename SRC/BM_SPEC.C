@@ -36,24 +36,23 @@ enum {
   FIRE_IMP_LUMP = 9,
   GHOSTLY_SLUG_LUMP = 10,
   SEWER_MUTANT_LUMP = 11,
-  LUMP_12 = 12,
+  SLIME_DROPPER_LUMP = 12,
   CRAWLING_SLIME_LUMP = 13,
   HEDGEHOG_LUMP = 14,
-  LUMP_15 = 15,
   SKULLMAN_LUMP = 16,
-  LUMP_17 = 17,
+  DR_MANGLE_LUMP = 17,
   BOUNCE_BOT_LUMP = 18,
   ELEVATOR_LUMP = 19,
   LASER_TURRET_LUMP = 21,
   LASER_GUNNER_LUMP = 22,
-  LUMP_24 = 24,
-  LUMP_25 = 25,
-  LUMP_26 = 26,
-  LUMP_27 = 27,
-  LUMP_28 = 28,
-  LUMP_29 = 29,
+  SPARK_SHOOTER_LUMP = 24,
+  PUSH_BLOCK_LUMP = 25,
+  ROBOPAL_LUMP = 26,
+  CRUSHER_LUMP = 27,
+  FALLING_BLOCK_LUMP = 28,
+  TANK_BOT_LUMP = 29,
   INTRO_LUMP = 30,
-  LUMP_31 = 31,
+  HELICOPTER_LUMP = 31,
   RESPAWN_BEACON_LUMP = 32,
   NUMLUMPS = 33
 };
@@ -503,12 +502,12 @@ void ScanInfoPlane(void)
 
         case 44:
           SpawnDrMangleHologram(x, y);
-          lumpneeded[LUMP_17] = true;
+          lumpneeded[DR_MANGLE_LUMP] = true;
           break;
 
         case 45:
           SpawnDrMangle(x, y);
-          lumpneeded[LUMP_17] = true;
+          lumpneeded[DR_MANGLE_LUMP] = true;
           break;
 
         case 46:
@@ -561,12 +560,12 @@ void ScanInfoPlane(void)
 
         case 72:
           SpawnSparkShooter(x, y);
-          lumpneeded[LUMP_24] = true;
+          lumpneeded[SPARK_SHOOTER_LUMP] = true;
           break;
 
         case 74:
           SpawnRobopal(x, y);
-          lumpneeded[LUMP_26] = true;
+          lumpneeded[ROBOPAL_LUMP] = true;
           break;
 
         case 75:
@@ -596,32 +595,32 @@ void ScanInfoPlane(void)
 
         case 80:
           SpawnTankBot(x, y);
-          lumpneeded[LUMP_29] = true;
+          lumpneeded[TANK_BOT_LUMP] = true;
           break;
 
         case 81:
           SpawnPushBlock(x, y);
-          lumpneeded[LUMP_25] = true;
+          lumpneeded[PUSH_BLOCK_LUMP] = true;
           break;
 
         case 82:
           SpawnSlimeDropper(x, y);
-          lumpneeded[LUMP_12] = true;
+          lumpneeded[SLIME_DROPPER_LUMP] = true;
           break;
 
         case 83:
           SpawnHelicopter(x, y, 0);
-          lumpneeded[LUMP_31] = true;
+          lumpneeded[HELICOPTER_LUMP] = true;
           break;
 
         case 87:
           SpawnCrusher(x, y);
-          lumpneeded[LUMP_27] = true;
+          lumpneeded[CRUSHER_LUMP] = true;
           break;
 
         case 88:
           SpawnFallingBlock(x, y);
-          lumpneeded[LUMP_28] = true;
+          lumpneeded[FALLING_BLOCK_LUMP] = true;
           break;
 
         case 89:
