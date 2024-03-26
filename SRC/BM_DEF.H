@@ -220,18 +220,18 @@ typedef struct objstruct
   Uint16 left, top, right, bottom, midx;
   Uint16 tileleft, tiletop, tileright, tilebottom, tilemidx;
   Sint16 hitnorth, hiteast, hitsouth, hitwest;
-  Sint16 var1;
-  Sint16 var2;
-  Sint16 health;
-  Sint16 dmgflash;
-  Sint16 temp1;
-  Sint16 temp2;
-  Sint16 temp3;
-  Sint16 temp4;
-  Sint16 temp5;
-  Sint16 temp6;
-  Sint16 temp7;
-  void *sprite;
+  Sint16 shootable; // 40
+  Sint16 var2; // 42
+  Sint16 health; // 44
+  Sint16 dmgflash; // 46
+  Sint16 temp1; // 48
+  Sint16 temp2; // 4A
+  Sint16 temp3; // 4C
+  Sint16 temp4; // 4E
+  Sint16 temp5; // 50
+  Sint16 temp6; // 52
+  Sint16 temp7; // 54
+  void *sprite; // 56
   struct objstruct *next, *prev;
 } objtype;
 

@@ -751,7 +751,7 @@ void sub_1fca6(objtype* ob)
 }
 
 
-void SpawnElevator(Sint16 x, Sint16 y, Sint16 type)
+void SpawnElevator(Sint16 x, Sint16 y, arrowdirtype dir)
 {
   GetNewObj(false);
 
@@ -761,24 +761,24 @@ void SpawnElevator(Sint16 x, Sint16 y, Sint16 type)
   new->x = CONVERT_TILE_TO_GLOBAL(x);
   new->y = CONVERT_TILE_TO_GLOBAL(y);
 
-  switch (type)
+  switch (dir)
   {
-    case 0:
+    case arrow_North:
       new->xdir = 0;
       new->ydir = -1;
       break;
 
-    case 1:
+    case arrow_East:
       new->xdir = 1;
       new->ydir = 0;
       break;
 
-    case 2:
+    case arrow_South:
       new->xdir = 0;
       new->ydir = 1;
       break;
 
-    case 3:
+    case arrow_West:
       new->xdir = -1;
       new->ydir = 0;
       break;
@@ -789,7 +789,7 @@ void SpawnElevator(Sint16 x, Sint16 y, Sint16 type)
 }
 
 
-void SpawnApogeeLogo(Sint16 x, Sint16 y, Sint16 type)
+void SpawnApogeeLogo(Sint16 x, Sint16 y, arrowdirtype dir)
 {
   GetNewObj(false);
 
@@ -799,24 +799,24 @@ void SpawnApogeeLogo(Sint16 x, Sint16 y, Sint16 type)
   new->x = CONVERT_TILE_TO_GLOBAL(x);
   new->y = CONVERT_TILE_TO_GLOBAL(y);
 
-  switch (type)
+  switch (dir)
   {
-    case 0:
+    case arrow_North:
       new->xdir = 0;
       new->ydir = -1;
       break;
 
-    case 1:
+    case arrow_East:
       new->xdir = 1;
       new->ydir = 0;
       break;
 
-    case 2:
+    case arrow_South:
       new->xdir = 0;
       new->ydir = 1;
       break;
 
-    case 3:
+    case arrow_West:
       new->xdir = -1;
       new->ydir = 0;
       break;
@@ -832,7 +832,7 @@ void sub_2018a()
 }
 
 
-void SpawnHelicopter(Sint16 x, Sint16 y, Sint16 u)
+void SpawnHelicopter(Sint16 x, Sint16 y, arrowdirtype dir)
 {
   GetNewObj(false);
 
@@ -844,7 +844,7 @@ void SpawnHelicopter(Sint16 x, Sint16 y, Sint16 u)
   new->xdir = 0;
   new->ydir = 1;
   new->needtoclip = cl_noclip;
-  new->var1 = true;
+  new->shootable = true;
 
   switch (gamestate.difficulty)
   {
@@ -862,7 +862,7 @@ void SpawnHelicopter(Sint16 x, Sint16 y, Sint16 u)
 
   NewState(new, &s_130);
 
-  *(mapsegs[2] + mapbwidthtable[y]/2 + x) = u + 58;
+  *(mapsegs[2] + mapbwidthtable[y]/2 + x) = DIRARROWSTART + dir;
 
   new->temp1 = u;
   new->temp2 = 0x100;
@@ -1011,7 +1011,7 @@ void SpawnSpitterSnake(Sint16 x, Sint16 y)
   new->y = CONVERT_TILE_TO_GLOBAL(y) - 8*PIXGLOBAL;
   new->xdir = 1;
   new->ydir = 1;
-  new->var1 = true;
+  new->shootable = true;
 
   switch (gamestate.difficulty)
   {
@@ -1056,7 +1056,7 @@ void SpawnSewerMutant(Sint16 x, Sint16 y)
   new->y = CONVERT_TILE_TO_GLOBAL(y) - 32*PIXGLOBAL;
   new->xdir = 1;
   new->ydir = 1;
-  new->var1 = true;
+  new->shootable = true;
 
   switch (gamestate.difficulty)
   {
@@ -1106,7 +1106,7 @@ void SpawnHostage(Sint16 x, Sint16 y, Sint16 type)
   }
 
   new->hitnorth = 1;
-  new->var1 = false;
+  new->shootable = false;
 }
 
 
@@ -1120,7 +1120,7 @@ void SpawnDrMangleHologram(Sint16 x, Sint16 y)
   new->y = CONVERT_TILE_TO_GLOBAL(y) - 16*PIXGLOBAL;
   NewState(new, &s_156);
   new->priority = 3;
-  new->var1 = false;
+  new->shootable = false;
   new->needtoclip = cl_noclip;
   word_391C0 = false;
 }
@@ -1158,7 +1158,7 @@ void SpawnDrMangle(Sint16 x, Sint16 y)
   new->hitnorth = 1;
   new->ticcount = US_RndT() / 32;
 
-  new->var1 = false;
+  new->shootable = false;
   new->health = bosshealth = 200;
   word_389AA = -1;
   word_3CB80 = bosshealth / 20 - 1;

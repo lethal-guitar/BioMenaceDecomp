@@ -881,7 +881,7 @@ found:
           if (otherobj->obclass == 13)
           {
             otherobj->state = &s_167;
-            otherobj->var1 = true;
+            otherobj->shootable = true;
             word_391C0 = true;
             return;
           }
@@ -1426,7 +1426,7 @@ void SnakeDeadThink(objtype* ob)
 
 void SnakeContactShielded(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && !hit->dmgflash && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->shootable && !hit->dmgflash && hit->obclass != 21 && hit->obclass != 27)
   {
     DealDamage(hit, 5);
     SD_PlaySound(7);

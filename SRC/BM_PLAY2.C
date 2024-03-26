@@ -1417,22 +1417,22 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 20:
         points = 2000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 19:
         points = 800;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 23:
         points = 350;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 28:
         points = 500;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 24:
@@ -1441,7 +1441,7 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 13:
         points = 34464;
-        ob->var1 = 0;
+        ob->shootable = 0;
         SD_PlaySound(23);
         ob->obclass = inertobj;
         bosshealth = 999;
@@ -1449,7 +1449,7 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 33:
         points = 5000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         SpawnPickup(ob->tilemidx, ob->tiletop, 26);
         StartMusic(14);
         word_399F8 = true;
@@ -1458,12 +1458,12 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 34:
         points = 1000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 41:
         points = 1000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
     }
 
@@ -1622,7 +1622,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
     for (ob = player->next; ob; ob = ob->next)
     {
       if (
-        ob->active && ob->var1 &&
+        ob->active && ob->shootable &&
         ob->tileleft <= tilex && ob->tileright >= tilex &&
         ob->top <= bottom && ob->bottom >= top)
       {
@@ -1982,7 +1982,7 @@ void FragBloom(Uint16 x, Uint16 y, Direction dir)
 void C_Fireball(objtype* ob, objtype* hit)
 {
   if (
-    !hit->var1 || hit->dmgflash || hit->obclass == 21 || hit->obclass == 20 ||
+    !hit->shootable || hit->dmgflash || hit->obclass == 21 || hit->obclass == 20 ||
     hit->obclass == 27 || hit->obclass == 40 ||
     (hit->obclass == playerobj && ob->var2 == 1))
   {
@@ -2223,7 +2223,7 @@ void sub_1e34c(objtype* ob)
 
 void C_Grenade(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && hit->obclass != 21)
+  if (hit->shootable && hit->obclass != 21)
   {
     FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_East + 10);
     FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
@@ -2242,7 +2242,7 @@ void C_Grenade(objtype* ob, objtype* hit)
 void C_GrenadeExplosion(objtype* ob, objtype* hit)
 {
   if (
-    !hit->var1 || hit->dmgflash || hit->obclass == 21 || hit->obclass == 27 ||
+    !hit->shootable || hit->dmgflash || hit->obclass == 21 || hit->obclass == 27 ||
     hit->obclass == 40 || (hit->obclass == playerobj && ob->var2 == 1))
   {
     return;
@@ -2505,7 +2505,7 @@ void SpawnSuperPlasmaBolt(Uint16 x, Uint16 y, Sint16 dir)
 
 void C_Shot(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->shootable && hit->obclass != 21 && hit->obclass != 27)
   {
     DealDamage(hit, 1);
     ChangeState(ob, &s_rocketimpact1);
@@ -2517,7 +2517,7 @@ void C_Shot(objtype* ob, objtype* hit)
 
 void C_LaserShot(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->shootable && hit->obclass != 21 && hit->obclass != 27)
   {
     if (ob->temp7 == 1)
     {
