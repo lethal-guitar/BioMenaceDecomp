@@ -184,6 +184,7 @@ typedef enum
   crawlingslimeobj = 39,
   fireimpobj  = 40,
   helicopterobj  = 41,
+  parachutebotobj = 42,
   NUMCLASSTYPES
 } classtype;
 
@@ -208,16 +209,16 @@ typedef struct objstruct
   enum {ac_no, ac_yes, ac_allways, ac_removable} active;
   boolean needtoreact;
   enum {cl_noclip, cl_midclip, cl_fullclip} needtoclip;
-  Uint16 nothink;
-  Uint16 x, y;
-  Sint16 xdir, ydir;
-  Sint16 xmove, ymove;
-  Sint16 xspeed, yspeed;
-  Sint16 ticcount;
-  statetype far *state;
-  Uint16 shapenum;
-  Uint16 priority;
-  Uint16 left, top, right, bottom, midx;
+  Uint16 nothink; // 8
+  Uint16 x, y; // A, C
+  Sint16 xdir, ydir; // E, 10
+  Sint16 xmove, ymove; // 12, 14
+  Sint16 xspeed, yspeed; // 16, 18
+  Sint16 ticcount; // 1A
+  statetype far *state; // 1C
+  Uint16 shapenum; // 20
+  Uint16 priority; // 22
+  Uint16 left, top, right, bottom, midx; // 24, 26, 28, 2A, 2C
   Uint16 tileleft, tiletop, tileright, tilebottom, tilemidx;
   Sint16 hitnorth, hiteast, hitsouth, hitwest;
   Sint16 shootable; // 40

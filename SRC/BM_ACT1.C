@@ -209,14 +209,14 @@ extern statetype far s_308;
 
 
 void sub_1fca6();
-void sub_2018a();
+void T_Platform();
 void T_GoPlat();
-void sub_20628();
-void sub_2068c();
+void R_Helicopter();
+void SpawnParachuteBot(objtype* ob);
 void sub_20739();
-void sub_2080e();
-void sub_20838();
-void sub_2089a();
+void C_HelicopterBomb();
+void R_ParachuteBot();
+void R_HelicopterBomb();
 void sub_2097e();
 void sub_20992();
 void sub_20a42();
@@ -224,9 +224,9 @@ void sub_20b93();
 void sub_20c43();
 void sub_20e1f();
 void sub_20f20();
-void sub_2106d();
+void R_DrMangleShot();
 void sub_2117b();
-void sub_21324();
+void DrMangleDefeated();
 void sub_2134e();
 void sub_213a2();
 void sub_21639();
@@ -304,23 +304,23 @@ void C_GrenadeExplosion(objtype* ob, objtype* hit);
 
 statetype far s_128 = { /* 32250 */
   369, 369, think, false, ps_none, 0, 0, 0,
-  sub_2018a, NULL, R_Draw, NULL};
+  T_Platform, NULL, R_Draw, NULL};
 
 statetype far s_129 = { /* 32270 */
   406, 406, think, false, ps_none, 0, 0, 0,
-  sub_2018a, NULL, R_Draw, NULL};
+  T_Platform, NULL, R_Draw, NULL};
 
 statetype far s_130 = { /* 32290 */
   352, 352, stepthink, false, ps_none, 1, 0, 0,
-  T_GoPlat, NULL, sub_20628, &s_130};
+  T_GoPlat, NULL, R_Helicopter, &s_130};
 
 statetype far s_131 = { /* 322b0 */
   351, 351, stepthink, false, ps_none, 10, 0, 0,
-  T_GoPlat, NULL, sub_20628, &s_130};
+  T_GoPlat, NULL, R_Helicopter, &s_130};
 
 statetype far s_132 = { /* 322d0 */
   351, 351, stepthink, false, ps_none, 1, 0, 0,
-  T_GoPlat, NULL, sub_2068c, &s_130};
+  T_GoPlat, NULL, SpawnParachuteBot, &s_130};
 
 statetype far s_133 = { /* 322f0 */
   355, 357, step, false, ps_tofloor, 10, 128, 0,
@@ -332,11 +332,11 @@ statetype far s_134 = { /* 32310 */
 
 statetype far s_135 = { /* 32330 */
   356, 358, think, false, ps_none, 0, 0, 0,
-  T_Projectile, sub_2080e, sub_2089a, &s_135};
+  T_Projectile, C_HelicopterBomb, R_HelicopterBomb, &s_135};
 
 statetype far s_136 = { /* 32350 */
   353, 354, stepthink, false, ps_none, 10, 8, 32,
-  NULL, sub_2080e, sub_20838, &s_136};
+  NULL, C_HelicopterBomb, R_ParachuteBot, &s_136};
 
 statetype far s_137 = { /* 32370 */
   275, 277, step, false, ps_tofloor, 10, 128, 0,
@@ -440,7 +440,7 @@ statetype far s_161 = { /* 32670 */
 
 statetype far s_162 = { /* 32690 */
   343, 343, step, false, ps_none, 3, 0, 0,
-  sub_20f20, NULL, sub_2106d, &s_162};
+  sub_20f20, NULL, R_DrMangleShot, &s_162};
 
 statetype far s_163 = { /* 326b0 */
   344, 344, step, false, ps_tofloor, 20, 0, 0,
@@ -468,7 +468,7 @@ statetype far s_168 = { /* 32750 */
 
 statetype far s_169 = { /* 32770 */
   346, 346, step, false, ps_tofloor, 2, 0, 0,
-  sub_21324, NULL, R_Draw, &s_169};
+  DrMangleDefeated, NULL, R_Draw, &s_169};
 
 statetype far s_170 = { /* 32790 */
   346, 346, think, false, ps_tofloor, 0, 0, 0,
@@ -827,8 +827,84 @@ void SpawnApogeeLogo(Sint16 x, Sint16 y, arrowdirtype dir)
 }
 
 
-void sub_2018a()
+void T_Platform(objtype* ob)
 {
+  Uint16 newpos, newtile;
+
+  if (!xtry && !ytry)
+  {
+    xtry = ob->xdir * 12 * tics;
+    ytry = ob->ydir * 12 * tics;
+
+    if (ob->xdir == 1)
+    {
+      newpos = ob->right + xtry;
+      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
+      if (ob->tileright != newtile)
+      {
+        if (*(mapsegs[2]+mapbwidthtable[ob->tiletop]/2+newtile) == 31)
+        {
+          ob->xdir = -1;
+          xtry = xtry - (newpos & 0xFF);
+        }
+      }
+    }
+    else if (ob->xdir == -1)
+    {
+      newpos = ob->left + xtry;
+      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
+      if (ob->tileleft != newtile)
+      {
+        if (*(mapsegs[2]+mapbwidthtable[ob->tiletop]/2+newtile) == 31)
+        {
+          ob->xdir = 1;
+          xtry = xtry + (0x100 - (newpos & 0xFF));
+        }
+      }
+    }
+    else if (ob->ydir == 1)
+    {
+      newpos = ob->bottom + ytry;
+      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
+      if (ob->tilebottom != newtile)
+      {
+        if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) == 31)
+        {
+          if (*(mapsegs[2]+mapbwidthtable[newtile-2]/2+ob->tileleft) == 31)
+          {
+            ytry = 0;
+            ob->needtoreact = true;
+          }
+          else
+          {
+            ob->ydir = -1;
+            ytry = ytry - (newpos & 0xFF);
+          }
+        }
+      }
+    }
+    else if (ob->ydir == -1)
+    {
+      newpos = ob->top + ytry;
+      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
+      if (ob->tiletop != newtile)
+      {
+        if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) == 31)
+        {
+          if (*(mapsegs[2]+mapbwidthtable[newtile+2]/2+ob->tileleft) == 31)
+          {
+            ytry = 0;
+            ob->needtoreact = true;
+          }
+          else
+          {
+            ob->ydir = 1;
+            ytry = ytry + (0x100 - (newpos & 0xFF));
+          }
+        }
+      }
+    }
+  }
 }
 
 
@@ -971,33 +1047,106 @@ void T_GoPlat(objtype* ob)
 }
 
 
-void sub_20628()
+void R_Helicopter(objtype* ob)
+{
+  if (--ob->temp6 <= 0)
+  {
+    ob->state = &s_131;
+    ob->temp6 = 15;
+  }
+
+  if (--ob->temp7 <= 0)
+  {
+    ob->temp7 = 40;
+
+    if (OnScreen(ob))
+    {
+      SpawnParachuteBot(ob);
+    }
+  }
+
+  PLACESPRITE;
+}
+
+
+void SpawnParachuteBot(objtype* ob)
+{
+  SD_PlaySound(13);
+
+  GetNewObj(true);
+
+  new->obclass = parachutebotobj;
+  new->active = ac_allways;
+  new->x = ob->x + 24*PIXGLOBAL;
+  new->y = ob->y + 8*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 20;
+      break;
+
+    default:
+      new->health = 10;
+      break;
+  }
+
+  NewState(new, &s_136);
+}
+
+
+void sub_20739(objtype* ob)
 {
 }
 
 
-void sub_2068c()
+void C_HelicopterBomb(objtype* ob, objtype* hit)
 {
+  if (hit->obclass == playerobj)
+  {
+    ob->shootable = false;
+    ChangeState(ob, &s_grenadeexplosion2);
+  }
 }
 
 
-void sub_20739()
+void R_ParachuteBot(objtype* ob)
 {
+  if (!ob->hitnorth)
+  {
+    if (US_RndT() < 100)
+    {
+      ob->xdir = -ob->xdir;
+    }
+  }
+  else
+  {
+    ChangeState(ob, &s_133);
+    ob->y += 16*PIXGLOBAL;
+  }
+
+  PLACESPRITE;
 }
 
 
-void sub_2080e()
+void R_HelicopterBomb(objtype* ob)
 {
-}
+  if (ob->hitsouth)
+  {
+    ob->yspeed = 0;
+  }
 
+  if (ob->hitnorth)
+  {
+    ChangeState(ob, &s_grenadeexplosion2);
+    ob->shootable = false;
+    ob->nothink = 12;
+  }
 
-void sub_20838()
-{
-}
-
-
-void sub_2089a()
-{
+  PLACESPRITE;
 }
 
 
@@ -1082,6 +1231,7 @@ void sub_20c43()
 {
 }
 
+
 void SpawnHostage(Sint16 x, Sint16 y, Sint16 type)
 {
   GetNewObj(false);
@@ -1136,8 +1286,18 @@ void sub_20f20()
 }
 
 
-void sub_2106d()
+void R_DrMangleShot(objtype* ob)
 {
+  if (player->top + 24 > ob->top)
+  {
+    ob->ydir = -1;
+  }
+  else if (player->top + 24 < ob->top)
+  {
+    ob->ydir = 1;
+  }
+
+  PLACESPRITE;
 }
 
 
@@ -1170,7 +1330,7 @@ void sub_2117b()
 }
 
 
-void sub_21324(objtype* ob)
+void DrMangleDefeated(objtype* ob)
 {
   gamestate.mapon = 11;
   ob->hitnorth = 1;
