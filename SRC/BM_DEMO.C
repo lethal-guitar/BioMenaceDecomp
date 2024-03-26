@@ -106,12 +106,12 @@ void ShowTitle(Uint16 timeout)
 /*
 ============================
 =
-= ShowCredits
+= ShowScreen
 =
 ============================
 */
 
-void ShowCredits(Sint16 num)
+void ShowScreen(Sint16 num)
 {
   VW_FadeOut();
   RF_FixOfs();
