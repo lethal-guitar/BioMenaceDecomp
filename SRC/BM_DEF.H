@@ -318,9 +318,14 @@ void SizeText(char *text, Uint16 *width, Uint16 *height);
 
 extern boolean scorescreenkludge;
 
+#define SCR_PREVIEW      0
+#define SCR_CREDITS      1
+#define SCR_NOTSHAREWARE 2
+#define SCR_TECHHELP     3
+
 void CheckLastScan(void);
 void ShowTitle(Uint16 timeout);
-void ShowCredits(Sint16 num);
+void ShowScreen(Sint16 num);
 void RunDemo(Sint16 num);
 void DrawHighScores(void);
 void CheckHighScore(Sint32 score, Sint16 completed);
