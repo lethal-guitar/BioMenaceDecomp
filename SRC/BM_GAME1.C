@@ -131,7 +131,7 @@ void NewGame(void)
   }
 
   gamestate.maxhealth = 4;
-  gamestate.rapidfire = 0;
+  gamestate.rapidfire = false;
   gamestate.ammotype = AMMO_REGULAR;
   memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
   gamestate.ammoinclip = 0;

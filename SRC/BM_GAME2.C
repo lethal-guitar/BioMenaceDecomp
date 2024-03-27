@@ -365,7 +365,7 @@ void DrawStatusWindow(void)
   US_Print(buffer);
   VWB_Bar(119, 127, 26, 10, NUMBERBACK);
 
-  if (gamestate.rapidfire == 1 && gamestate.ammoinclip > 3)
+  if (gamestate.rapidfire == true && gamestate.ammoinclip > 3)
   {
     PrintNumbers(128, 128, 2, 0, gamestate.clips + 1);
   }

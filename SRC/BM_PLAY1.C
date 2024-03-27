@@ -1086,7 +1086,7 @@ void SnakeShootSingleThink2(objtype* ob)
 {
   if (gamestate.difficulty == gd_Easy && gamestate.ammotype == AMMO_REGULAR)
   {
-    gamestate.rapidfire = 1;
+    gamestate.rapidfire = true;
     gamestate.ammoinclip = 3;
 
     if (!ob->hitnorth)
@@ -1113,7 +1113,7 @@ void SnakeShootSingleCrouchThink(objtype* ob)
 {
   if (gamestate.difficulty == gd_Easy && gamestate.ammotype == AMMO_REGULAR)
   {
-    gamestate.rapidfire = 1;
+    gamestate.rapidfire = true;
     gamestate.ammoinclip = 3;
 
     ChangeState(player, &s_player_shoot_crouch1);
@@ -1561,7 +1561,7 @@ void SnakeStandThink(objtype* ob)
       ob->xspeed = ob->xdir * 16;
     }
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot_air1;
     }
@@ -1617,7 +1617,7 @@ void SnakeStandThink(objtype* ob)
 
     if (cmddown)
     {
-      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
       {
         ob->state = &s_player_shoot_crouch1;
       }
@@ -1646,7 +1646,7 @@ void SnakeStandThink(objtype* ob)
       return;
     }
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot1;
     }
@@ -1767,7 +1767,7 @@ void SnakeWalkThink(objtype* ob)
 
     ob->xspeed = ob->xdir * 16;
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot_air1;
     }
@@ -1785,7 +1785,7 @@ void SnakeWalkThink(objtype* ob)
 
     if (cmddown)
     {
-      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
       {
         ob->state = &s_player_shoot_crouch1;
       }
@@ -1814,7 +1814,7 @@ void SnakeWalkThink(objtype* ob)
       return;
     }
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot1;
     }
@@ -1943,7 +1943,7 @@ void SnakeAirThink(objtype* ob)
     }
     else
     {
-      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
       {
         ob->state = &s_player_shoot_air1;
       }
