@@ -306,10 +306,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var26)
+          if (!gamestate.helpmsggrenades)
           {
             ShowHelpMessage("Throw grenades to blow up monsters!\n");
-            gamestate.var26 = true;
+            gamestate.helpmsggrenades = true;
           }
           break;
 
@@ -339,10 +339,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var27)
+          if (!gamestate.helpmsgclips)
           {
             ShowHelpMessage("Collect machine guns for automatic fire.\n");
-            gamestate.var27 = true;
+            gamestate.helpmsgclips = true;
           }
           break;
 
@@ -358,10 +358,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var28)
+            if (!gamestate.helpmsgkeycards)
             {
               ShowHelpMessage("Use keycards to turn off electric beams.\n");
-              gamestate.var28 = true;
+              gamestate.helpmsgkeycards = true;
             }
           }
           break;
@@ -375,10 +375,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->obclass = inertobj;
           hit->priority = 3;
 
-          if (!gamestate.var29)
+          if (!gamestate.helpmsgdoors)
           {
             ShowHelpMessage("Push <UP> and use key to open door.\n");
-            gamestate.var29 = true;
+            gamestate.helpmsgdoors = true;
           }
 
           ChangeState(hit, &s_173);
@@ -432,10 +432,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -452,10 +452,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -472,10 +472,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -492,10 +492,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -526,10 +526,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var26)
+          if (!gamestate.helpmsggrenades)
           {
             ShowHelpMessage("Throw grenades to blow up monsters!\n");
-            gamestate.var26 = true;
+            gamestate.helpmsggrenades = true;
           }
           break;
 
@@ -558,10 +558,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var31)
+          if (!gamestate.helpmsgsupergun)
           {
             ShowHelpMessage("Super Gun!  Bullets do 5x the damage!\n");
-            gamestate.var31 = true;
+            gamestate.helpmsgsupergun = true;
           }
           break;
 
@@ -582,10 +582,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var32)
+          if (!gamestate.helpmsglandmines)
           {
             ShowHelpMessage("Cool!  Land mines!\n");
-            gamestate.var32 = true;
+            gamestate.helpmsglandmines = true;
           }
           break;
 
@@ -614,10 +614,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var41)
+          if (!gamestate.helpmsgplasmabolts)
           {
             ShowHelpMessage("Plasma Bolts!  Burn holes through enemies!\n");
-            gamestate.var41 = true;
+            gamestate.helpmsgplasmabolts = true;
           }
           break;
 
@@ -641,10 +641,10 @@ void SnakeContact(objtype* ob, objtype* hit)
 
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var33)
+          if (!gamestate.helpmsggems)
           {
             ShowHelpMessage("Collect 50 gems for an extra life!\n");
-            gamestate.var33 = true;
+            gamestate.helpmsggems = true;
           }
           break;
 
@@ -679,10 +679,10 @@ void SnakeContact(objtype* ob, objtype* hit)
 
           gamestate.maxhealth = player->health;
 
-          if (!gamestate.var34)
+          if (!gamestate.helpmsghealth)
           {
             ShowHelpMessage("First Aid Kit restores you to full health.\n");
-            gamestate.var34 = true;
+            gamestate.helpmsghealth = true;
           }
           break;
 
@@ -696,10 +696,10 @@ void SnakeContact(objtype* ob, objtype* hit)
 
           gamestate.secretlevelgem = true;
 
-          if (!gamestate.var42)
+          if (!gamestate.helpmsgsecretlevelgem)
           {
             ShowHelpMessage("You found a secret level warp gem!\n");
-            gamestate.var42 = true;
+            gamestate.helpmsgsecretlevelgem = true;
           }
           break;
 
@@ -749,10 +749,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var35)
+          if (!gamestate.helpmsginvincible)
           {
             ShowHelpMessage("Now you're invincible to monster attacks!\n");
-            gamestate.var35 = true;
+            gamestate.helpmsginvincible = true;
           }
           break;
 
@@ -837,10 +837,10 @@ void SnakeContact(objtype* ob, objtype* hit)
         ChangeState(hit, &s_176);
       }
 
-      if (!gamestate.var36)
+      if (!gamestate.helpmsgrobopal)
       {
         ShowHelpMessage("RoboPal gives you extra fire power!\n");
-        gamestate.var36 = true;
+        gamestate.helpmsgrobopal = true;
       }
       break;
 

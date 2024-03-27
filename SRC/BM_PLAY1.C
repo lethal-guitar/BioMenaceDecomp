@@ -910,10 +910,10 @@ found:
 
   if (intile == 18 || intile == 10)
   {
-    if (!gamestate.var37 && intile == 18)
+    if (!gamestate.helpmsgbridgeswitch && intile == 18)
     {
       ShowHelpMessage("This switch activates a bridge.\n");
-      gamestate.var37 = true;
+      gamestate.helpmsgbridgeswitch = true;
     }
 
     for (y = sy; sy+1 > y; y++)
@@ -968,10 +968,10 @@ found:
 
   if (intile == 19 || intile == 11)
   {
-    if (!gamestate.var38 && intile == 19)
+    if (!gamestate.helpmsgplatformswitch && intile == 19)
     {
       ShowHelpMessage("This switch activates a platform.\n");
-      gamestate.var38 = true;
+      gamestate.helpmsgplatformswitch = true;
     }
 
     map = mapsegs[2] + mapbwidthtable[sy]/2 + sx;
@@ -992,10 +992,10 @@ found:
 
   if (intile == 23)
   {
-    if (!gamestate.var39)
+    if (!gamestate.helpmsgcolorseq)
     {
       ShowHelpMessage("Find the color sequence in this level.\n");
-      gamestate.var39 = true;
+      gamestate.helpmsgcolorseq = true;
     }
 
     map = mapsegs[2] + mapbwidthtable[sy]/2 + sx;
@@ -2263,10 +2263,10 @@ void CheckInTiles(objtype *ob)
           case 5:
           case 6:
           case 8:
-            if (!gamestate.var40)
+            if (!gamestate.helpmsgenterdoor)
             {
               ShowHelpMessage("Push <UP> to enter or open a door.\n");
-              gamestate.var40 = true;
+              gamestate.helpmsgenterdoor = true;
             }
 
             doordestx = x;
