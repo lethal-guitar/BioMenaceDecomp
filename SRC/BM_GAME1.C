@@ -453,16 +453,16 @@ boolean RespawnPlayer(void)
     player->x = playerrestorex;
     player->priority = 1;
 
-    player->needtoclip = false;
+    player->needtoclip = cl_noclip;
     ChangeState(player, &s_player_standing);
 
-    player->needtoclip = true;
+    player->needtoclip = cl_midclip;
     CenterActor(player);
 
     ytry = 15;
     player->obclass = playerobj;
     player->active = ac_yes;
-    player->needtoclip = true;
+    player->needtoclip = cl_midclip;
 
     switch (gamestate.difficulty)
     {

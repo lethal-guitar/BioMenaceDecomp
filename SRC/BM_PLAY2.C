@@ -2234,7 +2234,7 @@ void C_Grenade(objtype* ob, objtype* hit)
 
     SD_PlaySound(7);
 
-    ob->needtoclip = true;
+    ob->needtoclip = cl_midclip;
   }
 }
 
@@ -2383,7 +2383,7 @@ void R_Grenade(objtype* ob)
         FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
 
         ob->obclass = 5;
-        ob->needtoclip = true;
+        ob->needtoclip = cl_midclip;
         ob->x = ob->x - 8*PIXGLOBAL;
         ob->y = ob->y - 24*PIXGLOBAL;
         ob->temp7 = 50;
