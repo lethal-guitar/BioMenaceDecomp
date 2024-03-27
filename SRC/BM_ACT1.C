@@ -211,6 +211,7 @@ extern statetype far s_grenadeexplosion2;
 
 extern boolean bossactivated;
 extern Sint16 unknown;
+extern Sint16 word_389AA;
 
 
 void R_EnemyProjectile(objtype* ob);
@@ -227,12 +228,12 @@ void SpitterSnakeSpit(objtype* ob);
 void T_SpitterSnake(objtype* ob);
 void SewerMutantThrow(objtype* ob);
 void T_SewerMutant(objtype* ob);
-void sub_20e1f(objtype* ob);
+void T_DrMangleHologram(objtype* ob);
 void sub_20f20(objtype* ob);
-void R_DrMangleShot(objtype* ob);
-void sub_2117b();
+void sub_2106d(objtype* ob);
+void T_DrMangle();
 void DrMangleDefeated(objtype* ob);
-void sub_2134e();
+void R_DrMangleJumping();
 void sub_213a2();
 void sub_21639();
 void sub_21654();
@@ -421,15 +422,15 @@ statetype far s_155 = { /* 325b0 */
 
 statetype far s_156 = { /* 325d0 */
   337, 337, step, false, ps_none, 10, 0, 0,
-  sub_20e1f, NULL, R_Draw, &s_156};
+  T_DrMangleHologram, NULL, R_Draw, &s_156};
 
 statetype far s_157 = { /* 325f0 */
   338, 338, step, false, ps_none, 10, 0, 0,
-  sub_20e1f, NULL, R_Draw, &s_156};
+  T_DrMangleHologram, NULL, R_Draw, &s_156};
 
 statetype far s_158 = { /* 32610 */
   339, 339, step, false, ps_none, 200, 0, 0,
-  sub_20e1f, NULL, R_Draw, &s_156};
+  T_DrMangleHologram, NULL, R_Draw, &s_156};
 
 statetype far s_159 = { /* 32630 */
   340, 340, step, false, ps_none, 10, 0, 0,
@@ -445,27 +446,27 @@ statetype far s_161 = { /* 32670 */
 
 statetype far s_162 = { /* 32690 */
   343, 343, step, false, ps_none, 3, 0, 0,
-  sub_20f20, NULL, R_DrMangleShot, &s_162};
+  sub_20f20, NULL, sub_2106d, &s_162};
 
 statetype far s_163 = { /* 326b0 */
   344, 344, step, false, ps_tofloor, 20, 0, 0,
-  sub_2117b, NULL, R_Draw, &s_164};
+  T_DrMangle, NULL, R_Draw, &s_164};
 
 statetype far s_164 = { /* 326d0 */
   345, 345, step, false, ps_tofloor, 20, 0, 0,
-  sub_2117b, NULL, R_Draw, &s_163};
+  T_DrMangle, NULL, R_Draw, &s_163};
 
 statetype far s_165 = { /* 326f0 */
   347, 349, step, false, ps_tofloor, 10, 128, 0,
-  sub_2117b, NULL, R_Walk, &s_166};
+  T_DrMangle, NULL, R_Walk, &s_166};
 
 statetype far s_166 = { /* 32710 */
   348, 350, step, false, ps_tofloor, 10, 128, 0,
-  sub_2117b, NULL, R_Walk, &s_165};
+  T_DrMangle, NULL, R_Walk, &s_165};
 
 statetype far s_167 = { /* 32730 */
   348, 350, think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_2134e, &s_167};
+  T_Projectile, NULL, R_DrMangleJumping, &s_167};
 
 statetype far s_168 = { /* 32750 */
   346, 346, step, false, ps_tofloor, 200, 0, 0,
@@ -1481,17 +1482,128 @@ void SpawnDrMangleHologram(Sint16 x, Sint16 y)
 }
 
 
-void sub_20e1f()
+void T_DrMangleHologram(objtype* ob)
 {
+  // Randomized animation
+  if (US_RndT() > 220)
+  {
+    if (ob->state == &s_156)
+    {
+      ChangeState(ob, &s_159);
+      return;
+    }
+
+    if (ob->state == &s_157)
+    {
+      ChangeState(ob, &s_160);
+      return;
+    }
+
+    if (ob->state == &s_158)
+    {
+      ChangeState(ob, &s_161);
+      return;
+    }
+  }
+  else if (US_RndT() > 110)
+  {
+    ChangeState(ob, &s_157);
+    return;
+  }
+
+  if (US_RndT() > 250 && ob->state != &s_158)
+  {
+    ChangeState(ob, &s_158);
+  }
+
+  // Never true, unless the actor were to be placed in level 11, which is not
+  // the case in the shipping game. See code in SnakeInteractThink().
+  if (bossactivated)
+  {
+    Sint16 rand = US_RndT();
+
+    if (rand > 120)
+    {
+      // What the heck?
+      ThrowGrenade(ob->midx, ob->top, dir_West);
+    }
+    else
+    {
+      sub_22db0(ob);
+    }
+
+    ob->state = &s_162;
+  }
 }
 
 
-void sub_20f20()
+void sub_20f20(objtype* ob)
 {
+  Sint16 rand, xdelta;
+
+  rand = US_RndT();
+
+  AccelerateY(ob, ob->y > player->y ? -1 : 1, US_RndT() / 8 + 4);
+
+  if (ob->yspeed > 0)
+  {
+    ob->ydir = 1;
+  }
+  else
+  {
+    ob->ydir = -1;
+  }
+
+  AccelerateX(ob, ob->xdir, US_RndT() / 8 + 4);
+
+  if (ob->xspeed < 0)
+  {
+    xdelta = ob->left - player->right;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = 1;
+    }
+    else
+    {
+      ob->xdir = -1;
+    }
+  }
+  else
+  {
+    xdelta = player->left - ob->right;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+    }
+    else
+    {
+      ob->xdir = 1;
+    }
+  }
+
+  if (rand > 150 && rand < 200)
+  {
+    if (
+      ob->top <= ob->bottom && player->bottom >= ob->top &&
+      sub_22a7a(ob->midx, ob->y + 15*PIXGLOBAL, &s_252) != -1)
+    {
+      new->xspeed = new->xdir * 60;
+      new->yspeed = 0;
+      SD_PlaySound(6);
+    }
+  }
+  else if (rand > 250)
+  {
+    // What the heck?
+    ThrowGrenade(ob->midx, ob->top, dir_West);
+    ThrowGrenade(ob->midx, ob->top, dir_East);
+  }
 }
 
 
-void R_DrMangleShot(objtype* ob)
+void sub_2106d(objtype* ob)
 {
   if (player->top + 24 > ob->top)
   {
@@ -1530,8 +1642,108 @@ void SpawnDrMangle(Sint16 x, Sint16 y)
 }
 
 
-void sub_2117b()
+void T_DrMangle(objtype* ob)
 {
+  Sint16 shotorigin, xdelta;
+
+  if (ob->health != bosshealth)
+  {
+    word_389AA = bosshealth;
+    bosshealth = ob->health;
+  }
+
+  if (ob->obclass == inertobj)
+  {
+    ob->state = &s_168;
+    ob->y += 32*PIXGLOBAL;
+    ob->shootable = false;
+    return;
+  }
+
+  if (ob->top <= player->bottom && ob->bottom >= player->top)
+  {
+    if (US_RndT() > 230 && ob->shootable == true)
+    {
+      if (ob->xdir == 1)
+      {
+        shotorigin = ob->x + 112*PIXGLOBAL;
+      }
+      else
+      {
+        shotorigin = ob->x;
+      }
+
+      if (sub_22a7a(shotorigin, ob->y + 32*PIXGLOBAL, &s_256) == -1)
+      {
+        return;
+      }
+
+      new->xspeed = new->xdir * 60;
+
+      if (US_RndT() < 70)
+      {
+        new->yspeed = 0;
+      }
+      else
+      {
+        if (ob->temp1 & 1)
+        {
+          new->yspeed = 4;
+        }
+        else
+        {
+          new->yspeed = -4;
+        }
+      }
+
+      SD_PlaySound(21);
+    }
+
+    if (ob->xdir == -1)
+    {
+      xdelta = ob->left - player->right;
+
+      if (xdelta <= 32*PIXGLOBAL)
+      {
+        if (xdelta < -128*PIXGLOBAL)
+        {
+          ob->xdir = 1;
+        }
+        else
+        {
+          ob->yspeed = -24 - US_RndT() / 16;
+          ob->xspeed = -32;
+
+          SD_PlaySound(23);
+          ob->shootable = true;
+          ob->state = &s_167;
+          return;
+        }
+      }
+    }
+    else
+    {
+      xdelta = player->left - ob->right;
+
+      if (xdelta <= 32*PIXGLOBAL)
+      {
+        if (xdelta < -128*PIXGLOBAL)
+        {
+          ob->xdir = -1;
+        }
+        else
+        {
+          ob->yspeed = -24 - US_RndT() / 16;
+          ob->xspeed = 32;
+
+          SD_PlaySound(23);
+          ob->shootable = true;
+          ob->state = &s_167;
+          return;
+        }
+      }
+    }
+  }
 }
 
 
@@ -1545,7 +1757,7 @@ void DrMangleDefeated(objtype* ob)
 }
 
 
-void sub_2134e(objtype* ob)
+void R_DrMangleJumping(objtype* ob)
 {
   if (ob->hitsouth)
   {

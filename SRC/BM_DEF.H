@@ -222,7 +222,7 @@ typedef struct objstruct
   Uint16 left, top, right, bottom, midx; // 24, 26, 28, 2A, 2C
   Uint16 tileleft, tiletop, tileright, tilebottom, tilemidx;
   Sint16 hitnorth, hiteast, hitsouth, hitwest;
-  Sint16 shootable; // 40
+  boolean shootable; // 40
   Sint16 var2; // 42
   Sint16 health; // 44
   Sint16 dmgflash; // 46
