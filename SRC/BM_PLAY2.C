@@ -735,11 +735,11 @@ void SnakeContact(objtype* ob, objtype* hit)
           SD_PlaySound(31);
           hit->shapenum = 174;
 
-          gamestate.var16++;
+          gamestate.potions++;
 
-          if (gamestate.var16 >= 1)
+          if (gamestate.potions >= 1)
           {
-            gamestate.var16 = 0;
+            gamestate.potions = 0;
             invincible = 1500;
 
             StartMusic(17);

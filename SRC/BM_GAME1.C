@@ -127,7 +127,7 @@ void NewGame(void)
     gamestate.lives = 3;
     gamestate.gems = 0;
     gamestate.nukestate = ns_none;
-    gamestate.var16 = 0;
+    gamestate.potions = 0;
   }
 
   gamestate.maxhealth = 4;

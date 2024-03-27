@@ -264,7 +264,7 @@ typedef struct
   boolean exitkey;
   boolean var14;
   boolean hasrobopal;
-  Sint8 var16;
+  Sint8 potions;
   Sint8 lives;
   Sint8 gems;
   Sint8 maxhealth;
