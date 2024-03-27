@@ -48,7 +48,7 @@ Uint16 arrowflip[] = {
 Sint16 word_391BA = 0;
 Sint16 word_391BC = 0;
 Sint16 word_391BE = 0;
-Sint16 word_391C0 = 0;
+boolean bossactivated = false;
 Sint16 word_391C2 = 0;
 Sint16 word_391C4 = 0;
 Sint16 word_391C6 = 0;
@@ -845,7 +845,7 @@ void SnakeInteractThink(objtype* ob)
 
     case 21:
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
-      if (word_391C0)
+      if (bossactivated)
       {
         return;
       }
@@ -882,7 +882,7 @@ found:
           {
             otherobj->state = &s_167;
             otherobj->shootable = true;
-            word_391C0 = true;
+            bossactivated = true;
             return;
           }
         }

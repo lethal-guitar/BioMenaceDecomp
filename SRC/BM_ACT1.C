@@ -22,8 +22,8 @@
 #include "BM_DEF.H"
 
 
-Sint16 TABLE6[] = { 0, 1, 0, -1, 1, 1, -1, -1, -1, 0, 1, 0, -1, 1, 1, -1 };
-
+Sint16 pdirx[] = {  0, 1, 0, -1,  1, 1, -1, -1 };
+Sint16 pdiry[] = { -1, 0, 1,  0, -1, 1,  1, -1 };
 
 extern statetype far s_128;
 extern statetype far s_129;
@@ -207,26 +207,31 @@ extern statetype far s_306;
 extern statetype far s_307;
 extern statetype far s_308;
 
+extern statetype far s_grenadeexplosion2;
 
-void sub_1fca6();
-void T_Platform();
-void T_GoPlat();
-void R_Helicopter();
+extern boolean bossactivated;
+extern Sint16 unknown;
+
+
+void R_EnemyProjectile(objtype* ob);
+void T_Platform(objtype* ob);
+void T_GoPlat(objtype* ob);
+void R_Helicopter(objtype* ob);
 void SpawnParachuteBot(objtype* ob);
-void sub_20739();
-void C_HelicopterBomb();
-void R_ParachuteBot();
-void R_HelicopterBomb();
-void sub_2097e();
-void sub_20992();
-void sub_20a42();
-void sub_20b93();
-void sub_20c43();
-void sub_20e1f();
-void sub_20f20();
-void R_DrMangleShot();
+void T_ParachuteBot(objtype* ob);
+void C_ParachuteBotAttack(objtype* ob, objtype* hit);
+void R_ParachuteBot(objtype* ob);
+void R_ParachuteBotAttack(objtype* ob);
+void T_SpitterSnake2(objtype* ob);
+void SpitterSnakeSpit(objtype* ob);
+void T_SpitterSnake(objtype* ob);
+void SewerMutantThrow(objtype* ob);
+void T_SewerMutant(objtype* ob);
+void sub_20e1f(objtype* ob);
+void sub_20f20(objtype* ob);
+void R_DrMangleShot(objtype* ob);
 void sub_2117b();
-void DrMangleDefeated();
+void DrMangleDefeated(objtype* ob);
 void sub_2134e();
 void sub_213a2();
 void sub_21639();
@@ -324,39 +329,39 @@ statetype far s_132 = { /* 322d0 */
 
 statetype far s_133 = { /* 322f0 */
   355, 357, step, false, ps_tofloor, 10, 128, 0,
-  sub_20739, NULL, R_Walk, &s_134};
+  T_ParachuteBot, NULL, R_Walk, &s_134};
 
 statetype far s_134 = { /* 32310 */
   356, 358, step, false, ps_tofloor, 10, 128, 0,
-  sub_20739, NULL, R_Walk, &s_133};
+  T_ParachuteBot, NULL, R_Walk, &s_133};
 
 statetype far s_135 = { /* 32330 */
   356, 358, think, false, ps_none, 0, 0, 0,
-  T_Projectile, C_HelicopterBomb, R_HelicopterBomb, &s_135};
+  T_Projectile, C_ParachuteBotAttack, R_ParachuteBotAttack, &s_135};
 
 statetype far s_136 = { /* 32350 */
   353, 354, stepthink, false, ps_none, 10, 8, 32,
-  NULL, C_HelicopterBomb, R_ParachuteBot, &s_136};
+  NULL, C_ParachuteBotAttack, R_ParachuteBot, &s_136};
 
 statetype far s_137 = { /* 32370 */
   275, 277, step, false, ps_tofloor, 10, 128, 0,
-  sub_20a42, NULL, R_Walk, &s_138};
+  T_SpitterSnake, NULL, R_Walk, &s_138};
 
 statetype far s_138 = { /* 32390 */
   276, 278, step, false, ps_tofloor, 10, 128, 0,
-  sub_20a42, NULL, R_Walk, &s_137};
+  T_SpitterSnake, NULL, R_Walk, &s_137};
 
 statetype far s_139 = { /* 323b0 */
   275, 277, step, true, ps_tofloor, 5, 128, 0,
-  sub_2097e, NULL, R_Walk, &s_140};
+  T_SpitterSnake2, NULL, R_Walk, &s_140};
 
 statetype far s_140 = { /* 323d0 */
   276, 278, step, true, ps_tofloor, 5, 128, 0,
-  sub_2097e, NULL, R_Walk, &s_139};
+  T_SpitterSnake2, NULL, R_Walk, &s_139};
 
 statetype far s_141 = { /* 323f0 */
   279, 280, step, false, ps_none, 10, 0, 0,
-  sub_20992, NULL, R_Draw, &s_142};
+  SpitterSnakeSpit, NULL, R_Draw, &s_142};
 
 statetype far s_142 = { /* 32410 */
   279, 280, step, false, ps_none, 10, 65408, 0,
@@ -364,31 +369,31 @@ statetype far s_142 = { /* 32410 */
 
 statetype far s_143 = { /* 32430 */
   281, 283, stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, sub_1fca6, &s_144};
+  T_Projectile, NULL, R_EnemyProjectile, &s_144};
 
 statetype far s_144 = { /* 32450 */
   282, 284, stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, sub_1fca6, &s_143};
+  T_Projectile, NULL, R_EnemyProjectile, &s_143};
 
 statetype far s_145 = { /* 32470 */
   298, 301, step, false, ps_tofloor, 20, 128, 0,
-  sub_20c43, NULL, R_Walk, &s_146};
+  T_SewerMutant, NULL, R_Walk, &s_146};
 
 statetype far s_146 = { /* 32490 */
   299, 302, step, false, ps_tofloor, 20, 128, 0,
-  sub_20c43, NULL, R_Walk, &s_145};
+  T_SewerMutant, NULL, R_Walk, &s_145};
 
 statetype far s_147 = { /* 324b0 */
   300, 303, step, false, ps_tofloor, 10, 0, 0,
-  sub_20b93, NULL, R_Walk, &s_145};
+  SewerMutantThrow, NULL, R_Walk, &s_145};
 
 statetype far s_148 = { /* 324d0 */
   304, 304, stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, sub_1fca6, &s_149};
+  T_Projectile, NULL, R_EnemyProjectile, &s_149};
 
 statetype far s_149 = { /* 324f0 */
   305, 305, stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, sub_1fca6, &s_148};
+  T_Projectile, NULL, R_EnemyProjectile, &s_148};
 
 statetype far s_150 = { /* 32510 */
   223, 223, step, false, ps_tofloor, 40, 0, 0,
@@ -626,7 +631,7 @@ statetype far s_207 = { /* 32c30 */
 
 
 
-void sub_1fca6(objtype* ob)
+void R_EnemyProjectile(objtype* ob)
 {
   Uint16 wall, absx, absy, angle, newangle;
   Uint32 speed;
@@ -940,7 +945,7 @@ void SpawnHelicopter(Sint16 x, Sint16 y, arrowdirtype dir)
 
   *(mapsegs[2] + mapbwidthtable[y]/2 + x) = DIRARROWSTART + dir;
 
-  new->temp1 = u;
+  new->temp1 = dir;
   new->temp2 = 0x100;
 }
 
@@ -1098,12 +1103,60 @@ void SpawnParachuteBot(objtype* ob)
 }
 
 
-void sub_20739(objtype* ob)
+void T_ParachuteBot(objtype* ob)
 {
+  Sint16 xdelta;
+
+  if (--ob->temp5 <= 0)
+  {
+    ob->shootable = false;
+    ChangeState(ob, &s_grenadeexplosion2);
+  }
+  else if (ob->top <= player->bottom && ob->bottom >= player->top)
+  {
+    if (ob->xdir == -1)
+    {
+      xdelta = ob->left - player->right;
+
+      if (xdelta <= 32*PIXGLOBAL)
+      {
+        if (xdelta < -8*PIXGLOBAL)
+        {
+          ob->xdir = 1;
+        }
+        else
+        {
+          ob->yspeed = -24 - US_RndT() / 16;
+          ob->xspeed = -32;
+          ob->state = &s_135;
+          return;
+        }
+      }
+    }
+    else
+    {
+      xdelta = player->left - ob->right;
+
+      if (xdelta <= 32*PIXGLOBAL)
+      {
+        if (xdelta < -8*PIXGLOBAL)
+        {
+          ob->xdir = -1;
+        }
+        else
+        {
+          ob->yspeed = -24 - US_RndT() / 16;
+          ob->xspeed = 32;
+          ob->state = &s_135;
+          return;
+        }
+      }
+    }
+  }
 }
 
 
-void C_HelicopterBomb(objtype* ob, objtype* hit)
+void C_ParachuteBotAttack(objtype* ob, objtype* hit)
 {
   if (hit->obclass == playerobj)
   {
@@ -1132,7 +1185,7 @@ void R_ParachuteBot(objtype* ob)
 }
 
 
-void R_HelicopterBomb(objtype* ob)
+void R_ParachuteBotAttack(objtype* ob)
 {
   if (ob->hitsouth)
   {
@@ -1180,19 +1233,95 @@ void SpawnSpitterSnake(Sint16 x, Sint16 y)
 }
 
 
-void sub_2097e(objtype* ob)
+void T_SpitterSnake2(objtype* ob)
 {
   ob->state = &s_137;
 }
 
 
-void sub_20992()
+void SpitterSnakeSpit(objtype* ob)
 {
+  GetNewObj(true);
+
+  new->obclass = enemyprojectileobj;
+
+  if (ob->xdir == 1)
+  {
+    new->x = ob->x + 24*PIXGLOBAL;
+    new->y = ob->y + 8*PIXGLOBAL;
+  }
+  else
+  {
+    new->x = ob->x;
+    new->y = ob->y + 8*PIXGLOBAL;
+  }
+
+  new->xdir = ob->xdir;
+  new->ydir = 1;
+  new->xspeed = ob->xdir * 40 + US_RndT() / 16;
+  new->yspeed = -20;
+  new->active = ac_allways;
+
+  NewState(new, &s_143);
+
+  ob->nothink = 2;
 }
 
 
-void sub_20a42()
+void T_SpitterSnake(objtype* ob)
 {
+  Sint16 xdelta;
+
+  if (abs(ob->y - player->y) > 48*PIXGLOBAL)
+  {
+    if (US_RndT() < 8)
+    {
+      ob->xdir = -ob->xdir;
+    }
+  }
+  else
+  {
+    xdelta = player->x - ob->x;
+
+    if (xdelta < -128*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+    }
+
+    if (xdelta < -64*PIXGLOBAL)
+    {
+      SD_PlaySound(9);
+      ob->xdir = -1;
+      ob->state = &s_141;
+      return;
+    }
+
+    if (xdelta < 0)
+    {
+      ob->xdir = 1;
+      ob->state = &s_139;
+      ob->nothink = 8;
+      return;
+    }
+
+    if (xdelta < 64*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+      ob->state = &s_139;
+      ob->nothink = 8;
+      return;
+    }
+
+    if (xdelta < 128*PIXGLOBAL)
+    {
+      SD_PlaySound(9);
+      ob->xdir = 1;
+      ob->state = &s_141;
+      return;
+    }
+
+    ob->xdir = 1;
+  }
 }
 
 
@@ -1222,13 +1351,89 @@ void SpawnSewerMutant(Sint16 x, Sint16 y)
 }
 
 
-void sub_20b93()
+void SewerMutantThrow(objtype* ob)
 {
+  GetNewObj(true);
+
+  new->obclass = enemyprojectileobj;
+
+  if (ob->xdir == 1)
+  {
+    new->x = ob->x + 24*PIXGLOBAL;
+    new->y = ob->y + 8*PIXGLOBAL;
+  }
+  else
+  {
+    new->x = ob->x;
+    new->y = ob->y + 8*PIXGLOBAL;
+  }
+
+  new->xdir = ob->xdir;
+  new->ydir = 1;
+  new->xspeed = ob->xdir * 30 + US_RndT() / 16;
+  new->yspeed = -20;
+  new->active = ac_allways;
+
+  NewState(new, &s_148);
+
+  ob->nothink = 2;
 }
 
 
-void sub_20c43()
+void T_SewerMutant(objtype* ob)
 {
+  Sint16 xdelta;
+
+  if (abs(ob->y - player->y) > 48*PIXGLOBAL)
+  {
+    if (US_RndT() < 8)
+    {
+      ob->xdir = -ob->xdir;
+    }
+  }
+  else
+  {
+    xdelta = player->x - ob->x;
+
+    if (xdelta < -128*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+    }
+
+    if (xdelta < -64*PIXGLOBAL)
+    {
+      SD_PlaySound(38);
+      ob->xdir = -1;
+      ob->state = &s_147;
+      return;
+    }
+
+    if (xdelta < 0)
+    {
+      ob->xdir = 1;
+      ob->state = &s_145;
+      ob->nothink = 8;
+      return;
+    }
+
+    if (xdelta < 64*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+      ob->state = &s_145;
+      ob->nothink = 8;
+      return;
+    }
+
+    if (xdelta < 128*PIXGLOBAL)
+    {
+      SD_PlaySound(38);
+      ob->xdir = 1;
+      ob->state = &s_147;
+      return;
+    }
+
+    ob->xdir = 1;
+  }
 }
 
 
@@ -1272,7 +1477,7 @@ void SpawnDrMangleHologram(Sint16 x, Sint16 y)
   new->priority = 3;
   new->shootable = false;
   new->needtoclip = cl_noclip;
-  word_391C0 = false;
+  bossactivated = false;
 }
 
 
@@ -1321,7 +1526,7 @@ void SpawnDrMangle(Sint16 x, Sint16 y)
   new->shootable = false;
   new->health = bosshealth = 200;
   word_389AA = -1;
-  word_3CB80 = bosshealth / 20 - 1;
+  unknown = bosshealth / 20 - 1;
 }
 
 

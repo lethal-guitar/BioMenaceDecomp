@@ -175,6 +175,7 @@ typedef enum
   lasergunnerobj  = 19,
   bounderobj  = 22,
   bouncebotobj  = 23,
+  enemyprojectileobj = 25,
   laserturretobj  = 28,
   sewermutantobj = 31,
   hedgehogobj = 32,
