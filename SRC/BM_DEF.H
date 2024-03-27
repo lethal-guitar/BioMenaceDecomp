@@ -236,6 +236,7 @@ typedef struct objstruct
   struct objstruct *next, *prev;
 } objtype;
 
+#define AMMO_REGULAR     0
 #define AMMO_SUPERBULLET 3
 #define AMMO_PLASMABOLT  4
 

@@ -1183,7 +1183,7 @@ void UpdateScoreBox(objtype *ob)
     dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
       + planesize + width*20 + 9*CHARWIDTH;
 
-    if (gamestate.ammotype == 0)
+    if (gamestate.ammotype == AMMO_REGULAR)
       MemDrawChar(33, dest, width, planesize);
     else if (gamestate.ammotype == AMMO_SUPERBULLET)
       MemDrawChar(34, dest, width, planesize);
@@ -1201,7 +1201,7 @@ void UpdateScoreBox(objtype *ob)
   //
   number = gamestate.ammoinclip;
   if (gamestate.difficulty == gd_Easy && gamestate.ammoinclip <= 3 &&
-      gamestate.ammotype == 0)
+      gamestate.ammotype == AMMO_REGULAR)
   {
     number = 0;
   }
@@ -1549,7 +1549,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
       if (gamestate.ammotype == AMMO_SUPERBULLET ||
           gamestate.ammotype == AMMO_PLASMABOLT)
       {
-        gamestate.ammotype = 0;
+        gamestate.ammotype = AMMO_REGULAR;
       }
 
       if (gamestate.clips > 0)
@@ -1566,7 +1566,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
     gamestate.ammoinclip--;
 
-    if (gamestate.ammotype == 0)
+    if (gamestate.ammotype == AMMO_REGULAR)
     {
       gamestate.rapidfire = true;
     }
@@ -1581,7 +1581,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
     if (gamestate.ammotype == AMMO_SUPERBULLET ||
         gamestate.ammotype == AMMO_PLASMABOLT)
     {
-      gamestate.ammotype = 0;
+      gamestate.ammotype = AMMO_REGULAR;
     }
 
     if (gamestate.clips > 0)

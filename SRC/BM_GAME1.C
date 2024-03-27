@@ -132,7 +132,7 @@ void NewGame(void)
 
   gamestate.maxhealth = 4;
   gamestate.rapidfire = 0;
-  gamestate.ammotype = 0;
+  gamestate.ammotype = AMMO_REGULAR;
   memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
   gamestate.ammoinclip = 0;
   gamestate.clips = 0;
@@ -269,7 +269,7 @@ boolean SaveTheGame(Sint16 handle)
   state.hostagerescued = false;
   state.clips = 0;
   state.ammoinclip = 0;
-  state.ammotype = 0;
+  state.ammotype = AMMO_REGULAR;
   memset(&state.explosives, 0, sizeof(state.explosives));
 
   switch (state.difficulty)
@@ -557,7 +557,7 @@ loaded:
   gamestate.hostagerescued = false;
   gamestate.clips = 0;
   gamestate.ammoinclip = 0;
-  gamestate.ammotype = 0;
+  gamestate.ammotype = AMMO_REGULAR;
   memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
 
   colorstep = 0;

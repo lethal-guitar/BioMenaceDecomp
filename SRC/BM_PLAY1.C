@@ -1084,7 +1084,7 @@ void OpenDoor(objtype* ob)
 
 void SnakeShootSingleThink2(objtype* ob)
 {
-  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == 0)
+  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == AMMO_REGULAR)
   {
     gamestate.rapidfire = 1;
     gamestate.ammoinclip = 3;
@@ -1111,7 +1111,7 @@ void SnakeShootSingleThink2(objtype* ob)
 
 void SnakeShootSingleCrouchThink(objtype* ob)
 {
-  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == 0)
+  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == AMMO_REGULAR)
   {
     gamestate.rapidfire = 1;
     gamestate.ammoinclip = 3;
