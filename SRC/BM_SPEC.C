@@ -70,7 +70,7 @@ Uint16 lumpstart[] = {
 
 Uint16 lumpend[] = {
   CONTROLS_LUMP_END,
-  222, 228, 234, 234, 248, 266, 274, 284, 293, 297,
+  PLAYER_LUMP_END, 228, 234, 234, 248, 266, 274, 284, 293, 297,
   305, 315, 320, 330, 330, 336, 350, 368, 369, 369, 375,
   379, 383, 385, 386, 396, 397, 398, 404, 410, 358, 363
 };
@@ -91,7 +91,6 @@ char* levelnames[GAMELEVELS] = {
 };
 
 
-// seg128
 char far HOSTAGEDLG1[] =
   "Somewhere in each level, there\n"
   "is someone like me who holds a key\n"

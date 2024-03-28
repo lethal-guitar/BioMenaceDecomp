@@ -517,7 +517,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 36:
-          hit->shapenum = GRENADE_RED1_SPR;
+          hit->shapenum = PICKUP_GRENADE_RED1_SPR;
           SD_PlaySound(14);
 
           gamestate.explosives.redgrenades++;
