@@ -207,7 +207,7 @@ extern statetype far s_306;
 extern statetype far s_307;
 extern statetype far s_308;
 
-extern statetype far s_grenadeexplosion2;
+extern statetype far s_grenadeexplosion1;
 
 extern boolean bossactivated;
 extern Sint16 unknown;
@@ -644,6 +644,11 @@ void R_EnemyProjectile(objtype* ob)
     ob->xspeed = -ob->xspeed/2;
   }
 
+  if (ob->hitsouth)
+  {
+    ob->yspeed = -ob->yspeed/2;
+  }
+
   wall = ob->hitnorth;
   if (wall)
   {
@@ -750,8 +755,6 @@ void R_EnemyProjectile(objtype* ob)
     if (speed < 256*16)
     {
       RemoveObj(ob);
-
-      return;
     }
   }
 }
@@ -837,76 +840,76 @@ void T_Platform(objtype* ob)
 {
   Uint16 newpos, newtile;
 
-  if (!xtry && !ytry)
-  {
-    xtry = ob->xdir * 12 * tics;
-    ytry = ob->ydir * 12 * tics;
+  if (xtry || ytry)
+    return;
 
-    if (ob->xdir == 1)
+  xtry = ob->xdir * 12 * tics;
+  ytry = ob->ydir * 12 * tics;
+
+  if (ob->ydir == 1)
+  {
+    newpos = ob->bottom + ytry;
+    newtile = CONVERT_GLOBAL_TO_TILE(newpos);
+
+    if (ob->tilebottom != newtile)
     {
-      newpos = ob->right + xtry;
-      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
-      if (ob->tileright != newtile)
+      if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) == PLATFORMBLOCK)
       {
-        if (*(mapsegs[2]+mapbwidthtable[ob->tiletop]/2+newtile) == 31)
+        ytry = 0;
+        ob->needtoreact = true;
+        return;
+      }
+    }
+
+    if (ob->tilebottom != newtile)
+    {
+      if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) ==
+          PLATFORMBLOCK-1)
+      {
+        if (*(mapsegs[2]+mapbwidthtable[newtile-2]/2+ob->tileleft) ==
+            PLATFORMBLOCK-1)
         {
-          ob->xdir = -1;
-          xtry = xtry - (newpos & 0xFF);
+          ytry = 0;
+          ob->needtoreact = true;
+          return;
+        }
+        else
+        {
+          ob->ydir = -1;
+          ytry = ytry - (newpos & 0xFF);
         }
       }
     }
-    else if (ob->xdir == -1)
+  }
+  else if (ob->ydir == -1)
+  {
+    newpos = ob->top + ytry;
+    newtile = CONVERT_GLOBAL_TO_TILE(newpos);
+
+    if (ob->tiletop != newtile)
     {
-      newpos = ob->left + xtry;
-      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
-      if (ob->tileleft != newtile)
+      if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) == PLATFORMBLOCK)
       {
-        if (*(mapsegs[2]+mapbwidthtable[ob->tiletop]/2+newtile) == 31)
-        {
-          ob->xdir = 1;
-          xtry = xtry + (0x100 - (newpos & 0xFF));
-        }
+        ytry = 0;
+        ob->needtoreact = true;
+        return;
       }
     }
-    else if (ob->ydir == 1)
+
+    if (ob->tiletop != newtile)
     {
-      newpos = ob->bottom + ytry;
-      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
-      if (ob->tilebottom != newtile)
+      if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) == PLATFORMBLOCK-1)
       {
-        if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) == 31)
+        if (*(mapsegs[2]+mapbwidthtable[newtile+2]/2+ob->tileleft) == PLATFORMBLOCK-1)
         {
-          if (*(mapsegs[2]+mapbwidthtable[newtile-2]/2+ob->tileleft) == 31)
-          {
-            ytry = 0;
-            ob->needtoreact = true;
-          }
-          else
-          {
-            ob->ydir = -1;
-            ytry = ytry - (newpos & 0xFF);
-          }
+          ytry = 0;
+          ob->needtoreact = true;
+          return;
         }
-      }
-    }
-    else if (ob->ydir == -1)
-    {
-      newpos = ob->top + ytry;
-      newtile = CONVERT_GLOBAL_TO_TILE(newpos);
-      if (ob->tiletop != newtile)
-      {
-        if (*(mapsegs[2]+mapbwidthtable[newtile]/2+ob->tileleft) == 31)
+        else
         {
-          if (*(mapsegs[2]+mapbwidthtable[newtile+2]/2+ob->tileleft) == 31)
-          {
-            ytry = 0;
-            ob->needtoreact = true;
-          }
-          else
-          {
-            ob->ydir = 1;
-            ytry = ytry + (0x100 - (newpos & 0xFF));
-          }
+          ob->ydir = 1;
+          ytry = ytry + (0x100 - (newpos & 0xFF));
         }
       }
     }
@@ -962,92 +965,91 @@ void T_GoPlat(objtype* ob)
   // object's animation/state changed during that frame, so don't update
   // anything if we already have movement for the current frame i.e. the
   // update code has already been executed this frame
-  //
-  if (!xtry && !ytry)
+  if (xtry || ytry)
+    return;
+
+  move = tics * 24;
+  if (ob->temp2 > move)
   {
-    move = tics * 12;
-    if (ob->temp2 > move)
+    ob->temp2 = ob->temp2 - move;
+
+    dir = pdirx[ob->temp1];
+    if (dir == 1)
     {
-      ob->temp2 = ob->temp2 - move;
-
-      dir = pdirx[ob->temp1];
-      if (dir == 1)
-      {
-        xtry = xtry + move;
-      }
-      else if (dir == -1)
-      {
-        xtry = xtry + -move;
-      }
-
-      dir = pdiry[ob->temp1];
-      if (dir == 1)
-      {
-        ytry = ytry + move;
-      }
-      else if (dir == -1)
-      {
-        ytry = ytry + -move;
-      }
+      xtry = xtry + move;
     }
-    else
+    else if (dir == -1)
     {
-      dir = pdirx[ob->temp1];
-      if (dir == 1)
-      {
-        xtry += ob->temp2;
-      }
-      else if (dir == -1)
-      {
-        xtry += -ob->temp2;
-      }
+      xtry = xtry + -move;
+    }
 
-      dir = pdiry[ob->temp1];
-      if (dir == 1)
-      {
-        ytry += ob->temp2;
-      }
-      else if (dir == -1)
-      {
-        ytry += -ob->temp2;
-      }
+    dir = pdiry[ob->temp1];
+    if (dir == 1)
+    {
+      ytry = ytry + move;
+    }
+    else if (dir == -1)
+    {
+      ytry = ytry + -move;
+    }
+  }
+  else
+  {
+    dir = pdirx[ob->temp1];
+    if (dir == 1)
+    {
+      xtry += ob->temp2;
+    }
+    else if (dir == -1)
+    {
+      xtry += -ob->temp2;
+    }
 
-      tx = CONVERT_GLOBAL_TO_TILE(ob->x + xtry);
-      ty = CONVERT_GLOBAL_TO_TILE(ob->y + ytry);
-      ob->temp1 = *(mapsegs[2]+mapbwidthtable[ty]/2 + tx) - DIRARROWSTART;
-      if (ob->temp1 < arrow_North || ob->temp1 > arrow_None)
-      {
-        char error[60] = "Goplat moved to a bad spot: ";
-        char buf[5] = "";
+    dir = pdiry[ob->temp1];
+    if (dir == 1)
+    {
+      ytry += ob->temp2;
+    }
+    else if (dir == -1)
+    {
+      ytry += -ob->temp2;
+    }
 
-        strcat(error, itoa(ob->x, buf, 16));
-        strcat(error, ",");
-        strcat(error, itoa(ob->y, buf, 16));
-        Quit(error);
-      }
+    tx = CONVERT_GLOBAL_TO_TILE(ob->x + xtry);
+    ty = CONVERT_GLOBAL_TO_TILE(ob->y + ytry);
+    ob->temp1 = *(mapsegs[2]+mapbwidthtable[ty]/2 + tx) - DIRARROWSTART;
+    if (ob->temp1 < arrow_North || ob->temp1 > arrow_None)
+    {
+      char error[60] = "Goplat moved to a bad spot: ";
+      char buf[5] = "";
 
-      move -= ob->temp2;
-      ob->temp2 = TILEGLOBAL - move;
+      strcat(error, itoa(ob->x, buf, 16));
+      strcat(error, ",");
+      strcat(error, itoa(ob->y, buf, 16));
+      Quit(error);
+    }
 
-      dir = pdirx[ob->temp1];
-      if (dir == 1)
-      {
-        xtry = xtry + move;
-      }
-      else if (dir == -1)
-      {
-        xtry = xtry - move;
-      }
+    move -= ob->temp2;
+    ob->temp2 = TILEGLOBAL - move;
 
-      dir = pdiry[ob->temp1];
-      if (dir == 1)
-      {
-        ytry = ytry + move;
-      }
-      else if (dir == -1)
-      {
-        ytry = ytry - move;
-      }
+    dir = pdirx[ob->temp1];
+    if (dir == 1)
+    {
+      xtry = xtry + move;
+    }
+    else if (dir == -1)
+    {
+      xtry = xtry - move;
+    }
+
+    dir = pdiry[ob->temp1];
+    if (dir == 1)
+    {
+      ytry = ytry + move;
+    }
+    else if (dir == -1)
+    {
+      ytry = ytry - move;
     }
   }
 }
@@ -1082,6 +1084,7 @@ void SpawnParachuteBot(objtype* ob)
   GetNewObj(true);
 
   new->obclass = parachutebotobj;
+  new->priority = 2;
   new->active = ac_allways;
   new->x = ob->x + 24*PIXGLOBAL;
   new->y = ob->y + 8*PIXGLOBAL;
@@ -1100,6 +1103,8 @@ void SpawnParachuteBot(objtype* ob)
       break;
   }
 
+  new->temp5 = 75;
+
   NewState(new, &s_136);
 }
 
@@ -1111,47 +1116,49 @@ void T_ParachuteBot(objtype* ob)
   if (--ob->temp5 <= 0)
   {
     ob->shootable = false;
-    ChangeState(ob, &s_grenadeexplosion2);
+    ChangeState(ob, &s_grenadeexplosion1);
+    return;
   }
-  else if (ob->top <= player->bottom && ob->bottom >= player->top)
-  {
-    if (ob->xdir == -1)
-    {
-      xdelta = ob->left - player->right;
 
-      if (xdelta <= 32*PIXGLOBAL)
-      {
-        if (xdelta < -8*PIXGLOBAL)
-        {
-          ob->xdir = 1;
-        }
-        else
-        {
-          ob->yspeed = -24 - US_RndT() / 16;
-          ob->xspeed = -32;
-          ob->state = &s_135;
-          return;
-        }
-      }
+  if (ob->top > player->bottom || ob->bottom < player->top)
+    return;
+
+  if (ob->xdir == -1)
+  {
+    xdelta = ob->left - player->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = 1;
     }
     else
     {
-      xdelta = player->left - ob->right;
+      ob->yspeed = -24 - US_RndT() / 16;
+      ob->xspeed = -32;
+      ob->state = &s_135;
+      return;
+    }
+  }
+  else
+  {
+    xdelta = player->left - ob->right;
 
-      if (xdelta <= 32*PIXGLOBAL)
-      {
-        if (xdelta < -8*PIXGLOBAL)
-        {
-          ob->xdir = -1;
-        }
-        else
-        {
-          ob->yspeed = -24 - US_RndT() / 16;
-          ob->xspeed = 32;
-          ob->state = &s_135;
-          return;
-        }
-      }
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+    }
+    else
+    {
+      ob->yspeed = -24 - US_RndT() / 16;
+      ob->xspeed = 32;
+      ob->state = &s_135;
+      return;
     }
   }
 }
@@ -1162,7 +1169,7 @@ void C_ParachuteBotAttack(objtype* ob, objtype* hit)
   if (hit->obclass == playerobj)
   {
     ob->shootable = false;
-    ChangeState(ob, &s_grenadeexplosion2);
+    ChangeState(ob, &s_grenadeexplosion1);
   }
 }
 
@@ -1195,7 +1202,7 @@ void R_ParachuteBotAttack(objtype* ob)
 
   if (ob->hitnorth)
   {
-    ChangeState(ob, &s_grenadeexplosion2);
+    ChangeState(ob, &s_grenadeexplosion1);
     ob->shootable = false;
     ob->nothink = 12;
   }
@@ -1209,7 +1216,6 @@ void SpawnSpitterSnake(Sint16 x, Sint16 y)
   GetNewObj(false);
 
   new->obclass = spittersnakeobj;
-  new->active = ac_allways;
   new->x = CONVERT_TILE_TO_GLOBAL(x);
   new->y = CONVERT_TILE_TO_GLOBAL(y) - 8*PIXGLOBAL;
   new->xdir = 1;
@@ -1226,9 +1232,6 @@ void SpawnSpitterSnake(Sint16 x, Sint16 y)
       new->health = 3;
       break;
   }
-
-  new->temp6 = 15;
-  new->temp7 = 40;
 
   NewState(new, &s_137);
 }
@@ -1259,9 +1262,9 @@ void SpitterSnakeSpit(objtype* ob)
 
   new->xdir = ob->xdir;
   new->ydir = 1;
-  new->xspeed = ob->xdir * 40 + US_RndT() / 16;
+  new->xspeed = ob->xdir * 40 - (US_RndT() >> 4);
   new->yspeed = -20;
-  new->active = ac_allways;
+  new->active = ac_removable;
 
   NewState(new, &s_143);
 
@@ -1371,9 +1374,9 @@ void SewerMutantThrow(objtype* ob)
 
   new->xdir = ob->xdir;
   new->ydir = 1;
-  new->xspeed = ob->xdir * 30 + US_RndT() / 16;
+  new->xspeed = ob->xdir * 30 - (US_RndT() >> 4);
   new->yspeed = -20;
-  new->active = ac_allways;
+  new->active = ac_removable;
 
   NewState(new, &s_148);
 
@@ -1585,11 +1588,14 @@ void sub_20f20(objtype* ob)
 
   if (rand > 150 && rand < 200)
   {
-    if (
-      ob->top <= ob->bottom && player->bottom >= ob->top &&
-      sub_22a7a(ob->midx, ob->y + 15*PIXGLOBAL, &s_252) != -1)
+    if (ob->top > player->bottom || ob->bottom < player->top)
+      return;
+
+    if (sub_22a7a(ob->midx, ob->y + 15*PIXGLOBAL, &s_252) == -1)
+      return;
+
     {
-      new->xspeed = new->xdir * 60;
+      new->xspeed = ob->xdir * 60;
       new->yspeed = 0;
       SD_PlaySound(6);
     }
@@ -1605,11 +1611,11 @@ void sub_20f20(objtype* ob)
 
 void sub_2106d(objtype* ob)
 {
-  if (player->top + 24 > ob->top)
+  if (ob->top > player->top + 24)
   {
     ob->ydir = -1;
   }
-  else if (player->top + 24 < ob->top)
+  else if (ob->top < player->top + 24)
   {
     ob->ydir = 1;
   }
@@ -1660,89 +1666,87 @@ void T_DrMangle(objtype* ob)
     return;
   }
 
-  if (ob->top <= player->bottom && ob->bottom >= player->top)
+  if (ob->top > player->bottom || ob->bottom < player->top)
+    return;
+
+  if (US_RndT() > 230 && ob->shootable == true)
   {
-    if (US_RndT() > 230 && ob->shootable == true)
+    if (ob->xdir == 1)
     {
-      if (ob->xdir == 1)
-      {
-        shotorigin = ob->x + 112*PIXGLOBAL;
-      }
-      else
-      {
-        shotorigin = ob->x;
-      }
-
-      if (sub_22a7a(shotorigin, ob->y + 32*PIXGLOBAL, &s_256) == -1)
-      {
-        return;
-      }
-
-      new->xspeed = new->xdir * 60;
-
-      if (US_RndT() < 70)
-      {
-        new->yspeed = 0;
-      }
-      else
-      {
-        if (ob->temp1 & 1)
-        {
-          new->yspeed = 4;
-        }
-        else
-        {
-          new->yspeed = -4;
-        }
-      }
-
-      SD_PlaySound(21);
-    }
-
-    if (ob->xdir == -1)
-    {
-      xdelta = ob->left - player->right;
-
-      if (xdelta <= 32*PIXGLOBAL)
-      {
-        if (xdelta < -128*PIXGLOBAL)
-        {
-          ob->xdir = 1;
-        }
-        else
-        {
-          ob->yspeed = -24 - US_RndT() / 16;
-          ob->xspeed = -32;
-
-          SD_PlaySound(23);
-          ob->shootable = true;
-          ob->state = &s_167;
-          return;
-        }
-      }
+      shotorigin = ob->x + 112*PIXGLOBAL;
     }
     else
     {
-      xdelta = player->left - ob->right;
+      shotorigin = ob->x;
+    }
 
-      if (xdelta <= 32*PIXGLOBAL)
+    if (sub_22a7a(shotorigin, ob->y + 32*PIXGLOBAL, &s_255) == -1)
+    {
+      return;
+    }
+
+    new->xspeed = ob->xdir * 60;
+
+    if (US_RndT() < 70)
+    {
+      new->yspeed = 0;
+    }
+    else
+    {
+      if (ob->temp1 & 1)
       {
-        if (xdelta < -128*PIXGLOBAL)
-        {
-          ob->xdir = -1;
-        }
-        else
-        {
-          ob->yspeed = -24 - US_RndT() / 16;
-          ob->xspeed = 32;
-
-          SD_PlaySound(23);
-          ob->shootable = true;
-          ob->state = &s_167;
-          return;
-        }
+        new->yspeed = 4;
+      }
+      else
+      {
+        new->yspeed = -4;
       }
     }
+
+    SD_PlaySound(21);
+  }
+
+  if (ob->xdir == -1)
+  {
+    xdelta = ob->left - player->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -128*PIXGLOBAL)
+    {
+      ob->xdir = 1;
+      return;
+    }
+
+    ob->yspeed = -24 - US_RndT() / 16;
+    ob->xspeed = -32;
+
+    SD_PlaySound(23);
+    ob->shootable = true;
+    ob->state = &s_167;
+    return;
+  }
+  else
+  {
+    xdelta = player->left - ob->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -128*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+      return;
+    }
+
+    ob->yspeed = -24 - US_RndT() / 16;
+    ob->xspeed = 32;
+
+    SD_PlaySound(23);
+    ob->shootable = true;
+    ob->state = &s_167;
+    return;
   }
 }
 
