@@ -127,12 +127,12 @@ void NewGame(void)
     gamestate.lives = 3;
     gamestate.gems = 0;
     gamestate.nukestate = ns_none;
-    gamestate.var16 = 0;
+    gamestate.potions = 0;
   }
 
   gamestate.maxhealth = 4;
-  gamestate.rapidfire = 0;
-  gamestate.ammotype = 0;
+  gamestate.rapidfire = false;
+  gamestate.ammotype = AMMO_REGULAR;
   memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
   gamestate.ammoinclip = 0;
   gamestate.clips = 0;
@@ -269,7 +269,7 @@ boolean SaveTheGame(Sint16 handle)
   state.hostagerescued = false;
   state.clips = 0;
   state.ammoinclip = 0;
-  state.ammotype = 0;
+  state.ammotype = AMMO_REGULAR;
   memset(&state.explosives, 0, sizeof(state.explosives));
 
   switch (state.difficulty)
@@ -453,16 +453,16 @@ boolean RespawnPlayer(void)
     player->x = playerrestorex;
     player->priority = 1;
 
-    player->needtoclip = false;
+    player->needtoclip = cl_noclip;
     ChangeState(player, &s_player_standing);
 
-    player->needtoclip = true;
+    player->needtoclip = cl_midclip;
     CenterActor(player);
 
     ytry = 15;
     player->obclass = playerobj;
     player->active = ac_yes;
-    player->needtoclip = true;
+    player->needtoclip = cl_midclip;
 
     switch (gamestate.difficulty)
     {
@@ -557,7 +557,7 @@ loaded:
   gamestate.hostagerescued = false;
   gamestate.clips = 0;
   gamestate.ammoinclip = 0;
-  gamestate.ammotype = 0;
+  gamestate.ammotype = AMMO_REGULAR;
   memset(&gamestate.explosives, 0, sizeof(gamestate.explosives));
 
   colorstep = 0;

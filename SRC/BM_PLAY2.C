@@ -18,12 +18,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include "BM_ACT.H"
 #include "BM_DEF.H"
-
-
-#define PLACESPRITE \
-  RF_PlaceSprite(&ob->sprite, ob->x, ob->y, ob->shapenum, \
-    ob->dmgflash ? maskdraw : spritedraw, ob->priority);
 
 
 Uint16 bounceangle[8][8] = {
@@ -310,10 +306,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var26)
+          if (!gamestate.helpmsggrenades)
           {
             ShowHelpMessage("Throw grenades to blow up monsters!\n");
-            gamestate.var26 = true;
+            gamestate.helpmsggrenades = true;
           }
           break;
 
@@ -343,10 +339,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var27)
+          if (!gamestate.helpmsgclips)
           {
             ShowHelpMessage("Collect machine guns for automatic fire.\n");
-            gamestate.var27 = true;
+            gamestate.helpmsgclips = true;
           }
           break;
 
@@ -362,10 +358,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var28)
+            if (!gamestate.helpmsgkeycards)
             {
               ShowHelpMessage("Use keycards to turn off electric beams.\n");
-              gamestate.var28 = true;
+              gamestate.helpmsgkeycards = true;
             }
           }
           break;
@@ -379,10 +375,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->obclass = inertobj;
           hit->priority = 3;
 
-          if (!gamestate.var29)
+          if (!gamestate.helpmsgdoors)
           {
             ShowHelpMessage("Push <UP> and use key to open door.\n");
-            gamestate.var29 = true;
+            gamestate.helpmsgdoors = true;
           }
 
           ChangeState(hit, &s_173);
@@ -436,10 +432,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -456,10 +452,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -476,10 +472,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -496,10 +492,10 @@ void SnakeContact(objtype* ob, objtype* hit)
             hit->priority = 3;
             ChangeState(hit, &s_173);
 
-            if (!gamestate.var30)
+            if (!gamestate.helpmsgshards)
             {
               ShowHelpMessage("Find out where these crystal shards go.\n");
-              gamestate.var30 = true;
+              gamestate.helpmsgshards = true;
             }
           }
           break;
@@ -521,7 +517,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 36:
-          hit->shapenum = GRENADE_RED1_SPR;
+          hit->shapenum = PICKUP_GRENADE_RED1_SPR;
           SD_PlaySound(14);
 
           gamestate.explosives.redgrenades++;
@@ -530,10 +526,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var26)
+          if (!gamestate.helpmsggrenades)
           {
             ShowHelpMessage("Throw grenades to blow up monsters!\n");
-            gamestate.var26 = true;
+            gamestate.helpmsggrenades = true;
           }
           break;
 
@@ -562,10 +558,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var31)
+          if (!gamestate.helpmsgsupergun)
           {
             ShowHelpMessage("Super Gun!  Bullets do 5x the damage!\n");
-            gamestate.var31 = true;
+            gamestate.helpmsgsupergun = true;
           }
           break;
 
@@ -586,10 +582,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var32)
+          if (!gamestate.helpmsglandmines)
           {
             ShowHelpMessage("Cool!  Land mines!\n");
-            gamestate.var32 = true;
+            gamestate.helpmsglandmines = true;
           }
           break;
 
@@ -618,10 +614,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var41)
+          if (!gamestate.helpmsgplasmabolts)
           {
             ShowHelpMessage("Plasma Bolts!  Burn holes through enemies!\n");
-            gamestate.var41 = true;
+            gamestate.helpmsgplasmabolts = true;
           }
           break;
 
@@ -645,10 +641,10 @@ void SnakeContact(objtype* ob, objtype* hit)
 
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var33)
+          if (!gamestate.helpmsggems)
           {
             ShowHelpMessage("Collect 50 gems for an extra life!\n");
-            gamestate.var33 = true;
+            gamestate.helpmsggems = true;
           }
           break;
 
@@ -683,10 +679,10 @@ void SnakeContact(objtype* ob, objtype* hit)
 
           gamestate.maxhealth = player->health;
 
-          if (!gamestate.var34)
+          if (!gamestate.helpmsghealth)
           {
             ShowHelpMessage("First Aid Kit restores you to full health.\n");
-            gamestate.var34 = true;
+            gamestate.helpmsghealth = true;
           }
           break;
 
@@ -700,10 +696,10 @@ void SnakeContact(objtype* ob, objtype* hit)
 
           gamestate.secretlevelgem = true;
 
-          if (!gamestate.var42)
+          if (!gamestate.helpmsgsecretlevelgem)
           {
             ShowHelpMessage("You found a secret level warp gem!\n");
-            gamestate.var42 = true;
+            gamestate.helpmsgsecretlevelgem = true;
           }
           break;
 
@@ -739,11 +735,11 @@ void SnakeContact(objtype* ob, objtype* hit)
           SD_PlaySound(31);
           hit->shapenum = 174;
 
-          gamestate.var16++;
+          gamestate.potions++;
 
-          if (gamestate.var16 >= 1)
+          if (gamestate.potions >= 1)
           {
-            gamestate.var16 = 0;
+            gamestate.potions = 0;
             invincible = 1500;
 
             StartMusic(17);
@@ -753,10 +749,10 @@ void SnakeContact(objtype* ob, objtype* hit)
           hit->priority = 3;
           ChangeState(hit, &s_173);
 
-          if (!gamestate.var35)
+          if (!gamestate.helpmsginvincible)
           {
             ShowHelpMessage("Now you're invincible to monster attacks!\n");
-            gamestate.var35 = true;
+            gamestate.helpmsginvincible = true;
           }
           break;
 
@@ -841,10 +837,10 @@ void SnakeContact(objtype* ob, objtype* hit)
         ChangeState(hit, &s_176);
       }
 
-      if (!gamestate.var36)
+      if (!gamestate.helpmsgrobopal)
       {
         ShowHelpMessage("RoboPal gives you extra fire power!\n");
-        gamestate.var36 = true;
+        gamestate.helpmsgrobopal = true;
       }
       break;
 
@@ -1187,7 +1183,7 @@ void UpdateScoreBox(objtype *ob)
     dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
       + planesize + width*20 + 9*CHARWIDTH;
 
-    if (gamestate.ammotype == 0)
+    if (gamestate.ammotype == AMMO_REGULAR)
       MemDrawChar(33, dest, width, planesize);
     else if (gamestate.ammotype == AMMO_SUPERBULLET)
       MemDrawChar(34, dest, width, planesize);
@@ -1205,7 +1201,7 @@ void UpdateScoreBox(objtype *ob)
   //
   number = gamestate.ammoinclip;
   if (gamestate.difficulty == gd_Easy && gamestate.ammoinclip <= 3 &&
-      gamestate.ammotype == 0)
+      gamestate.ammotype == AMMO_REGULAR)
   {
     number = 0;
   }
@@ -1421,22 +1417,22 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 20:
         points = 2000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 19:
         points = 800;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 23:
         points = 350;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 28:
         points = 500;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 24:
@@ -1445,7 +1441,7 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 13:
         points = 34464;
-        ob->var1 = 0;
+        ob->shootable = 0;
         SD_PlaySound(23);
         ob->obclass = inertobj;
         bosshealth = 999;
@@ -1453,7 +1449,7 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 33:
         points = 5000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         SpawnPickup(ob->tilemidx, ob->tiletop, 26);
         StartMusic(14);
         word_399F8 = true;
@@ -1462,12 +1458,12 @@ void DealDamage(objtype* ob, Sint16 amount)
 
       case 34:
         points = 1000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
 
       case 41:
         points = 1000;
-        ob->var1 = 0;
+        ob->shootable = 0;
         break;
     }
 
@@ -1553,7 +1549,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
       if (gamestate.ammotype == AMMO_SUPERBULLET ||
           gamestate.ammotype == AMMO_PLASMABOLT)
       {
-        gamestate.ammotype = 0;
+        gamestate.ammotype = AMMO_REGULAR;
       }
 
       if (gamestate.clips > 0)
@@ -1570,7 +1566,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
     gamestate.ammoinclip--;
 
-    if (gamestate.ammotype == 0)
+    if (gamestate.ammotype == AMMO_REGULAR)
     {
       gamestate.rapidfire = true;
     }
@@ -1585,7 +1581,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
     if (gamestate.ammotype == AMMO_SUPERBULLET ||
         gamestate.ammotype == AMMO_PLASMABOLT)
     {
-      gamestate.ammotype = 0;
+      gamestate.ammotype = AMMO_REGULAR;
     }
 
     if (gamestate.clips > 0)
@@ -1626,7 +1622,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
     for (ob = player->next; ob; ob = ob->next)
     {
       if (
-        ob->active && ob->var1 &&
+        ob->active && ob->shootable &&
         ob->tileleft <= tilex && ob->tileright >= tilex &&
         ob->top <= bottom && ob->bottom >= top)
       {
@@ -1986,7 +1982,7 @@ void FragBloom(Uint16 x, Uint16 y, Direction dir)
 void C_Fireball(objtype* ob, objtype* hit)
 {
   if (
-    !hit->var1 || hit->dmgflash || hit->obclass == 21 || hit->obclass == 20 ||
+    !hit->shootable || hit->dmgflash || hit->obclass == 21 || hit->obclass == 20 ||
     hit->obclass == 27 || hit->obclass == 40 ||
     (hit->obclass == playerobj && ob->var2 == 1))
   {
@@ -2227,7 +2223,7 @@ void sub_1e34c(objtype* ob)
 
 void C_Grenade(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && hit->obclass != 21)
+  if (hit->shootable && hit->obclass != 21)
   {
     FragBloom(ob->x + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_East + 10);
     FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
@@ -2238,7 +2234,7 @@ void C_Grenade(objtype* ob, objtype* hit)
 
     SD_PlaySound(7);
 
-    ob->needtoclip = true;
+    ob->needtoclip = cl_midclip;
   }
 }
 
@@ -2246,7 +2242,7 @@ void C_Grenade(objtype* ob, objtype* hit)
 void C_GrenadeExplosion(objtype* ob, objtype* hit)
 {
   if (
-    !hit->var1 || hit->dmgflash || hit->obclass == 21 || hit->obclass == 27 ||
+    !hit->shootable || hit->dmgflash || hit->obclass == 21 || hit->obclass == 27 ||
     hit->obclass == 40 || (hit->obclass == playerobj && ob->var2 == 1))
   {
     return;
@@ -2387,7 +2383,7 @@ void R_Grenade(objtype* ob)
         FragBloom(ob->x - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
 
         ob->obclass = 5;
-        ob->needtoclip = true;
+        ob->needtoclip = cl_midclip;
         ob->x = ob->x - 8*PIXGLOBAL;
         ob->y = ob->y - 24*PIXGLOBAL;
         ob->temp7 = 50;
@@ -2509,7 +2505,7 @@ void SpawnSuperPlasmaBolt(Uint16 x, Uint16 y, Sint16 dir)
 
 void C_Shot(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->shootable && hit->obclass != 21 && hit->obclass != 27)
   {
     DealDamage(hit, 1);
     ChangeState(ob, &s_rocketimpact1);
@@ -2521,7 +2517,7 @@ void C_Shot(objtype* ob, objtype* hit)
 
 void C_LaserShot(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->shootable && hit->obclass != 21 && hit->obclass != 27)
   {
     if (ob->temp7 == 1)
     {

@@ -169,11 +169,13 @@ typedef enum
   ceilingwalkerobj = 10,
   spittersnakeobj  = 11,
   hostageobj  = 12,
+  drmangleobj  = 13,
   platformobj = 14,
   robopalobj  = 16,
   lasergunnerobj  = 19,
   bounderobj  = 22,
   bouncebotobj  = 23,
+  enemyprojectileobj = 25,
   laserturretobj  = 28,
   sewermutantobj = 31,
   hedgehogobj = 32,
@@ -182,6 +184,8 @@ typedef enum
   bombobj = 36,
   crawlingslimeobj = 39,
   fireimpobj  = 40,
+  helicopterobj  = 41,
+  parachutebotobj = 42,
   NUMCLASSTYPES
 } classtype;
 
@@ -206,33 +210,34 @@ typedef struct objstruct
   enum {ac_no, ac_yes, ac_allways, ac_removable} active;
   boolean needtoreact;
   enum {cl_noclip, cl_midclip, cl_fullclip} needtoclip;
-  Uint16 nothink;
-  Uint16 x, y;
-  Sint16 xdir, ydir;
-  Sint16 xmove, ymove;
-  Sint16 xspeed, yspeed;
-  Sint16 ticcount;
-  statetype far *state;
-  Uint16 shapenum;
-  Uint16 priority;
-  Uint16 left, top, right, bottom, midx;
+  Uint16 nothink; // 8
+  Uint16 x, y; // A, C
+  Sint16 xdir, ydir; // E, 10
+  Sint16 xmove, ymove; // 12, 14
+  Sint16 xspeed, yspeed; // 16, 18
+  Sint16 ticcount; // 1A
+  statetype far *state; // 1C
+  Uint16 shapenum; // 20
+  Uint16 priority; // 22
+  Uint16 left, top, right, bottom, midx; // 24, 26, 28, 2A, 2C
   Uint16 tileleft, tiletop, tileright, tilebottom, tilemidx;
   Sint16 hitnorth, hiteast, hitsouth, hitwest;
-  Sint16 var1;
-  Sint16 var2;
-  Sint16 health;
-  Sint16 dmgflash;
-  Sint16 temp1;
-  Sint16 temp2;
-  Sint16 temp3;
-  Sint16 temp4;
-  Sint16 temp5;
-  Sint16 temp6;
-  Sint16 temp7;
-  void *sprite;
+  boolean shootable; // 40
+  Sint16 var2; // 42
+  Sint16 health; // 44
+  Sint16 dmgflash; // 46
+  Sint16 temp1; // 48
+  Sint16 temp2; // 4A
+  Sint16 temp3; // 4C
+  Sint16 temp4; // 4E
+  Sint16 temp5; // 50
+  Sint16 temp6; // 52
+  Sint16 temp7; // 54
+  void *sprite; // 56
   struct objstruct *next, *prev;
 } objtype;
 
+#define AMMO_REGULAR     0
 #define AMMO_SUPERBULLET 3
 #define AMMO_PLASMABOLT  4
 
@@ -261,7 +266,7 @@ typedef struct
   boolean exitkey;
   boolean var14;
   boolean hasrobopal;
-  Sint8 var16;
+  Sint8 potions;
   Sint8 lives;
   Sint8 gems;
   Sint8 maxhealth;
@@ -272,25 +277,25 @@ typedef struct
   Sint8 ammotype;
   boolean hostagerescued;
   boolean secretlevelgem;
-  Sint16 var26;
-  Sint16 var27;
-  Sint16 var28;
-  Sint16 var29;
-  Sint16 var30;
-  Sint16 var31;
-  Sint16 var32;
-  Sint16 var33;
-  Sint16 var34;
-  Sint16 var35;
-  Sint16 var36;
-  Sint16 var37;
-  Sint16 var38;
-  Sint16 var39;
-  Sint16 var40;
-  Sint16 var41;
-  Sint16 var42;
-  Sint16 var43;
-  Sint16 var44;
+  boolean helpmsggrenades;
+  boolean helpmsgclips;
+  boolean helpmsgkeycards;
+  boolean helpmsgdoors;
+  boolean helpmsgshards;
+  boolean helpmsgsupergun;
+  boolean helpmsglandmines;
+  boolean helpmsggems;
+  boolean helpmsghealth;
+  boolean helpmsginvincible;
+  boolean helpmsgrobopal;
+  boolean helpmsgbridgeswitch;
+  boolean helpmsgplatformswitch;
+  boolean helpmsgcolorseq;
+  boolean helpmsgenterdoor;
+  boolean helpmsgplasmabolts;
+  boolean helpmsgsecretlevelgem;
+  boolean var43;
+  boolean var44;
   objtype *riding;
 } gametype;
 
@@ -318,9 +323,14 @@ void SizeText(char *text, Uint16 *width, Uint16 *height);
 
 extern boolean scorescreenkludge;
 
+#define SCR_PREVIEW      0
+#define SCR_CREDITS      1
+#define SCR_NOTSHAREWARE 2
+#define SCR_TECHHELP     3
+
 void CheckLastScan(void);
 void ShowTitle(Uint16 timeout);
-void ShowCredits(Sint16 num);
+void ShowScreen(Sint16 num);
 void RunDemo(Sint16 num);
 void DrawHighScores(void);
 void CheckHighScore(Sint32 score, Sint16 completed);

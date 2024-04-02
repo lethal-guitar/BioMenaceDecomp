@@ -362,7 +362,7 @@ void DemoLoop(void)
         // TODO
         StartMusic(18);
         var6 = true;
-        ShowCredits(3);
+        ShowScreen(SCR_TECHHELP);
       }
       break;
 
@@ -381,7 +381,7 @@ void DemoLoop(void)
         StartMusic(11);
       }
 
-      ShowCredits(1);
+      ShowScreen(SCR_CREDITS);
       break;
 
     case 3:
@@ -390,7 +390,7 @@ void DemoLoop(void)
       {
         StartMusic(11);
       }
-      ShowCredits(0);
+      ShowScreen(SCR_PREVIEW);
       break;
 
     case 4:

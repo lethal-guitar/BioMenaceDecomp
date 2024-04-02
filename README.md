@@ -22,16 +22,15 @@ Some variables and functions don't have meaningful names yet, and many places us
 
 | What | Bytes | % done |
 | --- | --- | --- |
-| All code | 113,941 / 131,744 | 89.98 % |
-| Game logic code | 26,324 / 44,127 | 59.66 % |
+| All code | 119,685 / 131,744 | 90.85 % |
+| Game logic code | 32,086 / 44,127 | 72.67 % |
 | Data | 89,984 / 89,984 | 100 % |
 
 
 ### TODO
 
-* Complete `GRAPHBM1.H`
 * Complete `AUDIOBM1.H`
-* Decompile `BM_ACT{1,2,3}.C`
+* Decompile `BM_ACT{2,3}.C`
 * Assign meaningful names to all functions and variables
 * Do registered version episode 1
 * Do episode 2

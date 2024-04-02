@@ -36,6 +36,11 @@ void SpawnTankBot(Sint16 x, Sint16 y)
 }
 
 
+void sub_22a7a()
+{
+}
+
+
 void sub_22b98()
 {
 }

@@ -24,6 +24,7 @@
 
 #include "BM_DEF.H"
 
+
 enum {
   CONTROLS_LUMP = 0,
   PLAYER_LUMP = 1,
@@ -36,45 +37,104 @@ enum {
   FIRE_IMP_LUMP = 9,
   GHOSTLY_SLUG_LUMP = 10,
   SEWER_MUTANT_LUMP = 11,
-  LUMP_12 = 12,
+  SLIME_DROPPER_LUMP = 12,
   CRAWLING_SLIME_LUMP = 13,
   HEDGEHOG_LUMP = 14,
-  LUMP_15 = 15,
   SKULLMAN_LUMP = 16,
-  LUMP_17 = 17,
+  DR_MANGLE_LUMP = 17,
   BOUNCE_BOT_LUMP = 18,
   ELEVATOR_LUMP = 19,
   LASER_TURRET_LUMP = 21,
   LASER_GUNNER_LUMP = 22,
-  LUMP_24 = 24,
-  LUMP_25 = 25,
-  LUMP_26 = 26,
-  LUMP_27 = 27,
-  LUMP_28 = 28,
-  LUMP_29 = 29,
+  SPARK_SHOOTER_LUMP = 24,
+  PUSH_BLOCK_LUMP = 25,
+  ROBOPAL_LUMP = 26,
+  CRUSHER_LUMP = 27,
+  FALLING_BLOCK_LUMP = 28,
+  TANK_BOT_LUMP = 29,
   INTRO_LUMP = 30,
-  LUMP_31 = 31,
+  HELICOPTER_LUMP = 31,
   RESPAWN_BEACON_LUMP = 32,
   NUMLUMPS = 33
 };
 
-boolean lumpneeded[NUMLUMPS];
-boolean firerobopal;
 
 Uint16 lumpstart[] = {
   CONTROLS_LUMP_START,
   PLAYER_LUMP_START,
-  223, 229, 235, 235, 249, 267, 275, 285, 294,
-  298, 306, 316, 321, 331, 331, 337, 364, 369, 370, 370,
-  376, 380, 384, 386, 387, 397, 398, 399, 406, 351, 359
+  HOSTAGE_LUMP_START,
+  SLUG_LUMP_START,
+  UNUSED1_LUMP_START,
+  BRAWLER_LUMP_START,
+  CEILWALKER_LUMP_START,
+  BOMB_LUMP_START,
+  SPITSNAKE_LUMP_START,
+  FIREIMP_LUMP_START,
+  GHOSTSLUG_LUMP_START,
+  SEWERMUTANT_LUMP_START,
+  SLIME_DROPPER_LUMP_START,
+  CRAWLSLIME_LUMP_START,
+  HEDGEHOG_LUMP_START,
+  UNUSED2_LUMP_START,
+  SKULLMAN_LUMP_START,
+  MANGLE_LUMP_START,
+  BOUNCEBOT_LUMP_START,
+  PLATFORM_LUMP_START,
+  UNUSED3_LUMP_START,
+  TURRET_LUMP_START,
+  LASERGUNNER_LUMP_START,
+  FORCEFIELD_BOT_LUMP_START,
+  SPARKSHOT_LUMP_START,
+  PUSHBLOCK_LUMP_START,
+  ROBOPAL_LUMP_START,
+  CRUSHERBLOCK_LUMP_START,
+  FALLINGBLOCK_LUMP_START,
+  TANKBOT_LUMP_START,
+  INTRO_LUMP_START,
+  HELICOPTER_LUMP_START,
+  RESPAWN_BEACON_LUMP_START,
 };
 
 Uint16 lumpend[] = {
   CONTROLS_LUMP_END,
-  222, 228, 234, 234, 248, 266, 274, 284, 293, 297,
-  305, 315, 320, 330, 330, 336, 350, 368, 369, 369, 375,
-  379, 383, 385, 386, 396, 397, 398, 404, 410, 358, 363
+  PLAYER_LUMP_END,
+  HOSTAGE_LUMP_END,
+  SLUG_LUMP_END,
+  UNUSED1_LUMP_END,
+  BRAWLER_LUMP_END,
+  CEILWALKER_LUMP_END,
+  BOMB_LUMP_END,
+  SPITSNAKE_LUMP_END,
+  FIREIMP_LUMP_END,
+  GHOSTSLUG_LUMP_END,
+  SEWERMUTANT_LUMP_END,
+  SLIME_DROPPER_LUMP_END,
+  CRAWLSLIME_LUMP_END,
+  HEDGEHOG_LUMP_END,
+  UNUSED2_LUMP_END,
+  SKULLMAN_LUMP_END,
+  MANGLE_LUMP_END,
+  BOUNCEBOT_LUMP_END,
+  PLATFORM_LUMP_END,
+  UNUSED3_LUMP_END,
+  TURRET_LUMP_END,
+  LASERGUNNER_LUMP_END,
+  FORCEFIELD_BOT_LUMP_END,
+  SPARKSHOT_LUMP_END,
+  PUSHBLOCK_LUMP_END,
+  ROBOPAL_LUMP_END,
+  CRUSHERBLOCK_LUMP_END,
+  FALLINGBLOCK_LUMP_END,
+  TANKBOT_LUMP_END,
+  INTRO_LUMP_END,
+  HELICOPTER_LUMP_END,
+  RESPAWN_BEACON_LUMP_END,
 };
+
+
+boolean lumpneeded[NUMLUMPS];
+boolean firerobopal;
+
 
 char* levelnames[GAMELEVELS] = {
   "DownTown Metro",
@@ -92,7 +152,6 @@ char* levelnames[GAMELEVELS] = {
 };
 
 
-// seg128
 char far HOSTAGEDLG1[] =
   "Somewhere in each level, there\n"
   "is someone like me who holds a key\n"
@@ -503,12 +562,12 @@ void ScanInfoPlane(void)
 
         case 44:
           SpawnDrMangleHologram(x, y);
-          lumpneeded[LUMP_17] = true;
+          lumpneeded[DR_MANGLE_LUMP] = true;
           break;
 
         case 45:
           SpawnDrMangle(x, y);
-          lumpneeded[LUMP_17] = true;
+          lumpneeded[DR_MANGLE_LUMP] = true;
           break;
 
         case 46:
@@ -561,12 +620,12 @@ void ScanInfoPlane(void)
 
         case 72:
           SpawnSparkShooter(x, y);
-          lumpneeded[LUMP_24] = true;
+          lumpneeded[SPARK_SHOOTER_LUMP] = true;
           break;
 
         case 74:
           SpawnRobopal(x, y);
-          lumpneeded[LUMP_26] = true;
+          lumpneeded[ROBOPAL_LUMP] = true;
           break;
 
         case 75:
@@ -596,32 +655,32 @@ void ScanInfoPlane(void)
 
         case 80:
           SpawnTankBot(x, y);
-          lumpneeded[LUMP_29] = true;
+          lumpneeded[TANK_BOT_LUMP] = true;
           break;
 
         case 81:
           SpawnPushBlock(x, y);
-          lumpneeded[LUMP_25] = true;
+          lumpneeded[PUSH_BLOCK_LUMP] = true;
           break;
 
         case 82:
           SpawnSlimeDropper(x, y);
-          lumpneeded[LUMP_12] = true;
+          lumpneeded[SLIME_DROPPER_LUMP] = true;
           break;
 
         case 83:
           SpawnHelicopter(x, y, 0);
-          lumpneeded[LUMP_31] = true;
+          lumpneeded[HELICOPTER_LUMP] = true;
           break;
 
         case 87:
           SpawnCrusher(x, y);
-          lumpneeded[LUMP_27] = true;
+          lumpneeded[CRUSHER_LUMP] = true;
           break;
 
         case 88:
           SpawnFallingBlock(x, y);
-          lumpneeded[LUMP_28] = true;
+          lumpneeded[FALLING_BLOCK_LUMP] = true;
           break;
 
         case 89:

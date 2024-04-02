@@ -18,6 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include "BM_ACT.H"
 #include "BM_DEF.H"
 
 
@@ -47,7 +48,7 @@ Uint16 arrowflip[] = {
 Sint16 word_391BA = 0;
 Sint16 word_391BC = 0;
 Sint16 word_391BE = 0;
-Sint16 word_391C0 = 0;
+boolean bossactivated = false;
 Sint16 word_391C2 = 0;
 Sint16 word_391C4 = 0;
 Sint16 word_391C6 = 0;
@@ -844,7 +845,7 @@ void SnakeInteractThink(objtype* ob)
 
     case 21:
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
-      if (word_391C0)
+      if (bossactivated)
       {
         return;
       }
@@ -880,8 +881,8 @@ found:
           if (otherobj->obclass == 13)
           {
             otherobj->state = &s_167;
-            otherobj->var1 = true;
-            word_391C0 = true;
+            otherobj->shootable = true;
+            bossactivated = true;
             return;
           }
         }
@@ -909,10 +910,10 @@ found:
 
   if (intile == 18 || intile == 10)
   {
-    if (!gamestate.var37 && intile == 18)
+    if (!gamestate.helpmsgbridgeswitch && intile == 18)
     {
       ShowHelpMessage("This switch activates a bridge.\n");
-      gamestate.var37 = true;
+      gamestate.helpmsgbridgeswitch = true;
     }
 
     for (y = sy; sy+1 > y; y++)
@@ -967,10 +968,10 @@ found:
 
   if (intile == 19 || intile == 11)
   {
-    if (!gamestate.var38 && intile == 19)
+    if (!gamestate.helpmsgplatformswitch && intile == 19)
     {
       ShowHelpMessage("This switch activates a platform.\n");
-      gamestate.var38 = true;
+      gamestate.helpmsgplatformswitch = true;
     }
 
     map = mapsegs[2] + mapbwidthtable[sy]/2 + sx;
@@ -991,10 +992,10 @@ found:
 
   if (intile == 23)
   {
-    if (!gamestate.var39)
+    if (!gamestate.helpmsgcolorseq)
     {
       ShowHelpMessage("Find the color sequence in this level.\n");
-      gamestate.var39 = true;
+      gamestate.helpmsgcolorseq = true;
     }
 
     map = mapsegs[2] + mapbwidthtable[sy]/2 + sx;
@@ -1083,9 +1084,9 @@ void OpenDoor(objtype* ob)
 
 void SnakeShootSingleThink2(objtype* ob)
 {
-  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == 0)
+  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == AMMO_REGULAR)
   {
-    gamestate.rapidfire = 1;
+    gamestate.rapidfire = true;
     gamestate.ammoinclip = 3;
 
     if (!ob->hitnorth)
@@ -1110,9 +1111,9 @@ void SnakeShootSingleThink2(objtype* ob)
 
 void SnakeShootSingleCrouchThink(objtype* ob)
 {
-  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == 0)
+  if (gamestate.difficulty == gd_Easy && gamestate.ammotype == AMMO_REGULAR)
   {
-    gamestate.rapidfire = 1;
+    gamestate.rapidfire = true;
     gamestate.ammoinclip = 3;
 
     ChangeState(player, &s_player_shoot_crouch1);
@@ -1425,7 +1426,7 @@ void SnakeDeadThink(objtype* ob)
 
 void SnakeContactShielded(objtype* ob, objtype* hit)
 {
-  if (hit->var1 && !hit->dmgflash && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->shootable && !hit->dmgflash && hit->obclass != 21 && hit->obclass != 27)
   {
     DealDamage(hit, 5);
     SD_PlaySound(7);
@@ -1560,7 +1561,7 @@ void SnakeStandThink(objtype* ob)
       ob->xspeed = ob->xdir * 16;
     }
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot_air1;
     }
@@ -1616,7 +1617,7 @@ void SnakeStandThink(objtype* ob)
 
     if (cmddown)
     {
-      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
       {
         ob->state = &s_player_shoot_crouch1;
       }
@@ -1645,7 +1646,7 @@ void SnakeStandThink(objtype* ob)
       return;
     }
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot1;
     }
@@ -1766,7 +1767,7 @@ void SnakeWalkThink(objtype* ob)
 
     ob->xspeed = ob->xdir * 16;
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot_air1;
     }
@@ -1784,7 +1785,7 @@ void SnakeWalkThink(objtype* ob)
 
     if (cmddown)
     {
-      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
       {
         ob->state = &s_player_shoot_crouch1;
       }
@@ -1813,7 +1814,7 @@ void SnakeWalkThink(objtype* ob)
       return;
     }
 
-    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+    if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
     {
       ob->state = &s_player_shoot1;
     }
@@ -1942,7 +1943,7 @@ void SnakeAirThink(objtype* ob)
     }
     else
     {
-      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == 1)
+      if (gamestate.ammoinclip > 0 && gamestate.rapidfire == true)
       {
         ob->state = &s_player_shoot_air1;
       }
@@ -2123,13 +2124,7 @@ void R_OnGround(objtype* ob)
     jumptime = 0;
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 
@@ -2148,13 +2143,7 @@ void R_Walking(objtype* ob)
     ChangeState(ob, &s_player_standing);
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 
@@ -2229,13 +2218,7 @@ void R_PlayerInAir(objtype* ob)
     }
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 
@@ -2251,13 +2234,7 @@ void R_Dying(objtype* ob)
     ChangeState(ob, &s_player_dead);
   }
 
-  RF_PlaceSprite(
-    &ob->sprite,
-    ob->x,
-    ob->y,
-    ob->shapenum,
-    ob->dmgflash ? maskdraw : spritedraw,
-    ob->priority);
+  PLACESPRITE;
 }
 
 
@@ -2286,10 +2263,10 @@ void CheckInTiles(objtype *ob)
           case 5:
           case 6:
           case 8:
-            if (!gamestate.var40)
+            if (!gamestate.helpmsgenterdoor)
             {
               ShowHelpMessage("Push <UP> to enter or open a door.\n");
-              gamestate.var40 = true;
+              gamestate.helpmsgenterdoor = true;
             }
 
             doordestx = x;
