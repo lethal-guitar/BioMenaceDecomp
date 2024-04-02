@@ -309,175 +309,218 @@ void sub_24446();
 void C_GrenadeExplosion(objtype* ob, objtype* hit);
 
 statetype far s_128 = { /* 32250 */
-  369, 369, think, false, ps_none, 0, 0, 0,
+  PLATFORMSPR, PLATFORMSPR,
+  think, false, ps_none, 0, 0, 0,
   T_Platform, NULL, R_Draw, NULL};
 
 statetype far s_129 = { /* 32270 */
-  406, 406, think, false, ps_none, 0, 0, 0,
+  APOGEELOGOSPR, APOGEELOGOSPR,
+  think, false, ps_none, 0, 0, 0,
   T_Platform, NULL, R_Draw, NULL};
 
 statetype far s_130 = { /* 32290 */
-  352, 352, stepthink, false, ps_none, 1, 0, 0,
+  HELICOPTER2_SPR, HELICOPTER2_SPR,
+  stepthink, false, ps_none, 1, 0, 0,
   T_GoPlat, NULL, R_Helicopter, &s_130};
 
 statetype far s_131 = { /* 322b0 */
-  351, 351, stepthink, false, ps_none, 10, 0, 0,
+  HELICOPTER1_SPR, HELICOPTER1_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_GoPlat, NULL, R_Helicopter, &s_130};
 
 statetype far s_132 = { /* 322d0 */
-  351, 351, stepthink, false, ps_none, 1, 0, 0,
+  HELICOPTER1_SPR, HELICOPTER1_SPR,
+  stepthink, false, ps_none, 1, 0, 0,
   T_GoPlat, NULL, SpawnParachuteBot, &s_130};
 
 statetype far s_133 = { /* 322f0 */
-  355, 357, step, false, ps_tofloor, 10, 128, 0,
+  PARACHUTEBOT_WALK1_L_SPR, PARACHUTEBOT_WALK1_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   T_ParachuteBot, NULL, R_Walk, &s_134};
 
 statetype far s_134 = { /* 32310 */
-  356, 358, step, false, ps_tofloor, 10, 128, 0,
+  PARACHUTEBOT_WALK2_L_SPR, PARACHUTEBOT_WALK2_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   T_ParachuteBot, NULL, R_Walk, &s_133};
 
 statetype far s_135 = { /* 32330 */
-  356, 358, think, false, ps_none, 0, 0, 0,
+  PARACHUTEBOT_WALK2_L_SPR, PARACHUTEBOT_WALK2_R_SPR,
+  think, false, ps_none, 0, 0, 0,
   T_Projectile, C_ParachuteBotAttack, R_ParachuteBotAttack, &s_135};
 
 statetype far s_136 = { /* 32350 */
-  353, 354, stepthink, false, ps_none, 10, 8, 32,
+  PARACHUTEBOT_FALLING_L_SPR, PARACHUTEBOT_FALLING_R_SPR,
+  stepthink, false, ps_none, 10, 8, 32,
   NULL, C_ParachuteBotAttack, R_ParachuteBot, &s_136};
 
 statetype far s_137 = { /* 32370 */
-  275, 277, step, false, ps_tofloor, 10, 128, 0,
+  SPITSNAKE_WALK1_L_SPR, SPITSNAKE_WALK1_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   T_SpitterSnake, NULL, R_Walk, &s_138};
 
 statetype far s_138 = { /* 32390 */
-  276, 278, step, false, ps_tofloor, 10, 128, 0,
+  SPITSNAKE_WALK2_L_SPR, SPITSNAKE_WALK2_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   T_SpitterSnake, NULL, R_Walk, &s_137};
 
 statetype far s_139 = { /* 323b0 */
-  275, 277, step, true, ps_tofloor, 5, 128, 0,
+  SPITSNAKE_WALK1_L_SPR, SPITSNAKE_WALK1_R_SPR,
+  step, true, ps_tofloor, 5, 128, 0,
   T_SpitterSnake2, NULL, R_Walk, &s_140};
 
 statetype far s_140 = { /* 323d0 */
-  276, 278, step, true, ps_tofloor, 5, 128, 0,
+  SPITSNAKE_WALK2_L_SPR, SPITSNAKE_WALK2_R_SPR,
+  step, true, ps_tofloor, 5, 128, 0,
   T_SpitterSnake2, NULL, R_Walk, &s_139};
 
 statetype far s_141 = { /* 323f0 */
-  279, 280, step, false, ps_none, 10, 0, 0,
+  SPITSNAKE_ATTACK_L_SPR, SPITSNAKE_ATTACK_R_SPR,
+  step, false, ps_none, 10, 0, 0,
   SpitterSnakeSpit, NULL, R_Draw, &s_142};
 
 statetype far s_142 = { /* 32410 */
-  279, 280, step, false, ps_none, 10, 65408, 0,
+  SPITSNAKE_ATTACK_L_SPR, SPITSNAKE_ATTACK_R_SPR,
+  step, false, ps_none, 10, 65408, 0,
   NULL, NULL, R_Draw, &s_137};
 
 statetype far s_143 = { /* 32430 */
-  281, 283, stepthink, false, ps_none, 4, 0, 0,
+  SPITSNAKE_SPIT1_L_SPR, SPITSNAKE_SPIT1_R_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
   T_Projectile, NULL, R_EnemyProjectile, &s_144};
 
 statetype far s_144 = { /* 32450 */
-  282, 284, stepthink, false, ps_none, 4, 0, 0,
+  SPITSNAKE_SPIT2_L_SPR, SPITSNAKE_SPIT2_R_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
   T_Projectile, NULL, R_EnemyProjectile, &s_143};
 
 statetype far s_145 = { /* 32470 */
-  298, 301, step, false, ps_tofloor, 20, 128, 0,
+  SEWERMUTANT_WALK1_L_SPR, SEWERMUTANT_WALK1_R_SPR,
+  step, false, ps_tofloor, 20, 128, 0,
   T_SewerMutant, NULL, R_Walk, &s_146};
 
 statetype far s_146 = { /* 32490 */
-  299, 302, step, false, ps_tofloor, 20, 128, 0,
+  SEWERMUTANT_WALK2_L_SPR, SEWERMUTANT_WALK2_R_SPR,
+  step, false, ps_tofloor, 20, 128, 0,
   T_SewerMutant, NULL, R_Walk, &s_145};
 
 statetype far s_147 = { /* 324b0 */
-  300, 303, step, false, ps_tofloor, 10, 0, 0,
+  SEWERMUTANT_ATTACK_L_SPR, SEWERMUTANT_ATTACK_R_SPR,
+  step, false, ps_tofloor, 10, 0, 0,
   SewerMutantThrow, NULL, R_Walk, &s_145};
 
 statetype far s_148 = { /* 324d0 */
-  304, 304, stepthink, false, ps_none, 4, 0, 0,
+  SEWERMUTANT_SPIT1_SPR, SEWERMUTANT_SPIT1_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
   T_Projectile, NULL, R_EnemyProjectile, &s_149};
 
 statetype far s_149 = { /* 324f0 */
-  305, 305, stepthink, false, ps_none, 4, 0, 0,
+  SEWERMUTANT_SPIT2_SPR, SEWERMUTANT_SPIT2_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
   T_Projectile, NULL, R_EnemyProjectile, &s_148};
 
 statetype far s_150 = { /* 32510 */
-  223, 223, step, false, ps_tofloor, 40, 0, 0,
+  HOSTAGE1_1_SPR, HOSTAGE1_1_SPR,
+  step, false, ps_tofloor, 40, 0, 0,
   NULL, NULL, R_Draw, &s_151};
 
 statetype far s_151 = { /* 32530 */
-  224, 224, step, false, ps_tofloor, 40, 0, 0,
+  HOSTAGE1_2_SPR, HOSTAGE1_2_SPR,
+  step, false, ps_tofloor, 40, 0, 0,
   NULL, NULL, R_Draw, &s_150};
 
 statetype far s_152 = { /* 32550 */
-  225, 225, step, false, ps_tofloor, 40, 0, 0,
+  HOSTAGE2_1_SPR, HOSTAGE2_1_SPR,
+  step, false, ps_tofloor, 40, 0, 0,
   NULL, NULL, R_Draw, &s_153};
 
 statetype far s_153 = { /* 32570 */
-  226, 226, step, false, ps_tofloor, 40, 0, 0,
+  HOSTAGE2_2_SPR, HOSTAGE2_2_SPR,
+  step, false, ps_tofloor, 40, 0, 0,
   NULL, NULL, R_Draw, &s_152};
 
 statetype far s_154 = { /* 32590 */
-  227, 227, step, false, ps_tofloor, 40, 0, 0,
+  HOSTAGE3_1_SPR, HOSTAGE3_1_SPR,
+  step, false, ps_tofloor, 40, 0, 0,
   NULL, NULL, R_Draw, &s_155};
 
 statetype far s_155 = { /* 325b0 */
-  228, 228, step, false, ps_tofloor, 40, 0, 0,
+  HOSTAGE3_2_SPR, HOSTAGE3_2_SPR,
+  step, false, ps_tofloor, 40, 0, 0,
   NULL, NULL, R_Draw, &s_154};
 
 statetype far s_156 = { /* 325d0 */
-  337, 337, step, false, ps_none, 10, 0, 0,
+  MANGLE_HOLOGRAM1_SPR, MANGLE_HOLOGRAM1_SPR,
+  step, false, ps_none, 10, 0, 0,
   T_DrMangleHologram, NULL, R_Draw, &s_156};
 
 statetype far s_157 = { /* 325f0 */
-  338, 338, step, false, ps_none, 10, 0, 0,
+  MANGLE_HOLOGRAM2_SPR, MANGLE_HOLOGRAM2_SPR,
+  step, false, ps_none, 10, 0, 0,
   T_DrMangleHologram, NULL, R_Draw, &s_156};
 
 statetype far s_158 = { /* 32610 */
-  339, 339, step, false, ps_none, 200, 0, 0,
+  MANGLE_HOLOGRAM3_SPR, MANGLE_HOLOGRAM3_SPR,
+  step, false, ps_none, 200, 0, 0,
   T_DrMangleHologram, NULL, R_Draw, &s_156};
 
 statetype far s_159 = { /* 32630 */
-  340, 340, step, false, ps_none, 10, 0, 0,
+  MANGLE_HOLOGRAM_FADE1_SPR, MANGLE_HOLOGRAM_FADE1_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, NULL, R_Draw, &s_156};
 
 statetype far s_160 = { /* 32650 */
-  341, 341, step, false, ps_none, 10, 0, 0,
+  MANGLE_HOLOGRAM_FADE2_SPR, MANGLE_HOLOGRAM_FADE2_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, NULL, R_Draw, &s_157};
 
 statetype far s_161 = { /* 32670 */
-  342, 342, step, false, ps_none, 10, 0, 0,
+  MANGLE_HOLOGRAM_FADE3_SPR, MANGLE_HOLOGRAM_FADE3_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, NULL, R_Draw, &s_158};
 
 statetype far s_162 = { /* 32690 */
-  343, 343, step, false, ps_none, 3, 0, 0,
+  MANGLE_HOLOGRAM_ATTACK_SPR, MANGLE_HOLOGRAM_ATTACK_SPR,
+  step, false, ps_none, 3, 0, 0,
   sub_20f20, NULL, sub_2106d, &s_162};
 
 statetype far s_163 = { /* 326b0 */
-  344, 344, step, false, ps_tofloor, 20, 0, 0,
+  MANGLE_TYPING1_SPR, MANGLE_TYPING1_SPR,
+  step, false, ps_tofloor, 20, 0, 0,
   T_DrMangle, NULL, R_Draw, &s_164};
 
 statetype far s_164 = { /* 326d0 */
-  345, 345, step, false, ps_tofloor, 20, 0, 0,
+  MANGLE_TYPING2_SPR, MANGLE_TYPING2_SPR,
+  step, false, ps_tofloor, 20, 0, 0,
   T_DrMangle, NULL, R_Draw, &s_163};
 
 statetype far s_165 = { /* 326f0 */
-  347, 349, step, false, ps_tofloor, 10, 128, 0,
+  MANGLE_MONSTER1_L_SPR, MANGLE_MONSTER1_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   T_DrMangle, NULL, R_Walk, &s_166};
 
 statetype far s_166 = { /* 32710 */
-  348, 350, step, false, ps_tofloor, 10, 128, 0,
+  MANGLE_MONSTER2_L_SPR, MANGLE_MONSTER2_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   T_DrMangle, NULL, R_Walk, &s_165};
 
 statetype far s_167 = { /* 32730 */
-  348, 350, think, false, ps_none, 0, 0, 0,
+  MANGLE_MONSTER2_L_SPR, MANGLE_MONSTER2_R_SPR,
+  think, false, ps_none, 0, 0, 0,
   T_Projectile, NULL, R_DrMangleJumping, &s_167};
 
 statetype far s_168 = { /* 32750 */
-  346, 346, step, false, ps_tofloor, 200, 0, 0,
+  MANGLE_DEFEATED_SPR, MANGLE_DEFEATED_SPR,
+  step, false, ps_tofloor, 200, 0, 0,
   NULL, NULL, R_Draw, &s_169};
 
 statetype far s_169 = { /* 32770 */
-  346, 346, step, false, ps_tofloor, 2, 0, 0,
+  MANGLE_DEFEATED_SPR, MANGLE_DEFEATED_SPR,
+  step, false, ps_tofloor, 2, 0, 0,
   DrMangleDefeated, NULL, R_Draw, &s_169};
 
 statetype far s_170 = { /* 32790 */
-  346, 346, think, false, ps_tofloor, 0, 0, 0,
+  MANGLE_DEFEATED_SPR, MANGLE_DEFEATED_SPR,
+  think, false, ps_tofloor, 0, 0, 0,
   NULL, NULL, R_Draw, &s_170};
 
 // -------------------
@@ -495,139 +538,172 @@ statetype far s_173 = { /* 327f0 */
   sub_21654, NULL, R_Draw, NULL};
 
 statetype far s_174 = { /* 32810 */
-  387, 387, step, false, ps_none, 15, 0, 0,
+  ROBOPAL1_SPR, ROBOPAL1_SPR,
+  step, false, ps_none, 15, 0, 0,
   NULL, NULL, R_Draw, &s_175};
 
 statetype far s_175 = { /* 32830 */
-  388, 388, step, false, ps_none, 15, 0, 0,
+  ROBOPAL2_SPR, ROBOPAL2_SPR,
+  step, false, ps_none, 15, 0, 0,
   NULL, NULL, R_Draw, &s_174};
 
 statetype far s_176 = { /* 32850 */
-  387, 387, stepthink, false, ps_none, 5, 0, 0,
+  ROBOPAL1_SPR, ROBOPAL1_SPR,
+  stepthink, false, ps_none, 5, 0, 0,
   sub_21704, NULL, sub_218a8, &s_177};
 
 statetype far s_177 = { /* 32870 */
-  388, 388, stepthink, false, ps_none, 5, 0, 0,
+  ROBOPAL2_SPR, ROBOPAL2_SPR,
+  stepthink, false, ps_none, 5, 0, 0,
   sub_21704, NULL, sub_218a8, &s_176};
 
 statetype far s_178 = { /* 32890 */
-  389, 389, step, false, ps_none, 25, 0, 0,
+  ROBOPAL_TELEPORT1_SPR, ROBOPAL_TELEPORT1_SPR,
+  step, false, ps_none, 25, 0, 0,
   NULL, NULL, R_Draw, &s_179};
 
 statetype far s_179 = { /* 328b0 */
-  390, 390, step, false, ps_none, 25, 0, 0,
+  ROBOPAL_TELEPORT2_SPR, ROBOPAL_TELEPORT2_SPR,
+  step, false, ps_none, 25, 0, 0,
   NULL, NULL, R_Draw, &s_180};
 
 statetype far s_180 = { /* 328d0 */
-  65535, 65535, step, false, ps_none, 1, 0, 0,
+  -1, -1, step, false, ps_none, 1, 0, 0,
   sub_219ab, NULL, R_Draw, &s_181};
 
 statetype far s_181 = { /* 328f0 */
-  390, 390, step, false, ps_none, 25, 0, 0,
+  ROBOPAL_TELEPORT2_SPR, ROBOPAL_TELEPORT2_SPR,
+  step, false, ps_none, 25, 0, 0,
   NULL, NULL, R_Draw, &s_182};
 
 statetype far s_182 = { /* 32910 */
-  389, 389, step, false, ps_none, 25, 0, 0,
+  ROBOPAL_TELEPORT1_SPR, ROBOPAL_TELEPORT1_SPR,
+  step, false, ps_none, 25, 0, 0,
   NULL, NULL, R_Draw, &s_176};
 
 statetype far s_183 = { /* 32930 */
-  229, 232, step, false, ps_tofloor, 10, 128, 0,
+  SLUG_WALK1_L_SPR, SLUG_WALK1_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   sub_21b2c, NULL, R_Walk, &s_184};
 
 statetype far s_184 = { /* 32950 */
-  230, 233, step, false, ps_tofloor, 10, 128, 0,
+  SLUG_WALK2_L_SPR, SLUG_WALK2_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   sub_21b2c, NULL, R_Walk, &s_183};
 
 statetype far s_185 = { /* 32970 */
-  231, 234, think, false, ps_none, 0, 0, 0,
+  SLUG_ATTACK_L_SPR, SLUG_ATTACK_R_SPR,
+  think, false, ps_none, 0, 0, 0,
   T_Projectile, NULL, sub_21d67, &s_183};
 
 statetype far s_186 = { /* 32990 */
-  113, 113, step, false, ps_tofloor, 5, 64, 0,
+  RUNNING_FIRE1_SPR, RUNNING_FIRE1_SPR,
+  step, false, ps_tofloor, 5, 64, 0,
   sub_21ce4, C_GrenadeExplosion, sub_21e19, &s_187};
 
 statetype far s_187 = { /* 329b0 */
-  114, 114, step, false, ps_tofloor, 5, 64, 0,
+  RUNNING_FIRE2_SPR, RUNNING_FIRE2_SPR,
+  step, false, ps_tofloor, 5, 64, 0,
   sub_21ce4, C_GrenadeExplosion, sub_21e19, &s_186};
 
 statetype far s_188 = { /* 329d0 */
-  294, 296, step, false, ps_tofloor, 10, 128, 0,
+  GHOSTSLUG1_L_SPR, GHOSTSLUG1_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   sub_21bfb, NULL, R_Walk, &s_189};
 
 statetype far s_189 = { /* 329f0 */
-  295, 297, step, false, ps_tofloor, 10, 128, 0,
+  GHOSTSLUG2_L_SPR, GHOSTSLUG2_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
   sub_21bfb, NULL, R_Walk, &s_188};
 
 statetype far s_190 = { /* 32a10 */
-  294, 296, think, false, ps_none, 0, 0, 0,
+  GHOSTSLUG1_L_SPR, GHOSTSLUG1_R_SPR,
+  think, false, ps_none, 0, 0, 0,
   T_Projectile, NULL, sub_21dc0, &s_188};
 
 statetype far s_191 = { /* 32a30 */
-  267, 271, step, false, ps_tofloor, 10, 0, 0,
+  BOMB_WAIT_L_SPR, BOMB_WAIT_R_SPR,
+  step, false, ps_tofloor, 10, 0, 0,
   sub_21f41, NULL, R_Draw, &s_191};
 
 statetype far s_192 = { /* 32a50 */
-  268, 272, stepthink, false, ps_none, 4, 0, 0,
+  BOMB_JUMP1_L_SPR, BOMB_JUMP1_R_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
   T_Projectile, NULL, R_Draw, &s_193};
 
 statetype far s_193 = { /* 32a70 */
-  269, 273, stepthink, false, ps_none, 4, 0, 0,
+  BOMB_JUMP2_L_SPR, BOMB_JUMP2_R_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
   T_Projectile, NULL, sub_21ffd, &s_194};
 
 statetype far s_194 = { /* 32a90 */
-  270, 274, stepthink, false, ps_none, 0, 0, 0,
+  BOMB_JUMP3_L_SPR, BOMB_JUMP3_R_SPR,
+  stepthink, false, ps_none, 0, 0, 0,
   T_Projectile, NULL, sub_21ffd, &s_194};
 
 statetype far s_195 = { /* 32ab0 */
-  285, 289, step, false, ps_tofloor, 7, 128, 0,
+  FIREIMP_WALK1_L_SPR, FIREIMP_WALK1_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   sub_220e0, NULL, sub_22148, &s_196};
 
 statetype far s_196 = { /* 32ad0 */
-  286, 290, step, false, ps_tofloor, 7, 128, 0,
+  FIREIMP_WALK2_L_SPR, FIREIMP_WALK2_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   NULL, NULL, sub_22148, &s_197};
 
 statetype far s_197 = { /* 32af0 */
-  287, 291, step, false, ps_tofloor, 7, 128, 0,
+  FIREIMP_WALK3_L_SPR, FIREIMP_WALK3_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   NULL, NULL, sub_22148, &s_198};
 
 statetype far s_198 = { /* 32b10 */
-  288, 292, step, false, ps_tofloor, 7, 128, 0,
+  FIREIMP_WALK4_L_SPR, FIREIMP_WALK4_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   NULL, NULL, sub_22148, &s_195};
 
 statetype far s_199 = { /* 32b30 */
-  113, 113, stepthink, false, ps_tofloor, 7, 128, 0,
+  RUNNING_FIRE1_SPR, RUNNING_FIRE1_SPR,
+  stepthink, false, ps_tofloor, 7, 128, 0,
   NULL, NULL, sub_22148, &s_200};
 
 statetype far s_200 = { /* 32b50 */
-  114, 114, stepthink, false, ps_tofloor, 7, 128, 0,
+  RUNNING_FIRE2_SPR, RUNNING_FIRE2_SPR,
+  stepthink, false, ps_tofloor, 7, 128, 0,
   sub_22126, NULL, sub_22148, &s_199};
 
 statetype far s_201 = { /* 32b70 */
-  293, 293, stepthink, false, ps_tofloor, 50, 0, 0,
+  FIREIMP_STAND_SPR, FIREIMP_STAND_SPR,
+  stepthink, false, ps_tofloor, 50, 0, 0,
   NULL, NULL, R_Draw, &s_195};
 
 statetype far s_202 = { /* 32b90 */
-  288, 292, think, false, ps_none, 0, 0, 0,
+  FIREIMP_WALK4_L_SPR, FIREIMP_WALK4_R_SPR,
+  think, false, ps_none, 0, 0, 0,
   T_Projectile, NULL, sub_22213, NULL};
 
 statetype far s_203 = { /* 32bb0 */
-  323, 327, step, false, ps_tofloor, 7, 128, 0,
+  HEDGEHOG_ROLL1_L_SPR, HEDGEHOG_ROLL1_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   sub_222f6, NULL, sub_22392, &s_204};
 
 statetype far s_204 = { /* 32bd0 */
-  324, 328, step, false, ps_tofloor, 7, 128, 0,
+  HEDGEHOG_ROLL2_L_SPR, HEDGEHOG_ROLL2_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   NULL, NULL, sub_22392, &s_205};
 
 statetype far s_205 = { /* 32bf0 */
-  325, 329, step, false, ps_tofloor, 7, 128, 0,
+  HEDGEHOG_ROLL3_L_SPR, HEDGEHOG_ROLL3_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   NULL, NULL, sub_22392, &s_206};
 
 statetype far s_206 = { /* 32c10 */
-  326, 330, step, false, ps_tofloor, 7, 128, 0,
+  HEDGEHOG_ROLL4_L_SPR, HEDGEHOG_ROLL4_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
   NULL, NULL, sub_22392, &s_203};
 
 statetype far s_207 = { /* 32c30 */
-  322, 321, stepthink, false, ps_tofloor, 25, 0, 0,
+  REDGEHOG_STAND_L_SPR, HEDGEHOG_STAND_R_SPR,
+  stepthink, false, ps_tofloor, 25, 0, 0,
   sub_2233c, NULL, sub_22392, &s_207};
 
 

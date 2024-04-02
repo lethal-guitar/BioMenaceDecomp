@@ -124,167 +124,208 @@ statetype far s_score = { /* 30d00 */
   NULL, NULL, NULL, NULL};
 
 statetype far s_bulletimpact1 = { /* 30d20 */
-  129, 129, step, false, ps_none, 5, 0, 0,
+  BULLET_IMPACT1_SPR, BULLET_IMPACT1_SPR,
+  step, false, ps_none, 5, 0, 0,
   NULL, NULL, R_Draw, &s_bulletimpact2};
 
 statetype far s_bulletimpact2 = { /* 30d40 */
-  130, 130, step, false, ps_none, 5, 0, 0,
+  BULLET_IMPACT2_SPR, BULLET_IMPACT2_SPR,
+  step, false, ps_none, 5, 0, 0,
   NULL, NULL, R_Draw, &s_bulletimpact3};
 
 statetype far s_bulletimpact3 = { /* 30d60 */
-  131, 131, step, false, ps_none, 5, 0, 0,
+  BULLET_IMPACT3_SPR, BULLET_IMPACT3_SPR,
+  step, false, ps_none, 5, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
 statetype far s_gib_bone1 = { /* 30d80 */
-  134, 134, stepthink, false, ps_none, 6, 0, 0,
+  GIBS_BONE1_SPR, GIBS_BONE1_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_gib_bone2};
 
 statetype far s_gib_bone2 = { /* 30da0 */
-  135, 135, stepthink, false, ps_none, 6, 0, 0,
+  GIBS_BONE2_SPR, GIBS_BONE2_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_gib_bone1};
 
 statetype far s_gib_eyeball1 = { /* 30dc0 */
-  136, 136, stepthink, false, ps_none, 6, 0, 0,
+  GIBS_EYEBALL1_SPR, GIBS_EYEBALL1_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_gib_eyeball2};
 
 statetype far s_gib_eyeball2 = { /* 30de0 */
-  137, 137, stepthink, false, ps_none, 6, 0, 0,
+  GIBS_EYEBALL2_SPR, GIBS_EYEBALL2_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_gib_eyeball1};
 
 statetype far s_gib_flesh1 = { /* 30e00 */
-  138, 138, stepthink, false, ps_none, 6, 0, 0,
+  GIBS_FLESH1_SPR, GIBS_FLESH1_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_gib_flesh2};
 
 statetype far s_gib_flesh2 = { /* 30e20 */
-  139, 139, stepthink, false, ps_none, 6, 0, 0,
+  GIBS_FLESH2_SPR, GIBS_FLESH2_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_gib_flesh1};
 
 statetype far s_gibs_on_floor = { /* 30e40 */
-  132, 133, stepthink, false, ps_none, 100, 0, 0,
+  GIBS1_SPR, GIBS2_SPR,
+  stepthink, false, ps_none, 100, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
 statetype far s_metal_debris1 = { /* 30e60 */
-  146, 150, stepthink, false, ps_none, 8, 0, 0,
+  METAL_DEBRIS1_SPR, METAL_DEBRIS5_SPR,
+  stepthink, false, ps_none, 8, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_metal_debris2};
 
 statetype far s_metal_debris2 = { /* 30e80 */
-  147, 151, stepthink, false, ps_none, 8, 0, 0,
+  METAL_DEBRIS2_SPR, METAL_DEBRIS6_SPR,
+  stepthink, false, ps_none, 8, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_metal_debris3};
 
 statetype far s_metal_debris3 = { /* 30ea0 */
-  148, 152, stepthink, false, ps_none, 8, 0, 0,
+  METAL_DEBRIS3_SPR, METAL_DEBRIS7_SPR,
+  stepthink, false, ps_none, 8, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_metal_debris4};
 
 statetype far s_metal_debris4 = { /* 30ec0 */
-  149, 153, stepthink, false, ps_none, 8, 0, 0,
+  METAL_DEBRIS4_SPR, METAL_DEBRIS8_SPR,
+  stepthink, false, ps_none, 8, 0, 0,
   T_Projectile, NULL, R_Chunk, &s_metal_debris1};
 
 statetype far s_metal_debris_on_floor = { /* 30ee0 */
-  149, 153, stepthink, false, ps_none, 100, 0, 0,
+  METAL_DEBRIS4_SPR, METAL_DEBRIS8_SPR,
+  stepthink, false, ps_none, 100, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
 statetype far s_fireball1 = { /* 30f00 */
-  121, 125, stepthink, false, ps_none, 6, 0, 0,
+  FIREBALL1_SPR, FIREBALL5_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, C_Fireball, R_Fireball, &s_fireball2};
 
 statetype far s_fireball2 = { /* 30f20 */
-  122, 126, stepthink, false, ps_none, 6, 0, 0,
+  FIREBALL2_SPR, FIREBALL6_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, C_Fireball, R_Fireball, &s_fireball3};
 
 statetype far s_fireball3 = { /* 30f40 */
-  123, 127, stepthink, false, ps_none, 6, 0, 0,
+  FIREBALL3_SPR, FIREBALL7_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, C_Fireball, R_Fireball, &s_fireball4};
 
 statetype far s_fireball4 = { /* 30f60 */
-  124, 128, stepthink, false, ps_none, 6, 0, 0,
+  FIREBALL4_SPR, FIREBALL8_SPR,
+  stepthink, false, ps_none, 6, 0, 0,
   T_Projectile, C_Fireball, R_Fireball, &s_fireball1};
 
 statetype far s_grenade1 = { /* 30f80 */
-  105, 105, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_GREEN1_SPR, GRENADE_GREEN1_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_grenade2};
 
 statetype far s_grenade2 = { /* 30fa0 */
-  106, 106, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_GREEN2_SPR, GRENADE_GREEN2_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_grenade3};
 
 statetype far s_grenade3 = { /* 30fc0 */
-  107, 107, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_GREEN3_SPR, GRENADE_GREEN3_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_grenade4};
 
 statetype far s_grenade4 = { /* 30fe0 */
-  108, 108, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_GREEN4_SPR, GRENADE_GREEN4_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_grenade1};
 
 statetype far s_redgrenade1 = { /* 31000 */
-  109, 109, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_RED1_SPR, GRENADE_RED1_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_redgrenade2};
 
 statetype far s_redgrenade2 = { /* 31020 */
-  110, 110, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_RED2_SPR, GRENADE_RED2_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_redgrenade3};
 
 statetype far s_redgrenade3 = { /* 31040 */
-  111, 111, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_RED3_SPR, GRENADE_RED3_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_redgrenade4};
 
 statetype far s_redgrenade4 = { /* 31060 */
-  112, 112, stepthink, false, ps_none, 10, 0, 0,
+  GRENADE_RED4_SPR, GRENADE_RED4_SPR,
+  stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, C_Grenade, R_Grenade, &s_redgrenade1};
 
 statetype far s_grenadeexplosion1 = { /* 31080 */
-  115, 115, step, false, ps_none, 10, 0, 0,
+  GRENADE_EXPLOSION1_SPR, GRENADE_EXPLOSION1_SPR,
+  step, false, ps_none, 10, 0, 0,
   T_GrenadeExplosion, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion2};
 
 statetype far s_grenadeexplosion2 = { /* 310a0 */
-  116, 116, step, false, ps_none, 10, 0, 0,
+  GRENADE_EXPLOSION2_SPR, GRENADE_EXPLOSION2_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion3};
 
 statetype far s_grenadeexplosion3 = { /* 310c0 */
-  117, 117, step, false, ps_none, 10, 0, 0,
+  GRENADE_EXPLOSION3_SPR, GRENADE_EXPLOSION3_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion4};
 
 statetype far s_grenadeexplosion4 = { /* 310e0 */
-  118, 118, step, false, ps_none, 10, 0, 0,
+  GRENADE_EXPLOSION4_SPR, GRENADE_EXPLOSION4_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion5};
 
 statetype far s_grenadeexplosion5 = { /* 31100 */
-  119, 119, step, false, ps_none, 10, 0, 0,
+  GRENADE_EXPLOSION5_SPR, GRENADE_EXPLOSION5_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, C_GrenadeExplosion, R_Draw, &s_grenadeexplosion6};
 
 statetype far s_grenadeexplosion6 = { /* 31120 */
-  120, 120, step, false, ps_none, 10, 0, 0,
+  GRENADE_EXPLOSION6_SPR, GRENADE_EXPLOSION6_SPR,
+  step, false, ps_none, 10, 0, 0,
   NULL, C_GrenadeExplosion, R_Draw, NULL};
 
 statetype far s_robopalrocket1 = { /* 31140 */
-  393, 391, slide, false, ps_none, 6, 64, 64,
+  ROBOPAL_SHOT1_L_SPR, ROBOPAL_SHOT1_R_SPR,
+  slide, false, ps_none, 6, 64, 64,
   T_Shot, C_Shot, R_Shot, &s_robopalrocket2};
 
 statetype far s_robopalrocket2 = { /* 31160 */
-  394, 392, slide, false, ps_none, 6, 64, 64,
+  ROBOPAL_SHOT2_L_SPR, ROBOPAL_SHOT2_R_SPR,
+  slide, false, ps_none, 6, 64, 64,
   T_Shot, C_Shot, R_Shot, &s_robopalrocket1};
 
 statetype far s_lasershot = { /* 31180 */
-  63, 63, slide, false, ps_none, 6, 64, 64,
+  LASER_BLAST_RED_SPR, LASER_BLAST_RED_SPR,
+  slide, false, ps_none, 6, 64, 64,
   T_Shot, C_LaserShot, R_Shot, &s_lasershot};
 
 statetype far s_superplasmabolt = { /* 311a0 */
-  65, 64, slide, false, ps_none, 2, 64, 64,
+  SUPER_BLAST_L_SPR, SUPER_BLAST_R_SPR,
+  slide, false, ps_none, 2, 64, 64,
   T_Shot, C_LaserShot, R_SuperPlasmaBolt, &s_superplasmabolt};
 
 statetype far s_rocketimpact1 = { /* 311c0 */
-  395, 395, step, false, ps_none, 12, 0, 0,
+  ROCKET_IMPACT1_SPR, ROCKET_IMPACT1_SPR,
+  step, false, ps_none, 12, 0, 0,
   NULL, NULL, R_Draw, &s_rocketimpact2};
 
 statetype far s_rocketimpact2 = { /* 311e0 */
-  396, 396, step, false, ps_none, 12, 0, 0,
+  ROCKET_IMPACT2_SPR, ROCKET_IMPACT2_SPR,
+  step, false, ps_none, 12, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
 statetype far s_plasmaboltimpact1 = { /* 31200 */
-  57, 57, step, false, ps_none, 12, 0, 0,
+  SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
+  step, false, ps_none, 12, 0, 0,
   NULL, NULL, R_Draw, &s_plasmaboltimpact2};
 
 statetype far s_plasmaboltimpact2 = { /* 31220 */
-  58, 58, step, false, ps_none, 12, 0, 0,
+  SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
+  step, false, ps_none, 12, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
 
