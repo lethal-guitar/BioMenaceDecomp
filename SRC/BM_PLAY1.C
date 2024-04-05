@@ -852,7 +852,7 @@ void SnakeInteractThink(objtype* ob)
 
       for (otherobj = player->next; otherobj; otherobj = otherobj->next)
       {
-        if (otherobj->obclass == 13)
+        if (otherobj->obclass == drmangleobj)
         {
           goto found;
         }
@@ -867,7 +867,7 @@ found:
       {
         for (otherobj = player->next; otherobj; otherobj = otherobj->next)
         {
-          if (otherobj->obclass == 13)
+          if (otherobj->obclass == drmangleobj)
           {
             RemoveObj(otherobj);
             return;
@@ -878,7 +878,7 @@ found:
       {
         for (otherobj = player->next; otherobj; otherobj = otherobj->next)
         {
-          if (otherobj->obclass == 13)
+          if (otherobj->obclass == drmangleobj)
           {
             otherobj->state = &s_167;
             otherobj->shootable = true;
@@ -1426,7 +1426,8 @@ void SnakeDeadThink(objtype* ob)
 
 void SnakeContactShielded(objtype* ob, objtype* hit)
 {
-  if (hit->shootable && !hit->dmgflash && hit->obclass != 21 && hit->obclass != 27)
+  if (hit->shootable && !hit->dmgflash && hit->obclass != pushblockobj &&
+      hit->obclass != crushblockobj)
   {
     DealDamage(hit, 5);
     SD_PlaySound(7);
@@ -1450,7 +1451,7 @@ void SnakeStandThink(objtype* ob)
   if (word_391CA > 0)
   {
     SD_PlaySound(26);
-    ob->obclass = 5;
+    ob->obclass = fireballobj;
 
     word_391CA--;
     if (word_391CA <= 0)

@@ -18,989 +18,1403 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include "BM_ACT.H"
 #include "BM_DEF.H"
 
 // PLACEHOLDER
 
 Sint16 TABLE7[] = {
-  700, 700, 350, 175, 140, 144, 154, 156, 158, 160,
+  700, 700, 350, 175
+};
+
+
+Sint16 pickupshapenums[] = {
+  140, 144, 154, 156, 158, 160,
   162, 164, 195, 197, 193, 185, 187, 189, 191, 209, 199,
   200, 201, 202, 203, 204, 205, 206, 207, 208, 166, 168,
   170, 172, 174, 176, 178, 211, 142, 217, 219, 215, 180
 };
 
+
 Sint16 word_399F8 = -2;
 Sint16 word_399FA = 0;
 
-void placeholder2(void)
-{
-  "Continue from beacons when you get killed.\n";
-}
 
-extern statetype far s_128;
-extern statetype far s_129;
-extern statetype far s_130;
-extern statetype far s_131;
-extern statetype far s_132;
-extern statetype far s_133;
-extern statetype far s_134;
-extern statetype far s_135;
-extern statetype far s_136;
-extern statetype far s_137;
-extern statetype far s_138;
-extern statetype far s_139;
-extern statetype far s_140;
-extern statetype far s_141;
-extern statetype far s_142;
-extern statetype far s_143;
-extern statetype far s_144;
-extern statetype far s_145;
-extern statetype far s_146;
-extern statetype far s_147;
-extern statetype far s_148;
-extern statetype far s_149;
-extern statetype far s_150;
-extern statetype far s_151;
-extern statetype far s_152;
-extern statetype far s_153;
-extern statetype far s_154;
-extern statetype far s_155;
-extern statetype far s_156;
-extern statetype far s_157;
-extern statetype far s_158;
-extern statetype far s_159;
-extern statetype far s_160;
-extern statetype far s_161;
-extern statetype far s_162;
-extern statetype far s_163;
-extern statetype far s_164;
-extern statetype far s_165;
-extern statetype far s_166;
-extern statetype far s_167;
-extern statetype far s_168;
-extern statetype far s_169;
-extern statetype far s_170;
-extern statetype far s_171;
-extern statetype far s_172;
-extern statetype far s_173;
-extern statetype far s_174;
-extern statetype far s_175;
-extern statetype far s_176;
-extern statetype far s_177;
-extern statetype far s_178;
-extern statetype far s_179;
-extern statetype far s_180;
-extern statetype far s_181;
-extern statetype far s_182;
-extern statetype far s_183;
-extern statetype far s_184;
-extern statetype far s_185;
-extern statetype far s_186;
-extern statetype far s_187;
-extern statetype far s_188;
-extern statetype far s_189;
-extern statetype far s_190;
-extern statetype far s_191;
-extern statetype far s_192;
-extern statetype far s_193;
-extern statetype far s_194;
-extern statetype far s_195;
-extern statetype far s_196;
-extern statetype far s_197;
-extern statetype far s_198;
-extern statetype far s_199;
-extern statetype far s_200;
-extern statetype far s_201;
-extern statetype far s_202;
-extern statetype far s_203;
-extern statetype far s_204;
-extern statetype far s_205;
-extern statetype far s_206;
-extern statetype far s_207;
-extern statetype far s_208;
-extern statetype far s_209;
-extern statetype far s_210;
-extern statetype far s_211;
-extern statetype far s_212;
-extern statetype far s_213;
-extern statetype far s_214;
-extern statetype far s_215;
-extern statetype far s_216;
-extern statetype far s_217;
-extern statetype far s_218;
-extern statetype far s_219;
-extern statetype far s_220;
-extern statetype far s_221;
-extern statetype far s_222;
-extern statetype far s_223;
-extern statetype far s_224;
-extern statetype far s_225;
-extern statetype far s_226;
-extern statetype far s_227;
-extern statetype far s_228;
-extern statetype far s_229;
-extern statetype far s_230;
-extern statetype far s_231;
-extern statetype far s_232;
-extern statetype far s_233;
-extern statetype far s_234;
-extern statetype far s_235;
-extern statetype far s_236;
-extern statetype far s_237;
-extern statetype far s_238;
-extern statetype far s_239;
-extern statetype far s_240;
-extern statetype far s_241;
-extern statetype far s_242;
-extern statetype far s_243;
-extern statetype far s_244;
-extern statetype far s_245;
-extern statetype far s_246;
-extern statetype far s_247;
-extern statetype far s_248;
-extern statetype far s_249;
-extern statetype far s_250;
-extern statetype far s_251;
-extern statetype far s_252;
-extern statetype far s_253;
-extern statetype far s_254;
-extern statetype far s_255;
-extern statetype far s_256;
-extern statetype far s_257;
-extern statetype far s_258;
-extern statetype far s_259;
-extern statetype far s_260;
-extern statetype far s_261;
-extern statetype far s_262;
-extern statetype far s_263;
-extern statetype far s_264;
-extern statetype far s_265;
-extern statetype far s_266;
-extern statetype far s_267;
-extern statetype far s_268;
-extern statetype far s_269;
-extern statetype far s_270;
-extern statetype far s_271;
-extern statetype far s_272;
-extern statetype far s_273;
-extern statetype far s_274;
-extern statetype far s_275;
-extern statetype far s_276;
-extern statetype far s_277;
-extern statetype far s_278;
-extern statetype far s_279;
-extern statetype far s_280;
-extern statetype far s_281;
-extern statetype far s_282;
-extern statetype far s_283;
-extern statetype far s_284;
-extern statetype far s_285;
-extern statetype far s_286;
-extern statetype far s_287;
-extern statetype far s_288;
-extern statetype far s_289;
-extern statetype far s_290;
-extern statetype far s_291;
-extern statetype far s_292;
-extern statetype far s_293;
-extern statetype far s_294;
-extern statetype far s_295;
-extern statetype far s_296;
-extern statetype far s_297;
-extern statetype far s_298;
-extern statetype far s_299;
-extern statetype far s_300;
-extern statetype far s_301;
-extern statetype far s_302;
-extern statetype far s_303;
-extern statetype far s_304;
-extern statetype far s_305;
-extern statetype far s_306;
-extern statetype far s_307;
-extern statetype far s_308;
+void R_WalkCeiling();
+void T_Pickup();
+void T_PickupRise();
+void T_RoboPal();
+void R_RoboPal();
+void RoboPalTeleport_DoWarp();
+void T_Slug();
+void T_GhostlySlug();
+void T_RunningFire();
+void R_SlugAttack();
+void R_GhostlySlugAttack();
+void R_RunningFire();
+void T_Bomb();
+void R_Bomb();
+void T_FireImp();
+void T_FireImpFireForm();
+void R_FireImp();
+void R_FireImpJumping();
+void T_HedgeHogRolling();
+void T_HedgeHogWaiting();
+void T_HedgeHogWaiting2();
+void R_HedgeHog();
+void R_HedgeHogJumping();
+void T_Brawler();
+void T_CeilingWalkerOnCeiling();
+void T_CeilingWalkerOnFloor();
+void R_CeilingWalkerFalling();
+void T_CrawlingSlime();
 
 
-void sub_1fca6();
-void sub_2018a();
-void sub_2041b();
-void sub_20628();
-void sub_2068c();
-void sub_20739();
-void sub_2080e();
-void sub_20838();
-void sub_2089a();
-void sub_2097e();
-void sub_20992();
-void sub_20a42();
-void sub_20b93();
-void sub_20c43();
-void sub_20e1f();
-void sub_20f20();
-void sub_2106d();
-void sub_2117b();
-void sub_21324();
-void sub_2134e();
-void sub_213a2();
-void sub_21639();
-void sub_21654();
-void sub_21704();
-void sub_218a8();
-void sub_219ab();
-void sub_21b2c();
-void sub_21bfb();
-void sub_21ce4();
-void sub_21d67();
-void sub_21dc0();
-void sub_21e19();
-void sub_21f41();
-void sub_21ffd();
-void sub_220e0();
-void sub_22126();
-void sub_22148();
-void sub_22213();
-void sub_222f6();
-void sub_2233c();
-void sub_2235e();
-void sub_22392();
-void sub_2245d();
-void sub_22540();
-void sub_2268b();
-void sub_2274a();
-void sub_227bc();
-void sub_228aa();
-void sub_2291e();
-void sub_22b98();
-void sub_22be7();
-void sub_22d16();
-void sub_22db0();
-void sub_22e5c();
-void sub_22f1a();
-void sub_22f3f();
-void sub_22fa5();
-void sub_230fe();
-void sub_23188();
-void sub_23223();
-void sub_23254();
-void sub_2334c();
-void sub_23395();
-void sub_233de();
-void sub_234b7();
-void sub_234ed();
-void sub_2351f();
-void sub_235c2();
-void sub_235e1();
-void sub_23600();
-void sub_2365a();
-void sub_2370e();
-void sub_237bf();
-void sub_2390f();
-void sub_23995();
-void sub_239b3();
-void sub_23aa2();
-void sub_23b07();
-void sub_23d3f();
-void sub_23dc4();
-void sub_23f58();
-void sub_23fba();
-void sub_24001();
-void sub_24048();
-void sub_24067();
-void sub_24086();
-void sub_240d4();
-void sub_241cb();
-void sub_242b1();
-void sub_24372();
-void sub_24446();
+statetype far s_pickup1 = { /* 327b0 */
+  0, 0, step, false, ps_none, 20, 0, 0,
+  T_Pickup, NULL, R_Draw, &s_pickup2};
 
-statetype far s_208 = { /* 32c50 */
-  REDGEHOG_STAND_L_SPR, HEDGEHOG_STAND_R_SPR,
-  stepthink, false, ps_tofloor, 75, 0, 0,
-  sub_2235e, NULL, R_Draw, &s_208};
+statetype far s_pickup2 = { /* 327d0 */
+  0, 0, step, false, ps_none, 20, 0, 0,
+  T_Pickup, NULL, R_Draw, &s_pickup1};
 
-statetype far s_209 = { /* 32c70 */
-  REDGEHOG_STAND_L_SPR, HEDGEHOG_STAND_R_SPR,
+statetype far s_pickuprise = { /* 327f0 */
+  0, 0, slide, false, ps_none, 40, 0, 8,
+  T_PickupRise, NULL, R_Draw, NULL};
+
+statetype far s_robopalwait1 = { /* 32810 */
+  ROBOPAL1_SPR, ROBOPAL1_SPR,
+  step, false, ps_none, 15, 0, 0,
+  NULL, NULL, R_Draw, &s_robopalwait2};
+
+statetype far s_robopalwait2 = { /* 32830 */
+  ROBOPAL2_SPR, ROBOPAL2_SPR,
+  step, false, ps_none, 15, 0, 0,
+  NULL, NULL, R_Draw, &s_robopalwait1};
+
+statetype far s_robopalactive1 = { /* 32850 */
+  ROBOPAL1_SPR, ROBOPAL1_SPR,
+  stepthink, false, ps_none, 5, 0, 0,
+  T_RoboPal, NULL, R_RoboPal, &s_robopalactive2};
+
+statetype far s_robopalactive2 = { /* 32870 */
+  ROBOPAL2_SPR, ROBOPAL2_SPR,
+  stepthink, false, ps_none, 5, 0, 0,
+  T_RoboPal, NULL, R_RoboPal, &s_robopalactive1};
+
+statetype far s_robopal_teleport1 = { /* 32890 */
+  ROBOPAL_TELEPORT1_SPR, ROBOPAL_TELEPORT1_SPR,
+  step, false, ps_none, 25, 0, 0,
+  NULL, NULL, R_Draw, &s_robopal_teleport2};
+
+statetype far s_robopal_teleport2 = { /* 328b0 */
+  ROBOPAL_TELEPORT2_SPR, ROBOPAL_TELEPORT2_SPR,
+  step, false, ps_none, 25, 0, 0,
+  NULL, NULL, R_Draw, &s_robopal_teleport3};
+
+statetype far s_robopal_teleport3 = { /* 328d0 */
+  -1, -1, step, false, ps_none, 1, 0, 0,
+  RoboPalTeleport_DoWarp, NULL, R_Draw, &s_robopal_teleport4};
+
+statetype far s_robopal_teleport4 = { /* 328f0 */
+  ROBOPAL_TELEPORT2_SPR, ROBOPAL_TELEPORT2_SPR,
+  step, false, ps_none, 25, 0, 0,
+  NULL, NULL, R_Draw, &s_robopal_teleport5};
+
+statetype far s_robopal_teleport5 = { /* 32910 */
+  ROBOPAL_TELEPORT1_SPR, ROBOPAL_TELEPORT1_SPR,
+  step, false, ps_none, 25, 0, 0,
+  NULL, NULL, R_Draw, &s_robopalactive1};
+
+statetype far s_slug_walk1 = { /* 32930 */
+  SLUG_WALK1_L_SPR, SLUG_WALK1_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
+  T_Slug, NULL, R_Walk, &s_slug_walk2};
+
+statetype far s_slug_walk2 = { /* 32950 */
+  SLUG_WALK2_L_SPR, SLUG_WALK2_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
+  T_Slug, NULL, R_Walk, &s_slug_walk1};
+
+statetype far s_slug_attack = { /* 32970 */
+  SLUG_ATTACK_L_SPR, SLUG_ATTACK_R_SPR,
   think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_2245d, NULL};
+  T_Projectile, NULL, R_SlugAttack, &s_slug_walk1};
 
-statetype far s_210 = { /* 32c90 */
+statetype far s_running_fire1 = { /* 32990 */
+  RUNNING_FIRE1_SPR, RUNNING_FIRE1_SPR,
+  step, false, ps_tofloor, 5, 64, 0,
+  T_RunningFire, C_GrenadeExplosion, R_RunningFire, &s_running_fire2};
+
+statetype far s_running_fire2 = { /* 329b0 */
+  RUNNING_FIRE2_SPR, RUNNING_FIRE2_SPR,
+  step, false, ps_tofloor, 5, 64, 0,
+  T_RunningFire, C_GrenadeExplosion, R_RunningFire, &s_running_fire1};
+
+statetype far s_ghostlyslug1 = { /* 329d0 */
+  GHOSTSLUG1_L_SPR, GHOSTSLUG1_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
+  T_GhostlySlug, NULL, R_Walk, &s_ghostlyslug2};
+
+statetype far s_ghostlyslug2 = { /* 329f0 */
+  GHOSTSLUG2_L_SPR, GHOSTSLUG2_R_SPR,
+  step, false, ps_tofloor, 10, 128, 0,
+  T_GhostlySlug, NULL, R_Walk, &s_ghostlyslug1};
+
+statetype far s_ghostlyslug_attack = { /* 32a10 */
+  GHOSTSLUG1_L_SPR, GHOSTSLUG1_R_SPR,
+  think, false, ps_none, 0, 0, 0,
+  T_Projectile, NULL, R_GhostlySlugAttack, &s_ghostlyslug1};
+
+statetype far s_bomb_idle = { /* 32a30 */
+  BOMB_WAIT_L_SPR, BOMB_WAIT_R_SPR,
+  step, false, ps_tofloor, 10, 0, 0,
+  T_Bomb, NULL, R_Draw, &s_bomb_idle};
+
+statetype far s_bomb_attack1 = { /* 32a50 */
+  BOMB_JUMP1_L_SPR, BOMB_JUMP1_R_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
+  T_Projectile, NULL, R_Draw, &s_bomb_attack2};
+
+statetype far s_bomb_attack2 = { /* 32a70 */
+  BOMB_JUMP2_L_SPR, BOMB_JUMP2_R_SPR,
+  stepthink, false, ps_none, 4, 0, 0,
+  T_Projectile, NULL, R_Bomb, &s_bomb_attack3};
+
+statetype far s_bomb_attack3 = { /* 32a90 */
+  BOMB_JUMP3_L_SPR, BOMB_JUMP3_R_SPR,
+  stepthink, false, ps_none, 0, 0, 0,
+  T_Projectile, NULL, R_Bomb, &s_bomb_attack3};
+
+statetype far s_fireimp_walk1 = { /* 32ab0 */
+  FIREIMP_WALK1_L_SPR, FIREIMP_WALK1_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  T_FireImp, NULL, R_FireImp, &s_fireimp_walk2};
+
+statetype far s_fireimp_walk2 = { /* 32ad0 */
+  FIREIMP_WALK2_L_SPR, FIREIMP_WALK2_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  NULL, NULL, R_FireImp, &s_fireimp_walk3};
+
+statetype far s_fireimp_walk3 = { /* 32af0 */
+  FIREIMP_WALK3_L_SPR, FIREIMP_WALK3_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  NULL, NULL, R_FireImp, &s_fireimp_walk4};
+
+statetype far s_fireimp_walk4 = { /* 32b10 */
+  FIREIMP_WALK4_L_SPR, FIREIMP_WALK4_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  NULL, NULL, R_FireImp, &s_fireimp_walk1};
+
+statetype far s_fireimp_fireform1 = { /* 32b30 */
+  RUNNING_FIRE1_SPR, RUNNING_FIRE1_SPR,
+  stepthink, false, ps_tofloor, 7, 128, 0,
+  NULL, NULL, R_FireImp, &s_fireimp_fireform2};
+
+statetype far s_fireimp_fireform2 = { /* 32b50 */
+  RUNNING_FIRE2_SPR, RUNNING_FIRE2_SPR,
+  stepthink, false, ps_tofloor, 7, 128, 0,
+  T_FireImpFireForm, NULL, R_FireImp, &s_fireimp_fireform1};
+
+statetype far s_fireimp_stand = { /* 32b70 */
+  FIREIMP_STAND_SPR, FIREIMP_STAND_SPR,
+  stepthink, false, ps_tofloor, 50, 0, 0,
+  NULL, NULL, R_Draw, &s_fireimp_walk1};
+
+statetype far s_fireimp_jumping = { /* 32b90 */
+  FIREIMP_WALK4_L_SPR, FIREIMP_WALK4_R_SPR,
+  think, false, ps_none, 0, 0, 0,
+  T_Projectile, NULL, R_FireImpJumping, NULL};
+
+statetype far s_hedgehog_roll1 = { /* 32bb0 */
+  HEDGEHOG_ROLL1_L_SPR, HEDGEHOG_ROLL1_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  T_HedgeHogRolling, NULL, R_HedgeHog, &s_hedgehog_roll2};
+
+statetype far s_hedgehog_roll2 = { /* 32bd0 */
+  HEDGEHOG_ROLL2_L_SPR, HEDGEHOG_ROLL2_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  NULL, NULL, R_HedgeHog, &s_hedgehog_roll3};
+
+statetype far s_hedgehog_roll3 = { /* 32bf0 */
+  HEDGEHOG_ROLL3_L_SPR, HEDGEHOG_ROLL3_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  NULL, NULL, R_HedgeHog, &s_hedgehog_roll4};
+
+statetype far s_hedgehog_roll4 = { /* 32c10 */
+  HEDGEHOG_ROLL4_L_SPR, HEDGEHOG_ROLL4_R_SPR,
+  step, false, ps_tofloor, 7, 128, 0,
+  NULL, NULL, R_HedgeHog, &s_hedgehog_roll1};
+
+statetype far s_hedgehog_wait1 = { /* 32c30 */
+  HEDGEHOG_STAND_L_SPR, HEDGEHOG_STAND_R_SPR,
+  stepthink, false, ps_tofloor, 25, 0, 0,
+  T_HedgeHogWaiting, NULL, R_HedgeHog, &s_hedgehog_wait1};
+
+statetype far s_hedgehog_wait2 = { /* 32c50 */
+  HEDGEHOG_STAND_L_SPR, HEDGEHOG_STAND_R_SPR,
+  stepthink, false, ps_tofloor, 75, 0, 0,
+  T_HedgeHogWaiting2, NULL, R_Draw, &s_hedgehog_wait2};
+
+statetype far s_hedgehog_jumping = { /* 32c70 */
+  HEDGEHOG_STAND_L_SPR, HEDGEHOG_STAND_R_SPR,
+  think, false, ps_none, 0, 0, 0,
+  T_Projectile, NULL, R_HedgeHogJumping, NULL};
+
+statetype far s_brawler_stand = { /* 32c90 */
   BRAWLER_STAND_L_SPR, BRAWLER_STAND_R_SPR,
   step, true, ps_tofloor, 75, 0, 0,
-  NULL, NULL, R_Draw, &s_211};
+  NULL, NULL, R_Draw, &s_brawler_walk1};
 
-statetype far s_211 = { /* 32cb0 */
+statetype far s_brawler_walk1 = { /* 32cb0 */
   BRAWLER_WALK1_L_SPR, BRAWLER_WALK1_R_SPR,
   stepthink, false, ps_tofloor, 10, 64, 0,
-  sub_22540, NULL, R_Walk, &s_212};
+  T_Brawler, NULL, R_Walk, &s_brawler_walk2};
 
-statetype far s_212 = { /* 32cd0 */
+statetype far s_brawler_walk2 = { /* 32cd0 */
   BRAWLER_WALK2_L_SPR, BRAWLER_WALK2_R_SPR,
   stepthink, false, ps_tofloor, 10, 64, 0,
-  sub_22540, NULL, R_Walk, &s_213};
+  T_Brawler, NULL, R_Walk, &s_brawler_walk3};
 
-statetype far s_213 = { /* 32cf0 */
+statetype far s_brawler_walk3 = { /* 32cf0 */
   BRAWLER_WALK3_L_SPR, BRAWLER_WALK3_R_SPR,
   stepthink, false, ps_tofloor, 10, 64, 0,
-  sub_22540, NULL, R_Walk, &s_214};
+  T_Brawler, NULL, R_Walk, &s_brawler_walk4};
 
-statetype far s_214 = { /* 32d10 */
+statetype far s_brawler_walk4 = { /* 32d10 */
   BRAWLER_WALK4_L_SPR, BRAWLER_WALK4_R_SPR,
   stepthink, false, ps_tofloor, 10, 64, 0,
-  sub_22540, NULL, R_Walk, &s_211};
+  T_Brawler, NULL, R_Walk, &s_brawler_walk1};
 
-statetype far s_215 = { /* 32d30 */
+statetype far s_brawler_attack1 = { /* 32d30 */
   BRAWLER_ATTACK1_L_SPR, BRAWLER_ATTACK1_R_SPR,
   step, true, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_216};
+  NULL, NULL, R_Draw, &s_brawler_attack2};
 
-statetype far s_216 = { /* 32d50 */
+statetype far s_brawler_attack2 = { /* 32d50 */
   BRAWLER_ATTACK2_L_LPR, BRAWLER_ATTACK2_R_LPR,
   step, true, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_211};
+  NULL, NULL, R_Draw, &s_brawler_walk1};
 
-statetype far s_217 = { /* 32d70 */
+statetype far s_ceilwalker_walkceil1 = { /* 32d70 */
   CEILWALKER_WALK_CEIL1_L, CEILWALKER_WALK_CEIL1_R,
   step, false, ps_toceiling, 10, 128, 0,
-  sub_2268b, NULL, sub_213a2, &s_218};
+  T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil2};
 
-statetype far s_218 = { /* 32d90 */
+statetype far s_ceilwalker_walkceil2 = { /* 32d90 */
   CEILWALKER_WALK_CEIL2_L, CEILWALKER_WALK_CEIL2_R,
   step, false, ps_toceiling, 10, 128, 0,
-  sub_2268b, NULL, sub_213a2, &s_219};
+  T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil3};
 
-statetype far s_219 = { /* 32db0 */
+statetype far s_ceilwalker_walkceil3 = { /* 32db0 */
   CEILWALKER_WALK_CEIL3_L, CEILWALKER_WALK_CEIL3_R,
   step, false, ps_toceiling, 10, 128, 0,
-  sub_2268b, NULL, sub_213a2, &s_220};
+  T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil4};
 
-statetype far s_220 = { /* 32dd0 */
+statetype far s_ceilwalker_walkceil4 = { /* 32dd0 */
   CEILWALKER_WALK_CEIL4_L, CEILWALKER_WALK_CEIL4_R,
   step, false, ps_toceiling, 10, 128, 0,
-  sub_2268b, NULL, sub_213a2, &s_217};
+  T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil1};
 
-statetype far s_221 = { /* 32df0 */
+statetype far s_ceilwalker_walkfloor1 = { /* 32df0 */
   CEILWALKER_WALK1_L, CEILWALKER_WALK1_R,
   step, false, ps_tofloor, 6, 128, 0,
-  sub_2274a, NULL, R_Walk, &s_222};
+  T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor2};
 
-statetype far s_222 = { /* 32e10 */
+statetype far s_ceilwalker_walkfloor2 = { /* 32e10 */
   CEILWALKER_WALK2_L, CEILWALKER_WALK2_R,
   step, false, ps_tofloor, 6, 128, 0,
-  sub_2274a, NULL, R_Walk, &s_223};
+  T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor3};
 
-statetype far s_223 = { /* 32e30 */
+statetype far s_ceilwalker_walkfloor3 = { /* 32e30 */
   CEILWALKER_WALK3_L, CEILWALKER_WALK3_R,
   step, false, ps_tofloor, 6, 128, 0,
-  sub_2274a, NULL, R_Walk, &s_224};
+  T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor4};
 
-statetype far s_224 = { /* 32e50 */
+statetype far s_ceilwalker_walkfloor4 = { /* 32e50 */
   CEILWALKER_WALK4_L, CEILWALKER_WALK4_R,
   step, false, ps_tofloor, 6, 128, 0,
-  sub_2274a, NULL, R_Walk, &s_221};
+  T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor1};
 
-statetype far s_225 = { /* 32e70 */
+statetype far s_ceilwalker_falling = { /* 32e70 */
   CEILWALKER_FALL_L, CEILWALKER_FALL_R,
   think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_227bc, &s_225};
+  T_Projectile, NULL, R_CeilingWalkerFalling, &s_ceilwalker_falling};
 
-statetype far s_226 = { /* 32e90 */
+statetype far s_crawlslime1 = { /* 32e90 */
   CRAWLSLIME1_L_SPR, CRAWLSLIME1_R_SPR,
   step, true, ps_tofloor, 25, 0, 0,
-  NULL, NULL, R_Draw, &s_227};
+  NULL, NULL, R_Draw, &s_crawlslime2};
 
-statetype far s_227 = { /* 32eb0 */
+statetype far s_crawlslime2 = { /* 32eb0 */
   CRAWLSLIME1_L_SPR, CRAWLSLIME1_R_SPR,
   stepthink, false, ps_tofloor, 10, 64, 0,
-  sub_228aa, NULL, R_Walk, &s_228};
+  T_CrawlingSlime, NULL, R_Walk, &s_crawlslime3};
 
-statetype far s_228 = { /* 32ed0 */
+statetype far s_crawlslime3 = { /* 32ed0 */
   CRAWLSLIME2_L_SPR, CRAWLSLIME2_R_SPR,
   stepthink, false, ps_tofloor, 10, 64, 0,
-  sub_228aa, NULL, R_Walk, &s_227};
+  T_CrawlingSlime, NULL, R_Walk, &s_crawlslime2};
 
-statetype far s_229 = { /* 32ef0 */
+statetype far s_crawlslime_steppedon = { /* 32ef0 */
   CRAWLSLIME_STEPON_SPR, CRAWLSLIME_STEPON_SPR,
   step, true, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_226};
+  NULL, NULL, R_Draw, &s_crawlslime1};
 
-statetype far s_230 = { /* 32f10 */
-  BIG_EXPLOSION1_SPR, BIG_EXPLOSION1_SPR,
-  step, false, ps_none, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_231};
 
-statetype far s_231 = { /* 32f30 */
-  BIG_EXPLOSION2_SPR, BIG_EXPLOSION2_SPR,
-  step, false, ps_none, 12, 0, 0,
-  NULL, NULL, R_Draw, &s_232};
-
-statetype far s_232 = { /* 32f50 */
-  BIG_EXPLOSION3_SPR, BIG_EXPLOSION3_SPR,
-  step, false, ps_none, 5, 0, 0,
-  NULL, NULL, R_Draw, NULL};
-
-statetype far s_233 = { /* 32f70 */
-  TANKBOT1_SPR, TANKBOT1_SPR,
-  stepthink, false, ps_tofloor, 6, 0, 0,
-  sub_2291e, NULL, R_Draw, &s_233};
-
-statetype far s_234 = { /* 32f90 */
-  TANKBOT1_SPR, TANKBOT1_SPR,
-  step, false, ps_tofloor, 10, 0, 0,
-  sub_22b98, NULL, R_Draw, &s_234};
-
-statetype far s_235 = { /* 32fb0 */
-  TANKBOT1_SPR, TANKBOT1_SPR,
-  slide, false, ps_tofloor, 20, 8, 0,
-  NULL, NULL, R_Walk, &s_236};
-
-statetype far s_236 = { /* 32fd0 */
-  TANKBOT2_SPR, TANKBOT2_SPR,
-  slide, false, ps_tofloor, 20, 8, 0,
-  sub_22be7, NULL, R_Walk, &s_235};
-
-statetype far s_237 = { /* 32ff0 */
-  TANKBOT_SHOOT_SPR, TANKBOT_SHOOT_SPR,
-  step, false, ps_tofloor, 7, 0, 0,
-  sub_22d16, NULL, R_Draw, &s_234};
-
-statetype far s_238 = { /* 33010 */
-  TANKBOT1_SPR, TANKBOT1_SPR,
-  step, false, ps_tofloor, 7, 0, 0,
-  sub_22db0, NULL, R_Draw, &s_234};
-
-statetype far s_239 = { /* 33030 */
-  TANKBOT_SHOT_FLYING_SPR, TANKBOT_SHOT_FLYING_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, NULL, sub_22f3f, &s_239};
-
-statetype far s_240 = { /* 33050 */
-  TANKBOT_SHOT_LANDING_SPR, TANKBOT_SHOT_LANDING_SPR,
-  stepthink, false, ps_none, 5, 8, 65504,
-  NULL, NULL, sub_22fa5, &s_240};
-
-statetype far s_241 = { /* 33070 */
-  TANKBOT_BIG_SHOT_SPR, TANKBOT_BIG_SHOT_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, NULL, sub_22e5c, &s_241};
-
-statetype far s_242 = { /* 33090 */
-  SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
-  step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_243};
-
-statetype far s_243 = { /* 330b0 */
-  SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
-  step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, NULL};
-
-statetype far s_244 = { /* 330d0 */
-  SMALL_FIRE1_SPR, SMALL_FIRE1_SPR,
-  step, true, ps_tofloor, 5, 0, 0,
-  sub_22f1a, NULL, R_Draw, &s_245};
-
-statetype far s_245 = { /* 330f0 */
-  SMALL_FIRE2_SPR, SMALL_FIRE2_SPR,
-  step, true, ps_tofloor, 5, 0, 0,
-  sub_22f1a, NULL, R_Draw, &s_246};
-
-statetype far s_246 = { /* 33110 */
-  SMALL_FIRE3_SPR, SMALL_FIRE3_SPR,
-  step, true, ps_tofloor, 5, 0, 0,
-  sub_22f1a, NULL, R_Draw, &s_244};
-
-statetype far s_247 = { /* 33130 */
-  LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
-  step, false, ps_tofloor, 6, 0, 0,
-  sub_230fe, NULL, R_Draw, &s_247};
-
-statetype far s_248 = { /* 33150 */
-  LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
-  step, true, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_249};
-
-statetype far s_249 = { /* 33170 */
-  LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
-  step, true, ps_tofloor, 4, 0, 0,
-  NULL, NULL, R_Draw, &s_250};
-
-statetype far s_250 = { /* 33190 */
-  LASERGUNNER_SHOOT_L_SPR, LASERGUNNER_SHOOT_R_SPR,
-  step, false, ps_tofloor, 6, 0, 0,
-  sub_23188, NULL, R_Draw, &s_249};
-
-statetype far s_251 = { /* 331b0 */
-  LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
-  stepthink, false, ps_tofloor, 6, 0, 0,
-  sub_2291e, NULL, R_Draw, &s_251};
-
-statetype far s_252 = { /* 331d0 */
-  LASER_BLAST_BLUE_SPR, LASER_BLAST_BLUE_SPR,
-  stepthink, true, ps_none, 8, 0, 0,
-  T_Velocity, sub_23223, sub_23254, &s_252};
-
-statetype far s_253 = { /* 331f0 */
-  SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
-  step, true, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_254};
-
-statetype far s_254 = { /* 33210 */
-  SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
-  step, true, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, NULL};
-
-statetype far s_255 = { /* 33230 */
-  SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
-  stepthink, true, ps_none, 8, 0, 0,
-  T_Velocity, sub_23223, sub_23254, &s_256};
-
-statetype far s_256 = { /* 33250 */
-  SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
-  stepthink, true, ps_none, 8, 0, 0,
-  T_Velocity, sub_23223, sub_23254, &s_255};
-
-statetype far s_257 = { /* 33270 */
-  PUSHBLOCKSPR, PUSHBLOCKSPR,
-  stepthink, false, ps_tofloor, 6, 0, 1,
-  NULL, sub_233de, sub_2334c, &s_257};
-
-statetype far s_258 = { /* 33290 */
-  PUSHBLOCKSPR, PUSHBLOCKSPR,
-  stepthink, false, ps_none, 0, 0, 0,
-  T_Projectile, sub_233de, sub_23395, &s_257};
-
-statetype far s_259 = { /* 332b0 */
-  FALLINGBLOCKSPR, FALLINGBLOCKSPR,
-  stepthink, false, ps_none, 1, 0, 0,
-  sub_234b7, sub_2351f, R_Draw, &s_259};
-
-statetype far s_260 = { /* 332d0 */
-  FALLINGBLOCKSPR, FALLINGBLOCKSPR,
-  stepthink, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_234ed, &s_260};
-
-statetype far s_261 = { /* 332f0 */
-  CRUSHERBLOCKSPR, CRUSHERBLOCKSPR,
-  stepthink, false, ps_none, 6, 0, 0,
-  sub_235c2, NULL, R_Draw, &s_261};
-
-statetype far s_262 = { /* 33310 */
-  CRUSHERBLOCKSPR, CRUSHERBLOCKSPR,
-  stepthink, false, ps_none, 5, 0, 8,
-  sub_235e1, sub_2365a, sub_23600, &s_262};
-
-statetype far s_263 = { /* 33330 */
-  BOUNCEBOT1_SPR, BOUNCEBOT1_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_264};
-
-statetype far s_264 = { /* 33350 */
-  BOUNCEBOT3_SPR, BOUNCEBOT3_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_265};
-
-statetype far s_265 = { /* 33370 */
-  BOUNCEBOT4_SPR, BOUNCEBOT4_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_266};
-
-statetype far s_266 = { /* 33390 */
-  BOUNCEBOT5_SPR, BOUNCEBOT5_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_263};
-
-statetype far s_267 = { /* 333b0 */
-  BOUNCEBOT2_SPR, BOUNCEBOT2_SPR,
-  stepthink, false, ps_none, 15, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_263};
-
-statetype far s_268 = { /* 333d0 */
-  SLIME_DROPPER1_SPR, SLIME_DROPPER1_SPR,
-  step, false, ps_none, 50, 0, 0,
-  NULL, NULL, R_Draw, &s_269};
-
-statetype far s_269 = { /* 333f0 */
-  SLIME_DROPPER2_SPR, SLIME_DROPPER2_SPR,
-  step, false, ps_none, 50, 0, 0,
-  NULL, NULL, R_Draw, &s_270};
-
-statetype far s_270 = { /* 33410 */
-  SLIME_DROPPER3_SPR, SLIME_DROPPER3_SPR,
-  step, false, ps_none, 1, 0, 0,
-  sub_2390f, NULL, R_Draw, &s_268};
-
-statetype far s_271 = { /* 33430 */
-  SLIME_DROP1_SPR, SLIME_DROP1_SPR,
-  step, false, ps_none, 5, 0, 0,
-  NULL, NULL, R_Draw, &s_272};
-
-statetype far s_272 = { /* 33450 */
-  SLIME_DROP2_SPR, SLIME_DROP2_SPR,
-  step, false, ps_none, 5, 0, 0,
-  sub_23995, NULL, R_Draw, &s_271};
-
-statetype far s_273 = { /* 33470 */
-  SLIME_DROP3_SPR, SLIME_DROP3_SPR,
-  stepthink, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_239b3, &s_273};
-
-statetype far s_274 = { /* 33490 */
-  SLIME_DROP_SPLAT1_SPR, SLIME_DROP_SPLAT1_SPR,
-  step, false, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_275};
-
-statetype far s_275 = { /* 334b0 */
-  SLIME_DROP_SPLAT2_SPR, SLIME_DROP_SPLAT2_SPR,
-  step, false, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_276};
-
-statetype far s_276 = { /* 334d0 */
-  SLIME_DROP_SPLAT3_SPR, SLIME_DROP_SPLAT3_SPR,
-  step, false, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_277};
-
-statetype far s_277 = { /* 334f0 */
-  SLIME_DROP_SPLAT4_SPR, SLIME_DROP_SPLAT4_SPR,
-  step, false, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, NULL};
-
-statetype far s_278 = { /* 33510 */
-  TURRET_IDLE_L_SPR, TURRET_IDLE_R_SPR,
-  step, false, ps_tofloor, 6, 0, 0,
-  sub_23aa2, NULL, R_Draw, &s_278};
-
-statetype far s_279 = { /* 33530 */
-  TURRET_READY_L_SPR, TURRET_READY_R_SPR,
-  step, true, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_280};
-
-statetype far s_280 = { /* 33550 */
-  TURRET_READY_L_SPR, TURRET_READY_R_SPR,
-  step, true, ps_tofloor, 4, 0, 0,
-  NULL, NULL, R_Draw, &s_281};
-
-statetype far s_281 = { /* 33570 */
-  TURRET_SHOOT_L_SPR, TURRET_SHOOT_R_SPR,
-  step, false, ps_tofloor, 6, 0, 0,
-  sub_23b07, NULL, R_Draw, &s_280};
-
-statetype far s_282 = { /* 33590 */
-  ASTEROID1_SPR, ASTEROID1_SPR,
-  slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, sub_23dc4, &s_283};
-
-statetype far s_283 = { /* 335b0 */
-  ASTEROID2_SPR, ASTEROID2_SPR,
-  slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, sub_23dc4, &s_284};
-
-statetype far s_284 = { /* 335d0 */
-  ASTEROID3_SPR, ASTEROID3_SPR,
-  slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, sub_23dc4, &s_285};
-
-statetype far s_285 = { /* 335f0 */
-  ASTEROID4_SPR, ASTEROID4_SPR,
-  slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, sub_23dc4, &s_282};
-
-statetype far s_286 = { /* 33610 */
-  LANDMINE1_SPR, LANDMINE1_SPR,
-  slide, false, ps_none, 10, 0, 0,
-  NULL, sub_23d3f, sub_23dc4, &s_287};
-
-statetype far s_287 = { /* 33630 */
-  LANDMINE2_SPR, LANDMINE2_SPR,
-  slide, false, ps_none, 10, 0, 0,
-  NULL, sub_23d3f, sub_23dc4, &s_286};
-
-statetype far s_288 = { /* 33650 */
-  SKULLMAN1_SPR, SKULLMAN1_SPR,
-  stepthink, false, ps_none, 35, 0, 0,
-  sub_241cb, NULL, R_Draw, &s_288};
-
-statetype far s_289 = { /* 33670 */
-  SKULLMAN2_SPR, SKULLMAN2_SPR,
-  stepthink, false, ps_none, 35, 0, 0,
-  sub_241cb, NULL, R_Draw, &s_289};
-
-statetype far s_290 = { /* 33690 */
-  SKULLMAN_HAND_R_SPR, SKULLMAN_HAND_R_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  sub_24048, NULL, R_Draw, &s_290};
-
-statetype far s_291 = { /* 336b0 */
-  SKULLMAN_HAND_L_SPR, SKULLMAN_HAND_L_SPR,
-  stepthink, false, ps_none, 10, 0, 0,
-  sub_24067, NULL, R_Draw, &s_291};
-
-statetype far s_292 = { /* 336d0 */
-  SKULLMAN_HAND_R_SPR, SKULLMAN_HAND_R_SPR,
-  slide, false, ps_none, 10, 24, 24,
-  sub_24086, NULL, sub_23f58, &s_292};
-
-statetype far s_293 = { /* 336f0 */
-  SKULLMAN_HAND_L_SPR, SKULLMAN_HAND_L_SPR,
-  slide, false, ps_none, 10, 24, 24,
-  sub_240d4, NULL, sub_23f58, &s_293};
-
-statetype far s_294 = { /* 33710 */
-  SKULLMAN_HAND_ATTACK1_SPR, SKULLMAN_HAND_ATTACK1_SPR,
-  stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, sub_23fba, &s_295};
-
-statetype far s_295 = { /* 33730 */
-  SKULLMAN_HAND_ATTACK2_SPR, SKULLMAN_HAND_ATTACK2_SPR,
-  stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, sub_23fba, &s_294};
-
-statetype far s_296 = { /* 33750 */
-  SKULLMAN_HAND_ATTACK1_SPR, SKULLMAN_HAND_ATTACK1_SPR,
-  stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, sub_24001, &s_297};
-
-statetype far s_297 = { /* 33770 */
-  SKULLMAN_HAND_ATTACK2_SPR, SKULLMAN_HAND_ATTACK2_SPR,
-  stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, sub_24001, &s_296};
-
-statetype far s_298 = { /* 33790 */
-  0, 0, step, false, ps_none, 50, 0, 0,
-  NULL, NULL, R_Draw, &s_299};
-
-statetype far s_299 = { /* 337b0 */
-  0, 0, step, false, ps_none, 1, 0, 0,
-  sub_242b1, NULL, R_Draw, &s_298};
-
-statetype far s_300 = { /* 337d0 */
-  SPARKSHOT1_SPR, SPARKSHOT1_SPR,
-  stepthink, false, ps_none, 8, 0, 0,
-  T_Velocity, NULL, sub_24372, &s_301};
-
-statetype far s_301 = { /* 337f0 */
-  SPARKSHOT2_SPR, SPARKSHOT2_SPR,
-  stepthink, false, ps_none, 8, 0, 0,
-  T_Velocity, NULL, sub_24372, &s_300};
-
-statetype far s_302 = { /* 33810 */
-  SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
-  step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_303};
-
-statetype far s_303 = { /* 33830 */
-  SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
-  step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, NULL};
-
-statetype far s_304 = { /* 33850 */
-  RESPAWN_BEACON_INACTIVE_SPR, RESPAWN_BEACON_INACTIVE_SPR,
-  step, false, ps_tofloor, 10, 0, 0,
-  NULL, sub_24446, R_Draw, &s_304};
-
-statetype far s_305 = { /* 33870 */
-  RESPAWN_BEACON_ACTIVE1_SPR, RESPAWN_BEACON_ACTIVE1_SPR,
-  step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_306};
-
-statetype far s_306 = { /* 33890 */
-  RESPAWN_BEACON_ACTIVE2_SPR, RESPAWN_BEACON_ACTIVE2_SPR,
-  step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_307};
-
-statetype far s_307 = { /* 338b0 */
-  RESPAWN_BEACON_ACTIVE3_SPR, RESPAWN_BEACON_ACTIVE3_SPR,
-  step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_308};
-
-statetype far s_308 = { /* 338d0 */
-  RESPAWN_BEACON_ACTIVE4_SPR, RESPAWN_BEACON_ACTIVE4_SPR,
-  step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_305};
-
-
-void sub_213a2()
+void R_WalkCeiling(objtype* ob)
 {
-}
+  if (ob->xdir == 1 && ob->hitwest)
+  {
+    ob->x -= ob->xmove;
+    ob->xdir = -1;
+    ob->nothink = US_RndT() >> 5;
 
-void SpawnPickup()
-{
+    ChangeState(ob, ob->state);
+  }
+  else if (ob->xdir == -1 && ob->hiteast)
+  {
+    ob->x -= ob->xmove;
+    ob->xdir = 1;
+    ob->nothink = US_RndT() >> 5;
+
+    ChangeState(ob, ob->state);
+  }
+  else if (!ob->hitsouth)
+  {
+    ob->x -= ob->xmove << 1;
+    ob->y -= ob->ymove;
+    ob->xdir = -ob->xdir;
+    ob->nothink = US_RndT() >> 5;
+
+    ChangeState(ob, ob->state);
+  }
+
+  PLACESPRITE;
 }
 
 
-void sub_21639()
+void SpawnPickup(Sint16 x, Sint16 y, Sint16 type)
 {
+  Sint16 shapeindex = 0;
+
+  GetNewObj(false);
+
+  new->needtoclip = cl_noclip;
+  new->obclass = pickupobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y);
+  new->ydir = -1;
+  new->temp1 = type;
+
+  switch (type)
+  {
+    case 9: shapeindex = 0; break;
+    case 16: shapeindex = 1; break;
+    case 17: shapeindex = 2; break;
+    case 18: shapeindex = 3; break;
+    case 19: shapeindex = 4; break;
+    case 20: shapeindex = 5; break;
+    case 21: shapeindex = 6; break;
+    case 22: shapeindex = 7; break;
+    case 23: shapeindex = 8; break;
+    case 24: shapeindex = 9; break;
+    case 25: shapeindex = 10; break;
+    case 26: shapeindex = 11; break;
+    case 27: shapeindex = 12; break;
+    case 28: shapeindex = 13; break;
+    case 29: shapeindex = 14; break;
+    case 30: shapeindex = 15; break;
+    case 36: shapeindex = 34; break;
+    case 37: shapeindex = 35; break;
+    case 38: shapeindex = 36; break;
+    case 39: shapeindex = 37; break;
+    case 52: shapeindex = 26; break;
+    case 53: shapeindex = 27; break;
+    case 54: shapeindex = 38; break;
+    case 75: shapeindex = 28; break;
+    case 76: shapeindex = 29; break;
+    case 77: shapeindex = 30; break;
+    case 78: shapeindex = 31; break;
+    case 79: shapeindex = 32; break;
+    case 80: shapeindex = 33; break;
+  }
+
+  new->temp2 = new->shapenum = pickupshapenums[shapeindex];
+  new->temp3 = new->temp2 + 2;
+
+  NewState(new, &s_pickup1);
 }
 
 
-void sub_21654()
+void T_Pickup(objtype* ob)
 {
+  ob->shapenum++;
+  if (ob->shapenum == ob->temp3)
+    ob->shapenum = ob->temp2;
+}
+
+
+void T_PickupRise(objtype* ob)
+{
+  if (ob->hitnorth)
+  {
+    ob->state = &s_pickup1;
+  }
+
+  ob->shapenum++;
+  if (ob->shapenum == ob->temp3)
+    ob->shapenum = ob->temp2;
+
+  DoGravity(ob);
 }
 
 
 void SpawnRobopal(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->active = ac_allways;
+  new->obclass = robopalobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 8*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+  new->temp7 = 0;
+  new->shootable = false;
+
+  firerobopal = false;
+
+  NewState(new, &s_robopalwait1);
+
 }
 
 
-void sub_21704()
+void T_RoboPal(objtype* ob)
 {
+  if (!gamestate.hasrobopal)
+  {
+    ChangeState(ob, &s_robopal_teleport1);
+    return;
+  }
+
+  if (ob->needtoclip == cl_noclip)
+  {
+    ob->needtoclip = cl_midclip;
+  }
+
+  if (ob->temp7 > 300)
+  {
+    ob->state = &s_robopal_teleport1;
+    return;
+  }
+
+  AccelerateY(ob, ob->y > player->y + 8*PIXGLOBAL ? -1 : 1, 10);
+  if (ob->yspeed > 0)
+  {
+    ob->ydir = 1;
+  }
+  else
+  {
+    ob->ydir = -1;
+  }
+
+  if (player->xdir == 1)
+  {
+    if (!ob->hitnorth && !ob->hitsouth)
+    {
+      if (ob->x > player->x - 18*PIXGLOBAL)
+      {
+        ob->xdir = -1;
+      }
+      else if (ob->x > player->x - 40*PIXGLOBAL &&
+               ob->x < player->x - 35*PIXGLOBAL)
+      {
+        ob->xspeed = 0;
+        ob->temp7 = 0;
+        ob->xdir = player->xdir;
+        return;
+      }
+    }
+
+    ob->temp7++;
+
+    AccelerateX(ob, ob->x > player->x - 40*PIXGLOBAL ? -1 : 1, 16);
+  }
+  else if (player->xdir == -1)
+  {
+    if (!ob->hitnorth && !ob->hitsouth)
+    {
+      if (ob->x < player->x + 40)
+      {
+        ob->xdir = 1;
+      }
+      else if (ob->x > player->x + 40*PIXGLOBAL &&
+               ob->x < player->x + 45*PIXGLOBAL)
+      {
+        ob->xspeed = 0;
+        ob->temp7 = 0;
+        ob->xdir = player->xdir;
+        return;
+      }
+    }
+
+    ob->temp7++;
+
+    AccelerateX(ob, ob->x > player->x + 40*PIXGLOBAL ? -1 : 1, 16);
+  }
+
+  if (ob->xspeed > 0)
+  {
+    ob->xdir = 1;
+  }
+  else
+  {
+    ob->xdir = -1;
+  }
 }
 
 
-void sub_218a8()
+void R_RoboPal(objtype* ob)
 {
+  if (ob->top > player->top + 8*PIXGLOBAL)
+  {
+    ob->ydir = -1;
+  }
+  else if (ob->top < player->top + 8*PIXGLOBAL)
+  {
+    ob->ydir = 1;
+  }
+
+  if (ob->hiteast || ob->hitwest)
+  {
+    ob->xdir = -ob->xdir;
+    ob->xspeed = -ob->xspeed;
+  }
+
+  if (ob->hitnorth)
+  {
+    if (ob->x < player->x)
+    {
+      ob->xdir = 1;
+    }
+    else
+    {
+      ob->xdir = -1;
+    }
+  }
+
+  if (ob->hitsouth)
+  {
+    if (ob->x < player->x)
+    {
+      ob->xdir = 1;
+    }
+    else
+    {
+      ob->xdir = -1;
+    }
+  }
+
+  if (firerobopal)
+  {
+    if (player->xdir == 1)
+    {
+      SpawnShot(ob->midx, ob->top + 4*PIXGLOBAL, player->xdir);
+    }
+    else
+    {
+      SpawnShot(ob->midx - 8*PIXGLOBAL, ob->top + 4*PIXGLOBAL, player->xdir);
+    }
+
+    firerobopal = false;
+  }
+
+  PLACESPRITE;
 }
 
 
-void sub_219ab()
+void RoboPalTeleport_DoWarp(objtype* ob)
 {
+  if (!gamestate.hasrobopal)
+  {
+    RemoveObj(ob);
+    return;
+  }
+
+  ob->needtoclip = cl_noclip;
+  ob->x = player->x;
+  ob->y = player->y;
+  ob->temp7 = false;
 }
 
 
 void SpawnSlug(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = slugobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 113;
+  new->xdir = 1;
+  new->ydir = 1;
+
+  NewState(new, &s_slug_walk1);
+
+  new->hitnorth = true;
+  new->ticcount =  US_RndT() / 32;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 3;
+      break;
+
+    default:
+      new->health = 1;
+      break;
+  }
 }
 
 
 void SpawnGhostlySlug(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = slugobj;
+  new->priority = 2;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y);
+  new->xdir = 1;
+  new->ydir = 1;
+
+  NewState(new, &s_ghostlyslug1);
+
+  new->hitnorth = true;
+  new->ticcount =  US_RndT() / 32;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 10;
+      break;
+
+    default:
+      new->health = 5;
+      break;
+  }
 }
 
 
-void sub_21b2c()
+void T_Slug(objtype* ob)
 {
+  Sint16 xdelta;
+
+  if (ob->top > player->bottom || ob->bottom < player->top)
+    return;
+
+  if (ob->xdir == -1)
+  {
+    xdelta = ob->left - player->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = 1;
+      return;
+    }
+
+    ob->yspeed = -24 - US_RndT() / 16;
+    ob->xspeed = -32;
+    SD_PlaySound(10);
+    ob->state = &s_slug_attack;
+    return;
+  }
+  else
+  {
+    xdelta = player->left - ob->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+      return;
+    }
+
+    ob->yspeed = -24 - US_RndT() / 16;
+    ob->xspeed = 32;
+    SD_PlaySound(10);
+    ob->state = &s_slug_attack;
+    return;
+  }
 }
 
 
-void sub_21bfb()
+void T_GhostlySlug(objtype* ob)
 {
+  Sint16 xdelta;
+
+  if (ob->top > player->bottom || ob->bottom < player->top)
+    return;
+
+  if (ob->xdir == -1)
+  {
+    xdelta = ob->left - player->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = 1;
+      return;
+    }
+
+    ob->yspeed = -24 - US_RndT() / 8;
+    ob->xspeed = -32 - US_RndT() / 8;
+    SD_PlaySound(10);
+    ob->state = &s_ghostlyslug_attack;
+    return;
+  }
+  else
+  {
+    xdelta = player->left - ob->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+      return;
+    }
+
+    ob->yspeed = -24 - US_RndT() / 8;
+    ob->xspeed = 32 + US_RndT() / 8;
+    SD_PlaySound(10);
+    ob->state = &s_ghostlyslug_attack;
+    return;
+  }
 }
 
 
-void sub_21ce4()
+void T_RunningFire(objtype* ob)
 {
+  if (ob->temp7-- <= 0)
+  {
+    ChangeState(ob, &s_grenadeexplosion1);
+  }
+
+  if (US_RndT() > 230)
+  {
+    FragBloom(ob->midx + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_East + 10);
+    SD_PlaySound(13);
+  }
+
+  if (US_RndT() > 230)
+  {
+    FragBloom(ob->midx - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
+    SD_PlaySound(13);
+  }
 }
 
 
-void sub_21d67()
+void R_SlugAttack(objtype* ob)
 {
+  if (ob->hitsouth)
+  {
+    ob->yspeed = 0;
+  }
+
+  if (ob->hitnorth)
+  {
+    ChangeState(ob, &s_slug_walk1);
+    ob->nothink = 12;
+  }
+
+  PLACESPRITE;
 }
 
 
-void sub_21dc0()
+void R_GhostlySlugAttack(objtype* ob)
 {
+  if (ob->hitsouth)
+  {
+    ob->yspeed = 0;
+  }
+
+  if (ob->hitnorth)
+  {
+    ChangeState(ob, &s_ghostlyslug1);
+    ob->nothink = 12;
+  }
+
+  PLACESPRITE;
 }
 
 
-void sub_21e19()
+void R_RunningFire(objtype* ob)
 {
+  if (ob->xdir == 1 && ob->hitwest)
+  {
+    ChangeState(ob, &s_grenadeexplosion1);
+  }
+  else if (ob->xdir == -1 && ob->hiteast)
+  {
+    ChangeState(ob, &s_grenadeexplosion1);
+  }
+  else if (!ob->hitnorth)
+  {
+    ChangeState(ob, &s_grenadeexplosion1);
+  }
+
+  PLACESPRITE;
 }
 
 
 void SpawnBomb(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = bombobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 113;
+  new->xdir = 1;
+  new->ydir = 1;
+
+  NewState(new, &s_bomb_idle);
+
+  new->hitnorth = true;
+  new->ticcount =  US_RndT() / 32;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 10;
+      break;
+
+    default:
+      new->health = 5;
+      break;
+  }
 }
 
 
-void sub_21f41()
+void T_Bomb(objtype* ob)
 {
+  Sint16 xdelta;
+
+  ob->needtoreact = true;
+
+  if (ob->top > player->bottom || ob->bottom < player->top)
+    return;
+
+  if (ob->xdir == -1)
+  {
+    xdelta = ob->left - player->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = 1;
+      return;
+    }
+
+    ob->yspeed = -32 - US_RndT() / 8;
+    ob->xspeed = -32;
+    ob->state = &s_bomb_attack1;
+    return;
+  }
+  else
+  {
+    xdelta = player->left - ob->right;
+
+    if (xdelta > 32*PIXGLOBAL)
+      return;
+
+    if (xdelta < -8*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+      return;
+    }
+
+    ob->yspeed = -32 - US_RndT() / 8;
+    ob->xspeed = 32;
+    ob->state = &s_bomb_attack1;
+    return;
+  }
 }
 
 
-void sub_21ffd()
+void R_Bomb(objtype* ob)
 {
+  if (ob->hitsouth)
+  {
+    ob->yspeed = 0;
+  }
+
+  if (ob->hitnorth)
+  {
+    ChangeState(ob, &s_grenadeexplosion1);
+  }
+
+  PLACESPRITE;
 }
+
 
 void SpawnFireImp(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = fireimpobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 16*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 20;
+      break;
+
+    default:
+      new->health = 10;
+      break;
+  }
+
+  NewState(new, &s_fireimp_walk1);
+
+  new->hitnorth = true;
 }
 
 
-void sub_220e0()
+void T_FireImp(objtype* ob)
 {
+  if (player->right < ob->left || player->left > ob->right ||
+      player->top > ob->bottom || player->bottom < ob->top)
+  {
+  }
+  else
+  {
+    ob->state = &s_fireimp_fireform1;
+  }
 }
 
 
-void sub_22126()
+void T_FireImpFireForm(objtype* ob)
 {
+  if (US_RndT() > 240)
+  {
+    // Return to regular form
+    ChangeState(ob, &s_fireimp_stand);
+  }
 }
 
 
-void sub_22148()
+void R_FireImp(objtype* ob)
 {
+  // Randomly turn into fire form - no-op if already in fire form
+  if (US_RndT() > 200)
+  {
+    ChangeState(ob, &s_fireimp_fireform1);
+  }
+
+  if (ob->xdir == 1 && ob->hitwest)
+  {
+    ob->xdir = -1;
+  }
+  else if (ob->xdir == -1 && ob->hiteast)
+  {
+    ob->xdir = 1;
+  }
+  else if (!ob->hitnorth)
+  {
+    // Jump over gaps
+    ob->x -= ob->xmove;
+    ob->y -= ob->ymove;
+
+    ob->yspeed = -(US_RndT() / 32 * 20);
+    if (ob->yspeed < -60)
+    {
+      ob->yspeed = -60;
+    }
+    if (ob->yspeed > -30)
+    {
+      ob->yspeed = -30;
+    }
+
+    ob->xspeed = ob->xdir << 5;
+
+    ChangeState(ob, &s_fireimp_jumping);
+  }
+
+  PLACESPRITE;
 }
 
 
-void sub_22213()
+void R_FireImpJumping(objtype* ob)
 {
+  if (ob->hitsouth)
+  {
+    ob->yspeed = 0;
+  }
+
+  if (ob->hitnorth)
+  {
+    ChangeState(ob, &s_fireimp_walk1);
+  }
+
+  PLACESPRITE;
 }
 
 
 void SpawnHedgehog(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = hedgehogobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 16*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+  new->shootable = true;
+
+  NewState(new, &s_hedgehog_roll1);
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 6;
+      break;
+
+    default:
+      new->health = 3;
+      break;
+  }
+
+  new->hitnorth = true;
 }
 
 
-void sub_222f6()
+void T_HedgeHogRolling(objtype* ob)
 {
+  if (player->right < ob->left || player->left > ob->right ||
+      player->top > ob->bottom || player->bottom < ob->top)
+  {
+  }
+  else
+  {
+    ob->state = &s_hedgehog_wait1;
+  }
 }
 
 
-void sub_2233c()
+void T_HedgeHogWaiting(objtype* ob)
 {
+  if (US_RndT() > 200)
+  {
+    ChangeState(ob, &s_hedgehog_roll1);
+  }
 }
 
 
-void sub_2235e()
+void T_HedgeHogWaiting2(objtype* ob)
 {
+  if (US_RndT() > 160)
+  {
+    ob->xdir = 1;
+  }
+  else
+  {
+    ob->xdir = -1;
+  }
+
+  if (US_RndT() > 175)
+  {
+    ob->state = &s_hedgehog_roll1;
+  }
 }
 
 
-void sub_22392()
+void R_HedgeHog(objtype* ob)
 {
+  if (US_RndT() > 200)
+  {
+    ChangeState(ob, &s_hedgehog_wait1);
+  }
+
+  if (ob->xdir == 1 && ob->hitwest)
+  {
+    ob->xdir = -1;
+  }
+  else if (ob->xdir == -1 && ob->hiteast)
+  {
+    ob->xdir = 1;
+  }
+  else if (!ob->hitnorth)
+  {
+    // Jump over gaps
+    ob->x -= ob->xmove;
+    ob->y -= ob->ymove;
+
+    ob->yspeed = -(US_RndT() / 32 * 20);
+    if (ob->yspeed < -60)
+    {
+      ob->yspeed = -60;
+    }
+    if (ob->yspeed > -30)
+    {
+      ob->yspeed = -30;
+    }
+
+    ob->xspeed = ob->xdir << 5;
+
+    ChangeState(ob, &s_hedgehog_jumping);
+  }
+
+  PLACESPRITE;
 }
 
 
-void sub_2245d()
+void R_HedgeHogJumping(objtype* ob)
 {
+  if (ob->hitsouth)
+  {
+    ob->yspeed = 0;
+  }
+
+  if (ob->hitnorth)
+  {
+    ChangeState(ob, &s_hedgehog_roll1);
+  }
+
+  PLACESPRITE;
 }
 
 
 void SpawnBrawler(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = brawlerobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y) - 24*PIXGLOBAL;
+  new->xdir = 1;
+  new->ydir = 1;
+
+  NewState(new, &s_brawler_walk1);
+
+  new->hitnorth = true;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 10;
+      break;
+
+    default:
+      new->health = 5;
+      break;
+  }
 }
 
 
-void sub_22540()
+void T_Brawler(objtype* ob)
 {
+  Sint16 xdelta;
+
+  if (ob->top > player->bottom || ob->bottom < player->top)
+    return;
+
+  if (ob->xdir == -1)
+  {
+    xdelta = ob->left - player->right;
+
+    if (xdelta > 64*PIXGLOBAL)
+      return;
+
+    if (xdelta < -16*PIXGLOBAL)
+    {
+      ob->xdir = 1;
+      return;
+    }
+  }
+  else
+  {
+    xdelta = player->left - ob->right;
+
+    if (xdelta > 64*PIXGLOBAL)
+      return;
+
+    if (xdelta < -16*PIXGLOBAL)
+    {
+      ob->xdir = -1;
+      return;
+    }
+  }
+
+  if (player->right < ob->left || player->left > ob->right ||
+      player->top > ob->bottom || player->bottom < ob->top)
+    return;
+
+  ob->state = &s_brawler_attack1;
 }
 
 
 void SpawnCeilingWalker(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = ceilingwalkerobj;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y);
+  new->xdir = 1;
+  new->ydir = 1;
+
+  NewState(new, &s_ceilwalker_walkceil1);
+
+  new->hitnorth = true;
+  new->ticcount =  US_RndT() / 32;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 3;
+      break;
+
+    default:
+      new->health = 1;
+      break;
+  }
 }
 
 
-void sub_2268b()
+void T_CeilingWalkerOnCeiling(objtype* ob)
 {
+  if (ob->xdir == -1)
+  {
+    if (player->right < ob->left || player->left > ob->right ||
+        player->bottom < ob->top)
+      return;
+
+    if (!ob->hitnorth)
+    {
+      ob->yspeed = 24 - US_RndT() / 16;
+      SD_PlaySound(3);
+      ob->state = &s_ceilwalker_falling;
+      return;
+    }
+  }
+  else
+  {
+    if (player->right < ob->left || player->left > ob->right ||
+        player->bottom < ob->top)
+      return;
+
+    if (!ob->hitnorth)
+    {
+      ob->yspeed = 24 - US_RndT() / 16;
+      SD_PlaySound(3);
+      ob->state = &s_ceilwalker_falling;
+      return;
+    }
+  }
 }
 
 
-void sub_2274a()
+void T_CeilingWalkerOnFloor(objtype* ob)
 {
+  if (ob->xdir == -1)
+  {
+    if (!ob->hitnorth)
+    {
+      ob->yspeed = 24 - US_RndT() / 16;
+      SD_PlaySound(3);
+      ob->state = &s_ceilwalker_falling;
+      return;
+    }
+  }
+  else
+  {
+    if (!ob->hitnorth)
+    {
+      ob->yspeed = 24 - US_RndT() / 16;
+      SD_PlaySound(3);
+      ob->state = &s_ceilwalker_falling;
+      return;
+    }
+  }
 }
 
 
-void sub_227bc()
+void R_CeilingWalkerFalling(objtype* ob)
 {
+  if (ob->hitnorth)
+  {
+    SD_PlaySound(4);
+    ChangeState(ob, &s_ceilwalker_walkfloor1);
+    ob->nothink = 12;
+  }
+
+  PLACESPRITE;
 }
 
 
 void SpawnCrawlingSlime(Sint16 x, Sint16 y)
 {
+  GetNewObj(false);
+
+  new->obclass = crawlingslimeobj;
+  new->priority = 2;
+  new->x = CONVERT_TILE_TO_GLOBAL(x);
+  new->y = CONVERT_TILE_TO_GLOBAL(y);
+  new->xdir = 1;
+  new->ydir = 1;
+
+  NewState(new, &s_crawlslime2);
+
+  new->hitnorth = true;
+  new->shootable = true;
+
+  switch (gamestate.difficulty)
+  {
+    case gd_Hard:
+      new->health = 3;
+      break;
+
+    default:
+      new->health = 1;
+      break;
+  }
 }
 
 
-void sub_228aa()
+void T_CrawlingSlime(objtype* ob)
 {
+  if (US_RndT() > 250)
+  {
+    ob->state = &s_crawlslime1;
+  }
+
+  if (ob->top > player->bottom || ob->bottom < player->top)
+    return;
+
+  if (player->right < ob->left || player->left > ob->right ||
+      player->top > ob->bottom || player->bottom < ob->top)
+    return;
+
+  ob->state = &s_crawlslime_steppedon;
 }
-
-

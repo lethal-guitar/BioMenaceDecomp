@@ -595,28 +595,27 @@ void FullClipToWalls(objtype *ob)
 
   switch (ob->obclass)
   {
-    // TODO: Use constants here once known
-  case 1:
+  case playerobj:
     w = 56*PIXGLOBAL;
     h = 24*PIXGLOBAL;
     break;
 
-  case 27:
+  case crushblockobj:
     w = 72*PIXGLOBAL;
     h = 56*PIXGLOBAL;
     break;
 
-  case 21:
+  case pushblockobj:
     w = 32*PIXGLOBAL;
     h = 40*PIXGLOBAL;
     break;
 
-  case 3:
+  case grenadeobj:
     w = 16*PIXGLOBAL;
     h = 16*PIXGLOBAL;
     break;
 
-  case 34:
+  case skullmanhandobj:
     w = 40*PIXGLOBAL;
     h = 24*PIXGLOBAL;
     break;
@@ -954,7 +953,7 @@ void ClipToSprite(objtype *push, objtype *solid, boolean squish)
 
 //==========================================================================
 
-void sub_18B3F(objtype *push, objtype *solid, boolean squish)
+void ClipToPushBlock(objtype *push, objtype *solid, boolean squish)
 {
   Sint16 xmove, ymove, leftinto, rightinto, topinto, bottominto, var14;
 

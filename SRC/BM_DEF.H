@@ -160,9 +160,11 @@ typedef enum
 typedef enum
 {
   // TODO
-  nothing,         //  0
-  playerobj,       //  1
-  inertobj,        //  2
+  nothing = 0,
+  playerobj = 1,
+  inertobj = 2,
+  grenadeobj = 3,
+  fireballobj = 5,
   pickupobj   =  6,
   slugobj     =  7,
   brawlerobj  =  9,
@@ -172,10 +174,15 @@ typedef enum
   drmangleobj  = 13,
   platformobj = 14,
   robopalobj  = 16,
+  shotobj = 17,
   lasergunnerobj  = 19,
+  tankbotobj = 20,
+  pushblockobj = 21,
   bounderobj  = 22,
   bouncebotobj  = 23,
+  slimedropperobj = 24,
   enemyprojectileobj = 25,
+  crushblockobj = 27,
   laserturretobj  = 28,
   sewermutantobj = 31,
   hedgehogobj = 32,
@@ -221,7 +228,7 @@ typedef struct objstruct
   Uint16 priority; // 22
   Uint16 left, top, right, bottom, midx; // 24, 26, 28, 2A, 2C
   Uint16 tileleft, tiletop, tileright, tilebottom, tilemidx;
-  Sint16 hitnorth, hiteast, hitsouth, hitwest;
+  Sint16 hitnorth, hiteast, hitsouth, hitwest; // 38, 3A, 3C, 3E
   boolean shootable; // 40
   Sint16 var2; // 42
   Sint16 health; // 44
@@ -419,6 +426,7 @@ void PushObj(objtype *ob);
 void ClipToSpriteSide(objtype *push, objtype *solid);
 void ClipToSpriteTop(objtype *push, objtype *solid);
 void ClipToSprite(objtype *push, objtype *solid, boolean squish);
+void ClipToPushBlock(objtype *push, objtype *solid, boolean squish);
 Sint16 DoActor(objtype *ob, Sint16 numtics);
 void StateMachine(objtype *ob);
 void NewState(objtype *ob, statetype far *state);

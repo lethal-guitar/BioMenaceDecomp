@@ -207,8 +207,6 @@ extern statetype far s_306;
 extern statetype far s_307;
 extern statetype far s_308;
 
-extern statetype far s_grenadeexplosion1;
-
 extern boolean bossactivated;
 extern Sint16 unknown;
 extern Sint16 word_389AA;
@@ -234,77 +232,6 @@ void sub_2106d(objtype* ob);
 void T_DrMangle();
 void DrMangleDefeated(objtype* ob);
 void R_DrMangleJumping();
-void sub_213a2();
-void sub_21639();
-void sub_21654();
-void sub_21704();
-void sub_218a8();
-void sub_219ab();
-void sub_21b2c();
-void sub_21bfb();
-void sub_21ce4();
-void sub_21d67();
-void sub_21dc0();
-void sub_21e19();
-void sub_21f41();
-void sub_21ffd();
-void sub_220e0();
-void sub_22126();
-void sub_22148();
-void sub_22213();
-void sub_222f6();
-void sub_2233c();
-void sub_2235e();
-void sub_22392();
-void sub_2245d();
-void sub_22540();
-void sub_2268b();
-void sub_2274a();
-void sub_227bc();
-void sub_228aa();
-void sub_2291e();
-void sub_22b98();
-void sub_22be7();
-void sub_22d16();
-void sub_22db0();
-void sub_22e5c();
-void sub_22f1a();
-void sub_22f3f();
-void sub_22fa5();
-void sub_230fe();
-void sub_23188();
-void sub_23223();
-void sub_23254();
-void sub_2334c();
-void sub_23395();
-void sub_233de();
-void sub_234b7();
-void sub_234ed();
-void sub_2351f();
-void sub_235c2();
-void sub_235e1();
-void sub_23600();
-void sub_2365a();
-void sub_2370e();
-void sub_237bf();
-void sub_2390f();
-void sub_23995();
-void sub_239b3();
-void sub_23aa2();
-void sub_23b07();
-void sub_23d3f();
-void sub_23dc4();
-void sub_23f58();
-void sub_23fba();
-void sub_24001();
-void sub_24048();
-void sub_24067();
-void sub_24086();
-void sub_240d4();
-void sub_241cb();
-void sub_242b1();
-void sub_24372();
-void sub_24446();
 
 void C_GrenadeExplosion(objtype* ob, objtype* hit);
 
@@ -522,189 +449,6 @@ statetype far s_170 = { /* 32790 */
   MANGLE_DEFEATED_SPR, MANGLE_DEFEATED_SPR,
   think, false, ps_tofloor, 0, 0, 0,
   NULL, NULL, R_Draw, &s_170};
-
-// -------------------
-
-statetype far s_171 = { /* 327b0 */
-  0, 0, step, false, ps_none, 20, 0, 0,
-  sub_21639, NULL, R_Draw, &s_172};
-
-statetype far s_172 = { /* 327d0 */
-  0, 0, step, false, ps_none, 20, 0, 0,
-  sub_21639, NULL, R_Draw, &s_171};
-
-statetype far s_173 = { /* 327f0 */
-  0, 0, slide, false, ps_none, 40, 0, 8,
-  sub_21654, NULL, R_Draw, NULL};
-
-statetype far s_174 = { /* 32810 */
-  ROBOPAL1_SPR, ROBOPAL1_SPR,
-  step, false, ps_none, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_175};
-
-statetype far s_175 = { /* 32830 */
-  ROBOPAL2_SPR, ROBOPAL2_SPR,
-  step, false, ps_none, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_174};
-
-statetype far s_176 = { /* 32850 */
-  ROBOPAL1_SPR, ROBOPAL1_SPR,
-  stepthink, false, ps_none, 5, 0, 0,
-  sub_21704, NULL, sub_218a8, &s_177};
-
-statetype far s_177 = { /* 32870 */
-  ROBOPAL2_SPR, ROBOPAL2_SPR,
-  stepthink, false, ps_none, 5, 0, 0,
-  sub_21704, NULL, sub_218a8, &s_176};
-
-statetype far s_178 = { /* 32890 */
-  ROBOPAL_TELEPORT1_SPR, ROBOPAL_TELEPORT1_SPR,
-  step, false, ps_none, 25, 0, 0,
-  NULL, NULL, R_Draw, &s_179};
-
-statetype far s_179 = { /* 328b0 */
-  ROBOPAL_TELEPORT2_SPR, ROBOPAL_TELEPORT2_SPR,
-  step, false, ps_none, 25, 0, 0,
-  NULL, NULL, R_Draw, &s_180};
-
-statetype far s_180 = { /* 328d0 */
-  -1, -1, step, false, ps_none, 1, 0, 0,
-  sub_219ab, NULL, R_Draw, &s_181};
-
-statetype far s_181 = { /* 328f0 */
-  ROBOPAL_TELEPORT2_SPR, ROBOPAL_TELEPORT2_SPR,
-  step, false, ps_none, 25, 0, 0,
-  NULL, NULL, R_Draw, &s_182};
-
-statetype far s_182 = { /* 32910 */
-  ROBOPAL_TELEPORT1_SPR, ROBOPAL_TELEPORT1_SPR,
-  step, false, ps_none, 25, 0, 0,
-  NULL, NULL, R_Draw, &s_176};
-
-statetype far s_183 = { /* 32930 */
-  SLUG_WALK1_L_SPR, SLUG_WALK1_R_SPR,
-  step, false, ps_tofloor, 10, 128, 0,
-  sub_21b2c, NULL, R_Walk, &s_184};
-
-statetype far s_184 = { /* 32950 */
-  SLUG_WALK2_L_SPR, SLUG_WALK2_R_SPR,
-  step, false, ps_tofloor, 10, 128, 0,
-  sub_21b2c, NULL, R_Walk, &s_183};
-
-statetype far s_185 = { /* 32970 */
-  SLUG_ATTACK_L_SPR, SLUG_ATTACK_R_SPR,
-  think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_21d67, &s_183};
-
-statetype far s_186 = { /* 32990 */
-  RUNNING_FIRE1_SPR, RUNNING_FIRE1_SPR,
-  step, false, ps_tofloor, 5, 64, 0,
-  sub_21ce4, C_GrenadeExplosion, sub_21e19, &s_187};
-
-statetype far s_187 = { /* 329b0 */
-  RUNNING_FIRE2_SPR, RUNNING_FIRE2_SPR,
-  step, false, ps_tofloor, 5, 64, 0,
-  sub_21ce4, C_GrenadeExplosion, sub_21e19, &s_186};
-
-statetype far s_188 = { /* 329d0 */
-  GHOSTSLUG1_L_SPR, GHOSTSLUG1_R_SPR,
-  step, false, ps_tofloor, 10, 128, 0,
-  sub_21bfb, NULL, R_Walk, &s_189};
-
-statetype far s_189 = { /* 329f0 */
-  GHOSTSLUG2_L_SPR, GHOSTSLUG2_R_SPR,
-  step, false, ps_tofloor, 10, 128, 0,
-  sub_21bfb, NULL, R_Walk, &s_188};
-
-statetype far s_190 = { /* 32a10 */
-  GHOSTSLUG1_L_SPR, GHOSTSLUG1_R_SPR,
-  think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_21dc0, &s_188};
-
-statetype far s_191 = { /* 32a30 */
-  BOMB_WAIT_L_SPR, BOMB_WAIT_R_SPR,
-  step, false, ps_tofloor, 10, 0, 0,
-  sub_21f41, NULL, R_Draw, &s_191};
-
-statetype far s_192 = { /* 32a50 */
-  BOMB_JUMP1_L_SPR, BOMB_JUMP1_R_SPR,
-  stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, R_Draw, &s_193};
-
-statetype far s_193 = { /* 32a70 */
-  BOMB_JUMP2_L_SPR, BOMB_JUMP2_R_SPR,
-  stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, sub_21ffd, &s_194};
-
-statetype far s_194 = { /* 32a90 */
-  BOMB_JUMP3_L_SPR, BOMB_JUMP3_R_SPR,
-  stepthink, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_21ffd, &s_194};
-
-statetype far s_195 = { /* 32ab0 */
-  FIREIMP_WALK1_L_SPR, FIREIMP_WALK1_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  sub_220e0, NULL, sub_22148, &s_196};
-
-statetype far s_196 = { /* 32ad0 */
-  FIREIMP_WALK2_L_SPR, FIREIMP_WALK2_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  NULL, NULL, sub_22148, &s_197};
-
-statetype far s_197 = { /* 32af0 */
-  FIREIMP_WALK3_L_SPR, FIREIMP_WALK3_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  NULL, NULL, sub_22148, &s_198};
-
-statetype far s_198 = { /* 32b10 */
-  FIREIMP_WALK4_L_SPR, FIREIMP_WALK4_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  NULL, NULL, sub_22148, &s_195};
-
-statetype far s_199 = { /* 32b30 */
-  RUNNING_FIRE1_SPR, RUNNING_FIRE1_SPR,
-  stepthink, false, ps_tofloor, 7, 128, 0,
-  NULL, NULL, sub_22148, &s_200};
-
-statetype far s_200 = { /* 32b50 */
-  RUNNING_FIRE2_SPR, RUNNING_FIRE2_SPR,
-  stepthink, false, ps_tofloor, 7, 128, 0,
-  sub_22126, NULL, sub_22148, &s_199};
-
-statetype far s_201 = { /* 32b70 */
-  FIREIMP_STAND_SPR, FIREIMP_STAND_SPR,
-  stepthink, false, ps_tofloor, 50, 0, 0,
-  NULL, NULL, R_Draw, &s_195};
-
-statetype far s_202 = { /* 32b90 */
-  FIREIMP_WALK4_L_SPR, FIREIMP_WALK4_R_SPR,
-  think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, sub_22213, NULL};
-
-statetype far s_203 = { /* 32bb0 */
-  HEDGEHOG_ROLL1_L_SPR, HEDGEHOG_ROLL1_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  sub_222f6, NULL, sub_22392, &s_204};
-
-statetype far s_204 = { /* 32bd0 */
-  HEDGEHOG_ROLL2_L_SPR, HEDGEHOG_ROLL2_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  NULL, NULL, sub_22392, &s_205};
-
-statetype far s_205 = { /* 32bf0 */
-  HEDGEHOG_ROLL3_L_SPR, HEDGEHOG_ROLL3_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  NULL, NULL, sub_22392, &s_206};
-
-statetype far s_206 = { /* 32c10 */
-  HEDGEHOG_ROLL4_L_SPR, HEDGEHOG_ROLL4_R_SPR,
-  step, false, ps_tofloor, 7, 128, 0,
-  NULL, NULL, sub_22392, &s_203};
-
-statetype far s_207 = { /* 32c30 */
-  REDGEHOG_STAND_L_SPR, HEDGEHOG_STAND_R_SPR,
-  stepthink, false, ps_tofloor, 25, 0, 0,
-  sub_2233c, NULL, sub_22392, &s_207};
 
 
 
@@ -1209,14 +953,13 @@ void T_ParachuteBot(objtype* ob)
     if (xdelta < -8*PIXGLOBAL)
     {
       ob->xdir = 1;
-    }
-    else
-    {
-      ob->yspeed = -24 - US_RndT() / 16;
-      ob->xspeed = -32;
-      ob->state = &s_135;
       return;
     }
+
+    ob->yspeed = -24 - US_RndT() / 16;
+    ob->xspeed = -32;
+    ob->state = &s_135;
+    return;
   }
   else
   {

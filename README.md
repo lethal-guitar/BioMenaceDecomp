@@ -11,9 +11,10 @@ BioMenace uses the same engine and thus shares a lot of code with the 2nd Keen t
 
 Only the episode 1 Shareware EXE (v1.1) is currently covered - the original version, not the freeware release (which contains registered version episode 1).
 
-All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). The player control code has also been recreated. However, practically all of the actor logic (enemies, items, interactive objects etc.) is still missing.
+All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). The player control code has also been recreated, as well as most of the
+actor logic.
 
-Overall, about 90 % of the code has been recreated.
+Overall, about 95 % of the code has been recreated.
 
 Some variables and functions don't have meaningful names yet, and many places use magic numbers instead of enum values/constants.
 
@@ -22,15 +23,15 @@ Some variables and functions don't have meaningful names yet, and many places us
 
 | What | Bytes | % done |
 | --- | --- | --- |
-| All code | 119,685 / 131,744 | 90.85 % |
-| Game logic code | 32,086 / 44,127 | 72.67 % |
+| All code | 124,991 / 131,744 | 94.87 % |
+| Game logic code | 37,374 / 44,127 | 84.70 % |
 | Data | 89,984 / 89,984 | 100 % |
 
 
 ### TODO
 
 * Complete `AUDIOBM1.H`
-* Decompile `BM_ACT{2,3}.C`
+* Decompile `BM_ACT3.C`
 * Assign meaningful names to all functions and variables
 * Do registered version episode 1
 * Do episode 2
