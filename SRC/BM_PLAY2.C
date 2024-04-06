@@ -44,60 +44,7 @@ Sint16 doordestx;
 Sint16 doordesty;
 Uint16 jumptime;
 
-extern Uint16 invincible;
-extern Sint16 word_399F8;
-extern Sint16 unknown;
-extern Sint16 word_389AA;
-extern boolean firerobopal;
 
-extern statetype far s_score;
-extern statetype far s_bulletimpact1;
-extern statetype far s_bulletimpact2;
-extern statetype far s_bulletimpact3;
-extern statetype far s_gib_bone1;
-extern statetype far s_gib_bone2;
-extern statetype far s_gib_eyeball1;
-extern statetype far s_gib_eyeball2;
-extern statetype far s_gib_flesh1;
-extern statetype far s_gib_flesh2;
-extern statetype far s_gibs_on_floor;
-extern statetype far s_metal_debris1;
-extern statetype far s_metal_debris2;
-extern statetype far s_metal_debris3;
-extern statetype far s_metal_debris4;
-extern statetype far s_metal_debris_on_floor;
-extern statetype far s_fireball1;
-extern statetype far s_fireball2;
-extern statetype far s_fireball3;
-extern statetype far s_fireball4;
-extern statetype far s_grenade1;
-extern statetype far s_grenade2;
-extern statetype far s_grenade3;
-extern statetype far s_grenade4;
-extern statetype far s_redgrenade1;
-extern statetype far s_redgrenade2;
-extern statetype far s_redgrenade3;
-extern statetype far s_redgrenade4;
-extern statetype far s_grenadeexplosion1;
-extern statetype far s_grenadeexplosion2;
-extern statetype far s_grenadeexplosion3;
-extern statetype far s_grenadeexplosion4;
-extern statetype far s_grenadeexplosion5;
-extern statetype far s_grenadeexplosion6;
-extern statetype far s_robopalrocket1;
-extern statetype far s_robopalrocket2;
-extern statetype far s_lasershot;
-extern statetype far s_superplasmabolt;
-extern statetype far s_rocketimpact1;
-extern statetype far s_rocketimpact2;
-extern statetype far s_plasmaboltimpact1;
-extern statetype far s_plasmaboltimpact2;
-
-extern statetype far s_player_place_mine;
-extern statetype far s_253;
-
-void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
-void SpawnLaserShot(Uint16 x, Uint16 y, Sint16 dir);
 void R_Chunk(objtype* ob);
 void C_Fireball(objtype* ob, objtype* hit);
 void R_Fireball(objtype* ob);
@@ -1325,7 +1272,7 @@ void UpdateScoreBox(objtype *ob)
 
     number = bosshealth / unknown;
 
-    if (number != word_389AA)
+    if (number != lastbosshealth)
     {
       if (number > 20)
         number = 20;
@@ -1488,7 +1435,7 @@ void DealDamage(objtype* ob, Sint16 amount)
         ob->shootable = 0;
         SpawnPickup(ob->tilemidx, ob->tiletop, 26);
         StartMusic(14);
-        word_399F8 = true;
+        word_399F8 = 1;
         bosshealth = 999;
         break;
 

@@ -28,18 +28,6 @@ Uint16 invincible;
 boolean cmdup, cmddown, cmdleft, cmdright;
 boolean cmdjump, cmdfire, firebutton;
 
-extern Uint16 colorstep;
-extern Sint16 doordestx;
-extern Sint16 doordesty;
-extern Uint16 jumptime;
-extern Uint8 unktime;
-
-extern boolean jumpcheat;
-extern boolean godmode;
-extern boolean button0held, button1held, fireheld;
-
-extern Sint16 word_399FA;
-
 Uint16 arrowflip[] = {
   arrow_South,     arrow_West,      arrow_North,     arrow_East,
   arrow_SouthWest, arrow_NorthWest, arrow_NorthEast, arrow_SouthEast
@@ -57,57 +45,7 @@ Sint16 word_391CA = 0;
 
 Sint16 TABLE2[] = { -8, 0, 8 };
 
-extern statetype far s_player_dying;
-extern statetype far s_player_dead;
-extern statetype far s_player_fireball;
-extern statetype far s_player_shielded1;
-extern statetype far s_player_shielded2;
-extern statetype far s_player_standing;
-extern statetype far s_player_5;
-extern statetype far s_player_6;
-extern statetype far s_player_lineup;
-extern statetype far s_player_enter_door1;
-extern statetype far s_player_enter_door2;
-extern statetype far s_player_interact1;
-extern statetype far s_player_interact2;
-extern statetype far s_player_opendoor1;
-extern statetype far s_player_opendoor2;
-extern statetype far s_player_crouching;
-extern statetype far s_player_place_mine;
-extern statetype far s_player_climbing_idle;
-extern statetype far s_player_climbing1;
-extern statetype far s_player_climbing2;
-extern statetype far s_player_walking1;
-extern statetype far s_player_walking2;
-extern statetype far s_player_walking3;
-extern statetype far s_player_walking4;
-extern statetype far s_player_throwing_grenade1;
-extern statetype far s_player_throwing_grenade2;
-extern statetype far s_player_throwing_grenade3;
-extern statetype far s_player_throwing_grenade_air1;
-extern statetype far s_player_throwing_grenade_air2;
-extern statetype far s_player_throwing_grenade_air3;
-extern statetype far s_player_in_air1;
-extern statetype far s_player_in_air2;
-extern statetype far s_player_in_air3;
-extern statetype far s_player_shoot_single1;
-extern statetype far s_player_shoot_single2;
-extern statetype far s_player_shoot_single3;
-extern statetype far s_player_shoot_single_air1;
-extern statetype far s_player_shoot_single_air2;
-extern statetype far s_player_shoot_single_air3;
-extern statetype far s_player_shoot_single_crouch1;
-extern statetype far s_player_shoot_single_crouch2;
-extern statetype far s_player_shoot_single_crouch3;
-extern statetype far s_player_shoot1;
-extern statetype far s_player_shoot2;
-extern statetype far s_player_shoot_crouch1;
-extern statetype far s_player_shoot_crouch2;
-extern statetype far s_player_shoot_air1;
-extern statetype far s_player_shoot_air2;
-extern statetype far s_167;
 
-void ThrowGrenade(Uint16 x, Uint16 y, Direction dir);
 void OpenDoor(objtype* ob);
 void SnakeShootThink(objtype* ob);
 void SnakeDyingThink(objtype* ob);
@@ -136,12 +74,6 @@ void SnakeThrow(objtype* ob);
 void WarpToDoorDest(objtype* ob);
 void SnakeDeadThink(objtype* ob);
 
-void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
-void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage);
-void DealDamage(objtype* ob, Sint16 amount);
-void SpawnSuperPlasmaBolt(Uint16 x, Uint16 y, Sint16 dir);
-void ShowCompatibilityInfoMessage();
-void BossDialog();
 
 statetype far s_player_dying = {
   PLAYER_DYING1_SPR, PLAYER_DYING1_SPR,
@@ -248,7 +180,6 @@ statetype far s_player_climbing2 = {
   slidethink, false, ps_none, 8, 0, 16,
   SnakeClimbThink, SnakeContact2, R_Draw, &s_player_climbing1};
 
-//seg58
 statetype far s_player_walking1 = {
   PLAYER_WALKING1_L_SPR, PLAYER_WALKING1_R_SPR,
   slidethink, true, ps_tofloor, 6, 24, 0,
@@ -269,7 +200,6 @@ statetype far s_player_walking4 = {
   slidethink, true, ps_tofloor, 6, 24, 0,
   SnakeWalkThink, SnakeContact2, R_Walking, &s_player_walking1};
 
-//seg62
 statetype far s_player_throwing_grenade1 = {
   PLAYER_THROW1_L_SPR, PLAYER_THROW1_R_SPR,
   step, true, ps_tofloor, 20, 0, 0,
@@ -300,7 +230,6 @@ statetype far s_player_throwing_grenade_air3 = {
   stepthink, false, ps_none, 10, 0, 0,
   T_Projectile, SnakeContact, R_PlayerInAir, &s_player_in_air1};
 
-//68
 statetype far s_player_in_air1 = {
   PLAYER_IN_AIR_L_SPR, PLAYER_IN_AIR_R_SPR,
   think, false, ps_none, 0, 0, 0,
@@ -361,7 +290,6 @@ statetype far s_player_shoot_single_crouch3 = {
   step, false, ps_tofloor, 5, 0, 0,
   NULL, SnakeContact2, R_Draw, &s_player_crouching};
 
-//seg80
 statetype far s_player_shoot1 = {
   PLAYER_SHOOT1_L_SPR, PLAYER_SHOOT1_R_SPR,
   step, false, ps_tofloor, 2, 0, 0,
@@ -392,7 +320,6 @@ statetype far s_player_shoot_air2 = {
   step, false, ps_none, 1, 0, 0,
   SnakeShootAirThink2, SnakeContact, R_PlayerInAir, &s_player_shoot_air1};
 
-// seg86
 
 
 void SpawnPlayer(Sint16 x, Sint16 y, Sint16 xdir)
@@ -880,7 +807,7 @@ found:
         {
           if (otherobj->obclass == drmangleobj)
           {
-            otherobj->state = &s_167;
+            otherobj->state = &s_drmangle_monster_jumping;
             otherobj->shootable = true;
             bossactivated = true;
             return;
@@ -2335,9 +2262,9 @@ void CheckInTiles(objtype *ob)
             break;
 
           case 25:
-            if (word_399FA != -1)
+            if (crusheractive != -1)
             {
-              word_399FA = 1;
+              crusheractive = 1;
             }
             break;
         }

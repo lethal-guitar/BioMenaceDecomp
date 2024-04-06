@@ -301,7 +301,7 @@ typedef struct
   boolean helpmsgenterdoor;
   boolean helpmsgplasmabolts;
   boolean helpmsgsecretlevelgem;
-  boolean var43;
+  boolean helpmsgbeacon;
   boolean var44;
   objtype *riding;
 } gametype;
@@ -478,6 +478,8 @@ void UpdateScoreBox(objtype *ob);
 
 extern statetype far s_player_standing;
 
+extern Sint16 word_391C2;
+
 /*
 =============================================================================
 
@@ -495,7 +497,7 @@ extern Sint16 practicetimer;
 extern Uint16 playerrestorex;
 extern Uint16 playerrestorey;
 extern Sint16 bosshealth;
-extern Sint16 word_389AA;
+extern Sint16 lastbosshealth;
 extern Sint16 nagtimer;
 
 

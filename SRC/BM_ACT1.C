@@ -25,198 +25,11 @@
 Sint16 pdirx[] = {  0, 1, 0, -1,  1, 1, -1, -1 };
 Sint16 pdiry[] = { -1, 0, 1,  0, -1, 1,  1, -1 };
 
-extern statetype far s_128;
-extern statetype far s_129;
-extern statetype far s_130;
-extern statetype far s_131;
-extern statetype far s_132;
-extern statetype far s_133;
-extern statetype far s_134;
-extern statetype far s_135;
-extern statetype far s_136;
-extern statetype far s_137;
-extern statetype far s_138;
-extern statetype far s_139;
-extern statetype far s_140;
-extern statetype far s_141;
-extern statetype far s_142;
-extern statetype far s_143;
-extern statetype far s_144;
-extern statetype far s_145;
-extern statetype far s_146;
-extern statetype far s_147;
-extern statetype far s_148;
-extern statetype far s_149;
-extern statetype far s_150;
-extern statetype far s_151;
-extern statetype far s_152;
-extern statetype far s_153;
-extern statetype far s_154;
-extern statetype far s_155;
-extern statetype far s_156;
-extern statetype far s_157;
-extern statetype far s_158;
-extern statetype far s_159;
-extern statetype far s_160;
-extern statetype far s_161;
-extern statetype far s_162;
-extern statetype far s_163;
-extern statetype far s_164;
-extern statetype far s_165;
-extern statetype far s_166;
-extern statetype far s_167;
-extern statetype far s_168;
-extern statetype far s_169;
-extern statetype far s_170;
-extern statetype far s_171;
-extern statetype far s_172;
-extern statetype far s_173;
-extern statetype far s_174;
-extern statetype far s_175;
-extern statetype far s_176;
-extern statetype far s_177;
-extern statetype far s_178;
-extern statetype far s_179;
-extern statetype far s_180;
-extern statetype far s_181;
-extern statetype far s_182;
-extern statetype far s_183;
-extern statetype far s_184;
-extern statetype far s_185;
-extern statetype far s_186;
-extern statetype far s_187;
-extern statetype far s_188;
-extern statetype far s_189;
-extern statetype far s_190;
-extern statetype far s_191;
-extern statetype far s_192;
-extern statetype far s_193;
-extern statetype far s_194;
-extern statetype far s_195;
-extern statetype far s_196;
-extern statetype far s_197;
-extern statetype far s_198;
-extern statetype far s_199;
-extern statetype far s_200;
-extern statetype far s_201;
-extern statetype far s_202;
-extern statetype far s_203;
-extern statetype far s_204;
-extern statetype far s_205;
-extern statetype far s_206;
-extern statetype far s_207;
-extern statetype far s_208;
-extern statetype far s_209;
-extern statetype far s_210;
-extern statetype far s_211;
-extern statetype far s_212;
-extern statetype far s_213;
-extern statetype far s_214;
-extern statetype far s_215;
-extern statetype far s_216;
-extern statetype far s_217;
-extern statetype far s_218;
-extern statetype far s_219;
-extern statetype far s_220;
-extern statetype far s_221;
-extern statetype far s_222;
-extern statetype far s_223;
-extern statetype far s_224;
-extern statetype far s_225;
-extern statetype far s_226;
-extern statetype far s_227;
-extern statetype far s_228;
-extern statetype far s_229;
-extern statetype far s_230;
-extern statetype far s_231;
-extern statetype far s_232;
-extern statetype far s_233;
-extern statetype far s_234;
-extern statetype far s_235;
-extern statetype far s_236;
-extern statetype far s_237;
-extern statetype far s_238;
-extern statetype far s_239;
-extern statetype far s_240;
-extern statetype far s_241;
-extern statetype far s_242;
-extern statetype far s_243;
-extern statetype far s_244;
-extern statetype far s_245;
-extern statetype far s_246;
-extern statetype far s_247;
-extern statetype far s_248;
-extern statetype far s_249;
-extern statetype far s_250;
-extern statetype far s_251;
-extern statetype far s_252;
-extern statetype far s_253;
-extern statetype far s_254;
-extern statetype far s_255;
-extern statetype far s_256;
-extern statetype far s_257;
-extern statetype far s_258;
-extern statetype far s_259;
-extern statetype far s_260;
-extern statetype far s_261;
-extern statetype far s_262;
-extern statetype far s_263;
-extern statetype far s_264;
-extern statetype far s_265;
-extern statetype far s_266;
-extern statetype far s_267;
-extern statetype far s_268;
-extern statetype far s_269;
-extern statetype far s_270;
-extern statetype far s_271;
-extern statetype far s_272;
-extern statetype far s_273;
-extern statetype far s_274;
-extern statetype far s_275;
-extern statetype far s_276;
-extern statetype far s_277;
-extern statetype far s_278;
-extern statetype far s_279;
-extern statetype far s_280;
-extern statetype far s_281;
-extern statetype far s_282;
-extern statetype far s_283;
-extern statetype far s_284;
-extern statetype far s_285;
-extern statetype far s_286;
-extern statetype far s_287;
-extern statetype far s_288;
-extern statetype far s_289;
-extern statetype far s_290;
-extern statetype far s_291;
-extern statetype far s_292;
-extern statetype far s_293;
-extern statetype far s_294;
-extern statetype far s_295;
-extern statetype far s_296;
-extern statetype far s_297;
-extern statetype far s_298;
-extern statetype far s_299;
-extern statetype far s_300;
-extern statetype far s_301;
-extern statetype far s_302;
-extern statetype far s_303;
-extern statetype far s_304;
-extern statetype far s_305;
-extern statetype far s_306;
-extern statetype far s_307;
-extern statetype far s_308;
-
-extern boolean bossactivated;
-extern Sint16 unknown;
-extern Sint16 word_389AA;
-
 
 void R_EnemyProjectile(objtype* ob);
 void T_Platform(objtype* ob);
 void T_GoPlat(objtype* ob);
 void R_Helicopter(objtype* ob);
-void SpawnParachuteBot(objtype* ob);
 void T_ParachuteBot(objtype* ob);
 void C_ParachuteBotAttack(objtype* ob, objtype* hit);
 void R_ParachuteBot(objtype* ob);
@@ -227,228 +40,227 @@ void T_SpitterSnake(objtype* ob);
 void SewerMutantThrow(objtype* ob);
 void T_SewerMutant(objtype* ob);
 void T_DrMangleHologram(objtype* ob);
-void sub_20f20(objtype* ob);
-void sub_2106d(objtype* ob);
+void T_DrMangleHologramAttacking(objtype* ob);
+void R_DrMangleHologramAttacking(objtype* ob);
 void T_DrMangle();
 void DrMangleDefeated(objtype* ob);
 void R_DrMangleJumping();
 
-void C_GrenadeExplosion(objtype* ob, objtype* hit);
 
-statetype far s_128 = { /* 32250 */
+statetype far s_platform = { /* 32250 */
   PLATFORMSPR, PLATFORMSPR,
   think, false, ps_none, 0, 0, 0,
   T_Platform, NULL, R_Draw, NULL};
 
-statetype far s_129 = { /* 32270 */
+statetype far s_apogeelogo = { /* 32270 */
   APOGEELOGOSPR, APOGEELOGOSPR,
   think, false, ps_none, 0, 0, 0,
   T_Platform, NULL, R_Draw, NULL};
 
-statetype far s_130 = { /* 32290 */
+statetype far s_helicopter1 = { /* 32290 */
   HELICOPTER2_SPR, HELICOPTER2_SPR,
   stepthink, false, ps_none, 1, 0, 0,
-  T_GoPlat, NULL, R_Helicopter, &s_130};
+  T_GoPlat, NULL, R_Helicopter, &s_helicopter1};
 
-statetype far s_131 = { /* 322b0 */
+statetype far s_helicopter2 = { /* 322b0 */
   HELICOPTER1_SPR, HELICOPTER1_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  T_GoPlat, NULL, R_Helicopter, &s_130};
+  T_GoPlat, NULL, R_Helicopter, &s_helicopter1};
 
-statetype far s_132 = { /* 322d0 */
+statetype far s_helicopter_spawnbot = { /* 322d0 */
   HELICOPTER1_SPR, HELICOPTER1_SPR,
   stepthink, false, ps_none, 1, 0, 0,
-  T_GoPlat, NULL, SpawnParachuteBot, &s_130};
+  T_GoPlat, NULL, SpawnParachuteBot, &s_helicopter1};
 
-statetype far s_133 = { /* 322f0 */
+statetype far s_parachutebot_walk1 = { /* 322f0 */
   PARACHUTEBOT_WALK1_L_SPR, PARACHUTEBOT_WALK1_R_SPR,
   step, false, ps_tofloor, 10, 128, 0,
-  T_ParachuteBot, NULL, R_Walk, &s_134};
+  T_ParachuteBot, NULL, R_Walk, &s_parachutebot_walk2};
 
-statetype far s_134 = { /* 32310 */
+statetype far s_parachutebot_walk2 = { /* 32310 */
   PARACHUTEBOT_WALK2_L_SPR, PARACHUTEBOT_WALK2_R_SPR,
   step, false, ps_tofloor, 10, 128, 0,
-  T_ParachuteBot, NULL, R_Walk, &s_133};
+  T_ParachuteBot, NULL, R_Walk, &s_parachutebot_walk1};
 
-statetype far s_135 = { /* 32330 */
+statetype far s_parachutebot_attack = { /* 32330 */
   PARACHUTEBOT_WALK2_L_SPR, PARACHUTEBOT_WALK2_R_SPR,
   think, false, ps_none, 0, 0, 0,
-  T_Projectile, C_ParachuteBotAttack, R_ParachuteBotAttack, &s_135};
+  T_Projectile, C_ParachuteBotAttack, R_ParachuteBotAttack, &s_parachutebot_attack};
 
-statetype far s_136 = { /* 32350 */
+statetype far s_parachutebot_falling = { /* 32350 */
   PARACHUTEBOT_FALLING_L_SPR, PARACHUTEBOT_FALLING_R_SPR,
   stepthink, false, ps_none, 10, 8, 32,
-  NULL, C_ParachuteBotAttack, R_ParachuteBot, &s_136};
+  NULL, C_ParachuteBotAttack, R_ParachuteBot, &s_parachutebot_falling};
 
-statetype far s_137 = { /* 32370 */
+statetype far s_spitsnake_walk1 = { /* 32370 */
   SPITSNAKE_WALK1_L_SPR, SPITSNAKE_WALK1_R_SPR,
   step, false, ps_tofloor, 10, 128, 0,
-  T_SpitterSnake, NULL, R_Walk, &s_138};
+  T_SpitterSnake, NULL, R_Walk, &s_spitsnake_walk2};
 
-statetype far s_138 = { /* 32390 */
+statetype far s_spitsnake_walk2 = { /* 32390 */
   SPITSNAKE_WALK2_L_SPR, SPITSNAKE_WALK2_R_SPR,
   step, false, ps_tofloor, 10, 128, 0,
-  T_SpitterSnake, NULL, R_Walk, &s_137};
+  T_SpitterSnake, NULL, R_Walk, &s_spitsnake_walk1};
 
-statetype far s_139 = { /* 323b0 */
+statetype far s_spitsnake_wait1 = { /* 323b0 */
   SPITSNAKE_WALK1_L_SPR, SPITSNAKE_WALK1_R_SPR,
   step, true, ps_tofloor, 5, 128, 0,
-  T_SpitterSnake2, NULL, R_Walk, &s_140};
+  T_SpitterSnake2, NULL, R_Walk, &s_spitsnake_wait2};
 
-statetype far s_140 = { /* 323d0 */
+statetype far s_spitsnake_wait2 = { /* 323d0 */
   SPITSNAKE_WALK2_L_SPR, SPITSNAKE_WALK2_R_SPR,
   step, true, ps_tofloor, 5, 128, 0,
-  T_SpitterSnake2, NULL, R_Walk, &s_139};
+  T_SpitterSnake2, NULL, R_Walk, &s_spitsnake_wait1};
 
-statetype far s_141 = { /* 323f0 */
+statetype far s_spitsnake_attack1 = { /* 323f0 */
   SPITSNAKE_ATTACK_L_SPR, SPITSNAKE_ATTACK_R_SPR,
   step, false, ps_none, 10, 0, 0,
-  SpitterSnakeSpit, NULL, R_Draw, &s_142};
+  SpitterSnakeSpit, NULL, R_Draw, &s_spitsnake_attack2};
 
-statetype far s_142 = { /* 32410 */
+statetype far s_spitsnake_attack2 = { /* 32410 */
   SPITSNAKE_ATTACK_L_SPR, SPITSNAKE_ATTACK_R_SPR,
   step, false, ps_none, 10, 65408, 0,
-  NULL, NULL, R_Draw, &s_137};
+  NULL, NULL, R_Draw, &s_spitsnake_walk1};
 
-statetype far s_143 = { /* 32430 */
+statetype far s_spitsnake_projectile1 = { /* 32430 */
   SPITSNAKE_SPIT1_L_SPR, SPITSNAKE_SPIT1_R_SPR,
   stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, R_EnemyProjectile, &s_144};
+  T_Projectile, NULL, R_EnemyProjectile, &s_spitsnake_projectile2};
 
-statetype far s_144 = { /* 32450 */
+statetype far s_spitsnake_projectile2 = { /* 32450 */
   SPITSNAKE_SPIT2_L_SPR, SPITSNAKE_SPIT2_R_SPR,
   stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, R_EnemyProjectile, &s_143};
+  T_Projectile, NULL, R_EnemyProjectile, &s_spitsnake_projectile1};
 
-statetype far s_145 = { /* 32470 */
+statetype far s_sewermutant1 = { /* 32470 */
   SEWERMUTANT_WALK1_L_SPR, SEWERMUTANT_WALK1_R_SPR,
   step, false, ps_tofloor, 20, 128, 0,
-  T_SewerMutant, NULL, R_Walk, &s_146};
+  T_SewerMutant, NULL, R_Walk, &s_sewermutant2};
 
-statetype far s_146 = { /* 32490 */
+statetype far s_sewermutant2 = { /* 32490 */
   SEWERMUTANT_WALK2_L_SPR, SEWERMUTANT_WALK2_R_SPR,
   step, false, ps_tofloor, 20, 128, 0,
-  T_SewerMutant, NULL, R_Walk, &s_145};
+  T_SewerMutant, NULL, R_Walk, &s_sewermutant1};
 
-statetype far s_147 = { /* 324b0 */
+statetype far s_sewermutant_attack = { /* 324b0 */
   SEWERMUTANT_ATTACK_L_SPR, SEWERMUTANT_ATTACK_R_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  SewerMutantThrow, NULL, R_Walk, &s_145};
+  SewerMutantThrow, NULL, R_Walk, &s_sewermutant1};
 
-statetype far s_148 = { /* 324d0 */
+statetype far s_sewermutant_projectile1 = { /* 324d0 */
   SEWERMUTANT_SPIT1_SPR, SEWERMUTANT_SPIT1_SPR,
   stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, R_EnemyProjectile, &s_149};
+  T_Projectile, NULL, R_EnemyProjectile, &s_sewermutant_projectile2};
 
-statetype far s_149 = { /* 324f0 */
+statetype far s_sewermutant_projectile2 = { /* 324f0 */
   SEWERMUTANT_SPIT2_SPR, SEWERMUTANT_SPIT2_SPR,
   stepthink, false, ps_none, 4, 0, 0,
-  T_Projectile, NULL, R_EnemyProjectile, &s_148};
+  T_Projectile, NULL, R_EnemyProjectile, &s_sewermutant_projectile1};
 
-statetype far s_150 = { /* 32510 */
+statetype far s_hostage1_1 = { /* 32510 */
   HOSTAGE1_1_SPR, HOSTAGE1_1_SPR,
   step, false, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_151};
+  NULL, NULL, R_Draw, &s_hostage1_2};
 
-statetype far s_151 = { /* 32530 */
+statetype far s_hostage1_2 = { /* 32530 */
   HOSTAGE1_2_SPR, HOSTAGE1_2_SPR,
   step, false, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_150};
+  NULL, NULL, R_Draw, &s_hostage1_1};
 
-statetype far s_152 = { /* 32550 */
+statetype far s_hostage2_1 = { /* 32550 */
   HOSTAGE2_1_SPR, HOSTAGE2_1_SPR,
   step, false, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_153};
+  NULL, NULL, R_Draw, &s_hostage2_2};
 
-statetype far s_153 = { /* 32570 */
+statetype far s_hostage2_2 = { /* 32570 */
   HOSTAGE2_2_SPR, HOSTAGE2_2_SPR,
   step, false, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_152};
+  NULL, NULL, R_Draw, &s_hostage2_1};
 
-statetype far s_154 = { /* 32590 */
+statetype far s_hostage3_1 = { /* 32590 */
   HOSTAGE3_1_SPR, HOSTAGE3_1_SPR,
   step, false, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_155};
+  NULL, NULL, R_Draw, &s_hostage3_2};
 
-statetype far s_155 = { /* 325b0 */
+statetype far s_hostage3_2 = { /* 325b0 */
   HOSTAGE3_2_SPR, HOSTAGE3_2_SPR,
   step, false, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_154};
+  NULL, NULL, R_Draw, &s_hostage3_1};
 
-statetype far s_156 = { /* 325d0 */
+statetype far s_drmangle_hologram1 = { /* 325d0 */
   MANGLE_HOLOGRAM1_SPR, MANGLE_HOLOGRAM1_SPR,
   step, false, ps_none, 10, 0, 0,
-  T_DrMangleHologram, NULL, R_Draw, &s_156};
+  T_DrMangleHologram, NULL, R_Draw, &s_drmangle_hologram1};
 
-statetype far s_157 = { /* 325f0 */
+statetype far s_drmangle_hologram2 = { /* 325f0 */
   MANGLE_HOLOGRAM2_SPR, MANGLE_HOLOGRAM2_SPR,
   step, false, ps_none, 10, 0, 0,
-  T_DrMangleHologram, NULL, R_Draw, &s_156};
+  T_DrMangleHologram, NULL, R_Draw, &s_drmangle_hologram1};
 
-statetype far s_158 = { /* 32610 */
+statetype far s_drmangle_hologram3 = { /* 32610 */
   MANGLE_HOLOGRAM3_SPR, MANGLE_HOLOGRAM3_SPR,
   step, false, ps_none, 200, 0, 0,
-  T_DrMangleHologram, NULL, R_Draw, &s_156};
+  T_DrMangleHologram, NULL, R_Draw, &s_drmangle_hologram1};
 
-statetype far s_159 = { /* 32630 */
+statetype far s_drmangle_hologram1_faded = { /* 32630 */
   MANGLE_HOLOGRAM_FADE1_SPR, MANGLE_HOLOGRAM_FADE1_SPR,
   step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_156};
+  NULL, NULL, R_Draw, &s_drmangle_hologram1};
 
-statetype far s_160 = { /* 32650 */
+statetype far s_drmangle_hologram2_faded = { /* 32650 */
   MANGLE_HOLOGRAM_FADE2_SPR, MANGLE_HOLOGRAM_FADE2_SPR,
   step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_157};
+  NULL, NULL, R_Draw, &s_drmangle_hologram2};
 
-statetype far s_161 = { /* 32670 */
+statetype far s_drmangle_hologram3_faded = { /* 32670 */
   MANGLE_HOLOGRAM_FADE3_SPR, MANGLE_HOLOGRAM_FADE3_SPR,
   step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_158};
+  NULL, NULL, R_Draw, &s_drmangle_hologram3};
 
-statetype far s_162 = { /* 32690 */
+statetype far s_drmangle_hologram_attacking = { /* 32690 */
   MANGLE_HOLOGRAM_ATTACK_SPR, MANGLE_HOLOGRAM_ATTACK_SPR,
   step, false, ps_none, 3, 0, 0,
-  sub_20f20, NULL, sub_2106d, &s_162};
+  T_DrMangleHologramAttacking, NULL, R_DrMangleHologramAttacking, &s_drmangle_hologram_attacking};
 
-statetype far s_163 = { /* 326b0 */
+statetype far s_drmangle_typing1 = { /* 326b0 */
   MANGLE_TYPING1_SPR, MANGLE_TYPING1_SPR,
   step, false, ps_tofloor, 20, 0, 0,
-  T_DrMangle, NULL, R_Draw, &s_164};
+  T_DrMangle, NULL, R_Draw, &s_drmangle_typing2};
 
-statetype far s_164 = { /* 326d0 */
+statetype far s_drmangle_typing2 = { /* 326d0 */
   MANGLE_TYPING2_SPR, MANGLE_TYPING2_SPR,
   step, false, ps_tofloor, 20, 0, 0,
-  T_DrMangle, NULL, R_Draw, &s_163};
+  T_DrMangle, NULL, R_Draw, &s_drmangle_typing1};
 
-statetype far s_165 = { /* 326f0 */
+statetype far s_drmangle_monster1 = { /* 326f0 */
   MANGLE_MONSTER1_L_SPR, MANGLE_MONSTER1_R_SPR,
   step, false, ps_tofloor, 10, 128, 0,
-  T_DrMangle, NULL, R_Walk, &s_166};
+  T_DrMangle, NULL, R_Walk, &s_drmangle_monster2};
 
-statetype far s_166 = { /* 32710 */
+statetype far s_drmangle_monster2 = { /* 32710 */
   MANGLE_MONSTER2_L_SPR, MANGLE_MONSTER2_R_SPR,
   step, false, ps_tofloor, 10, 128, 0,
-  T_DrMangle, NULL, R_Walk, &s_165};
+  T_DrMangle, NULL, R_Walk, &s_drmangle_monster1};
 
-statetype far s_167 = { /* 32730 */
+statetype far s_drmangle_monster_jumping = { /* 32730 */
   MANGLE_MONSTER2_L_SPR, MANGLE_MONSTER2_R_SPR,
   think, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, R_DrMangleJumping, &s_167};
+  T_Projectile, NULL, R_DrMangleJumping, &s_drmangle_monster_jumping};
 
-statetype far s_168 = { /* 32750 */
+statetype far s_drmangle_dying = { /* 32750 */
   MANGLE_DEFEATED_SPR, MANGLE_DEFEATED_SPR,
   step, false, ps_tofloor, 200, 0, 0,
-  NULL, NULL, R_Draw, &s_169};
+  NULL, NULL, R_Draw, &s_drmangle_dead};
 
-statetype far s_169 = { /* 32770 */
+statetype far s_drmangle_dead = { /* 32770 */
   MANGLE_DEFEATED_SPR, MANGLE_DEFEATED_SPR,
   step, false, ps_tofloor, 2, 0, 0,
-  DrMangleDefeated, NULL, R_Draw, &s_169};
+  DrMangleDefeated, NULL, R_Draw, &s_drmangle_dead};
 
-statetype far s_170 = { /* 32790 */
+statetype far s_drmangle_dead2 = { /* 32790 */
   MANGLE_DEFEATED_SPR, MANGLE_DEFEATED_SPR,
   think, false, ps_tofloor, 0, 0, 0,
-  NULL, NULL, R_Draw, &s_170};
+  NULL, NULL, R_Draw, &s_drmangle_dead2};
 
 
 
@@ -614,7 +426,7 @@ void SpawnElevator(Sint16 x, Sint16 y, arrowdirtype dir)
 
   }
 
-  NewState(new, &s_128);
+  NewState(new, &s_platform);
 }
 
 
@@ -652,7 +464,7 @@ void SpawnApogeeLogo(Sint16 x, Sint16 y, arrowdirtype dir)
 
   }
 
-  NewState(new, &s_129);
+  NewState(new, &s_apogeelogo);
 }
 
 
@@ -765,7 +577,7 @@ void SpawnHelicopter(Sint16 x, Sint16 y, arrowdirtype dir)
   new->temp6 = 15;
   new->temp7 = 40;
 
-  NewState(new, &s_130);
+  NewState(new, &s_helicopter1);
 
   *(mapsegs[2] + mapbwidthtable[y]/2 + x) = DIRARROWSTART + dir;
 
@@ -879,7 +691,7 @@ void R_Helicopter(objtype* ob)
 {
   if (--ob->temp6 <= 0)
   {
-    ob->state = &s_131;
+    ob->state = &s_helicopter2;
     ob->temp6 = 15;
   }
 
@@ -925,7 +737,7 @@ void SpawnParachuteBot(objtype* ob)
 
   new->temp5 = 75;
 
-  NewState(new, &s_136);
+  NewState(new, &s_parachutebot_falling);
 }
 
 
@@ -958,7 +770,7 @@ void T_ParachuteBot(objtype* ob)
 
     ob->yspeed = -24 - US_RndT() / 16;
     ob->xspeed = -32;
-    ob->state = &s_135;
+    ob->state = &s_parachutebot_attack;
     return;
   }
   else
@@ -971,14 +783,13 @@ void T_ParachuteBot(objtype* ob)
     if (xdelta < -8*PIXGLOBAL)
     {
       ob->xdir = -1;
-    }
-    else
-    {
-      ob->yspeed = -24 - US_RndT() / 16;
-      ob->xspeed = 32;
-      ob->state = &s_135;
       return;
     }
+
+    ob->yspeed = -24 - US_RndT() / 16;
+    ob->xspeed = 32;
+    ob->state = &s_parachutebot_attack;
+    return;
   }
 }
 
@@ -1004,7 +815,7 @@ void R_ParachuteBot(objtype* ob)
   }
   else
   {
-    ChangeState(ob, &s_133);
+    ChangeState(ob, &s_parachutebot_walk1);
     ob->y += 16*PIXGLOBAL;
   }
 
@@ -1052,13 +863,13 @@ void SpawnSpitterSnake(Sint16 x, Sint16 y)
       break;
   }
 
-  NewState(new, &s_137);
+  NewState(new, &s_spitsnake_walk1);
 }
 
 
 void T_SpitterSnake2(objtype* ob)
 {
-  ob->state = &s_137;
+  ob->state = &s_spitsnake_walk1;
 }
 
 
@@ -1085,7 +896,7 @@ void SpitterSnakeSpit(objtype* ob)
   new->yspeed = -20;
   new->active = ac_removable;
 
-  NewState(new, &s_143);
+  NewState(new, &s_spitsnake_projectile1);
 
   ob->nothink = 2;
 }
@@ -1115,14 +926,14 @@ void T_SpitterSnake(objtype* ob)
     {
       SD_PlaySound(9);
       ob->xdir = -1;
-      ob->state = &s_141;
+      ob->state = &s_spitsnake_attack1;
       return;
     }
 
     if (xdelta < 0)
     {
       ob->xdir = 1;
-      ob->state = &s_139;
+      ob->state = &s_spitsnake_wait1;
       ob->nothink = 8;
       return;
     }
@@ -1130,7 +941,7 @@ void T_SpitterSnake(objtype* ob)
     if (xdelta < 64*PIXGLOBAL)
     {
       ob->xdir = -1;
-      ob->state = &s_139;
+      ob->state = &s_spitsnake_wait1;
       ob->nothink = 8;
       return;
     }
@@ -1139,7 +950,7 @@ void T_SpitterSnake(objtype* ob)
     {
       SD_PlaySound(9);
       ob->xdir = 1;
-      ob->state = &s_141;
+      ob->state = &s_spitsnake_attack1;
       return;
     }
 
@@ -1170,7 +981,7 @@ void SpawnSewerMutant(Sint16 x, Sint16 y)
       break;
   }
 
-  NewState(new, &s_145);
+  NewState(new, &s_sewermutant1);
 }
 
 
@@ -1197,7 +1008,7 @@ void SewerMutantThrow(objtype* ob)
   new->yspeed = -20;
   new->active = ac_removable;
 
-  NewState(new, &s_148);
+  NewState(new, &s_sewermutant_projectile1);
 
   ob->nothink = 2;
 }
@@ -1227,14 +1038,14 @@ void T_SewerMutant(objtype* ob)
     {
       SD_PlaySound(38);
       ob->xdir = -1;
-      ob->state = &s_147;
+      ob->state = &s_sewermutant_attack;
       return;
     }
 
     if (xdelta < 0)
     {
       ob->xdir = 1;
-      ob->state = &s_145;
+      ob->state = &s_sewermutant1;
       ob->nothink = 8;
       return;
     }
@@ -1242,7 +1053,7 @@ void T_SewerMutant(objtype* ob)
     if (xdelta < 64*PIXGLOBAL)
     {
       ob->xdir = -1;
-      ob->state = &s_145;
+      ob->state = &s_sewermutant1;
       ob->nothink = 8;
       return;
     }
@@ -1251,7 +1062,7 @@ void T_SewerMutant(objtype* ob)
     {
       SD_PlaySound(38);
       ob->xdir = 1;
-      ob->state = &s_147;
+      ob->state = &s_sewermutant_attack;
       return;
     }
 
@@ -1271,15 +1082,15 @@ void SpawnHostage(Sint16 x, Sint16 y, Sint16 type)
   switch (type)
   {
     case 0:
-      NewState(new, &s_150);
+      NewState(new, &s_hostage1_1);
       break;
 
     case 1:
-      NewState(new, &s_152);
+      NewState(new, &s_hostage2_1);
       break;
 
     case 2:
-      NewState(new, &s_154);
+      NewState(new, &s_hostage3_1);
       break;
   }
 
@@ -1296,7 +1107,7 @@ void SpawnDrMangleHologram(Sint16 x, Sint16 y)
   new->active = ac_allways;
   new->x = CONVERT_TILE_TO_GLOBAL(x);
   new->y = CONVERT_TILE_TO_GLOBAL(y) - 16*PIXGLOBAL;
-  NewState(new, &s_156);
+  NewState(new, &s_drmangle_hologram1);
   new->priority = 3;
   new->shootable = false;
   new->needtoclip = cl_noclip;
@@ -1309,33 +1120,33 @@ void T_DrMangleHologram(objtype* ob)
   // Randomized animation
   if (US_RndT() > 220)
   {
-    if (ob->state == &s_156)
+    if (ob->state == &s_drmangle_hologram1)
     {
-      ChangeState(ob, &s_159);
+      ChangeState(ob, &s_drmangle_hologram1_faded);
       return;
     }
 
-    if (ob->state == &s_157)
+    if (ob->state == &s_drmangle_hologram2)
     {
-      ChangeState(ob, &s_160);
+      ChangeState(ob, &s_drmangle_hologram2_faded);
       return;
     }
 
-    if (ob->state == &s_158)
+    if (ob->state == &s_drmangle_hologram3)
     {
-      ChangeState(ob, &s_161);
+      ChangeState(ob, &s_drmangle_hologram3_faded);
       return;
     }
   }
   else if (US_RndT() > 110)
   {
-    ChangeState(ob, &s_157);
+    ChangeState(ob, &s_drmangle_hologram2);
     return;
   }
 
-  if (US_RndT() > 250 && ob->state != &s_158)
+  if (US_RndT() > 250 && ob->state != &s_drmangle_hologram3)
   {
-    ChangeState(ob, &s_158);
+    ChangeState(ob, &s_drmangle_hologram3);
   }
 
   // Never true, unless the actor were to be placed in level 11, which is not
@@ -1354,12 +1165,12 @@ void T_DrMangleHologram(objtype* ob)
       sub_22db0(ob);
     }
 
-    ob->state = &s_162;
+    ob->state = &s_drmangle_hologram_attacking;
   }
 }
 
 
-void sub_20f20(objtype* ob)
+void T_DrMangleHologramAttacking(objtype* ob)
 {
   Sint16 rand, xdelta;
 
@@ -1410,7 +1221,7 @@ void sub_20f20(objtype* ob)
     if (ob->top > player->bottom || ob->bottom < player->top)
       return;
 
-    if (sub_22a7a(ob->midx, ob->y + 15*PIXGLOBAL, &s_252) == -1)
+    if (SpawnEnemyShot(ob->midx, ob->y + 15*PIXGLOBAL, &s_252) == -1)
       return;
 
     {
@@ -1428,7 +1239,7 @@ void sub_20f20(objtype* ob)
 }
 
 
-void sub_2106d(objtype* ob)
+void R_DrMangleHologramAttacking(objtype* ob)
 {
   if (ob->top > player->top + 24)
   {
@@ -1455,14 +1266,14 @@ void SpawnDrMangle(Sint16 x, Sint16 y)
   new->xdir = 1;
   new->ydir = 1;
 
-  NewState(new, &s_163);
+  NewState(new, &s_drmangle_typing1);
 
   new->hitnorth = 1;
   new->ticcount = US_RndT() / 32;
 
   new->shootable = false;
   new->health = bosshealth = 200;
-  word_389AA = -1;
+  lastbosshealth = -1;
   unknown = bosshealth / 20 - 1;
 }
 
@@ -1473,13 +1284,13 @@ void T_DrMangle(objtype* ob)
 
   if (ob->health != bosshealth)
   {
-    word_389AA = bosshealth;
+    lastbosshealth = bosshealth;
     bosshealth = ob->health;
   }
 
   if (ob->obclass == inertobj)
   {
-    ob->state = &s_168;
+    ob->state = &s_drmangle_dying;
     ob->y += 32*PIXGLOBAL;
     ob->shootable = false;
     return;
@@ -1499,7 +1310,7 @@ void T_DrMangle(objtype* ob)
       shotorigin = ob->x;
     }
 
-    if (sub_22a7a(shotorigin, ob->y + 32*PIXGLOBAL, &s_255) == -1)
+    if (SpawnEnemyShot(shotorigin, ob->y + 32*PIXGLOBAL, &s_255) == -1)
     {
       return;
     }
@@ -1543,7 +1354,7 @@ void T_DrMangle(objtype* ob)
 
     SD_PlaySound(23);
     ob->shootable = true;
-    ob->state = &s_167;
+    ob->state = &s_drmangle_monster_jumping;
     return;
   }
   else
@@ -1564,7 +1375,7 @@ void T_DrMangle(objtype* ob)
 
     SD_PlaySound(23);
     ob->shootable = true;
-    ob->state = &s_167;
+    ob->state = &s_drmangle_monster_jumping;
     return;
   }
 }
@@ -1574,7 +1385,7 @@ void DrMangleDefeated(objtype* ob)
 {
   gamestate.mapon = 11;
   ob->hitnorth = 1;
-  ob->state = &s_170;
+  ob->state = &s_drmangle_dead2;
   ob->dmgflash = 0;
   playstate = ex_completed;
 }
@@ -1589,7 +1400,7 @@ void R_DrMangleJumping(objtype* ob)
 
   if (ob->hitnorth)
   {
-    ChangeState(ob, &s_165);
+    ChangeState(ob, &s_drmangle_monster1);
   }
 
   PLACESPRITE;

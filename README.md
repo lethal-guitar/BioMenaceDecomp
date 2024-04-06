@@ -1,37 +1,22 @@
 # BioMenace decompilation (WIP)
 
-This is a (heavily work in progress) decompilation/source code reconstruction of the game BioMenace,
+This is a work in progress decompilation/source code reconstruction of the game BioMenace,
 released by Apogee Software in 1993 for MS-DOS.
 
 Based on [K1n9_Duk3's reconstruction of Commander Keen 4 source code](https://github.com/sparky4/keen4-6).
-BioMenace uses the same engine and thus shares a lot of code with the 2nd Keen trilogy. Almost all of the game logic is completely unique to this game though.
+BioMenace is based on the same engine and thus shares a lot of code with the 2nd Keen trilogy.
+It's far from identical though - almost all of the game logic is completely unique to this game,
+and many other parts of the code have also been modified.
 
 
 ## Current state
 
-Only the episode 1 Shareware EXE (v1.1) is currently covered - the original version, not the freeware release (which contains registered version episode 1).
-
-All of the engine, menu system, and game loop/infrastructure code has been recreated and is mostly a byte-for-byte perfect match with the original EXE (aside from some function and variable addresses which aren't matching yet). The player control code has also been recreated, as well as most of the
-actor logic.
-
-Overall, about 95 % of the code has been recreated.
-
-Some variables and functions don't have meaningful names yet, and many places use magic numbers instead of enum values/constants.
-
-
-### Progress overview
-
-| What | Bytes | % done |
-| --- | --- | --- |
-| All code | 124,991 / 131,744 | 94.87 % |
-| Game logic code | 37,374 / 44,127 | 84.70 % |
-| Data | 89,984 / 89,984 | 100 % |
+This code produces a 100% identical binary to `BMENACE1.EXE` from the Shareware version v1.1 of the game (SHA-256 `c47d1114263b8cf3f27b776c8a858b4f89dc59d1a2cccfdddffc194277adc008`). Episodes 2 and 3 are still work in progress, as is the registered version episode 1.
 
 
 ### TODO
 
-* Complete `AUDIOBM1.H`
-* Decompile `BM_ACT3.C`
+* Complete `AUDIOBM1.H` and use constants where appropriate
 * Assign meaningful names to all functions and variables
 * Do registered version episode 1
 * Do episode 2
@@ -46,5 +31,7 @@ The `BIN` subdirectory of the installation should be in the `PATH`.
 
 Within the DOS environment, `cd` into the directory containing the code and run `make -a`.
 This creates a file called `BMENACE1.EXE`.
+Running `LZEXE\LZEXE.EXE BMENACE1.EXE` then produces an identical file to the original Shareware release.
 
-Running this file isn't too useful at this point. It will launch and you can navigate all the menus and start or load a game. You'll be able to walk and jump around in the levels. But nothing else is working.
+In order to play the game using this file, the game data from the original release is required since
+this repository doesn't contain any data files.

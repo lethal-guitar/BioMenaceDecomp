@@ -21,9 +21,9 @@
 #include "BM_ACT.H"
 #include "BM_DEF.H"
 
-// PLACEHOLDER
 
-Sint16 TABLE7[] = {
+
+Sint16 unused[] = {
   700, 700, 350, 175
 };
 
@@ -37,7 +37,7 @@ Sint16 pickupshapenums[] = {
 
 
 Sint16 word_399F8 = -2;
-Sint16 word_399FA = 0;
+Sint16 crusheractive = 0;
 
 
 void R_WalkCeiling();
@@ -661,7 +661,7 @@ void SpawnSlug(Sint16 x, Sint16 y)
 
   NewState(new, &s_slug_walk1);
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
   new->ticcount =  US_RndT() / 32;
   new->shootable = true;
 
@@ -691,7 +691,7 @@ void SpawnGhostlySlug(Sint16 x, Sint16 y)
 
   NewState(new, &s_ghostlyslug1);
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
   new->ticcount =  US_RndT() / 32;
   new->shootable = true;
 
@@ -890,7 +890,7 @@ void SpawnBomb(Sint16 x, Sint16 y)
 
   NewState(new, &s_bomb_idle);
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
   new->ticcount =  US_RndT() / 32;
   new->shootable = true;
 
@@ -995,7 +995,7 @@ void SpawnFireImp(Sint16 x, Sint16 y)
 
   NewState(new, &s_fireimp_walk1);
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
 }
 
 
@@ -1103,7 +1103,7 @@ void SpawnHedgehog(Sint16 x, Sint16 y)
       break;
   }
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
 }
 
 
@@ -1215,7 +1215,7 @@ void SpawnBrawler(Sint16 x, Sint16 y)
 
   NewState(new, &s_brawler_walk1);
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
   new->shootable = true;
 
   switch (gamestate.difficulty)
@@ -1285,7 +1285,7 @@ void SpawnCeilingWalker(Sint16 x, Sint16 y)
 
   NewState(new, &s_ceilwalker_walkceil1);
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
   new->ticcount =  US_RndT() / 32;
   new->shootable = true;
 
@@ -1386,7 +1386,7 @@ void SpawnCrawlingSlime(Sint16 x, Sint16 y)
 
   NewState(new, &s_crawlslime2);
 
-  new->hitnorth = true;
+  new->hitnorth = 1;
   new->shootable = true;
 
   switch (gamestate.difficulty)
