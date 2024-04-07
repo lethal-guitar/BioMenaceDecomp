@@ -1509,7 +1509,7 @@ void SpawnBulletImpact(Uint16 x, Uint16 y)
   if (gamestate.ammotype == AMMO_SUPERBULLET ||
       gamestate.ammotype == AMMO_PLASMABOLT)
   {
-    NewState(new, &s_253);
+    NewState(new, &s_bigshotimpact1);
   }
   else
   {

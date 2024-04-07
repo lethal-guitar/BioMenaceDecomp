@@ -1162,7 +1162,7 @@ void T_DrMangleHologram(objtype* ob)
     }
     else
     {
-      sub_22db0(ob);
+      SpawnNapalmBomb(ob);
     }
 
     ob->state = &s_drmangle_hologram_attacking;
@@ -1221,7 +1221,7 @@ void T_DrMangleHologramAttacking(objtype* ob)
     if (ob->top > player->bottom || ob->bottom < player->top)
       return;
 
-    if (SpawnEnemyShot(ob->midx, ob->y + 15*PIXGLOBAL, &s_252) == -1)
+    if (SpawnEnemyShot(ob->midx, ob->y + 15*PIXGLOBAL, &s_enemy_laser_shot) == -1)
       return;
 
     {
@@ -1310,7 +1310,7 @@ void T_DrMangle(objtype* ob)
       shotorigin = ob->x;
     }
 
-    if (SpawnEnemyShot(shotorigin, ob->y + 32*PIXGLOBAL, &s_255) == -1)
+    if (SpawnEnemyShot(shotorigin, ob->y + 32*PIXGLOBAL, &s_drmangleshot1) == -1)
     {
       return;
     }

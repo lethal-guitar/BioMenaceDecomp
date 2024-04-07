@@ -21,528 +21,448 @@
 #include "BM_ACT.H"
 #include "BM_DEF.H"
 
-extern statetype far s_230;
-extern statetype far s_231;
-extern statetype far s_232;
-extern statetype far s_233;
-extern statetype far s_234;
-extern statetype far s_235;
-extern statetype far s_236;
-extern statetype far s_237;
-extern statetype far s_238;
-extern statetype far s_239;
-extern statetype far s_240;
-extern statetype far s_241;
-extern statetype far s_242;
-extern statetype far s_243;
-extern statetype far s_244;
-extern statetype far s_245;
-extern statetype far s_246;
-extern statetype far s_247;
-extern statetype far s_248;
-extern statetype far s_249;
-extern statetype far s_250;
-extern statetype far s_251;
-extern statetype far s_252;
-extern statetype far s_253;
-extern statetype far s_254;
-extern statetype far s_255;
-extern statetype far s_256;
-extern statetype far s_257;
-extern statetype far s_258;
-extern statetype far s_259;
-extern statetype far s_260;
-extern statetype far s_261;
-extern statetype far s_262;
-extern statetype far s_263;
-extern statetype far s_264;
-extern statetype far s_265;
-extern statetype far s_266;
-extern statetype far s_267;
-extern statetype far s_268;
-extern statetype far s_269;
-extern statetype far s_270;
-extern statetype far s_271;
-extern statetype far s_272;
-extern statetype far s_273;
-extern statetype far s_274;
-extern statetype far s_275;
-extern statetype far s_276;
-extern statetype far s_277;
-extern statetype far s_278;
-extern statetype far s_279;
-extern statetype far s_280;
-extern statetype far s_281;
-extern statetype far s_282;
-extern statetype far s_283;
-extern statetype far s_284;
-extern statetype far s_285;
-extern statetype far s_286;
-extern statetype far s_287;
-extern statetype far s_288;
-extern statetype far s_289;
-extern statetype far s_290;
-extern statetype far s_291;
-extern statetype far s_292;
-extern statetype far s_293;
-extern statetype far s_294;
-extern statetype far s_295;
-extern statetype far s_296;
-extern statetype far s_297;
-extern statetype far s_298;
-extern statetype far s_299;
-extern statetype far s_300;
-extern statetype far s_301;
-extern statetype far s_302;
-extern statetype far s_303;
-extern statetype far s_304;
-extern statetype far s_305;
-extern statetype far s_306;
-extern statetype far s_307;
-extern statetype far s_308;
-
 
 Sint16 skullmanactivestate = -2;
 Sint16 crusheractive = 0;
 
 
-void T_ExplodingEnemy();
-void sub_22b98();
-void sub_22be7();
-void sub_22d16();
-void sub_22db0();
-void sub_22e5c();
-void sub_22f1a();
-void sub_22f3f();
-void sub_22fa5();
-void T_LaserGunner_Idle();
-void T_LaserGunner_Shooting();
-void C_EnemyLaserShot();
-void R_EnemyLaserShot();
-void R_PushBlock_OnGround();
-void R_PushBlock_Falling();
-void C_PushBlock();
-void T_FallingBlock();
-void R_FallingBlock();
-void C_FallingBlock();
-void T_Crusher_Waiting();
-void T_Crusher_Moving();
-void R_Crusher();
-void C_Crusher();
-void sub_2370e();
-void sub_237bf();
-void SpawnSlimeDrop();
+void T_ExplodingEnemy(objtype* ob);
+void T_TankBot_Waiting(objtype* ob);
+void T_TankBot_Moving(objtype* ob);
+void SpawnTankBotShot(objtype* ob);
+void R_TankBotShot(objtype* ob);
+void T_NapalmFire(objtype* ob);
+void R_NapalmBomb_Flying(objtype* ob);
+void R_NapalmBomb_Landing(objtype* ob);
+void T_LaserGunner_Idle(objtype* ob);
+void T_LaserGunner_Shooting(objtype* ob);
+void C_EnemyLaserShot(objtype* ob, objtype* hit);
+void R_EnemyLaserShot(objtype* ob);
+void R_PushBlock_OnGround(objtype* ob);
+void R_PushBlock_Falling(objtype* ob);
+void C_PushBlock(objtype* ob, objtype* hit);
+void T_FallingBlock(objtype* ob);
+void R_FallingBlock(objtype* ob);
+void C_FallingBlock(objtype* ob, objtype* hit);
+void T_Crusher_Waiting(objtype* ob);
+void T_Crusher_Moving(objtype* ob);
+void R_Crusher(objtype* ob);
+void C_Crusher(objtype* ob, objtype* hit);
+void T_BounceBot(objtype* ob);
+void R_BounceBot(objtype* ob);
+void SpawnSlimeDrop(objtype* ob);
 void SlimeDropperDropSlime(objtype* ob);
-void T_SlimeDropEmerging();
-void R_SlimeDrop();
-void T_LaserTurret();
-void LaserTurretFireShot();
-void C_LandMine();
-void R_BounceAround();
-void R_SkullmanHand();
-void R_SkullmanHand_Attack_L();
-void R_SkullmanHand_Attack_R();
-void T_SkullmanHand_R();
-void T_SkullmanHand_L();
-void T_SkullmanHand_R2();
-void T_SkullmanHand_L2();
-void T_SkullMan();
-void T_SparkShooter();
-void R_SparkShot();
-void C_RespawnBeacon();
+void T_SlimeDropEmerging(objtype* ob);
+void R_SlimeDrop(objtype* ob);
+void T_LaserTurret(objtype* ob);
+void LaserTurretFireShot(objtype* ob);
+void C_LandMine(objtype* ob, objtype* hit);
+void R_BounceAround(objtype* ob);
+void R_SkullmanHand(objtype* ob);
+void R_SkullmanHand_Attack_L(objtype* ob);
+void R_SkullmanHand_Attack_R(objtype* ob);
+void T_SkullmanHand_R(objtype* ob);
+void T_SkullmanHand_L(objtype* ob);
+void T_SkullmanHand_R2(objtype* ob);
+void T_SkullmanHand_L2(objtype* ob);
+void T_SkullMan(objtype* ob);
+void T_SparkShooter(objtype* ob);
+void R_SparkShot(objtype* ob);
+void C_RespawnBeacon(objtype* ob, objtype* hit);
 
-statetype far s_230 = { /* 32f10 */
+
+statetype far s_bigexplosion1 = { /* 32f10 */
   BIG_EXPLOSION1_SPR, BIG_EXPLOSION1_SPR,
   step, false, ps_none, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_231};
+  NULL, NULL, R_Draw, &s_bigexplosion2};
 
-statetype far s_231 = { /* 32f30 */
+statetype far s_bigexplosion2 = { /* 32f30 */
   BIG_EXPLOSION2_SPR, BIG_EXPLOSION2_SPR,
   step, false, ps_none, 12, 0, 0,
-  NULL, NULL, R_Draw, &s_232};
+  NULL, NULL, R_Draw, &s_bigexplosion3};
 
-statetype far s_232 = { /* 32f50 */
+statetype far s_bigexplosion3 = { /* 32f50 */
   BIG_EXPLOSION3_SPR, BIG_EXPLOSION3_SPR,
   step, false, ps_none, 5, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_233 = { /* 32f70 */
+statetype far s_tankbot_dying = { /* 32f70 */
   TANKBOT1_SPR, TANKBOT1_SPR,
   stepthink, false, ps_tofloor, 6, 0, 0,
-  T_ExplodingEnemy, NULL, R_Draw, &s_233};
+  T_ExplodingEnemy, NULL, R_Draw, &s_tankbot_dying};
 
-statetype far s_234 = { /* 32f90 */
+statetype far s_tankbot_waiting = { /* 32f90 */
   TANKBOT1_SPR, TANKBOT1_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  sub_22b98, NULL, R_Draw, &s_234};
+  T_TankBot_Waiting, NULL, R_Draw, &s_tankbot_waiting};
 
-statetype far s_235 = { /* 32fb0 */
+statetype far s_tankbot_moving1 = { /* 32fb0 */
   TANKBOT1_SPR, TANKBOT1_SPR,
   slide, false, ps_tofloor, 20, 8, 0,
-  NULL, NULL, R_Walk, &s_236};
+  NULL, NULL, R_Walk, &s_tankbot_moving2};
 
-statetype far s_236 = { /* 32fd0 */
+statetype far s_tankbot_moving2 = { /* 32fd0 */
   TANKBOT2_SPR, TANKBOT2_SPR,
   slide, false, ps_tofloor, 20, 8, 0,
-  sub_22be7, NULL, R_Walk, &s_235};
+  T_TankBot_Moving, NULL, R_Walk, &s_tankbot_moving1};
 
-statetype far s_237 = { /* 32ff0 */
+statetype far s_tankbot_shooting = { /* 32ff0 */
   TANKBOT_SHOOT_SPR, TANKBOT_SHOOT_SPR,
   step, false, ps_tofloor, 7, 0, 0,
-  sub_22d16, NULL, R_Draw, &s_234};
+  SpawnTankBotShot, NULL, R_Draw, &s_tankbot_waiting};
 
-statetype far s_238 = { /* 33010 */
+statetype far s_tankbot_launchbomb = { /* 33010 */
   TANKBOT1_SPR, TANKBOT1_SPR,
   step, false, ps_tofloor, 7, 0, 0,
-  sub_22db0, NULL, R_Draw, &s_234};
+  SpawnNapalmBomb, NULL, R_Draw, &s_tankbot_waiting};
 
-statetype far s_239 = { /* 33030 */
+statetype far s_tankbot_bomb_flying = { /* 33030 */
   TANKBOT_SHOT_FLYING_SPR, TANKBOT_SHOT_FLYING_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, NULL, sub_22f3f, &s_239};
+  T_Projectile, NULL, R_NapalmBomb_Flying, &s_tankbot_bomb_flying};
 
-statetype far s_240 = { /* 33050 */
+statetype far s_tankbot_bomb_landing = { /* 33050 */
   TANKBOT_SHOT_LANDING_SPR, TANKBOT_SHOT_LANDING_SPR,
   stepthink, false, ps_none, 5, 8, 65504,
-  NULL, NULL, sub_22fa5, &s_240};
+  NULL, NULL, R_NapalmBomb_Landing, &s_tankbot_bomb_landing};
 
-statetype far s_241 = { /* 33070 */
+statetype far s_tankbot_shot = { /* 33070 */
   TANKBOT_BIG_SHOT_SPR, TANKBOT_BIG_SHOT_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  T_Projectile, NULL, sub_22e5c, &s_241};
+  T_Projectile, NULL, R_TankBotShot, &s_tankbot_shot};
 
-statetype far s_242 = { /* 33090 */
+statetype far s_tankbot_shot_explode1 = { /* 33090 */
   SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
   step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_243};
+  NULL, NULL, R_Draw, &s_tankbot_shot_explode2};
 
-statetype far s_243 = { /* 330b0 */
+statetype far s_tankbot_shot_explode2 = { /* 330b0 */
   SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
   step, false, ps_none, 10, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_244 = { /* 330d0 */
+statetype far s_napalmfire1 = { /* 330d0 */
   SMALL_FIRE1_SPR, SMALL_FIRE1_SPR,
   step, true, ps_tofloor, 5, 0, 0,
-  sub_22f1a, NULL, R_Draw, &s_245};
+  T_NapalmFire, NULL, R_Draw, &s_napalmfire2};
 
-statetype far s_245 = { /* 330f0 */
+statetype far s_napalmfire2 = { /* 330f0 */
   SMALL_FIRE2_SPR, SMALL_FIRE2_SPR,
   step, true, ps_tofloor, 5, 0, 0,
-  sub_22f1a, NULL, R_Draw, &s_246};
+  T_NapalmFire, NULL, R_Draw, &s_napalmfire3};
 
-statetype far s_246 = { /* 33110 */
+statetype far s_napalmfire3 = { /* 33110 */
   SMALL_FIRE3_SPR, SMALL_FIRE3_SPR,
   step, true, ps_tofloor, 5, 0, 0,
-  sub_22f1a, NULL, R_Draw, &s_244};
+  T_NapalmFire, NULL, R_Draw, &s_napalmfire1};
 
-statetype far s_247 = { /* 33130 */
+statetype far s_lasergunner_idle = { /* 33130 */
   LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
   step, false, ps_tofloor, 6, 0, 0,
-  T_LaserGunner_Idle, NULL, R_Draw, &s_247};
+  T_LaserGunner_Idle, NULL, R_Draw, &s_lasergunner_idle};
 
-statetype far s_248 = { /* 33150 */
+statetype far s_lasergunner_attack1 = { /* 33150 */
   LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
   step, true, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_249};
+  NULL, NULL, R_Draw, &s_lasergunner_attack2};
 
-statetype far s_249 = { /* 33170 */
+statetype far s_lasergunner_attack2 = { /* 33170 */
   LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
   step, true, ps_tofloor, 4, 0, 0,
-  NULL, NULL, R_Draw, &s_250};
+  NULL, NULL, R_Draw, &s_lasergunner_attack3};
 
-statetype far s_250 = { /* 33190 */
+statetype far s_lasergunner_attack3 = { /* 33190 */
   LASERGUNNER_SHOOT_L_SPR, LASERGUNNER_SHOOT_R_SPR,
   step, false, ps_tofloor, 6, 0, 0,
-  T_LaserGunner_Shooting, NULL, R_Draw, &s_249};
+  T_LaserGunner_Shooting, NULL, R_Draw, &s_lasergunner_attack2};
 
-statetype far s_251 = { /* 331b0 */
+statetype far s_lasergunner_attack4 = { /* 331b0 */
   LASERGUNNER_IDLE_L_SPR, LASERGUNNER_IDLE_R_SPR,
   stepthink, false, ps_tofloor, 6, 0, 0,
-  T_ExplodingEnemy, NULL, R_Draw, &s_251};
+  T_ExplodingEnemy, NULL, R_Draw, &s_lasergunner_attack4};
 
-statetype far s_252 = { /* 331d0 */
+statetype far s_enemy_laser_shot = { /* 331d0 */
   LASER_BLAST_BLUE_SPR, LASER_BLAST_BLUE_SPR,
   stepthink, true, ps_none, 8, 0, 0,
-  T_Velocity, C_EnemyLaserShot, R_EnemyLaserShot, &s_252};
+  T_Velocity, C_EnemyLaserShot, R_EnemyLaserShot, &s_enemy_laser_shot};
 
-statetype far s_253 = { /* 331f0 */
+statetype far s_bigshotimpact1 = { /* 331f0 */
   SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
   step, true, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_254};
+  NULL, NULL, R_Draw, &s_bigshotimpact2};
 
-statetype far s_254 = { /* 33210 */
+statetype far s_bigshotimpact2 = { /* 33210 */
   SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
   step, true, ps_none, 10, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_255 = { /* 33230 */
+statetype far s_drmangleshot1 = { /* 33230 */
   SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
   stepthink, true, ps_none, 8, 0, 0,
-  T_Velocity, C_EnemyLaserShot, R_EnemyLaserShot, &s_256};
+  T_Velocity, C_EnemyLaserShot, R_EnemyLaserShot, &s_drmangleshot2};
 
-statetype far s_256 = { /* 33250 */
+statetype far s_drmangleshot2 = { /* 33250 */
   SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
   stepthink, true, ps_none, 8, 0, 0,
-  T_Velocity, C_EnemyLaserShot, R_EnemyLaserShot, &s_255};
+  T_Velocity, C_EnemyLaserShot, R_EnemyLaserShot, &s_drmangleshot1};
 
-statetype far s_257 = { /* 33270 */
+statetype far s_pushblock = { /* 33270 */
   PUSHBLOCKSPR, PUSHBLOCKSPR,
   stepthink, false, ps_tofloor, 6, 0, 1,
-  NULL, C_PushBlock, R_PushBlock_OnGround, &s_257};
+  NULL, C_PushBlock, R_PushBlock_OnGround, &s_pushblock};
 
-statetype far s_258 = { /* 33290 */
+statetype far s_pushblock_falling = { /* 33290 */
   PUSHBLOCKSPR, PUSHBLOCKSPR,
   stepthink, false, ps_none, 0, 0, 0,
-  T_Projectile, C_PushBlock, R_PushBlock_Falling, &s_257};
+  T_Projectile, C_PushBlock, R_PushBlock_Falling, &s_pushblock};
 
-statetype far s_259 = { /* 332b0 */
+statetype far s_fallingblock_idle = { /* 332b0 */
   FALLINGBLOCKSPR, FALLINGBLOCKSPR,
   stepthink, false, ps_none, 1, 0, 0,
-  T_FallingBlock, C_FallingBlock, R_Draw, &s_259};
+  T_FallingBlock, C_FallingBlock, R_Draw, &s_fallingblock_idle};
 
-statetype far s_260 = { /* 332d0 */
+statetype far s_fallingblock_falling = { /* 332d0 */
   FALLINGBLOCKSPR, FALLINGBLOCKSPR,
   stepthink, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, R_FallingBlock, &s_260};
+  T_Projectile, NULL, R_FallingBlock, &s_fallingblock_falling};
 
-statetype far s_261 = { /* 332f0 */
+statetype far s_crusher_idle = { /* 332f0 */
   CRUSHERBLOCKSPR, CRUSHERBLOCKSPR,
   stepthink, false, ps_none, 6, 0, 0,
-  T_Crusher_Waiting, NULL, R_Draw, &s_261};
+  T_Crusher_Waiting, NULL, R_Draw, &s_crusher_idle};
 
-statetype far s_262 = { /* 33310 */
+statetype far s_crusher_moving = { /* 33310 */
   CRUSHERBLOCKSPR, CRUSHERBLOCKSPR,
   stepthink, false, ps_none, 5, 0, 8,
-  T_Crusher_Moving, C_Crusher, R_Crusher, &s_262};
+  T_Crusher_Moving, C_Crusher, R_Crusher, &s_crusher_moving};
 
-statetype far s_263 = { /* 33330 */
+statetype far s_bouncebot1 = { /* 33330 */
   BOUNCEBOT1_SPR, BOUNCEBOT1_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_264};
+  T_BounceBot, NULL, R_BounceBot, &s_bouncebot2};
 
-statetype far s_264 = { /* 33350 */
+statetype far s_bouncebot2 = { /* 33350 */
   BOUNCEBOT3_SPR, BOUNCEBOT3_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_265};
+  T_BounceBot, NULL, R_BounceBot, &s_bouncebot3};
 
-statetype far s_265 = { /* 33370 */
+statetype far s_bouncebot3 = { /* 33370 */
   BOUNCEBOT4_SPR, BOUNCEBOT4_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_266};
+  T_BounceBot, NULL, R_BounceBot, &s_bouncebot4};
 
-statetype far s_266 = { /* 33390 */
+statetype far s_bouncebot4 = { /* 33390 */
   BOUNCEBOT5_SPR, BOUNCEBOT5_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_263};
+  T_BounceBot, NULL, R_BounceBot, &s_bouncebot1};
 
-statetype far s_267 = { /* 333b0 */
+statetype far s_bouncebot5 = { /* 333b0 */
   BOUNCEBOT2_SPR, BOUNCEBOT2_SPR,
   stepthink, false, ps_none, 15, 0, 0,
-  sub_2370e, NULL, sub_237bf, &s_263};
+  T_BounceBot, NULL, R_BounceBot, &s_bouncebot1};
 
-statetype far s_268 = { /* 333d0 */
+statetype far s_slimedropper1 = { /* 333d0 */
   SLIME_DROPPER1_SPR, SLIME_DROPPER1_SPR,
   step, false, ps_none, 50, 0, 0,
-  NULL, NULL, R_Draw, &s_269};
+  NULL, NULL, R_Draw, &s_slimedropper2};
 
-statetype far s_269 = { /* 333f0 */
+statetype far s_slimedropper2 = { /* 333f0 */
   SLIME_DROPPER2_SPR, SLIME_DROPPER2_SPR,
   step, false, ps_none, 50, 0, 0,
-  NULL, NULL, R_Draw, &s_270};
+  NULL, NULL, R_Draw, &s_slimedropper3};
 
-statetype far s_270 = { /* 33410 */
+statetype far s_slimedropper3 = { /* 33410 */
   SLIME_DROPPER3_SPR, SLIME_DROPPER3_SPR,
   step, false, ps_none, 1, 0, 0,
-  SlimeDropperDropSlime, NULL, R_Draw, &s_268};
+  SlimeDropperDropSlime, NULL, R_Draw, &s_slimedropper1};
 
-statetype far s_271 = { /* 33430 */
+statetype far s_slime_drop1 = { /* 33430 */
   SLIME_DROP1_SPR, SLIME_DROP1_SPR,
   step, false, ps_none, 5, 0, 0,
-  NULL, NULL, R_Draw, &s_272};
+  NULL, NULL, R_Draw, &s_slime_drop2};
 
-statetype far s_272 = { /* 33450 */
+statetype far s_slime_drop2 = { /* 33450 */
   SLIME_DROP2_SPR, SLIME_DROP2_SPR,
   step, false, ps_none, 5, 0, 0,
-  T_SlimeDropEmerging, NULL, R_Draw, &s_271};
+  T_SlimeDropEmerging, NULL, R_Draw, &s_slime_drop1};
 
-statetype far s_273 = { /* 33470 */
+statetype far s_slime_drop3 = { /* 33470 */
   SLIME_DROP3_SPR, SLIME_DROP3_SPR,
   stepthink, false, ps_none, 0, 0, 0,
-  T_Projectile, NULL, R_SlimeDrop, &s_273};
+  T_Projectile, NULL, R_SlimeDrop, &s_slime_drop3};
 
-statetype far s_274 = { /* 33490 */
+statetype far s_slimedrop_splat1 = { /* 33490 */
   SLIME_DROP_SPLAT1_SPR, SLIME_DROP_SPLAT1_SPR,
   step, false, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_275};
+  NULL, NULL, R_Draw, &s_slimedrop_splat2};
 
-statetype far s_275 = { /* 334b0 */
+statetype far s_slimedrop_splat2 = { /* 334b0 */
   SLIME_DROP_SPLAT2_SPR, SLIME_DROP_SPLAT2_SPR,
   step, false, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_276};
+  NULL, NULL, R_Draw, &s_slimedrop_splat3};
 
-statetype far s_276 = { /* 334d0 */
+statetype far s_slimedrop_splat3 = { /* 334d0 */
   SLIME_DROP_SPLAT3_SPR, SLIME_DROP_SPLAT3_SPR,
   step, false, ps_tofloor, 15, 0, 0,
-  NULL, NULL, R_Draw, &s_277};
+  NULL, NULL, R_Draw, &s_slimedrop_splat4};
 
-statetype far s_277 = { /* 334f0 */
+statetype far s_slimedrop_splat4 = { /* 334f0 */
   SLIME_DROP_SPLAT4_SPR, SLIME_DROP_SPLAT4_SPR,
   step, false, ps_tofloor, 15, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_278 = { /* 33510 */
+statetype far s_turret_idle = { /* 33510 */
   TURRET_IDLE_L_SPR, TURRET_IDLE_R_SPR,
   step, false, ps_tofloor, 6, 0, 0,
-  T_LaserTurret, NULL, R_Draw, &s_278};
+  T_LaserTurret, NULL, R_Draw, &s_turret_idle};
 
-statetype far s_279 = { /* 33530 */
+statetype far s_turret_attack1 = { /* 33530 */
   TURRET_READY_L_SPR, TURRET_READY_R_SPR,
   step, true, ps_tofloor, 40, 0, 0,
-  NULL, NULL, R_Draw, &s_280};
+  NULL, NULL, R_Draw, &s_turret_attack2};
 
-statetype far s_280 = { /* 33550 */
+statetype far s_turret_attack2 = { /* 33550 */
   TURRET_READY_L_SPR, TURRET_READY_R_SPR,
   step, true, ps_tofloor, 4, 0, 0,
-  NULL, NULL, R_Draw, &s_281};
+  NULL, NULL, R_Draw, &s_turret_attack3};
 
-statetype far s_281 = { /* 33570 */
+statetype far s_turret_attack3 = { /* 33570 */
   TURRET_SHOOT_L_SPR, TURRET_SHOOT_R_SPR,
   step, false, ps_tofloor, 6, 0, 0,
-  LaserTurretFireShot, NULL, R_Draw, &s_280};
+  LaserTurretFireShot, NULL, R_Draw, &s_turret_attack2};
 
-statetype far s_282 = { /* 33590 */
+statetype far s_asteroid1 = { /* 33590 */
   ASTEROID1_SPR, ASTEROID1_SPR,
   slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, R_BounceAround, &s_283};
+  NULL, NULL, R_BounceAround, &s_asteroid2};
 
-statetype far s_283 = { /* 335b0 */
+statetype far s_asteroid2 = { /* 335b0 */
   ASTEROID2_SPR, ASTEROID2_SPR,
   slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, R_BounceAround, &s_284};
+  NULL, NULL, R_BounceAround, &s_asteroid3};
 
-statetype far s_284 = { /* 335d0 */
+statetype far s_asteroid3 = { /* 335d0 */
   ASTEROID3_SPR, ASTEROID3_SPR,
   slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, R_BounceAround, &s_285};
+  NULL, NULL, R_BounceAround, &s_asteroid4};
 
-statetype far s_285 = { /* 335f0 */
+statetype far s_asteroid4 = { /* 335f0 */
   ASTEROID4_SPR, ASTEROID4_SPR,
   slide, false, ps_none, 10, 24, 24,
-  NULL, NULL, R_BounceAround, &s_282};
+  NULL, NULL, R_BounceAround, &s_asteroid1};
 
-statetype far s_286 = { /* 33610 */
+statetype far s_landmine1 = { /* 33610 */
   LANDMINE1_SPR, LANDMINE1_SPR,
   slide, false, ps_none, 10, 0, 0,
-  NULL, C_LandMine, R_BounceAround, &s_287};
+  NULL, C_LandMine, R_BounceAround, &s_landmine2};
 
-statetype far s_287 = { /* 33630 */
+statetype far s_landmine2 = { /* 33630 */
   LANDMINE2_SPR, LANDMINE2_SPR,
   slide, false, ps_none, 10, 0, 0,
-  NULL, C_LandMine, R_BounceAround, &s_286};
+  NULL, C_LandMine, R_BounceAround, &s_landmine1};
 
-statetype far s_288 = { /* 33650 */
+statetype far s_skullman1 = { /* 33650 */
   SKULLMAN1_SPR, SKULLMAN1_SPR,
   stepthink, false, ps_none, 35, 0, 0,
-  T_SkullMan, NULL, R_Draw, &s_288};
+  T_SkullMan, NULL, R_Draw, &s_skullman1};
 
-statetype far s_289 = { /* 33670 */
+statetype far s_skullman2 = { /* 33670 */
   SKULLMAN2_SPR, SKULLMAN2_SPR,
   stepthink, false, ps_none, 35, 0, 0,
-  T_SkullMan, NULL, R_Draw, &s_289};
+  T_SkullMan, NULL, R_Draw, &s_skullman2};
 
-statetype far s_290 = { /* 33690 */
+statetype far s_skullmanhand_r1 = { /* 33690 */
   SKULLMAN_HAND_R_SPR, SKULLMAN_HAND_R_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  T_SkullmanHand_R, NULL, R_Draw, &s_290};
+  T_SkullmanHand_R, NULL, R_Draw, &s_skullmanhand_r1};
 
-statetype far s_291 = { /* 336b0 */
+statetype far s_skullmanhand_l1 = { /* 336b0 */
   SKULLMAN_HAND_L_SPR, SKULLMAN_HAND_L_SPR,
   stepthink, false, ps_none, 10, 0, 0,
-  T_SkullmanHand_L, NULL, R_Draw, &s_291};
+  T_SkullmanHand_L, NULL, R_Draw, &s_skullmanhand_l1};
 
-statetype far s_292 = { /* 336d0 */
+statetype far s_skullmanhand_r2 = { /* 336d0 */
   SKULLMAN_HAND_R_SPR, SKULLMAN_HAND_R_SPR,
   slide, false, ps_none, 10, 24, 24,
-  T_SkullmanHand_R2, NULL, R_SkullmanHand, &s_292};
+  T_SkullmanHand_R2, NULL, R_SkullmanHand, &s_skullmanhand_r2};
 
-statetype far s_293 = { /* 336f0 */
+statetype far s_skullmanhand_l2 = { /* 336f0 */
   SKULLMAN_HAND_L_SPR, SKULLMAN_HAND_L_SPR,
   slide, false, ps_none, 10, 24, 24,
-  T_SkullmanHand_L2, NULL, R_SkullmanHand, &s_293};
+  T_SkullmanHand_L2, NULL, R_SkullmanHand, &s_skullmanhand_l2};
 
-statetype far s_294 = { /* 33710 */
+statetype far s_skullmanhand_attack_r1 = { /* 33710 */
   SKULLMAN_HAND_ATTACK1_SPR, SKULLMAN_HAND_ATTACK1_SPR,
   stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, R_SkullmanHand_Attack_L, &s_295};
+  T_Projectile, NULL, R_SkullmanHand_Attack_L, &s_skullmanhand_attack_r2};
 
-statetype far s_295 = { /* 33730 */
+statetype far s_skullmanhand_attack_r2 = { /* 33730 */
   SKULLMAN_HAND_ATTACK2_SPR, SKULLMAN_HAND_ATTACK2_SPR,
   stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, R_SkullmanHand_Attack_L, &s_294};
+  T_Projectile, NULL, R_SkullmanHand_Attack_L, &s_skullmanhand_attack_r1};
 
-statetype far s_296 = { /* 33750 */
+statetype far s_skullmanhand_attack_l1 = { /* 33750 */
   SKULLMAN_HAND_ATTACK1_SPR, SKULLMAN_HAND_ATTACK1_SPR,
   stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, R_SkullmanHand_Attack_R, &s_297};
+  T_Projectile, NULL, R_SkullmanHand_Attack_R, &s_skullmanhand_attack_l2};
 
-statetype far s_297 = { /* 33770 */
+statetype far s_skullmanhand_attack_l2 = { /* 33770 */
   SKULLMAN_HAND_ATTACK2_SPR, SKULLMAN_HAND_ATTACK2_SPR,
   stepthink, false, ps_none, 20, 0, 0,
-  T_Projectile, NULL, R_SkullmanHand_Attack_R, &s_296};
+  T_Projectile, NULL, R_SkullmanHand_Attack_R, &s_skullmanhand_attack_l1};
 
-statetype far s_298 = { /* 33790 */
+statetype far s_sparkshooter1 = { /* 33790 */
   0, 0, step, false, ps_none, 50, 0, 0,
-  NULL, NULL, R_Draw, &s_299};
+  NULL, NULL, R_Draw, &s_sparkshooter2};
 
-statetype far s_299 = { /* 337b0 */
+statetype far s_sparkshooter2 = { /* 337b0 */
   0, 0, step, false, ps_none, 1, 0, 0,
-  T_SparkShooter, NULL, R_Draw, &s_298};
+  T_SparkShooter, NULL, R_Draw, &s_sparkshooter1};
 
-statetype far s_300 = { /* 337d0 */
+statetype far s_sparkshot1 = { /* 337d0 */
   SPARKSHOT1_SPR, SPARKSHOT1_SPR,
   stepthink, false, ps_none, 8, 0, 0,
-  T_Velocity, NULL, R_SparkShot, &s_301};
+  T_Velocity, NULL, R_SparkShot, &s_sparkshot2};
 
-statetype far s_301 = { /* 337f0 */
+statetype far s_sparkshot2 = { /* 337f0 */
   SPARKSHOT2_SPR, SPARKSHOT2_SPR,
   stepthink, false, ps_none, 8, 0, 0,
-  T_Velocity, NULL, R_SparkShot, &s_300};
+  T_Velocity, NULL, R_SparkShot, &s_sparkshot1};
 
-statetype far s_302 = { /* 33810 */
+statetype far s_sparkshot_explode1 = { /* 33810 */
   SHOT_EXPLODE1_SPR, SHOT_EXPLODE1_SPR,
   step, false, ps_none, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_303};
+  NULL, NULL, R_Draw, &s_sparkshot_explode2};
 
-statetype far s_303 = { /* 33830 */
+statetype far s_sparkshot_explode2 = { /* 33830 */
   SHOT_EXPLODE2_SPR, SHOT_EXPLODE2_SPR,
   step, false, ps_none, 10, 0, 0,
   NULL, NULL, R_Draw, NULL};
 
-statetype far s_304 = { /* 33850 */
+statetype far s_respawn_beacon_idle = { /* 33850 */
   RESPAWN_BEACON_INACTIVE_SPR, RESPAWN_BEACON_INACTIVE_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  NULL, C_RespawnBeacon, R_Draw, &s_304};
+  NULL, C_RespawnBeacon, R_Draw, &s_respawn_beacon_idle};
 
-statetype far s_305 = { /* 33870 */
+statetype far s_respawn_beacon1 = { /* 33870 */
   RESPAWN_BEACON_ACTIVE1_SPR, RESPAWN_BEACON_ACTIVE1_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_306};
+  NULL, NULL, R_Draw, &s_respawn_beacon2};
 
-statetype far s_306 = { /* 33890 */
+statetype far s_respawn_beacon2 = { /* 33890 */
   RESPAWN_BEACON_ACTIVE2_SPR, RESPAWN_BEACON_ACTIVE2_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_307};
+  NULL, NULL, R_Draw, &s_respawn_beacon3};
 
-statetype far s_307 = { /* 338b0 */
+statetype far s_respawn_beacon3 = { /* 338b0 */
   RESPAWN_BEACON_ACTIVE3_SPR, RESPAWN_BEACON_ACTIVE3_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_308};
+  NULL, NULL, R_Draw, &s_respawn_beacon4};
 
-statetype far s_308 = { /* 338d0 */
+statetype far s_respawn_beacon4 = { /* 338d0 */
   RESPAWN_BEACON_ACTIVE4_SPR, RESPAWN_BEACON_ACTIVE4_SPR,
   step, false, ps_tofloor, 10, 0, 0,
-  NULL, NULL, R_Draw, &s_305};
+  NULL, NULL, R_Draw, &s_respawn_beacon1};
 
 
 void T_ExplodingEnemy(objtype* ob)
@@ -600,7 +520,7 @@ void SpawnBigExplosion(Sint16 x, Sint16 y)
   new->needtoclip = cl_noclip;
   new->priority = 3;
 
-  NewState(new, &s_230);
+  NewState(new, &s_bigexplosion1);
 }
 
 
@@ -637,7 +557,7 @@ void SpawnTankBot(Sint16 x, Sint16 y)
   new->xdir = 1;
   new->ydir = 1;
 
-  NewState(new, &s_234);
+  NewState(new, &s_tankbot_waiting);
 
   new->hitnorth = 1;
   new->ticcount =  US_RndT() / 32;
@@ -656,7 +576,7 @@ void SpawnTankBot(Sint16 x, Sint16 y)
 }
 
 
-void sub_22b98(objtype* ob)
+void T_TankBot_Waiting(objtype* ob)
 {
   ob->needtoreact = true;
 
@@ -664,18 +584,18 @@ void sub_22b98(objtype* ob)
   {
     ob->temp1 = US_RndT() / 8;
     ob->shootable = false;
-    ChangeState(ob, &s_233);
+    ChangeState(ob, &s_tankbot_dying);
     return;
   }
 
   if (US_RndT() < 160)
   {
-    ob->state = &s_235;
+    ob->state = &s_tankbot_moving1;
   }
 }
 
 
-void sub_22be7(objtype* ob)
+void T_TankBot_Moving(objtype* ob)
 {
   ob->needtoreact = true;
 
@@ -683,30 +603,31 @@ void sub_22be7(objtype* ob)
   {
     ob->temp1 = US_RndT() / 8;
     ob->shootable = false;
-    ob->state = &s_233;
+    ob->state = &s_tankbot_dying;
     return;
   }
 
   if (US_RndT() < 20)
   {
-    ob->state = &s_234;
+    ob->state = &s_tankbot_waiting;
   }
   else
   {
     if (US_RndT() < 100)
     {
-      ob->state = &s_237;
+      ob->state = &s_tankbot_shooting;
     }
 
     if (US_RndT() > 200)
     {
-      ob->state = &s_238;
+      ob->state = &s_tankbot_launchbomb;
     }
   }
 }
 
 
-void sub_22c59(objtype* ob)
+// Unused
+void R_TankBot_Moving(objtype* ob)
 {
   if (ob->xdir == 1 && ob->hitwest)
   {
@@ -733,14 +654,14 @@ void sub_22c59(objtype* ob)
 
   if (ob->health <= 0)
   {
-    ob->state = &s_233;
+    ob->state = &s_tankbot_dying;
   }
 
   PLACESPRITE;
 }
 
 
-void sub_22d16(objtype* ob)
+void SpawnTankBotShot(objtype* ob)
 {
   GetNewObj(true);
 
@@ -753,13 +674,13 @@ void sub_22d16(objtype* ob)
   new->xspeed = new->xdir*132 + (US_RndT() >> 4);
   new->yspeed = -3;
 
-  NewState(new, &s_241);
+  NewState(new, &s_tankbot_shot);
 
   SD_PlaySound(30);
 }
 
 
-void sub_22db0(objtype* ob)
+void SpawnNapalmBomb(objtype* ob)
 {
   SD_PlaySound(13);
 
@@ -775,23 +696,23 @@ void sub_22db0(objtype* ob)
   new->yspeed = -80;
   new->temp1 = US_RndT() / 4;
 
-  NewState(new, &s_239);
+  NewState(new, &s_tankbot_bomb_flying);
 }
 
 
-void sub_22e5c(objtype* ob)
+void R_TankBotShot(objtype* ob)
 {
   PLACESPRITE;
 
   if (ob->hiteast || ob->hitwest || ob->hitsouth)
   {
-    ChangeState(ob, &s_242);
+    ChangeState(ob, &s_tankbot_shot_explode1);
     return;
   }
 
   if (ob->hitnorth)
   {
-    ChangeState(ob, &s_242);
+    ChangeState(ob, &s_tankbot_shot_explode1);
 
     GetNewObj(true);
 
@@ -801,12 +722,12 @@ void sub_22e5c(objtype* ob)
     new->y = ob->y + 8*PIXGLOBAL;
     new->temp7 = 100;
 
-    NewState(new, &s_244);
+    NewState(new, &s_napalmfire1);
   }
 }
 
 
-void sub_22f1a(objtype* ob)
+void T_NapalmFire(objtype* ob)
 {
   if (ob->temp7 > 0 && ob->hitnorth)
   {
@@ -820,7 +741,7 @@ void sub_22f1a(objtype* ob)
 }
 
 
-void sub_22f3f(objtype* ob)
+void R_NapalmBomb_Flying(objtype* ob)
 {
   if (ob->temp1 > 0)
   {
@@ -831,14 +752,14 @@ void sub_22f3f(objtype* ob)
   {
     ob->temp1 = US_RndT() / 8;
 
-    ChangeState(ob, &s_240);
+    ChangeState(ob, &s_tankbot_bomb_landing);
   }
 
   PLACESPRITE;
 }
 
 
-void sub_22fa5(objtype* ob)
+void R_NapalmBomb_Landing(objtype* ob)
 {
   if (ob->temp1 > 0 && !ob->hitnorth)
   {
@@ -851,7 +772,7 @@ void sub_22fa5(objtype* ob)
   }
   else
   {
-    ChangeState(ob, &s_242);
+    ChangeState(ob, &s_tankbot_shot_explode1);
 
     FragBloom(ob->x, ob->y, dir_North);
     FragBloom(ob->x, ob->y, dir_South);
@@ -889,7 +810,7 @@ void SpawnLaserGunner(Sint16 x, Sint16 y)
       break;
   }
 
-  NewState(new, &s_247);
+  NewState(new, &s_lasergunner_idle);
 }
 
 
@@ -901,7 +822,7 @@ void T_LaserGunner_Idle(objtype* ob)
   {
     ob->temp1 = US_RndT() / 16;
     ob->shootable = false;
-    ChangeState(ob, &s_251);
+    ChangeState(ob, &s_lasergunner_attack4);
     return;
   }
 
@@ -920,7 +841,7 @@ void T_LaserGunner_Idle(objtype* ob)
 
       ob->temp1 = 2;
       ob->temp2 = 30;
-      ob->state = &s_248;
+      ob->state = &s_lasergunner_attack1;
       return;
     }
 
@@ -937,7 +858,7 @@ void T_LaserGunner_Shooting(objtype* ob)
 
   if (--ob->temp1 == 0)
   {
-    ob->state = &s_247;
+    ob->state = &s_lasergunner_idle;
   }
 
   if (ob->xdir == 1)
@@ -949,7 +870,7 @@ void T_LaserGunner_Shooting(objtype* ob)
     shotx = ob->x;
   }
 
-  if (SpawnEnemyShot(shotx, ob->y + 26*PIXGLOBAL, &s_252) == -1)
+  if (SpawnEnemyShot(shotx, ob->y + 26*PIXGLOBAL, &s_enemy_laser_shot) == -1)
     return;
 
   new->xspeed = ob->xdir * 60;
@@ -976,7 +897,7 @@ void C_EnemyLaserShot(objtype* ob, objtype* hit)
   if (hit->obclass == playerobj || hit->obclass == pushblockobj)
   {
     ob->y -= 8*PIXGLOBAL;
-    ChangeState(ob, &s_253);
+    ChangeState(ob, &s_bigshotimpact1);
     return;
   }
 }
@@ -988,7 +909,7 @@ void R_EnemyLaserShot(objtype* ob)
   {
     SD_PlaySound(29);
     ob->y -= 8*PIXGLOBAL;
-    ChangeState(ob, &s_253);
+    ChangeState(ob, &s_bigshotimpact1);
     ob->obclass = inertobj;
   }
 
@@ -1011,7 +932,7 @@ void SpawnPushBlock(Sint16 x, Sint16 y)
   new->shootable = true;
   new->temp7 = 15;
 
-  NewState(new, &s_257);
+  NewState(new, &s_pushblock);
 }
 
 
@@ -1019,7 +940,7 @@ void R_PushBlock_OnGround(objtype* ob)
 {
   if (!ob->hitnorth)
   {
-    ChangeState(ob, &s_258);
+    ChangeState(ob, &s_pushblock_falling);
   }
 
   PLACESPRITE;
@@ -1030,7 +951,7 @@ void R_PushBlock_Falling(objtype* ob)
 {
   if (ob->hitnorth)
   {
-    ChangeState(ob, &s_257);
+    ChangeState(ob, &s_pushblock);
   }
 
   PLACESPRITE;
@@ -1076,7 +997,7 @@ void SpawnFallingBlock(Sint16 x, Sint16 y)
   new->shootable = true;
   new->temp7 = 35;
 
-  NewState(new, &s_259);
+  NewState(new, &s_fallingblock_idle);
 }
 
 
@@ -1086,7 +1007,7 @@ void T_FallingBlock(objtype* ob)
   {
     if (--ob->temp7 <= 0)
     {
-      ChangeState(ob, &s_260);
+      ChangeState(ob, &s_fallingblock_falling);
       SD_PlaySound(36);
       ob->needtoclip = cl_noclip;
     }
@@ -1124,7 +1045,7 @@ void SpawnCrusher(Sint16 x, Sint16 y)
   new->needtoclip = cl_fullclip;
   new->temp7 = 15;
 
-  NewState(new, &s_261);
+  NewState(new, &s_crusher_idle);
 }
 
 
@@ -1132,7 +1053,7 @@ void T_Crusher_Waiting(objtype* ob)
 {
   if (crusheractive == 1)
   {
-    ChangeState(ob, &s_262);
+    ChangeState(ob, &s_crusher_moving);
   }
 }
 
@@ -1152,7 +1073,7 @@ void R_Crusher(objtype* ob)
   if (ob->hitnorth)
   {
     crusheractive = -1;
-    ChangeState(ob, &s_261);
+    ChangeState(ob, &s_crusher_idle);
     SD_PlaySound(8);
   }
 
@@ -1196,11 +1117,11 @@ void SpawnBounceBot(Sint16 x, Sint16 y)
       break;
   }
 
-  NewState(new, &s_263);
+  NewState(new, &s_bouncebot1);
 }
 
 
-void sub_2370e(objtype* ob)
+void T_BounceBot(objtype* ob)
 {
   Sint16 xdelta;
 
@@ -1250,7 +1171,7 @@ void sub_2370e(objtype* ob)
 }
 
 
-void sub_237bf(objtype* ob)
+void R_BounceBot(objtype* ob)
 {
   if (ob->hiteast || ob->hitwest)
   {
@@ -1280,7 +1201,7 @@ void sub_237bf(objtype* ob)
     ob->yspeed = -64 - (US_RndT() >> 4);
     ob->temp1 = 2;
 
-    ChangeState(ob, &s_267);
+    ChangeState(ob, &s_bouncebot5);
   }
 
   PLACESPRITE;
@@ -1297,7 +1218,7 @@ void SpawnSlimeDropper(Sint16 x, Sint16 y)
   new->xdir = 1;
   new->ydir = -1;
 
-  NewState(new, &s_268);
+  NewState(new, &s_slimedropper1);
 
   new->shootable = true;
   new->health = 10;
@@ -1322,7 +1243,7 @@ void SpawnSlimeDrop(objtype* ob)
   new->active = ac_removable;
   new->priority = 3;
 
-  NewState(new, &s_271);
+  NewState(new, &s_slime_drop1);
 
   SD_PlaySound(39);
 }
@@ -1332,7 +1253,7 @@ void T_SlimeDropEmerging(objtype* ob)
 {
   if (US_RndT() < 100)
   {
-    ob->state = &s_273;
+    ob->state = &s_slime_drop3;
   }
 }
 
@@ -1341,7 +1262,7 @@ void R_SlimeDrop(objtype* ob)
 {
   if (ob->hitnorth)
   {
-    ob->state = &s_274;
+    ob->state = &s_slimedrop_splat1;
     ob->priority = 0;
     ob->y -= 8*PIXGLOBAL;
     return;
@@ -1377,7 +1298,7 @@ void SpawnLaserTurret(Sint16 x, Sint16 y)
 
   new->needtoreact = true;
 
-  NewState(new, &s_278);
+  NewState(new, &s_turret_idle);
 }
 
 
@@ -1400,7 +1321,7 @@ void T_LaserTurret(objtype* ob)
 
       ob->temp1 = 1;
       ob->temp2 = US_RndT() >> 4;
-      ob->state = &s_279;
+      ob->state = &s_turret_attack1;
       return;
     }
 
@@ -1415,7 +1336,7 @@ void LaserTurretFireShot(objtype* ob)
 
   if (--ob->temp1 == 0)
   {
-    ob->state = &s_278;
+    ob->state = &s_turret_idle;
   }
 
   if (ob->xdir == 1)
@@ -1427,7 +1348,7 @@ void LaserTurretFireShot(objtype* ob)
     shotx = ob->x;
   }
 
-  if (SpawnEnemyShot(shotx, ob->y + 8*PIXGLOBAL, &s_252) == -1)
+  if (SpawnEnemyShot(shotx, ob->y + 8*PIXGLOBAL, &s_enemy_laser_shot) == -1)
     return;
 
   new->xspeed = ob->xdir * 60;
@@ -1470,7 +1391,7 @@ void SpawnAsteroid(Sint16 x, Sint16 y)
       break;
   }
 
-  NewState(new, &s_282);
+  NewState(new, &s_asteroid1);
 }
 
 
@@ -1516,7 +1437,7 @@ void SpawnLandMine(Sint16 x, Sint16 y)
       break;
   }
 
-  NewState(new, &s_286);
+  NewState(new, &s_landmine1);
 }
 
 
@@ -1615,11 +1536,11 @@ void SpawnSkullmanHand(Sint16 x, Sint16 y, Sint16 type)
   switch (type)
   {
     case 0:
-      NewState(new, &s_290);
+      NewState(new, &s_skullmanhand_r1);
       break;
 
     case 1:
-      NewState(new, &s_291);
+      NewState(new, &s_skullmanhand_l1);
       break;
   }
 }
@@ -1653,7 +1574,7 @@ void R_SkullmanHand_Attack_L(objtype* ob)
 {
   if (ob->hitnorth)
   {
-    ob->state = &s_292;
+    ob->state = &s_skullmanhand_r2;
     ob->ydir = -1;
   }
 
@@ -1665,7 +1586,7 @@ void R_SkullmanHand_Attack_R(objtype* ob)
 {
   if (ob->hitnorth)
   {
-    ob->state = &s_293;
+    ob->state = &s_skullmanhand_l2;
     ob->ydir = -1;
   }
 
@@ -1681,7 +1602,7 @@ void T_SkullmanHand_R(objtype* ob)
   }
   else
   {
-    ob->state = &s_294;
+    ob->state = &s_skullmanhand_attack_r1;
   }
 }
 
@@ -1694,7 +1615,7 @@ void T_SkullmanHand_L(objtype* ob)
   }
   else
   {
-    ob->state = &s_294;
+    ob->state = &s_skullmanhand_attack_r1;
   }
 }
 
@@ -1710,7 +1631,7 @@ void T_SkullmanHand_R2(objtype* ob)
       player->top < ob->bottom)
     return;
 
-  ob->state = &s_294;
+  ob->state = &s_skullmanhand_attack_r1;
   ob->yspeed = 0;
 }
 
@@ -1726,7 +1647,7 @@ void T_SkullmanHand_L2(objtype* ob)
       player->top < ob->bottom)
     return;
 
-  ob->state = &s_296;
+  ob->state = &s_skullmanhand_attack_l1;
   ob->yspeed = 0;
 }
 
@@ -1758,7 +1679,7 @@ void SpawnSkullman(Sint16 x, Sint16 y)
   lastbosshealth = -1;
   hbardivisor = bosshealth / 20 - 1;
 
-  NewState(new, &s_289);
+  NewState(new, &s_skullman2);
 }
 
 
@@ -1774,13 +1695,13 @@ void T_SkullMan(objtype* ob)
 
   if (US_RndT() > 200)
   {
-    if (ob->state == &s_288)
+    if (ob->state == &s_skullman1)
     {
-      ob->state = &s_289;
+      ob->state = &s_skullman2;
     }
     else
     {
-      ob->state = &s_288;
+      ob->state = &s_skullman1;
     }
   }
 }
@@ -1797,7 +1718,7 @@ void SpawnSparkShooter(Sint16 x, Sint16 y)
   new->x = new->left = new->right = CONVERT_TILE_TO_GLOBAL(x);
   new->y = new->top = new->bottom = CONVERT_TILE_TO_GLOBAL(y);
 
-  NewState(new, &s_298);
+  NewState(new, &s_sparkshooter1);
 }
 
 
@@ -1832,7 +1753,7 @@ void T_SparkShooter(objtype* ob)
       break;
   }
 
-  NewState(new, &s_300);
+  NewState(new, &s_sparkshot1);
   SD_PlaySound(21);
 }
 
@@ -1842,7 +1763,7 @@ void R_SparkShot(objtype* ob)
   if (ob->hitnorth || ob->hiteast || ob->hitsouth || ob->hitwest)
   {
     SD_PlaySound(29);
-    ChangeState(ob, &s_302);
+    ChangeState(ob, &s_sparkshot_explode1);
   }
 
   PLACESPRITE;
@@ -1861,7 +1782,7 @@ void SpawnRespawnBeacon(Sint16 x, Sint16 y)
   new->ydir = 1;
   new->hitnorth = 1;
 
-  NewState(new, &s_304);
+  NewState(new, &s_respawn_beacon_idle);
 }
 
 
@@ -1871,7 +1792,7 @@ void C_RespawnBeacon(objtype* ob, objtype* hit)
   {
     playerrestorex = player->x;
     playerrestorey = player->y;
-    ChangeState(ob, &s_305);
+    ChangeState(ob, &s_respawn_beacon1);
     SD_PlaySound(40);
 
     if (!gamestate.helpmsgbeacon)
