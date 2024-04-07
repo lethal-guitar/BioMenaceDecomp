@@ -49,11 +49,13 @@ Uint16 tedlevelnum;
 char str[80], str2[20];
 boolean storedemo;
 
-Sint16 unknown; //word_3CB80;
+// Boss health divisor - see UpdateScoreBox() in BM_PLAY2.C
+Sint16 hbardivisor;
+
 Uint16 curmusic;
 
-boolean word_3899A = false;
-boolean word_3899C = false;
+boolean unused3 = false;
+boolean showmenuhighscores = false;
 Uint16 unused1 = 0;
 boolean practicerestoremap = 0;
 Sint16 practicetimer = -1;

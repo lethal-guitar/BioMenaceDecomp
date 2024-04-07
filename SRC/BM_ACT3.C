@@ -101,6 +101,11 @@ extern statetype far s_306;
 extern statetype far s_307;
 extern statetype far s_308;
 
+
+Sint16 skullmanactivestate = -2;
+Sint16 crusheractive = 0;
+
+
 void T_ExplodingEnemy();
 void sub_22b98();
 void sub_22be7();
@@ -1161,7 +1166,7 @@ void C_Crusher(objtype* ob, objtype* hit)
   {
     jumptime = 0;
 
-    if (!word_391C2)
+    if (!playerdied)
     {
       KillPlayer();
     }
@@ -1560,7 +1565,7 @@ void R_BounceAround(objtype* ob)
 
 void SpawnSkullmanHand(Sint16 x, Sint16 y, Sint16 type)
 {
-  word_399F8 = -2;
+  skullmanactivestate = -2;
 
   GetNewObj(false);
 
@@ -1670,7 +1675,7 @@ void R_SkullmanHand_Attack_R(objtype* ob)
 
 void T_SkullmanHand_R(objtype* ob)
 {
-  if (word_399F8 == -2)
+  if (skullmanactivestate == -2)
   {
     return;
   }
@@ -1683,7 +1688,7 @@ void T_SkullmanHand_R(objtype* ob)
 
 void T_SkullmanHand_L(objtype* ob)
 {
-  if (word_399F8 < 0)
+  if (skullmanactivestate < 0)
   {
     return;
   }
@@ -1696,7 +1701,7 @@ void T_SkullmanHand_L(objtype* ob)
 
 void T_SkullmanHand_R2(objtype* ob)
 {
-  if (word_399F8 == 1)
+  if (skullmanactivestate == 1)
   {
     RemoveObj(ob);
   }
@@ -1712,7 +1717,7 @@ void T_SkullmanHand_R2(objtype* ob)
 
 void T_SkullmanHand_L2(objtype* ob)
 {
-  if (word_399F8 == 1)
+  if (skullmanactivestate == 1)
   {
     RemoveObj(ob);
   }
@@ -1751,7 +1756,7 @@ void SpawnSkullman(Sint16 x, Sint16 y)
 
   bosshealth = new->health;
   lastbosshealth = -1;
-  unknown = bosshealth / 20 - 1;
+  hbardivisor = bosshealth / 20 - 1;
 
   NewState(new, &s_289);
 }

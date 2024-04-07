@@ -217,30 +217,30 @@ typedef struct objstruct
   enum {ac_no, ac_yes, ac_allways, ac_removable} active;
   boolean needtoreact;
   enum {cl_noclip, cl_midclip, cl_fullclip} needtoclip;
-  Uint16 nothink; // 8
-  Uint16 x, y; // A, C
-  Sint16 xdir, ydir; // E, 10
-  Sint16 xmove, ymove; // 12, 14
-  Sint16 xspeed, yspeed; // 16, 18
-  Sint16 ticcount; // 1A
-  statetype far *state; // 1C
-  Uint16 shapenum; // 20
-  Uint16 priority; // 22
-  Uint16 left, top, right, bottom, midx; // 24, 26, 28, 2A, 2C
+  Uint16 nothink;
+  Uint16 x, y;
+  Sint16 xdir, ydir;
+  Sint16 xmove, ymove;
+  Sint16 xspeed, yspeed;
+  Sint16 ticcount;
+  statetype far *state;
+  Uint16 shapenum;
+  Uint16 priority;
+  Uint16 left, top, right, bottom, midx;
   Uint16 tileleft, tiletop, tileright, tilebottom, tilemidx;
-  Sint16 hitnorth, hiteast, hitsouth, hitwest; // 38, 3A, 3C, 3E
-  boolean shootable; // 40
-  Sint16 var2; // 42
-  Sint16 health; // 44
-  Sint16 dmgflash; // 46
-  Sint16 temp1; // 48
-  Sint16 temp2; // 4A
-  Sint16 temp3; // 4C
-  Sint16 temp4; // 4E
-  Sint16 temp5; // 50
-  Sint16 temp6; // 52
-  Sint16 temp7; // 54
-  void *sprite; // 56
+  Sint16 hitnorth, hiteast, hitsouth, hitwest;
+  boolean shootable;
+  enum {sb_any, sb_player} spawnedby;
+  Sint16 health;
+  Sint16 dmgflash;
+  Sint16 temp1;
+  Sint16 temp2;
+  Sint16 temp3;
+  Sint16 temp4;
+  Sint16 temp5;
+  Sint16 temp6;
+  Sint16 temp7;
+  void *sprite;
   struct objstruct *next, *prev;
 } objtype;
 
@@ -478,7 +478,7 @@ void UpdateScoreBox(objtype *ob);
 
 extern statetype far s_player_standing;
 
-extern Sint16 word_391C2;
+extern boolean playerdied;
 
 /*
 =============================================================================
@@ -490,8 +490,8 @@ extern Sint16 word_391C2;
 
 // TODO Move to correct section above
 
-extern boolean word_3899A;
-extern boolean word_3899C;
+extern boolean unused3;
+extern boolean showmenuhighscores;
 extern boolean practicerestoremap;
 extern Sint16 practicetimer;
 extern Uint16 playerrestorex;

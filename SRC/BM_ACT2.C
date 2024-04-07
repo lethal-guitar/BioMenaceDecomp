@@ -36,10 +36,6 @@ Sint16 pickupshapenums[] = {
 };
 
 
-Sint16 word_399F8 = -2;
-Sint16 crusheractive = 0;
-
-
 void R_WalkCeiling();
 void T_Pickup();
 void T_PickupRise();
@@ -292,7 +288,7 @@ statetype far s_brawler_attack1 = { /* 32d30 */
   NULL, NULL, R_Draw, &s_brawler_attack2};
 
 statetype far s_brawler_attack2 = { /* 32d50 */
-  BRAWLER_ATTACK2_L_LPR, BRAWLER_ATTACK2_R_LPR,
+  BRAWLER_ATTACK2_L_SPR, BRAWLER_ATTACK2_R_SPR,
   step, true, ps_tofloor, 10, 0, 0,
   NULL, NULL, R_Draw, &s_brawler_walk1};
 

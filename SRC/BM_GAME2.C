@@ -71,9 +71,8 @@ Sint16 inactivateright;
 Sint16 inactivatetop;
 Sint16 inactivatebottom;
 
-extern Sint16 word_391C8;
+extern Sint16 supermoveTimeout;
 extern Uint16 invincible;
-extern Sint16 word_3FA6E;
 extern Uint8 unktime;
 
 
@@ -393,7 +392,7 @@ void DrawStatusWindow(void)
 
 void StatusWindow(void)
 {
-  if (word_3899A &&
+  if (unused3 &&
       Keyboard[sc_J] && Keyboard[sc_I] && Keyboard[sc_M])
   {
     US_CenterWindow(20, 2);
@@ -976,7 +975,7 @@ void PlayLoop(void)
 
   do
   {
-    word_391C8--;
+    supermoveTimeout--;
 
     PollControls();
 

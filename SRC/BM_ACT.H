@@ -85,8 +85,8 @@ void SpawnRespawnBeacon(Sint16 x, Sint16 y);
 
 extern Uint16 bounceangle[8][8];
 extern boolean firerobopal;
-extern boolean bossactivated;
-extern Sint16 unknown;
+extern boolean drmangleactive;
+extern Sint16 hbardivisor;
 extern Uint16 invincible;
 extern Uint16 colorstep;
 extern Sint16 doordestx;
@@ -98,7 +98,7 @@ extern boolean jumpcheat;
 extern boolean godmode;
 extern boolean button0held, button1held, fireheld;
 
-extern Sint16 word_399F8;
+extern Sint16 skullmanactivestate;
 extern Sint16 crusheractive;
 
 

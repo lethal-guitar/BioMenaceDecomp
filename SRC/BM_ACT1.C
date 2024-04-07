@@ -1111,7 +1111,7 @@ void SpawnDrMangleHologram(Sint16 x, Sint16 y)
   new->priority = 3;
   new->shootable = false;
   new->needtoclip = cl_noclip;
-  bossactivated = false;
+  drmangleactive = false;
 }
 
 
@@ -1151,7 +1151,7 @@ void T_DrMangleHologram(objtype* ob)
 
   // Never true, unless the actor were to be placed in level 11, which is not
   // the case in the shipping game. See code in SnakeInteractThink().
-  if (bossactivated)
+  if (drmangleactive)
   {
     Sint16 rand = US_RndT();
 
@@ -1274,7 +1274,7 @@ void SpawnDrMangle(Sint16 x, Sint16 y)
   new->shootable = false;
   new->health = bosshealth = 200;
   lastbosshealth = -1;
-  unknown = bosshealth / 20 - 1;
+  hbardivisor = bosshealth / 20 - 1;
 }
 
 

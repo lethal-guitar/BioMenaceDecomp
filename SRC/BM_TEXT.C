@@ -68,7 +68,7 @@ TEXT FORMATTING COMMANDS
 =============================================================================
 */
 
-boolean word_38CA4 = false;
+boolean nagscreenshown = false;
 
 Sint16 pagenum,numpages;
 Uint16 leftmargin[TEXTROWS],rightmargin[TEXTROWS];
@@ -489,7 +489,7 @@ static void DrawNagScreenTimer(void)
   {
     nagtimer = -1;
     strcat(str, "GO!");
-    word_38CA4 = true;
+    nagscreenshown = true;
     SD_PlaySound(40); // TODO
   }
   else
@@ -832,7 +832,7 @@ void HelpScreens(void)
 
   StartMusic(0);
   TimeCount = 0;
-  word_38CA4 = false;
+  nagscreenshown = false;
 
   do
   {
@@ -847,7 +847,7 @@ void HelpScreens(void)
 
     if (pos == 4)
     {
-      word_3899C = true;
+      showmenuhighscores = true;
     }
 
     VW_ClearVideo(BACKCOLOR);
@@ -883,10 +883,10 @@ void HelpScreens(void)
         newpage = false;
         PageLayout(true);
 
-        if (word_3899C == true)
+        if (showmenuhighscores == true)
         {
           DrawHighScores_HelpMenu();
-          word_3899C = false;
+          showmenuhighscores = false;
         }
 
         VW_SetScreen(bufferofs, 0);
@@ -962,9 +962,9 @@ stopLoop:
     MM_FreePtr(&grsegs[pos]);
     IN_ClearKeysDown();
 
-    if (word_38CA4 == true)
+    if (nagscreenshown == true)
     {
-      word_38CA4 = false;
+      nagscreenshown = false;
 
       CA_DownLevel();
       IN_ClearKeysDown();

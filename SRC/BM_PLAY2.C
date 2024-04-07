@@ -868,7 +868,7 @@ void SnakeContact(objtype* ob, objtype* hit)
     case fireimpobj:
     case helicopterobj:
     case parachutebotobj:
-      if (hit->var2 == 1) break;
+      if (hit->spawnedby == sb_player) break;
 
       if (!invincible)
       {
@@ -1267,10 +1267,10 @@ void UpdateScoreBox(objtype *ob)
   //
   if (bosshealth > 0)
   {
-    if (!unknown)
-      unknown = 1;
+    if (!hbardivisor)
+      hbardivisor = 1;
 
-    number = bosshealth / unknown;
+    number = bosshealth / hbardivisor;
 
     if (number != lastbosshealth)
     {
@@ -1435,7 +1435,7 @@ void DealDamage(objtype* ob, Sint16 amount)
         ob->shootable = 0;
         SpawnPickup(ob->tilemidx, ob->tiletop, 26);
         StartMusic(14);
-        word_399F8 = 1;
+        skullmanactivestate = 1;
         bosshealth = 999;
         break;
 
@@ -1489,9 +1489,9 @@ loc_1d3c6:
     }
 
     if ((ob->obclass == skullmanobj || ob->obclass == skullmanhandobj) &&
-        word_399F8 < 0)
+        skullmanactivestate < 0)
     {
-      word_399F8++;
+      skullmanactivestate++;
     }
   }
 }
@@ -1925,14 +1925,14 @@ void FragBloom(Uint16 x, Uint16 y, Direction dir)
   if (dir >= 20)
   {
     dir -= 20;
-    new->var2 = 1;
+    new->spawnedby = sb_player;
     speed = US_RndT() / 4 + 15;
   }
 
   if (dir >= 10)
   {
     dir -= 10;
-    new->var2 = 1;
+    new->spawnedby = sb_player;
   }
 
   switch (dir)
@@ -1974,7 +1974,7 @@ void C_Fireball(objtype* ob, objtype* hit)
     hit->obclass != tankbotobj && hit->obclass != crushblockobj &&
     hit->obclass != fireimpobj)
   {
-    if (hit->obclass == playerobj && ob->var2 == 1)
+    if (hit->obclass == playerobj && ob->spawnedby == sb_player)
       return;
 
     DealDamage(hit, 1);
@@ -2173,7 +2173,7 @@ void ThrowGrenade(Uint16 x, Uint16 y, Direction dir)
   }
 
   new->temp1 = 9;
-  new->var2 = 1;
+  new->spawnedby = sb_player;
   new->active = ac_removable;
 
   if (new->temp7)
@@ -2234,7 +2234,7 @@ void C_GrenadeExplosion(objtype* ob, objtype* hit)
     hit->shootable && !hit->dmgflash && hit->obclass != pushblockobj &&
     hit->obclass != crushblockobj && hit->obclass != fireimpobj)
   {
-    if (hit->obclass == playerobj && ob->var2 == 1)
+    if (hit->obclass == playerobj && ob->spawnedby == sb_player)
       return;
     DealDamage(hit, 5);
     hit->dmgflash = 25;

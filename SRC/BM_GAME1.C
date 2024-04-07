@@ -32,7 +32,7 @@
 =============================================================================
 */
 
-extern Uint16 word_391BC;
+extern Uint16 unknown;
 extern Sint16 crusheractive;
 extern Uint16 invincible;
 extern Uint16 colorstep;
@@ -529,7 +529,7 @@ restart:
 loaded:
   colorstep = 0;
   crusheractive = 0;
-  word_391BC = 0;
+  unknown = 0;
   bosshealth = 999;
   SD_WaitSoundDone();
 

@@ -33,17 +33,17 @@ Uint16 arrowflip[] = {
   arrow_SouthWest, arrow_NorthWest, arrow_NorthEast, arrow_SouthEast
 };
 
-Sint16 word_391BA = 0;
-Sint16 word_391BC = 0;
-Sint16 word_391BE = 0;
-boolean bossactivated = false;
-Sint16 word_391C2 = 0;
-Sint16 word_391C4 = 0;
-Sint16 word_391C6 = 0;
-Sint16 word_391C8 = 0;
-Sint16 word_391CA = 0;
+Sint16 unused4 = 0;
+Sint16 unknown = 0;
+boolean doorwarpInProgress = false;
+boolean drmangleactive = false;
+boolean playerdied = false;
+Sint16 supermoveTurnCount = 0;
+Sint16 supermoveHoldUpCount = 0;
+Sint16 supermoveTimeout = 0;
+Sint16 playerShieldFramesLeft = 0;
 
-Sint16 TABLE2[] = { -8, 0, 8 };
+Sint16 ladderspeedx[] = { -8, 0, 8 };
 
 
 void OpenDoor(objtype* ob);
@@ -332,9 +332,9 @@ void SpawnPlayer(Sint16 x, Sint16 y, Sint16 xdir)
   player->xdir = xdir;
   player->ydir = 1;
 
-  if (gamestate.mapon == 0 || word_391C2 == 1)
+  if (gamestate.mapon == 0 || playerdied == true)
   {
-    word_391C2 = 0;
+    playerdied = false;
 
     switch (gamestate.difficulty)
     {
@@ -538,7 +538,7 @@ boolean CheckJumpOffLadder(objtype* ob)
   {
     SD_PlaySound(11);
 
-    ob->xspeed = TABLE2[c.xaxis + 1];
+    ob->xspeed = ladderspeedx[c.xaxis + 1];
     ob->yspeed = -40;
     ob->needtoclip = cl_midclip;
     jumptime = 16;
@@ -622,9 +622,9 @@ void WarpToDoorDest(objtype* ob)
   Uint16 tile;
   Uint16 far* map;
 
-  if (word_391BE) return;
+  if (doorwarpInProgress) return;
 
-  word_391BE = true;
+  doorwarpInProgress = true;
 
   map = mapsegs[2] + mapbwidthtable[ob->tilebottom] / 2 + ob->tileleft;
   tile = *map;
@@ -772,7 +772,7 @@ void SnakeInteractThink(objtype* ob)
 
     case 21:
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
-      if (bossactivated)
+      if (drmangleactive)
       {
         return;
       }
@@ -809,7 +809,7 @@ found:
           {
             otherobj->state = &s_drmangle_monster_jumping;
             otherobj->shootable = true;
-            bossactivated = true;
+            drmangleactive = true;
             return;
           }
         }
@@ -817,17 +817,17 @@ found:
       break;
 
     case 22:
-      if (word_391BC == 3)
+      if (unknown == 3)
       {
         return;
       }
 
-      if (word_391BC != 0 && !Keyboard[sc_UpArrow])
+      if (unknown != 0 && !Keyboard[sc_UpArrow])
       {
         return;
       }
 
-      word_391BC = 1;
+      unknown = 1;
       ShowCompatibilityInfoMessage();
       break;
 
@@ -1083,9 +1083,9 @@ void SnakeShootThink(objtype* ob)
   {
     if (c.button0 && !button0held)
     {
-      if (word_391BA)
+      if (unused4)
       {
-        word_391BA = false;
+        unused4 = false;
       }
 
       ob->xspeed = 0;
@@ -1167,9 +1167,9 @@ void SnakeShootCrouchThink(objtype* ob)
   {
     if (c.button0 && !button0held)
     {
-      if (word_391BA)
+      if (unused4)
       {
-        word_391BA = false;
+        unused4 = false;
       }
 
       ob->xspeed = 0;
@@ -1273,7 +1273,7 @@ void PollControls(void)
 
 void Jump(objtype* ob)
 {
-  word_391BA = 0;
+  unused4 = 0;
   SD_PlaySound(11);
   ob->xspeed = 0;
   ob->yspeed = -41;
@@ -1370,18 +1370,18 @@ void SnakeStandThink(objtype* ob)
   Sint16 startwalking;
   Sint16 i;
 
-  if (word_391BE)
+  if (doorwarpInProgress)
   {
-    word_391BE = false;
+    doorwarpInProgress = false;
   }
 
-  if (word_391CA > 0)
+  if (playerShieldFramesLeft > 0)
   {
     SD_PlaySound(26);
     ob->obclass = fireballobj;
 
-    word_391CA--;
-    if (word_391CA <= 0)
+    playerShieldFramesLeft--;
+    if (playerShieldFramesLeft <= 0)
     {
       ChangeState(ob, &s_player_standing);
       ob->obclass = playerobj;
@@ -1402,9 +1402,9 @@ void SnakeStandThink(objtype* ob)
     }
     else
     {
-      word_391C4++;
-      word_391C6 = 0;
-      word_391C8 = 10;
+      supermoveTurnCount++;
+      supermoveHoldUpCount = 0;
+      supermoveTimeout = 10;
       ob->xdir = -1;
     }
   }
@@ -1417,44 +1417,44 @@ void SnakeStandThink(objtype* ob)
     }
     else
     {
-      word_391C4++;
-      word_391C6 = 0;
-      word_391C8 = 10;
+      supermoveTurnCount++;
+      supermoveHoldUpCount = 0;
+      supermoveTimeout = 10;
       ob->xdir = 1;
     }
   }
 
   if (cmdup && !upheld)
   {
-    word_391C6++;
-    if (word_391C6 >= 75)
+    supermoveHoldUpCount++;
+    if (supermoveHoldUpCount >= 75)
     {
       SD_PlaySound(26);
-      word_391C6 = 75;
+      supermoveHoldUpCount = 75;
     }
 
-    word_391C4 = 0;
-    word_391C8 = 3;
+    supermoveTurnCount = 0;
+    supermoveTimeout = 3;
 
     if (cmdjump && !button0held)
     {
-      word_391C8 = 25;
+      supermoveTimeout = 25;
     }
   }
 
-  if (cmddown && word_391C6 >= 35)
+  if (cmddown && supermoveHoldUpCount >= 35)
   {
     // Invincibility
     invincible = 99;
-    word_391C8 = 0;
-    word_391C6 = 0;
+    supermoveTimeout = 0;
+    supermoveHoldUpCount = 0;
   }
 
-  if (word_391C8 <= 0)
+  if (supermoveTimeout <= 0)
   {
-    word_391C4 = 0;
-    word_391C6 = 0;
-    word_391C8 = 0;
+    supermoveTurnCount = 0;
+    supermoveHoldUpCount = 0;
+    supermoveTimeout = 0;
   }
 
   if (firebutton && !fireheld)
@@ -1481,7 +1481,7 @@ void SnakeStandThink(objtype* ob)
 
   if (cmdjump && !button0held && cmdfire && !button1held)
   {
-    word_391C6 = 0;
+    supermoveHoldUpCount = 0;
     Jump(ob);
 
     if (startwalking)
@@ -1505,7 +1505,7 @@ void SnakeStandThink(objtype* ob)
   {
     button1held = true;
 
-    if (word_391C4 >= 5)
+    if (supermoveTurnCount >= 5)
     {
       // Fireball Weapon
       for (i = 0; i < 3; i++)
@@ -1516,12 +1516,12 @@ void SnakeStandThink(objtype* ob)
       }
 
       ChangeState(ob, &s_player_fireball);
-      word_391C8 = 0;
-      word_391C4 = 0;
+      supermoveTimeout = 0;
+      supermoveTurnCount = 0;
       return;
     }
 
-    if (word_391C6 >= 75)
+    if (supermoveHoldUpCount >= 75)
     {
       // Super Plasma Bolt
       if (ob->xdir == 1)
@@ -1534,13 +1534,13 @@ void SnakeStandThink(objtype* ob)
       }
 
       DamagePlayer(ob, 1);
-      word_391C8 = 0;
-      word_391C6 = 0;
+      supermoveTimeout = 0;
+      supermoveHoldUpCount = 0;
       return;
     }
     else
     {
-      word_391C6 = 0;
+      supermoveHoldUpCount = 0;
     }
 
     if (cmddown)
@@ -1588,17 +1588,17 @@ void SnakeStandThink(objtype* ob)
 
   if (cmdjump && !button0held)
   {
-    if (word_391C4 >= 5)
+    if (supermoveTurnCount >= 5)
     {
       // Personal Shield
       ChangeState(ob, &s_player_shielded1);
-      word_391C8 = 0;
-      word_391CA = 45;
-      word_391C4 = 0;
+      supermoveTimeout = 0;
+      playerShieldFramesLeft = 45;
+      supermoveTurnCount = 0;
       return;
     }
 
-    word_391C6 = 0;
+    supermoveHoldUpCount = 0;
     Jump(ob);
 
     if (startwalking)
@@ -1622,7 +1622,7 @@ void SnakeStandThink(objtype* ob)
 
   if (startwalking)
   {
-    word_391C6 = 0;
+    supermoveHoldUpCount = 0;
     ob->state = &s_player_walking1;
     xtry = ob->xdir * 16;
     return;
@@ -1630,7 +1630,7 @@ void SnakeStandThink(objtype* ob)
 
   if (cmddown)
   {
-    word_391C6 = 0;
+    supermoveHoldUpCount = 0;
 
     if (CheckAttachToLadder(ob))
       return;
@@ -1648,9 +1648,9 @@ void SnakeWalkThink(objtype* ob)
 {
   Sint16 startwalking;
 
-  if (word_391BE)
+  if (doorwarpInProgress)
   {
-    word_391BE = false;
+    doorwarpInProgress = false;
   }
 
   startwalking = false;
@@ -1976,7 +1976,7 @@ void CheckFallOffLadder(objtype* ob)
     ob->state = &s_player_in_air3;
     jumptime = 0;
     ob->temp2 = 1;
-    ob->xspeed = TABLE2[c.xaxis + 1];
+    ob->xspeed = ladderspeedx[c.xaxis + 1];
     ob->yspeed = 0;
     ob->needtoclip = cl_midclip;
     ob->tilebottom--;
@@ -2031,7 +2031,7 @@ void KillPlayer(void)
   jumptime = 16;
   button0held = true;
   gamestate.riding = NULL;
-  word_391C2 = true;
+  playerdied = true;
   ChangeState(player, &s_player_dying);
 }
 
@@ -2250,12 +2250,12 @@ void CheckInTiles(objtype *ob)
             break;
 
           case 22:
-            if (word_391BC == 3)
+            if (unknown == 3)
             {
               return;
             }
 
-            if (ob->hitnorth == 1 && (word_391BC == 0 || Keyboard[sc_UpArrow]))
+            if (ob->hitnorth == 1 && (unknown == 0 || Keyboard[sc_UpArrow]))
             {
               CheckInteraction(ob);
             }
