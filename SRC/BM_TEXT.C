@@ -791,20 +791,14 @@ Sint16 HelpMenu(void)
 */
 void HelpScreens(void)
 {
-  //TODO
   static Uint16 layouttable[] =
   {
-    4612,
-    4610,
-    4611,
-    4608,
-    4607,
-    4613
-    /*T_HELPART,*/
-    /*T_CONTRART,*/
-    /*T_STORYART,*/
-    /*T_ORDERART,*/
-    /*T_IDART*/
+    T_ORDERART,
+    T_HELPART,
+    T_STORYART,
+    T_CONTRART,
+    T_SCORESART,
+    T_NAGSCREENART
   };
 
   Uint16 olddisplayofs, oldbufferofs, oldfontnumber;
@@ -1050,7 +1044,7 @@ nextpage:
 
   StopMusic();
 
-  MM_FreePtr(&grsegs[4609]);//T_ENDART]);
+  MM_FreePtr(&grsegs[T_ENDART]);
   MM_FreePtr(&grsegs[H_FLASHARROW1PIC]);
   MM_FreePtr(&grsegs[H_FLASHARROW2PIC]);
   CA_DownLevel();

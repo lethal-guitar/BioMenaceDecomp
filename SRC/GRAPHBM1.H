@@ -606,13 +606,13 @@ typedef enum {
   //
 
   //texts
-  T_1,                         // 4607
-  T_2,                         // 4608
+  T_SCORESART,                 // 4607
+  T_CONTRART,                  // 4608
   T_ENDART,                    // 4609
-  T_4,                         // 4610
-  T_5,                         // 4611
-  T_6,                         // 4612
-  T_7,                         // 4613
+  T_HELPART,                   // 4610
+  T_STORYART,                  // 4611
+  T_ORDERART,                  // 4612
+  T_NAGSCREENART,              // 4613
 
   //demos
   DEMO0,                       // 4614
