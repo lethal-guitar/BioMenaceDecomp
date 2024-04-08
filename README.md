@@ -16,8 +16,7 @@ This code produces a 100% identical binary to `BMENACE1.EXE` from the Shareware 
 
 ### TODO
 
-* Complete `AUDIOBM1.H` and use constants where appropriate
-* Assign meaningful names to all functions and variables
+* Define constants for text assets
 * Do registered version episode 1
 * Do episode 2
 * Do episode 3
