@@ -291,7 +291,7 @@ typedef struct
   enum { ns_none, ns_collected, ns_placed } nukestate;
   boolean radpill;
   boolean exitkey;
-  boolean var14;
+  boolean trianglekeys;
   boolean hasrobopal;
   Sint8 potions;
   Sint8 lives;

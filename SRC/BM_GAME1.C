@@ -141,7 +141,7 @@ void NewGame(void)
   gamestate.redshard = false;
   gamestate.cyanshard = false;
   gamestate.exitkey = false;
-  gamestate.var14 = 0;
+  gamestate.trianglekeys = 0;
   gamestate.specialkey = false;
   gamestate.radpill = false;
   gamestate.hostagerescued = false;
@@ -262,7 +262,7 @@ boolean SaveTheGame(Sint16 handle)
   state.redshard = false;
   state.cyanshard = false;
   state.exitkey = false;
-  state.var14 = 0;
+  state.trianglekeys = 0;
   state.specialkey = false;
   state.radpill = false;
   state.hasrobopal = false;
@@ -550,7 +550,7 @@ loaded:
   gamestate.redshard = false;
   gamestate.cyanshard = false;
   gamestate.exitkey = false;
-  gamestate.var14 = 0;
+  gamestate.trianglekeys = 0;
   gamestate.specialkey = false;
   gamestate.radpill = false;
   gamestate.hasrobopal = false;

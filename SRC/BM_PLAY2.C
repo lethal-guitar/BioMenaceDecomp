@@ -800,7 +800,7 @@ void SnakeContact(objtype* ob, objtype* hit)
       break;
 
     case 29:
-      gamestate.var14++;
+      gamestate.trianglekeys++;
 
       SD_PlaySound(14);
 

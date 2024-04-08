@@ -328,7 +328,7 @@ void DrawStatusWindow(void)
   US_Print("ITEMS");
   VWB_Bar(191, 127, 50, 10, NUMBERBACK);
 
-  if (gamestate.var14)
+  if (gamestate.trianglekeys)
   {
     VWB_DrawTile8(192, 128, 56);
   }

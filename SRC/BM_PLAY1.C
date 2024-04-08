@@ -431,13 +431,13 @@ boolean CheckInteraction(objtype* ob)
   {
     if (intile == INTILE_DOORLOCK_TRIANGLE)
     {
-      if (gamestate.var14 <= 0)
+      if (gamestate.trianglekeys <= 0)
       {
         SD_PlaySound(SND_NOKEY);
         return true;
       }
 
-      gamestate.var14--;
+      gamestate.trianglekeys--;
     }
     else
     {
