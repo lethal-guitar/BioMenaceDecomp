@@ -49,7 +49,6 @@ void R_Chunk(objtype* ob);
 void C_Fireball(objtype* ob, objtype* hit);
 void R_Fireball(objtype* ob);
 void T_GrenadeExplosion(objtype* ob);
-void sub_1e34c(objtype* ob);
 void C_Grenade(objtype* ob, objtype* hit);
 void C_GrenadeExplosion(objtype* ob, objtype* hit);
 void R_Grenade(objtype* ob);
@@ -2198,7 +2197,7 @@ void ThrowGrenade(Uint16 x, Uint16 y, Direction dir)
 }
 
 
-void sub_1e34c(objtype* ob)
+void UnusedThinkFunc(objtype* ob)
 {
   ob->temp2 = ob->temp2 + tics;
   ob->shapenum = 0;
