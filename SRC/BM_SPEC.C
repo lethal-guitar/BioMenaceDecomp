@@ -744,7 +744,7 @@ void HostageDialog(void)
   CA_CacheMarks(0);
 
   VW_FixRefreshBuffer();
-  StartMusic(15);
+  StartMusic(DIALOGMUSIC);
 
   for (i = index; i < index + numsteps; i++)
   {
@@ -829,7 +829,7 @@ void ShowCompatibilityInfoMessage(void)
 
   if (gamestate.mapon != 6)
   {
-    StartMusic(15);
+    StartMusic(DIALOGMUSIC);
   }
 
   for (i = index; i < index + numsteps; i++)

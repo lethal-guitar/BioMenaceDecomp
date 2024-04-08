@@ -361,8 +361,7 @@ void DemoLoop(void)
 
       if (!donefirstrun)
       {
-        // TODO
-        StartMusic(18);
+        StartMusic(TECHHELPMUSIC);
         donefirstrun = true;
         ShowScreen(SCR_TECHHELP);
       }
@@ -371,26 +370,23 @@ void DemoLoop(void)
     case 1:
       IN_ClearKeysDown();
       LastScan = 0;
-      // TODO
-      StartMusic(11);
+      StartMusic(DEMOLOOPMUSIC);
       ShowTitle(40);
       break;
 
     case 2:
-      // TODO
-      if (curmusic != 11)
+      if (curmusic != DEMOLOOPMUSIC)
       {
-        StartMusic(11);
+        StartMusic(DEMOLOOPMUSIC);
       }
 
       ShowScreen(SCR_CREDITS);
       break;
 
     case 3:
-      // TODO
-      if (curmusic != 11)
+      if (curmusic != DEMOLOOPMUSIC)
       {
-        StartMusic(11);
+        StartMusic(DEMOLOOPMUSIC);
       }
       ShowScreen(SCR_PREVIEW);
       break;

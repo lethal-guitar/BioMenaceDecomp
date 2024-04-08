@@ -35,6 +35,8 @@
 
 #pragma warn    -pia
 
+#define CTLPANELMUSIC    16
+
 //      Special imports
 extern  boolean         showscorebox;
 void  USL_CheckSavedGames(void);
@@ -1563,7 +1565,7 @@ extern void HelpScreens(void);
 
   USL_SetUpCtlPanel();
   USL_DrawCtlPanel();
-  StartMusic(16); // TODO: Constant
+  StartMusic(CTLPANELMUSIC);
 
   ydelta = 0;
   for (CtlPanelDone = false,resetitem = on = true;!CtlPanelDone;)
@@ -1609,7 +1611,7 @@ extern void HelpScreens(void);
         resetitem = true;
         break;
       case sc_M:
-        StartMusic(16);
+        StartMusic(CTLPANELMUSIC);
         break;
       case sc_F1:
       case sc_F2:

@@ -725,7 +725,7 @@ void SnakeContact(objtype* ob, objtype* hit)
             gamestate.potions = 0;
             invincible = 1500;
 
-            StartMusic(17);
+            StartMusic(INVINCIBLEMUSIC);
           }
 
           hit->obclass = inertobj;
@@ -1434,7 +1434,7 @@ void DealDamage(objtype* ob, Sint16 amount)
         points = 5000;
         ob->shootable = 0;
         SpawnPickup(ob->tilemidx, ob->tiletop, 26);
-        StartMusic(14);
+        StartMusic(VICTORYMUSIC);
         skullmanactivestate = 1;
         bosshealth = 999;
         break;

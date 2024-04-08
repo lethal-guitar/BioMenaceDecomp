@@ -830,7 +830,7 @@ void HelpScreens(void)
   displayofs = 0x8000;
   VW_SetScreen(displayofs, 0);
 
-  StartMusic(0);
+  StartMusic(HELPSCREENSMUSIC);
   TimeCount = 0;
   nagscreenshown = false;
 
