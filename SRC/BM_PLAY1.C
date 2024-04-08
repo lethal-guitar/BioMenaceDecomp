@@ -458,7 +458,7 @@ boolean CheckInteraction(objtype* ob)
 
   if (intile == INTILE_DOORLOCK_SPECIAL)
   {
-    SD_PlaySound(17);
+    SD_PlaySound(SND_USEKEYCARD);
 
     if (!gamestate.specialkey)
     {
@@ -539,7 +539,7 @@ boolean CheckJumpOffLadder(objtype* ob)
 
   if (c.button0 && !button0held)
   {
-    SD_PlaySound(11);
+    SD_PlaySound(SND_PLAYERJUMP);
 
     ob->xspeed = ladderspeedx[c.xaxis + 1];
     ob->yspeed = -40;
@@ -757,7 +757,7 @@ void SnakeInteractThink(objtype* ob)
       }
 
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
-      SD_PlaySound(SND_24);
+      SD_PlaySound(SND_DANGER);
       gamestate.nukestate = ns_placed;
 
       VW_FixRefreshBuffer();
@@ -790,7 +790,7 @@ void SnakeInteractThink(objtype* ob)
       return;
 
 found:
-      SD_PlaySound(SND_24);
+      SD_PlaySound(SND_DANGER);
       BossDialog();
 
       if (gamestate.mapon != 11)
@@ -993,7 +993,7 @@ void OpenDoor(objtype* ob)
   if (*(mapsegs[1] + mapbwidthtable[doordesty] / 2 + doordestx) == 0)
     return;
 
-  SD_PlaySound(19);
+  SD_PlaySound(SND_OPENDOOR);
 
   info = *(mapsegs[2] + mapbwidthtable[doordesty] / 2 + doordestx);
   x = info >> 8;
@@ -1279,7 +1279,7 @@ void PollControls(void)
 void Jump(objtype* ob)
 {
   unused4 = 0;
-  SD_PlaySound(11);
+  SD_PlaySound(SND_PLAYERJUMP);
   ob->xspeed = 0;
   ob->yspeed = -41;
   xtry = 0;
@@ -1322,7 +1322,7 @@ void DamagePlayer(objtype* ob, Sint16 damage)
   else
   {
     invincible = 50;
-    SD_PlaySound(1);
+    SD_PlaySound(SND_TAKEDAMAGE);
   }
 }
 
@@ -1362,7 +1362,7 @@ void SnakeContactShielded(objtype* ob, objtype* hit)
       hit->obclass != crushblockobj)
   {
     DealDamage(hit, 5);
-    SD_PlaySound(7);
+    SD_PlaySound(SND_EXPLOSION);
     hit->dmgflash = 25;
   }
 
@@ -1382,7 +1382,7 @@ void SnakeStandThink(objtype* ob)
 
   if (playerShieldFramesLeft > 0)
   {
-    SD_PlaySound(26);
+    SD_PlaySound(SND_SPECIALMOVE);
     ob->obclass = fireballobj;
 
     playerShieldFramesLeft--;
@@ -1434,7 +1434,7 @@ void SnakeStandThink(objtype* ob)
     supermoveHoldUpCount++;
     if (supermoveHoldUpCount >= 75)
     {
-      SD_PlaySound(26);
+      SD_PlaySound(SND_SPECIALMOVE);
       supermoveHoldUpCount = 75;
     }
 
@@ -1517,7 +1517,7 @@ void SnakeStandThink(objtype* ob)
       {
         FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, dir_East + 20);
         FragBloom(ob->midx, ob->y + 8*PIXGLOBAL, dir_West + 20);
-        SD_PlaySound(21);
+        SD_PlaySound(SND_LASERSHOT);
       }
 
       ChangeState(ob, &s_player_fireball);
@@ -2027,7 +2027,7 @@ void KillPlayer(void)
     return;
   }
 
-  SD_PlaySound(5);
+  SD_PlaySound(SND_PLAYERDIE);
   gamestate.lives--;
   player->xspeed = 0;
   player->yspeed = -41;

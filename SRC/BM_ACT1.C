@@ -711,7 +711,7 @@ void R_Helicopter(objtype* ob)
 
 void SpawnParachuteBot(objtype* ob)
 {
-  SD_PlaySound(13);
+  SD_PlaySound(SND_RICOCHET);
 
   GetNewObj(true);
 
@@ -924,7 +924,7 @@ void T_SpitterSnake(objtype* ob)
 
     if (xdelta < -64*PIXGLOBAL)
     {
-      SD_PlaySound(9);
+      SD_PlaySound(SND_SNAKESPIT);
       ob->xdir = -1;
       ob->state = &s_spitsnake_attack1;
       return;
@@ -948,7 +948,7 @@ void T_SpitterSnake(objtype* ob)
 
     if (xdelta < 128*PIXGLOBAL)
     {
-      SD_PlaySound(9);
+      SD_PlaySound(SND_SNAKESPIT);
       ob->xdir = 1;
       ob->state = &s_spitsnake_attack1;
       return;
@@ -1036,7 +1036,7 @@ void T_SewerMutant(objtype* ob)
 
     if (xdelta < -64*PIXGLOBAL)
     {
-      SD_PlaySound(38);
+      SD_PlaySound(SND_SEWERMUTANTTHROW);
       ob->xdir = -1;
       ob->state = &s_sewermutant_attack;
       return;
@@ -1060,7 +1060,7 @@ void T_SewerMutant(objtype* ob)
 
     if (xdelta < 128*PIXGLOBAL)
     {
-      SD_PlaySound(38);
+      SD_PlaySound(SND_SEWERMUTANTTHROW);
       ob->xdir = 1;
       ob->state = &s_sewermutant_attack;
       return;
@@ -1227,7 +1227,7 @@ void T_DrMangleHologramAttacking(objtype* ob)
     {
       new->xspeed = ob->xdir * 60;
       new->yspeed = 0;
-      SD_PlaySound(6);
+      SD_PlaySound(SND_TURRETSHOOT);
     }
   }
   else if (rand > 250)
@@ -1333,7 +1333,7 @@ void T_DrMangle(objtype* ob)
       }
     }
 
-    SD_PlaySound(21);
+    SD_PlaySound(SND_LASERSHOT);
   }
 
   if (ob->xdir == -1)
@@ -1352,7 +1352,7 @@ void T_DrMangle(objtype* ob)
     ob->yspeed = -24 - US_RndT() / 16;
     ob->xspeed = -32;
 
-    SD_PlaySound(23);
+    SD_PlaySound(SND_ROAR);
     ob->shootable = true;
     ob->state = &s_drmangle_monster_jumping;
     return;
@@ -1373,7 +1373,7 @@ void T_DrMangle(objtype* ob)
     ob->yspeed = -24 - US_RndT() / 16;
     ob->xspeed = 32;
 
-    SD_PlaySound(23);
+    SD_PlaySound(SND_ROAR);
     ob->shootable = true;
     ob->state = &s_drmangle_monster_jumping;
     return;

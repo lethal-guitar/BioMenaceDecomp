@@ -280,7 +280,7 @@ void SnakeContact(objtype* ob, objtype* hit)
       switch (hit->temp1)
       {
         case 9:
-          SD_PlaySound(14);
+          SD_PlaySound(SND_COLLECTAMMO);
           hit->shapenum = GRENADE_GREEN1_SPR;
 
           gamestate.explosives.grenades++;
@@ -297,7 +297,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 16:
-          SD_PlaySound(14);
+          SD_PlaySound(SND_COLLECTAMMO);
           hit->shapenum = PICKUP_GUN1_SPR;
 
           if (gamestate.ammoinclip > 0 || gamestate.ammotype != 0)
@@ -332,7 +332,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 17:
           if (c.yaxis == -1)
           {
-            SD_PlaySound(15);
+            SD_PlaySound(SND_COLLECTKEY);
             hit->shapenum = PICKUP_KEYCARD1_SPR;
 
             gamestate.keyitems.keycards++;
@@ -350,7 +350,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 18:
-          SD_PlaySound(15);
+          SD_PlaySound(SND_COLLECTKEY);
           hit->shapenum = PICKUP_KEY1_SPR;
 
           gamestate.keyitems.keys++;
@@ -375,7 +375,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 24:
           if (c.yaxis == -1)
           {
-            SD_PlaySound(14);
+            SD_PlaySound(SND_COLLECTAMMO);
             hit->shapenum = POINTS_100_SPR + hit->temp1 - 19;
 
             GivePoints(bonuspoints[hit->temp1 - 19]);
@@ -389,7 +389,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 25:
           if (c.yaxis == -1)
           {
-            SD_PlaySound(16);
+            SD_PlaySound(SND_COLLECTONEUP);
             hit->shapenum = ONE_UP_SPR;
 
             if (gamestate.lives < 9)
@@ -406,7 +406,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 26:
           if (c.yaxis == -1 || gamestate.mapon == 6 || gamestate.mapon == 11)
           {
-            SD_PlaySound(15);
+            SD_PlaySound(SND_COLLECTKEY);
             hit->shapenum = PICKUP_SHARD_BLUE1_SPR;
 
             gamestate.blueshard++;
@@ -426,7 +426,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 27:
           if (c.yaxis == -1)
           {
-            SD_PlaySound(15);
+            SD_PlaySound(SND_COLLECTKEY);
             hit->shapenum = PICKUP_SHARD_GREEN1_SPR;
 
             gamestate.greenshard++;
@@ -446,7 +446,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 28:
           if (c.yaxis == -1)
           {
-            SD_PlaySound(15);
+            SD_PlaySound(SND_COLLECTKEY);
             hit->shapenum = PICKUP_SHARD_RED1_SPR;
 
             gamestate.redshard++;
@@ -466,7 +466,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 29:
           if (c.yaxis == -1)
           {
-            SD_PlaySound(15);
+            SD_PlaySound(SND_COLLECTKEY);
             hit->shapenum = PICKUP_SHARD_CYAN1_SPR;
 
             gamestate.cyanshard++;
@@ -486,7 +486,7 @@ void SnakeContact(objtype* ob, objtype* hit)
         case 30:
           if (c.yaxis == -1)
           {
-            SD_PlaySound(15);
+            SD_PlaySound(SND_COLLECTKEY);
             hit->shapenum = PICKUP_SPECIALKEY1_SPR;
 
             gamestate.specialkey++;
@@ -501,7 +501,7 @@ void SnakeContact(objtype* ob, objtype* hit)
 
         case 36:
           hit->shapenum = PICKUP_GRENADE_RED1_SPR;
-          SD_PlaySound(14);
+          SD_PlaySound(SND_COLLECTAMMO);
 
           gamestate.explosives.redgrenades++;
 
@@ -517,7 +517,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 37:
-          SD_PlaySound(15);
+          SD_PlaySound(SND_COLLECTKEY);
           hit->shapenum = PICKUP_AMMO_SUPER1_SPR;
 
           gamestate.rapidfire = true;
@@ -549,7 +549,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 38:
-          SD_PlaySound(27);
+          SD_PlaySound(SND_COLLECTBONUS);
           hit->shapenum = PICKUP_LANDMINES1_SPR;
 
           if (gamestate.difficulty == gd_Hard)
@@ -573,7 +573,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 39:
-          SD_PlaySound(27);
+          SD_PlaySound(SND_COLLECTBONUS);
           hit->shapenum = PICKUP_AMMO_PLASMA1_SPR;
 
           gamestate.rapidfire = false;
@@ -605,7 +605,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 52:
-          SD_PlaySound(27);
+          SD_PlaySound(SND_COLLECTBONUS);
           hit->shapenum = PICKUP_LIFEGEM1_SPR;
 
           gamestate.gems++;
@@ -617,7 +617,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           {
             gamestate.lives++;
             gamestate.gems = 0;
-            SD_PlaySound(16);
+            SD_PlaySound(SND_COLLECTONEUP);
 
             hit->shapenum = ONE_UP_SPR;
           }
@@ -632,14 +632,14 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 53:
-          SD_PlaySound(27);
+          SD_PlaySound(SND_COLLECTBONUS); // NOTE: Unnecessary
           hit->shapenum = PICKUP_HEALTH1_SPR;
 
           hit->obclass = inertobj;
           hit->priority = 3;
           ChangeState(hit, &s_pickuprise);
 
-          SD_PlaySound(28);
+          SD_PlaySound(SND_COLLECTHEALTH);
 
           switch (gamestate.difficulty)
           {
@@ -670,7 +670,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 54:
-          SD_PlaySound(16);
+          SD_PlaySound(SND_COLLECTONEUP);
           hit->shapenum = PICKUP_SECRETLEVELGEM1_SPR;
 
           hit->obclass = inertobj;
@@ -687,7 +687,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 75:
-          SD_PlaySound(27);
+          SD_PlaySound(SND_COLLECTBONUS);
           hit->shapenum = PICKUP_NUKE1_SPR;
 
           gamestate.nukestate = ns_collected;
@@ -701,7 +701,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 76:
-          SD_PlaySound(27);
+          SD_PlaySound(SND_COLLECTBONUS);
           hit->shapenum = PICKUP_RADPILL1_SPR;
 
           gamestate.radpill = true;
@@ -715,7 +715,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 77:
-          SD_PlaySound(31);
+          SD_PlaySound(SND_COLLECTPOTION);
           hit->shapenum = PICKUP_INVINCIBILITY1_SPR;
 
           gamestate.potions++;
@@ -740,7 +740,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 78:
-          SD_PlaySound(33);
+          SD_PlaySound(SND_COLLECTVALUABLEITEM);
           hit->shapenum = POINTS_5000_SPR;
 
           GivePoints(5000);
@@ -751,7 +751,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 79:
-          SD_PlaySound(33);
+          SD_PlaySound(SND_COLLECTVALUABLEITEM);
           hit->shapenum = POINTS_50000_SPR;
 
           GivePoints(50000);
@@ -762,7 +762,7 @@ void SnakeContact(objtype* ob, objtype* hit)
           break;
 
         case 80:
-          SD_PlaySound(15);
+          SD_PlaySound(SND_COLLECTKEY);
 
           gamestate.exitkey = true;
 
@@ -787,7 +787,7 @@ void SnakeContact(objtype* ob, objtype* hit)
 
       HostageDialog();
 
-      SD_PlaySound(14);
+      SD_PlaySound(SND_COLLECTAMMO);
 
       hit->shapenum = POINTS_5000_SPR;
 
@@ -802,7 +802,7 @@ void SnakeContact(objtype* ob, objtype* hit)
     case 29:
       gamestate.trianglekeys++;
 
-      SD_PlaySound(14);
+      SD_PlaySound(SND_COLLECTAMMO);
 
       hit->shapenum = PICKUP_TRIANGLE2_SPR;
       hit->obclass = pickupobj;
@@ -813,7 +813,7 @@ void SnakeContact(objtype* ob, objtype* hit)
     case robopalobj:
       if (!gamestate.hasrobopal && (invincible == 0 || invincible > 50))
       {
-        SD_PlaySound(33);
+        SD_PlaySound(SND_COLLECTVALUABLEITEM);
 
         gamestate.hasrobopal = true;
 
@@ -1425,7 +1425,7 @@ void DealDamage(objtype* ob, Sint16 amount)
       case drmangleobj:
         points = 34464;
         ob->shootable = 0;
-        SD_PlaySound(23);
+        SD_PlaySound(SND_ROAR);
         ob->obclass = inertobj;
         bosshealth = 999;
         break;
@@ -1545,7 +1545,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
     if (gamestate.ammotype != AMMO_PLASMABOLT)
     {
-      SD_PlaySound(12);
+      SD_PlaySound(SND_PLAYERGUN);
     }
 
     gamestate.ammoinclip--;
@@ -1577,7 +1577,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
     if (gamestate.ammotype != AMMO_PLASMABOLT)
     {
-      SD_PlaySound(12);
+      SD_PlaySound(SND_PLAYERGUN);
     }
 
     gamestate.rapidfire = false;
@@ -1652,7 +1652,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
       if (US_RndT() < 16)
       {
-        SD_PlaySound(13);
+        SD_PlaySound(SND_RICOCHET);
       }
 
       return;
@@ -1666,7 +1666,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
         if (US_RndT() < 16)
         {
-          SD_PlaySound(13);
+          SD_PlaySound(SND_RICOCHET);
         }
 
         return;
@@ -1680,7 +1680,7 @@ void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage)
 
         if (US_RndT() < 16)
         {
-          SD_PlaySound(13);
+          SD_PlaySound(SND_RICOCHET);
         }
 
         return;
@@ -1699,7 +1699,7 @@ void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir)
 {
   Sint16 temp;
 
-  SD_PlaySound(8);
+  SD_PlaySound(SND_SQUISHPLAYER);
 
   GetNewObj(true);
   new->active = ac_removable;
@@ -2116,7 +2116,7 @@ void R_Fireball(objtype* ob)
 void T_GrenadeExplosion(objtype* ob)
 {
   (void)ob;
-  SD_PlaySound(7);
+  SD_PlaySound(SND_EXPLOSION);
 }
 
 
@@ -2221,7 +2221,7 @@ void C_Grenade(objtype* ob, objtype* hit)
 
     ob->obclass = fireballobj;
 
-    SD_PlaySound(7);
+    SD_PlaySound(SND_EXPLOSION);
 
     ob->needtoclip = cl_midclip;
   }
@@ -2404,7 +2404,7 @@ void SpawnShot(Uint16 x, Uint16 y, Sint16 dir)
   new->obclass = shotobj;
   new->active = ac_allways;
 
-  SD_PlaySound(29);
+  SD_PlaySound(SND_ZING);
 
   switch (dir)
   {
@@ -2435,7 +2435,7 @@ void SpawnLaserShot(Uint16 x, Uint16 y, Sint16 dir)
   new->obclass = shotobj;
   new->active = ac_allways;
 
-  SD_PlaySound(21);
+  SD_PlaySound(SND_LASERSHOT);
 
   new->temp7 = 1;
 
@@ -2468,7 +2468,7 @@ void SpawnSuperPlasmaBolt(Uint16 x, Uint16 y, Sint16 dir)
   new->obclass = shotobj;
   new->active = ac_allways;
 
-  SD_PlaySound(7);
+  SD_PlaySound(SND_EXPLOSION);
 
   new->temp7 = 0;
 
@@ -2538,7 +2538,7 @@ void ExplodeShot(objtype* ob)
     ChangeState(ob, &s_rocketimpact1);
   }
 
-  SD_PlaySound(30);
+  SD_PlaySound(SND_TANKSHOOT);
 }
 
 

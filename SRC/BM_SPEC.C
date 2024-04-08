@@ -887,7 +887,7 @@ void BossDialog(void)
       case  0: _fstrcpy(buffer, BOSSDIALOG1); break;
       case  1: _fstrcpy(buffer, BOSSDIALOG2); break;
       case  2: _fstrcpy(buffer, BOSSDIALOG3); break;
-      case  3: _fstrcpy(buffer, BOSSDIALOG4); SD_PlaySound(23); break;
+      case  3: _fstrcpy(buffer, BOSSDIALOG4); SD_PlaySound(SND_ROAR); break;
       case  4: _fstrcpy(buffer, BOSSDIALOG5); break;
       case  5: _fstrcpy(buffer, BOSSDIALOG6); break;
       case  6: _fstrcpy(buffer, BOSSDIALOG7); break;

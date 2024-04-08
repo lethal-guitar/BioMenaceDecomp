@@ -495,13 +495,13 @@ void T_ExplodingEnemy(objtype* ob)
     SpawnBigExplosion(explosionx, explosiony);
     ChunkBloom(ob, ob->midx, ob->y, dir_East);
     ChunkBloom(ob, ob->midx, ob->y, dir_West);
-    SD_PlaySound(30);
+    SD_PlaySound(SND_TANKSHOOT);
 
     ob->nothink = US_RndT() / 16;
     return;
   }
 
-  SD_PlaySound(23);
+  SD_PlaySound(SND_ROAR);
   SpawnBigExplosion(ob->midx, ob->y + 16*PIXGLOBAL);
   RemoveObj(ob);
 }
@@ -676,13 +676,13 @@ void SpawnTankBotShot(objtype* ob)
 
   NewState(new, &s_tankbot_shot);
 
-  SD_PlaySound(30);
+  SD_PlaySound(SND_TANKSHOOT);
 }
 
 
 void SpawnNapalmBomb(objtype* ob)
 {
-  SD_PlaySound(13);
+  SD_PlaySound(SND_RICOCHET);
 
   GetNewObj(true);
 
@@ -778,7 +778,7 @@ void R_NapalmBomb_Landing(objtype* ob)
     FragBloom(ob->x, ob->y, dir_South);
     FragBloom(ob->x, ob->y, dir_East);
     FragBloom(ob->x, ob->y, dir_West);
-    SD_PlaySound(21);
+    SD_PlaySound(SND_LASERSHOT);
   }
 
   PLACESPRITE;
@@ -888,7 +888,7 @@ void T_LaserGunner_Shooting(objtype* ob)
     new->yspeed = -4;
   }
 
-  SD_PlaySound(21);
+  SD_PlaySound(SND_LASERSHOT);
 }
 
 
@@ -907,7 +907,7 @@ void R_EnemyLaserShot(objtype* ob)
 {
   if (ob->hitnorth || ob->hiteast || ob->hitsouth || ob->hitwest)
   {
-    SD_PlaySound(29);
+    SD_PlaySound(SND_ZING);
     ob->y -= 8*PIXGLOBAL;
     ChangeState(ob, &s_bigshotimpact1);
     ob->obclass = inertobj;
@@ -965,7 +965,7 @@ void C_PushBlock(objtype* ob, objtype* hit)
     if (--ob->temp7 <= 0)
     {
       ob->temp7 = 15;
-      SD_PlaySound(37);
+      SD_PlaySound(SND_BLOCKPUSHED);
     }
   }
 
@@ -1008,7 +1008,7 @@ void T_FallingBlock(objtype* ob)
     if (--ob->temp7 <= 0)
     {
       ChangeState(ob, &s_fallingblock_falling);
-      SD_PlaySound(36);
+      SD_PlaySound(SND_FALLINGBLOCK);
       ob->needtoclip = cl_noclip;
     }
   }
@@ -1063,7 +1063,7 @@ void T_Crusher_Moving(objtype* ob)
   if (--ob->temp7 <= 0)
   {
     ob->temp7 = 15;
-    SD_PlaySound(35);
+    SD_PlaySound(SND_CRUSHERMOVE);
   }
 }
 
@@ -1074,7 +1074,7 @@ void R_Crusher(objtype* ob)
   {
     crusheractive = -1;
     ChangeState(ob, &s_crusher_idle);
-    SD_PlaySound(8);
+    SD_PlaySound(SND_SQUISHPLAYER);
   }
 
   PLACESPRITE;
@@ -1184,7 +1184,7 @@ void R_BounceBot(objtype* ob)
     if (ob->tileright >= originxtile && ob->tileleft <= originxtilemax &&
         ob->tiletop >= originytile && ob->tilebottom <= originytilemax)
     {
-      SD_PlaySound(0);
+      SD_PlaySound(SND_ROBOTBOUNCE);
     }
 
     ob->yspeed = -ob->yspeed;
@@ -1195,7 +1195,7 @@ void R_BounceBot(objtype* ob)
     if (ob->tileright >= originxtile && ob->tileleft <= originxtilemax &&
         ob->tiletop >= originytile && ob->tilebottom <= originytilemax)
     {
-      SD_PlaySound(0);
+      SD_PlaySound(SND_ROBOTBOUNCE);
     }
 
     ob->yspeed = -64 - (US_RndT() >> 4);
@@ -1245,7 +1245,7 @@ void SpawnSlimeDrop(objtype* ob)
 
   NewState(new, &s_slime_drop1);
 
-  SD_PlaySound(39);
+  SD_PlaySound(SND_DROPSLIME);
 }
 
 
@@ -1354,7 +1354,7 @@ void LaserTurretFireShot(objtype* ob)
   new->xspeed = ob->xdir * 60;
   new->yspeed = 0;
 
-  SD_PlaySound(6);
+  SD_PlaySound(SND_TURRETSHOOT);
 }
 
 
@@ -1450,7 +1450,7 @@ void C_LandMine(objtype* ob, objtype* hit)
 
     ob->obclass = fireballobj;
     ob->temp6 = 1;
-    SD_PlaySound(7);
+    SD_PlaySound(SND_EXPLOSION);
 
     ChangeState(ob, &s_grenadeexplosion1);
     ob->needtoclip = cl_midclip;
@@ -1754,7 +1754,7 @@ void T_SparkShooter(objtype* ob)
   }
 
   NewState(new, &s_sparkshot1);
-  SD_PlaySound(21);
+  SD_PlaySound(SND_LASERSHOT);
 }
 
 
@@ -1762,7 +1762,7 @@ void R_SparkShot(objtype* ob)
 {
   if (ob->hitnorth || ob->hiteast || ob->hitsouth || ob->hitwest)
   {
-    SD_PlaySound(29);
+    SD_PlaySound(SND_ZING);
     ChangeState(ob, &s_sparkshot_explode1);
   }
 
@@ -1793,7 +1793,7 @@ void C_RespawnBeacon(objtype* ob, objtype* hit)
     playerrestorex = player->x;
     playerrestorey = player->y;
     ChangeState(ob, &s_respawn_beacon1);
-    SD_PlaySound(40);
+    SD_PlaySound(SND_BEACONACTIVE);
 
     if (!gamestate.helpmsgbeacon)
     {

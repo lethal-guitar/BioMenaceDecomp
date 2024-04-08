@@ -490,13 +490,13 @@ static void DrawNagScreenTimer(void)
     nagtimer = -1;
     strcat(str, "GO!");
     nagscreenshown = true;
-    SD_PlaySound(40); // TODO
+    SD_PlaySound(SND_BEACONACTIVE);
   }
   else
   {
     itoa(nagtimer, str2, 10);
     strcat(str, str2);
-    SD_PlaySound(41); // TODO
+    SD_PlaySound(SND_NAGTIMERTICK);
   }
 
   fontcolor = LIGHTMAGENTA;
@@ -1007,9 +1007,8 @@ void EpisodeEndScreens(void)
   CA_CacheGrChunk(H_FLASHARROW2PIC);
   CA_CacheGrChunk(H_FLASHARROW1PIC);
 
-  // TODO
-  CA_CacheGrChunk(4609);//T_ENDART);
-  textseg = grsegs[4609];//T_ENDART];
+  CA_CacheGrChunk(T_ENDART);
+  textseg = grsegs[T_ENDART];
 
   text = textseg;
   CacheLayoutGraphics();

@@ -726,7 +726,7 @@ void T_Slug(objtype* ob)
 
     ob->yspeed = -24 - US_RndT() / 16;
     ob->xspeed = -32;
-    SD_PlaySound(10);
+    SD_PlaySound(SND_SLUGATTACK);
     ob->state = &s_slug_attack;
     return;
   }
@@ -745,7 +745,7 @@ void T_Slug(objtype* ob)
 
     ob->yspeed = -24 - US_RndT() / 16;
     ob->xspeed = 32;
-    SD_PlaySound(10);
+    SD_PlaySound(SND_SLUGATTACK);
     ob->state = &s_slug_attack;
     return;
   }
@@ -774,7 +774,7 @@ void T_GhostlySlug(objtype* ob)
 
     ob->yspeed = -24 - US_RndT() / 8;
     ob->xspeed = -32 - US_RndT() / 8;
-    SD_PlaySound(10);
+    SD_PlaySound(SND_SLUGATTACK);
     ob->state = &s_ghostlyslug_attack;
     return;
   }
@@ -793,7 +793,7 @@ void T_GhostlySlug(objtype* ob)
 
     ob->yspeed = -24 - US_RndT() / 8;
     ob->xspeed = 32 + US_RndT() / 8;
-    SD_PlaySound(10);
+    SD_PlaySound(SND_SLUGATTACK);
     ob->state = &s_ghostlyslug_attack;
     return;
   }
@@ -810,13 +810,13 @@ void T_RunningFire(objtype* ob)
   if (US_RndT() > 230)
   {
     FragBloom(ob->midx + 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_East + 10);
-    SD_PlaySound(13);
+    SD_PlaySound(SND_RICOCHET);
   }
 
   if (US_RndT() > 230)
   {
     FragBloom(ob->midx - 2*PIXGLOBAL, ob->y - 8*PIXGLOBAL, dir_West + 10);
-    SD_PlaySound(13);
+    SD_PlaySound(SND_RICOCHET);
   }
 }
 
@@ -1309,7 +1309,7 @@ void T_CeilingWalkerOnCeiling(objtype* ob)
     if (!ob->hitnorth)
     {
       ob->yspeed = 24 - US_RndT() / 16;
-      SD_PlaySound(3);
+      SD_PlaySound(SND_CEILWALKERFALL);
       ob->state = &s_ceilwalker_falling;
       return;
     }
@@ -1323,7 +1323,7 @@ void T_CeilingWalkerOnCeiling(objtype* ob)
     if (!ob->hitnorth)
     {
       ob->yspeed = 24 - US_RndT() / 16;
-      SD_PlaySound(3);
+      SD_PlaySound(SND_CEILWALKERFALL);
       ob->state = &s_ceilwalker_falling;
       return;
     }
@@ -1338,7 +1338,7 @@ void T_CeilingWalkerOnFloor(objtype* ob)
     if (!ob->hitnorth)
     {
       ob->yspeed = 24 - US_RndT() / 16;
-      SD_PlaySound(3);
+      SD_PlaySound(SND_CEILWALKERFALL);
       ob->state = &s_ceilwalker_falling;
       return;
     }
@@ -1348,7 +1348,7 @@ void T_CeilingWalkerOnFloor(objtype* ob)
     if (!ob->hitnorth)
     {
       ob->yspeed = 24 - US_RndT() / 16;
-      SD_PlaySound(3);
+      SD_PlaySound(SND_CEILWALKERFALL);
       ob->state = &s_ceilwalker_falling;
       return;
     }
@@ -1360,7 +1360,7 @@ void R_CeilingWalkerFalling(objtype* ob)
 {
   if (ob->hitnorth)
   {
-    SD_PlaySound(4);
+    SD_PlaySound(SND_CEILWALKERLAND);
     ChangeState(ob, &s_ceilwalker_walkfloor1);
     ob->nothink = 12;
   }
