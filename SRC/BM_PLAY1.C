@@ -110,12 +110,12 @@ statetype far s_player_standing = {
   stepthink, false, ps_tofloor, 4, 0, 16,
   SnakeStandThink, SnakeContact2, R_OnGround, &s_player_standing};
 
-statetype far s_player_5 = {
+statetype far s_player_activated_trigger = {
   PLAYER_STANDING_L_SPR, PLAYER_STANDING_R_SPR,
   step, false, ps_tofloor, 1, 0, 0,
   SnakeInteractThink, NULL, R_OnGround, &s_player_standing};
 
-statetype far s_player_6 = {
+statetype far s_player_unused2 = {
   PLAYER_STANDING_L_SPR, PLAYER_STANDING_R_SPR,
   think, false, ps_none, 0, 0, 0,
   AlignPlayer, NULL, R_Draw, NULL};
@@ -385,9 +385,11 @@ boolean CheckInteraction(objtype* ob)
     *(mapsegs[1] + mapbwidthtable[ob->tiletop + 1]/2 + ob->tilemidx)];
 
   if (
-    intile == 3 || intile == 19 || intile == 18 || intile == 9 ||
-    intile == 10 || intile == 11 ||  intile == 12 || intile == 23 ||
-    intile == 14 || intile == 15)
+    intile == INTILE_KEYCARD_SLOT || intile == INTILE_PLATFORM_SWITCH ||
+    intile == INTILE_BRIDGE_SWITCH || intile == INTILE_SHARD_SLOT_BLUE ||
+    intile == INTILE_SHARD_SLOT_GREEN || intile == INTILE_SHARD_SLOT_RED ||
+    intile == INTILE_SHARD_SLOT_CYAN || intile == INTILE_COLOR_SEQ_SWITCH ||
+    intile == INTILE_NUKE_SLOT || intile == INTILE_EXITKEY_SLOT)
   {
     temp = CONVERT_TILE_TO_GLOBAL(ob->tilemidx) - 4*PIXGLOBAL;
 
@@ -405,7 +407,7 @@ boolean CheckInteraction(objtype* ob)
     return true;
   }
 
-  if (intile == 7)
+  if (intile == INTILE_DOOR)
   {
     temp = CONVERT_TILE_TO_GLOBAL(ob->tilemidx) - 4*PIXGLOBAL;
 
@@ -424,9 +426,10 @@ boolean CheckInteraction(objtype* ob)
     return true;
   }
 
-  if (intile == 4 || intile == 6 || intile == 5)
+  if (intile == INTILE_DOORLOCK_TRIANGLE || intile == INTILE_DOORLOCK2 ||
+      intile == INTILE_DOORLOCK1)
   {
-    if (intile == 4)
+    if (intile == INTILE_DOORLOCK_TRIANGLE)
     {
       if (gamestate.var14 <= 0)
       {
@@ -453,7 +456,7 @@ boolean CheckInteraction(objtype* ob)
     return true;
   }
 
-  if (intile == 8)
+  if (intile == INTILE_DOORLOCK_SPECIAL)
   {
     SD_PlaySound(17);
 
@@ -470,14 +473,14 @@ boolean CheckInteraction(objtype* ob)
     return true;
   }
 
-  if (intile == 148)
+  if (intile == (INTILE_UNKNOWN | INTILE_FOREGROUND))
   {
     return true;
   }
 
-  if (intile == 21 || intile == 22)
+  if (intile == INTILE_TRIGGER_DRMANGLE || intile == INTILE_TRIGGER_UNKNOWN)
   {
-    ob->state = &s_player_5;
+    ob->state = &s_player_activated_trigger;
     upheld = true;
     return true;
   }
@@ -660,14 +663,14 @@ void SnakeInteractThink(objtype* ob)
 
   switch (intile)
   {
-    case 18:
-    case 19:
-    case 23:
+    case INTILE_BRIDGE_SWITCH:
+    case INTILE_PLATFORM_SWITCH:
+    case INTILE_COLOR_SEQ_SWITCH:
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
       SD_PlaySound(SND_USESWITCH);
       break;
 
-    case 3:
+    case INTILE_KEYCARD_SLOT:
       if (gamestate.keyitems.keycards == 0)
       {
         ShowHelpMessage("You don't have a key for this!\n");
@@ -680,7 +683,7 @@ void SnakeInteractThink(objtype* ob)
       SD_PlaySound(SND_USEKEYCARD);
       break;
 
-    case 9:
+    case INTILE_SHARD_SLOT_BLUE:
       if (!gamestate.blueshard)
       {
         ShowHelpMessage("You don't have the right shard!\n");
@@ -693,7 +696,7 @@ void SnakeInteractThink(objtype* ob)
       SD_PlaySound(SND_USESHARD);
       break;
 
-    case 10:
+    case INTILE_SHARD_SLOT_GREEN:
       if (!gamestate.greenshard)
       {
         ShowHelpMessage("You don't have the right shard!\n");
@@ -706,7 +709,7 @@ void SnakeInteractThink(objtype* ob)
       SD_PlaySound(SND_USESHARD);
       break;
 
-    case 11:
+    case INTILE_SHARD_SLOT_RED:
       if (!gamestate.redshard)
       {
         ShowHelpMessage("You don't have the right shard!\n");
@@ -719,7 +722,7 @@ void SnakeInteractThink(objtype* ob)
       SD_PlaySound(SND_USESHARD);
       break;
 
-    case 12:
+    case INTILE_SHARD_SLOT_CYAN:
       if (!gamestate.cyanshard)
       {
         ShowHelpMessage("You don't have the right shard!\n");
@@ -732,7 +735,7 @@ void SnakeInteractThink(objtype* ob)
       SD_PlaySound(SND_USESHARD);
       break;
 
-    case 15:
+    case INTILE_EXITKEY_SLOT:
       if (!gamestate.exitkey)
       {
         ShowHelpMessage("You must rescue the hostage first!\n");
@@ -745,7 +748,7 @@ void SnakeInteractThink(objtype* ob)
       SD_PlaySound(SND_USESHARD);
       break;
 
-    case 14:
+    case INTILE_NUKE_SLOT:
       if (gamestate.nukestate != ns_collected)
       {
         ShowHelpMessage("You don't have a nuclear bomb!\n");
@@ -770,7 +773,7 @@ void SnakeInteractThink(objtype* ob)
       RF_ForceRefresh();
       break;
 
-    case 21:
+    case INTILE_TRIGGER_DRMANGLE:
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
       if (drmangleactive)
       {
@@ -816,7 +819,7 @@ found:
       }
       break;
 
-    case 22:
+    case INTILE_TRIGGER_UNKNOWN:
       if (unknown == 3)
       {
         return;
@@ -835,9 +838,9 @@ found:
       return;
   }
 
-  if (intile == 18 || intile == 10)
+  if (intile == INTILE_BRIDGE_SWITCH || intile == INTILE_SHARD_SLOT_GREEN)
   {
-    if (!gamestate.helpmsgbridgeswitch && intile == 18)
+    if (!gamestate.helpmsgbridgeswitch && intile == INTILE_BRIDGE_SWITCH)
     {
       ShowHelpMessage("This switch activates a bridge.\n");
       gamestate.helpmsgbridgeswitch = true;
@@ -855,7 +858,7 @@ found:
 
         tile += manim;
 
-        if (tinf[INTILE + tile] == 144)
+        if (tinf[INTILE + tile] == (INTILE_FORCEFIELD | INTILE_FOREGROUND))
           tile = 0;
 
         RF_MemToMap(&tile, 1, x, y, 1, 1);
@@ -865,7 +868,8 @@ found:
     return;
   }
 
-  if (intile == 3 || intile == 9 || intile == 12 || intile == 15)
+  if (intile == INTILE_KEYCARD_SLOT || intile == INTILE_SHARD_SLOT_BLUE ||
+      intile == INTILE_SHARD_SLOT_CYAN || intile == INTILE_EXITKEY_SLOT)
   {
     for (y = sy; y < mapheight; y++)
     {
@@ -881,7 +885,8 @@ found:
       RF_MemToMap(&tile, 1, sx, y, 1, 1);
     }
 
-    if (gamestate.mapon == 10 && (intile == 9 || intile == 12))
+    if (gamestate.mapon == 10 &&
+        (intile == INTILE_SHARD_SLOT_BLUE || intile == INTILE_SHARD_SLOT_CYAN))
     {
       info = *(mapsegs[2] + mapbwidthtable[sy-1] / 2 + sx);
       x = info >> 8;
@@ -893,9 +898,9 @@ found:
     return;
   }
 
-  if (intile == 19 || intile == 11)
+  if (intile == INTILE_PLATFORM_SWITCH || intile == INTILE_SHARD_SLOT_RED)
   {
-    if (!gamestate.helpmsgplatformswitch && intile == 19)
+    if (!gamestate.helpmsgplatformswitch && intile == INTILE_PLATFORM_SWITCH)
     {
       ShowHelpMessage("This switch activates a platform.\n");
       gamestate.helpmsgplatformswitch = true;
@@ -917,7 +922,7 @@ found:
     return;
   }
 
-  if (intile == 23)
+  if (intile == INTILE_COLOR_SEQ_SWITCH)
   {
     if (!gamestate.helpmsgcolorseq)
     {
@@ -2187,10 +2192,10 @@ void CheckInTiles(objtype *ob)
       {
         switch (intile)
         {
-          case 4:
-          case 5:
-          case 6:
-          case 8:
+          case INTILE_DOORLOCK_TRIANGLE:
+          case INTILE_DOORLOCK1:
+          case INTILE_DOORLOCK2:
+          case INTILE_DOORLOCK_SPECIAL:
             if (!gamestate.helpmsgenterdoor)
             {
               ShowHelpMessage("Push <UP> to enter or open a door.\n");
@@ -2201,7 +2206,7 @@ void CheckInTiles(objtype *ob)
             doordesty = y;
             break;
 
-          case 2:
+          case INTILE_DAMAGING:
             if (ob->health > 0)
             {
               if (invincible == 0)
@@ -2215,7 +2220,7 @@ void CheckInTiles(objtype *ob)
             }
             break;
 
-          case 16:
+          case INTILE_FORCEFIELD:
             if (ob->health > 0)
             {
               DamagePlayer(ob, 50);
@@ -2226,7 +2231,7 @@ void CheckInTiles(objtype *ob)
             }
             break;
 
-          case 13:
+          case INTILE_RADIATION:
             if (gamestate.radpill == true)
             {
               return;
@@ -2242,14 +2247,14 @@ void CheckInTiles(objtype *ob)
             }
             break;
 
-          case 21:
+          case INTILE_TRIGGER_DRMANGLE:
             if (ob->hitnorth == 1)
             {
               CheckInteraction(ob);
             }
             break;
 
-          case 22:
+          case INTILE_TRIGGER_UNKNOWN:
             if (unknown == 3)
             {
               return;
@@ -2261,7 +2266,7 @@ void CheckInTiles(objtype *ob)
             }
             break;
 
-          case 25:
+          case INTILE_TRIGGER_CRUSHER:
             if (crusheractive != -1)
             {
               crusheractive = 1;
