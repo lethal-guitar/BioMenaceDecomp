@@ -40,12 +40,12 @@
 
 #define MINMEMORY 250000l
 
-#define HIGHSCORE_LEFT	40
-#define HIGHSCORE_TOP	35
-#define HIGHSCORE_RIGHT	280
-#define HIGHSCORE_MAP	12
+#define HIGHSCORE_LEFT   40
+#define HIGHSCORE_TOP    35
+#define HIGHSCORE_RIGHT 280
+#define HIGHSCORE_MAP    12
 
-#define ENDINGMUSIC	12
+#define ENDINGMUSIC 12
 
 #define INACTIVATEDIST 6
 
@@ -132,54 +132,49 @@ typedef enum {
 } arrowdirtype;
 
 typedef enum {
-  ex_stillplaying, //  0
-  ex_died,         //  1
-  ex_completed,    //  2
-  ex_warped,       //  3 // TODO: probably something else
-  ex_resetgame,    //  4
-  ex_loadedgame,   //  5
-  ex_abortgame,    //  6
-  ex_dummy,
-  ex_dummy2,
-  ex_dummy3,
-  ex_dummy4,
+  ex_stillplaying, // 0
+  ex_died,         // 1
+  ex_completed,    // 2
+  ex_warped,       // 3
+  ex_resetgame,    // 4
+  ex_loadedgame,   // 5
+  ex_abortgame,    // 6
   NUMEXITTYPES
 } exittype;
 
 typedef enum
 {
-  INTILE_NOTHING = 0,
-  INTILE_LADDER = 1,
-  INTILE_DAMAGING = 2,
-  INTILE_KEYCARD_SLOT = 3,
+  INTILE_NOTHING           = 0,
+  INTILE_LADDER            = 1,
+  INTILE_DAMAGING          = 2,
+  INTILE_KEYCARD_SLOT      = 3,
   INTILE_DOORLOCK_TRIANGLE = 4,
-  INTILE_DOORLOCK1 = 5,
-  INTILE_DOORLOCK2 = 6,
-  INTILE_DOOR = 7,
-  INTILE_DOORLOCK_SPECIAL = 8,
-  INTILE_SHARD_SLOT_BLUE = 9,
-  INTILE_SHARD_SLOT_GREEN = 10,
-  INTILE_SHARD_SLOT_RED = 11,
-  INTILE_SHARD_SLOT_CYAN = 12,
-  INTILE_RADIATION = 13,
-  INTILE_NUKE_SLOT = 14,
-  INTILE_EXITKEY_SLOT = 15,
-  INTILE_FORCEFIELD = 16,
-  INTILE_BRIDGE_SWITCH = 18,
-  INTILE_PLATFORM_SWITCH = 19,
-  INTILE_UNKNOWN = 20,
-  INTILE_TRIGGER_DRMANGLE = 21,
-  INTILE_TRIGGER_UNKNOWN = 22,
-  INTILE_COLOR_SEQ_SWITCH = 23,
-  INTILE_TRIGGER_CRUSHER = 25,
-  INTILE_FOREGROUND = 0x80
+  INTILE_DOORLOCK1         = 5,
+  INTILE_DOORLOCK2         = 6,
+  INTILE_DOOR              = 7,
+  INTILE_DOORLOCK_SPECIAL  = 8,
+  INTILE_SHARD_SLOT_BLUE   = 9,
+  INTILE_SHARD_SLOT_GREEN  = 10,
+  INTILE_SHARD_SLOT_RED    = 11,
+  INTILE_SHARD_SLOT_CYAN   = 12,
+  INTILE_RADIATION         = 13,
+  INTILE_NUKE_SLOT         = 14,
+  INTILE_EXITKEY_SLOT      = 15,
+  INTILE_FORCEFIELD        = 16,
+  INTILE_BRIDGE_SWITCH     = 18,
+  INTILE_PLATFORM_SWITCH   = 19,
+  INTILE_UNKNOWN           = 20,
+  INTILE_TRIGGER_DRMANGLE  = 21,
+  INTILE_TRIGGER_UNKNOWN   = 22,
+  INTILE_COLOR_SEQ_SWITCH  = 23,
+  INTILE_TRIGGER_CRUSHER   = 25,
+  INTILE_FOREGROUND        = 0x80
 } intiletype;
 
 #define INTILE_TYPEMASK (INTILE_FOREGROUND-1)
 
 typedef enum
 {
-  // TODO
   nothing = 0,
   playerobj = 1,
   inertobj = 2,
@@ -336,7 +331,17 @@ typedef struct
 
 extern char str[80], str2[20];
 extern boolean storedemo;
+extern Sint16 hbardivisor;
 extern Uint16 curmusic;
+extern boolean unused3;
+extern boolean showmenuhighscores;
+extern boolean practicerestoremap;
+extern Sint16 practicetimer;
+extern Uint16 playerrestorex;
+extern Uint16 playerrestorey;
+extern Sint16 bosshealth;
+extern Sint16 lastbosshealth;
+extern Sint16 nagtimer;
 
 void SizeText(char *text, Uint16 *width, Uint16 *height);
 
@@ -492,33 +497,11 @@ extern char *levelnames[GAMELEVELS];
 
 void ScanInfoPlane(void);
 
-void SpawnScoreBox(void);
 void ResetScoreBox(void);
 void UpdateScoreBox(objtype *ob);
 
 extern statetype far s_player_standing;
 
 extern boolean playerdied;
-
-/*
-=============================================================================
-
-            OTHER DEFINITIONS
-
-=============================================================================
-*/
-
-// TODO Move to correct section above
-
-extern boolean unused3;
-extern boolean showmenuhighscores;
-extern boolean practicerestoremap;
-extern Sint16 practicetimer;
-extern Uint16 playerrestorex;
-extern Uint16 playerrestorey;
-extern Sint16 bosshealth;
-extern Sint16 lastbosshealth;
-extern Sint16 nagtimer;
-
 
 #endif
