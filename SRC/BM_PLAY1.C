@@ -559,30 +559,30 @@ boolean CheckJumpOffLadder(objtype* ob)
 
 void AlignPlayer(objtype* ob)
 {
-  Sint16 var1;
+  Sint16 xmove;
 
-  var1 = ob->temp1 - ob->x;
+  xmove = ob->temp1 - ob->x;
 
-  if (var1 < 0)
+  if (xmove < 0)
   {
     xtry = xtry - tics*PIXGLOBAL;
 
-    if (xtry > var1)
+    if (xtry > xmove)
     {
       return;
     }
   }
-  else if (var1 > 0)
+  else if (xmove > 0)
   {
     xtry = xtry + tics*PIXGLOBAL;
 
-    if (xtry < var1)
+    if (xtry < xmove)
     {
       return;
     }
   }
 
-  xtry = var1;
+  xtry = xmove;
   ob->temp1 = 0;
 
   if (!CheckInteraction(ob))

@@ -321,8 +321,8 @@ void DemoLoop(void)
 
   register Sint16 i, state;
   Sint16 level;
-  Sint16 var4 = 1;
-  boolean var6 = false;
+  boolean unusedvar = true;
+  boolean donefirstrun = false;
 
 //
 // check for launch from ted
@@ -359,11 +359,11 @@ void DemoLoop(void)
       IN_ClearKeysDown();
       LastScan = 0;
 
-      if (!var6)
+      if (!donefirstrun)
       {
         // TODO
         StartMusic(18);
-        var6 = true;
+        donefirstrun = true;
         ShowScreen(SCR_TECHHELP);
       }
       break;

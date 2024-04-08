@@ -950,9 +950,9 @@ void PlayLoop(void)
 {
   objtype* obj;
   objtype *check;
-  Sint16 var2;
+  Sint16 unusedvar;
 
-  var2 = 25;
+  unusedvar = 25;
   StartMusic(gamestate.mapon);
   ingame = true;
   playstate = ex_stillplaying;

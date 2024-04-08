@@ -955,7 +955,7 @@ void ClipToSprite(objtype *push, objtype *solid, boolean squish)
 
 void ClipToPushBlock(objtype *push, objtype *solid, boolean squish)
 {
-  Sint16 xmove, ymove, leftinto, rightinto, topinto, bottominto, var14;
+  Sint16 xmove, ymove, leftinto, rightinto, topinto, bottominto, xdelta;
 
   if ((solid->hiteast && push->xdir == -1) ||
       (solid->hitwest && push->xdir == 1))
@@ -1012,16 +1012,16 @@ void ClipToPushBlock(objtype *push, objtype *solid, boolean squish)
 
   if (leftinto > 0 && push->left > solid->left)
   {
-    var14 = leftinto - xmove + 1;
+    xdelta = leftinto - xmove + 1;
 
-    if (var14 < 0)
+    if (xdelta < 0)
     {
-      var14 = 0;
+      xdelta = 0;
     }
 
     push->xspeed = 0;
 
-    xtry = leftinto + var14;
+    xtry = leftinto + xdelta;
     PushObj(push);
 
     xtry = -leftinto / 2;
@@ -1035,16 +1035,16 @@ void ClipToPushBlock(objtype *push, objtype *solid, boolean squish)
   }
   else if (rightinto > 0 && push->right < solid->right)
   {
-    var14 = rightinto + xmove + 1;
+    xdelta = rightinto + xmove + 1;
 
-    if (var14 < 0)
+    if (xdelta < 0)
     {
-      var14 = 0;
+      xdelta = 0;
     }
 
     push->xspeed = 0;
 
-    xtry = -rightinto - var14;
+    xtry = -rightinto - xdelta;
     PushObj(push);
 
     xtry = rightinto / 2;
