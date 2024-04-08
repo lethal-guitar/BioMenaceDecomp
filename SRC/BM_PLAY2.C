@@ -1699,7 +1699,7 @@ void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir)
 {
   Sint16 temp;
 
-  SD_PlaySound(SND_SQUISHPLAYER);
+  SD_PlaySound(SND_SQUISH);
 
   GetNewObj(true);
   new->active = ac_removable;
@@ -2538,7 +2538,7 @@ void ExplodeShot(objtype* ob)
     ChangeState(ob, &s_rocketimpact1);
   }
 
-  SD_PlaySound(SND_TANKSHOOT);
+  SD_PlaySound(SND_BOOM);
 }
 
 

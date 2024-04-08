@@ -495,7 +495,7 @@ void T_ExplodingEnemy(objtype* ob)
     SpawnBigExplosion(explosionx, explosiony);
     ChunkBloom(ob, ob->midx, ob->y, dir_East);
     ChunkBloom(ob, ob->midx, ob->y, dir_West);
-    SD_PlaySound(SND_TANKSHOOT);
+    SD_PlaySound(SND_BOOM);
 
     ob->nothink = US_RndT() / 16;
     return;
@@ -676,7 +676,7 @@ void SpawnTankBotShot(objtype* ob)
 
   NewState(new, &s_tankbot_shot);
 
-  SD_PlaySound(SND_TANKSHOOT);
+  SD_PlaySound(SND_BOOM);
 }
 
 
@@ -1074,7 +1074,7 @@ void R_Crusher(objtype* ob)
   {
     crusheractive = -1;
     ChangeState(ob, &s_crusher_idle);
-    SD_PlaySound(SND_SQUISHPLAYER);
+    SD_PlaySound(SND_SQUISH);
   }
 
   PLACESPRITE;

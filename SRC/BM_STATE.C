@@ -894,7 +894,7 @@ void ClipToSprite(objtype *push, objtype *solid, boolean squish)
     PushObj(push);
     if (squish && push->hitwest)
     {
-      SD_PlaySound(SND_SQUISHPLAYER);
+      SD_PlaySound(SND_SQUISH);
       KillPlayer();
     }
     push->hiteast = 1;
@@ -907,7 +907,7 @@ void ClipToSprite(objtype *push, objtype *solid, boolean squish)
     PushObj(push);
     if (squish && push->hiteast)
     {
-      SD_PlaySound(SND_SQUISHPLAYER);
+      SD_PlaySound(SND_SQUISH);
       KillPlayer();
     }
     push->hitwest = 1;
@@ -930,7 +930,7 @@ void ClipToSprite(objtype *push, objtype *solid, boolean squish)
     PushObj(push);
     if (squish && push->hitsouth)
     {
-      SD_PlaySound(SND_SQUISHPLAYER);
+      SD_PlaySound(SND_SQUISH);
       KillPlayer();
     }
     if (!push->hitsouth)
@@ -944,7 +944,7 @@ void ClipToSprite(objtype *push, objtype *solid, boolean squish)
     ClipToWalls(push);
     if (squish && push->hitnorth)
     {
-      SD_PlaySound(SND_SQUISHPLAYER);
+      SD_PlaySound(SND_SQUISH);
       KillPlayer();
     }
     push->hitsouth = 23;
