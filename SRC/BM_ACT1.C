@@ -119,7 +119,7 @@ statetype far s_spitsnake_attack1 = { /* 323f0 */
 
 statetype far s_spitsnake_attack2 = { /* 32410 */
   SPITSNAKE_ATTACK_L_SPR, SPITSNAKE_ATTACK_R_SPR,
-  step, false, ps_none, 10, 65408, 0,
+  step, false, ps_none, 10, -128, 0,
   NULL, NULL, R_Draw, &s_spitsnake_walk1};
 
 statetype far s_spitsnake_projectile1 = { /* 32430 */

@@ -498,6 +498,7 @@ void KillPlayer(void);
 void SnakeContact2(objtype* o1, objtype* o2);
 void HandleRiding(objtype *ob);
 void CheckInTiles(objtype *ob);
+void PollControls(void);
 
 extern char *levelnames[GAMELEVELS];
 

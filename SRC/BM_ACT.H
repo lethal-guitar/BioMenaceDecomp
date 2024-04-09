@@ -29,11 +29,13 @@
     ob->dmgflash ? maskdraw : spritedraw, ob->priority);
 
 
+void SpawnScoreBox(void);
 void FireBullet(Uint16 x, Uint16 y, Sint16 xdir, Sint16 damage);
 void DealDamage(objtype* ob, Sint16 amount);
 void SpawnSuperPlasmaBolt(Uint16 x, Uint16 y, Sint16 dir);
-void ShowCompatibilityInfoMessage();
-void BossDialog();
+void HostageDialog(void);
+void ShowCompatibilityInfoMessage(void);
+void BossDialog(void);
 
 void C_GrenadeExplosion(objtype* ob, objtype* hit);
 void ChunkBloom(objtype* ob, Uint16 x, Uint16 y, Direction dir);
