@@ -123,7 +123,7 @@ statetype far s_tankbot_bomb_flying = { /* 33030 */
 
 statetype far s_tankbot_bomb_landing = { /* 33050 */
   TANKBOT_SHOT_LANDING_SPR, TANKBOT_SHOT_LANDING_SPR,
-  stepthink, false, ps_none, 5, 8, 65504,
+  stepthink, false, ps_none, 5, 8, -32,
   NULL, NULL, R_NapalmBomb_Landing, &s_tankbot_bomb_landing};
 
 statetype far s_tankbot_shot = { /* 33070 */
