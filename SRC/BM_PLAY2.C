@@ -1457,11 +1457,18 @@ void DealDamage(objtype* ob, Sint16 amount)
       ob->obclass == helicopterobj)
     {
       SpawnBigExplosion(ob->x, ob->y + 16*PIXGLOBAL);
-      goto loc_1d3c6;
+
+      // NOTE: I have no clue why this is done via a `goto` like this, it would
+      // be much clearer to move the code in the `else` block to after the
+      // `if`/`else` and remove the `else` block.
+      //
+      // If there is a way to get the compiler to produce identical assembly
+      // without using a `goto`, I haven't found it yet.
+      goto spawnGibs;
     }
     else
     {
-loc_1d3c6:
+spawnGibs:
       ChunkBloom(ob, ob->midx, ob->y, dir_North);
       ChunkBloom(ob, ob->midx, ob->y, dir_South);
       ChunkBloom(ob, ob->midx, ob->y, dir_East);
