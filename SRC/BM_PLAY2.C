@@ -798,7 +798,7 @@ void SnakeContact(objtype* ob, objtype* hit)
       SpawnPickup(ob->tilemidx, ob->tiletop, 80);
       break;
 
-    case 29:
+    case obclass_29:
       gamestate.trianglekeys++;
 
       SD_PlaySound(SND_COLLECTAMMO);
@@ -847,7 +847,7 @@ void SnakeContact(objtype* ob, objtype* hit)
 
     case fireballobj:
     case slugobj:
-    case 8:
+    case obclass_8:
     case brawlerobj:
     case ceilingwalkerobj:
     case spittersnakeobj:
@@ -856,8 +856,8 @@ void SnakeContact(objtype* ob, objtype* hit)
     case bouncebotobj:
     case slimedropperobj:
     case enemyprojectileobj:
-    case 26:
-    case 30:
+    case obclass_26:
+    case obclass_30:
     case sewermutantobj:
     case hedgehogobj:
     case skullmanobj:
@@ -1376,13 +1376,13 @@ void DealDamage(objtype* ob, Sint16 amount)
     {
       case slugobj:
       case ceilingwalkerobj:
-      case 29:
-      case 30:
+      case obclass_29:
+      case obclass_30:
       case crawlingslimeobj:
         points = 50;
         break;
 
-      case 8:
+      case obclass_8:
       case hedgehogobj:
         points = 100;
         break;
