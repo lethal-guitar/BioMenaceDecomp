@@ -260,8 +260,8 @@ void HandleCommand(void)
 
   case 'L':
     py = ParseNumber();
-    rowon = (py - 10)/10;
-    py = rowon * 10 + 10;
+    rowon = (py - FONTHEIGHT)/FONTHEIGHT;
+    py = rowon * FONTHEIGHT + FONTHEIGHT;
     px = ParseNumber();
     while (*(text++) != '\n') // scan to end of line
     ;
@@ -481,7 +481,7 @@ static void DrawNagScreenTimer(void)
   Sint16 oldcolor;
   oldcolor = fontcolor;
 
-  VWB_DrawPic(16, 176, 28);
+  VWB_DrawPic(16, 176, H_BOTTOMINFOPIC);
 
   strcpy(str, "Timer= ");
 
@@ -537,11 +537,11 @@ void PageLayout(boolean shownumber)
   VWB_DrawPic(304, 0, H_RIGHTWINDOWPIC);
   if (shownumber)
   {
-    VWB_DrawPic(16, 176, 28);//H_BOTTOMINFOPIC);
+    VWB_DrawPic(16, 176, H_BOTTOMINFOPIC);
   }
   else
   {
-    VWB_DrawPic(16, 192, 25);//H_BOTTOMWINDOWPIC);
+    VWB_DrawPic(16, 192, H_TOPWINDOWPIC);
   }
 
   for (i=0; i<TEXTROWS; i++)
@@ -738,7 +738,7 @@ Sint16 HelpMenu(void)
     {
       myhelpmenupos = 4;
     }
-    VWB_DrawPic(56, 24*myhelpmenupos+56, 22);//H_HANDPIC);
+    VWB_DrawPic(56, 24*myhelpmenupos+56, H_HANDPIC);
     VW_UpdateScreen();
     VWB_Bar(56, 24*myhelpmenupos+56, 31, 24, BACKCOLOR);
     IN_ReadControl(0, &control);
