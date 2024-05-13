@@ -11,12 +11,11 @@ and many other parts of the code have also been modified.
 
 ## Current state
 
-This code produces a 100% identical binary to `BMENACE1.EXE` from the Shareware version v1.1 of the game (SHA-256 `c47d1114263b8cf3f27b776c8a858b4f89dc59d1a2cccfdddffc194277adc008`). Episodes 2 and 3 are still work in progress, as is the registered version episode 1.
+This code produces a 100% identical binary to `BMENACE1.EXE` from the freeware release of the game (SHA-256 `b91ed9c1e8a7a47cff209401f50aa7bc2eca9b42738d7f6aa5e6b55ed35fae7a`). The shareware version v1.1 (SHA-256 `c47d1114263b8cf3f27b776c8a858b4f89dc59d1a2cccfdddffc194277adc008`) can also be perfectly reproduced. Episodes 2 and 3 are still work in progress.
 
 
 ### TODO
 
-* Do registered version episode 1
 * Do episode 2
 * Do episode 3
 
@@ -27,9 +26,11 @@ A copy of Borland C++ 2.0 is required, and a DOS environment to run it in (real 
 The compiler is expected to be installed at `C:\BCC_20` by default.
 The `BIN` subdirectory of the installation should be in the `PATH`.
 
-Within the DOS environment, `cd` into the directory containing the code and run `make -a`.
-This creates a file called `BMENACE1.EXE`.
-Running `LZEXE\LZEXE.EXE BMENACE1.EXE` then produces an identical file to the original Shareware release.
+Within the DOS environment, `cd` into the directory containing the code and run `make`.
+This creates a file called `BMENACE1.EXE`, but it still needs to be compressed before it matches the original version.
+Run `LZEXE\LZEXE.EXE BMENACE1.EXE` to do so, and a perfectly matching file should be produced.
 
-In order to play the game using this file, the game data from the original release is required since
+To build the shareware version, uncomment the corresponding `#define` near the top of `ID_HEADS.H`, and comment out the `FREEWARE` `#define`.
+
+In order to play the game using an `EXE` built from this code, the game data from the original release is required -
 this repository doesn't contain any data files.
