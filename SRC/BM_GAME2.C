@@ -392,7 +392,7 @@ void DrawStatusWindow(void)
 
 void StatusWindow(void)
 {
-  if (unused3 &&
+  if (debugcodeentered &&
       Keyboard[sc_J] && Keyboard[sc_I] && Keyboard[sc_M])
   {
     US_CenterWindow(20, 2);

@@ -54,7 +54,7 @@ Sint16 hbardivisor;
 
 Uint16 curmusic;
 
-boolean unused3 = false;
+boolean debugcodeentered = false;
 boolean showmenuhighscores = false;
 Uint16 unused1 = 0;
 boolean practicerestoremap = 0;
@@ -64,7 +64,7 @@ Uint16 playerrestorey = 0;
 Sint16 bosshealth = -1;
 Sint16 lastbosshealth = -1;
 Sint16 nagtimer = -1;
-Uint16 unused2 = 0;
+boolean copyprotectionfailed = false;
 
 
 /*

@@ -343,7 +343,7 @@ extern char str[80], str2[20];
 extern boolean storedemo;
 extern Sint16 hbardivisor;
 extern Uint16 curmusic;
-extern boolean unused3;
+extern boolean debugcodeentered;
 extern boolean showmenuhighscores;
 extern boolean practicerestoremap;
 extern Sint16 practicetimer;
@@ -352,6 +352,7 @@ extern Uint16 playerrestorey;
 extern Sint16 bosshealth;
 extern Sint16 lastbosshealth;
 extern Sint16 nagtimer;
+extern boolean copyprotectionfailed;
 
 void SizeText(char *text, Uint16 *width, Uint16 *height);
 
