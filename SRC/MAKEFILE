@@ -1,3 +1,5 @@
+.autodepend
+
 !if !$d(BCROOT)
 BCROOT=C:\BCC_20
 !endif
