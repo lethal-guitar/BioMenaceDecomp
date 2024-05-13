@@ -589,6 +589,7 @@ loaded:
     goto start;
 
   case ex_completed:
+#ifdef SHAREWARE
     // Shareware nag timer
     if (gamestate.mapon >= 4 && gamestate.mapon < 11 && !debugok)
     {
@@ -601,6 +602,23 @@ loaded:
 
       HelpScreens();
     }
+#else
+    if (copyprotectionfailed)
+    {
+      VW_FixRefreshBuffer();
+      US_CenterWindow(35, 8);
+      PrintY += 2;
+
+      US_CPrint(FILE_ID_MISSING);
+      VW_UpdateScreen();
+      VW_WaitVBL(50);
+      IN_ClearKeysDown();
+      IN_Ack();
+      RF_ForceRefresh();
+
+      goto abortGame;
+    }
+#endif
 
     // Return from secret bonus level
     if (gamestate.mapon > 13)
@@ -678,6 +696,7 @@ loaded:
     break;
 
   case ex_abortgame:
+abortGame:
     IN_ClearKeysDown();
     StopMusic();
     CA_SetAllPurge();

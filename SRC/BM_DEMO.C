@@ -88,8 +88,13 @@ void ShowTitle(Uint16 timeout)
 
   panadjust = 0;
 
+#ifdef SHAREWARE
   CA_CacheGrChunk(TITLESHAREWAREPIC);
   VWB_DrawPic(0, 0, TITLESHAREWAREPIC);
+#else
+  CA_CacheGrChunk(TITLEPIC);
+  VWB_DrawPic(0, 0, TITLEPIC);
+#endif
 
   VW_SetScreen(displayofs, 0);
   VW_ScreenToScreen(bufferofs, displayofs, 42, 224);

@@ -44,6 +44,9 @@
 
 #define EXTENSION "BM1"
 
+#define FREEWARE
+//#define SHAREWARE
+
 extern  char far introscn;
 
 #include "AUDIOBM1.H"

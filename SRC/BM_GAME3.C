@@ -33,6 +33,22 @@ boolean debugok;
 Uint16 extravbls;
 boolean jumpcheat;
 
+extern char far EASY[];
+extern char far NORMAL[];
+extern char far HARD[];
+extern char far GAME_OVER[];
+extern char far NOT_ENOUGH_MEM[];
+extern char far DIDNT_MAKE_IT_PAST[];
+extern char far TRY_AGAIN[];
+extern char far INSUFFICIENT_MEM[];
+extern char far ONE_MOMENT[];
+extern char far GOD_MODE_ON[];
+extern char far GOD_MODE_OFF[];
+extern char far FREE_ITEMS[];
+extern char far JUMP_CHEAT_ON[];
+extern char far JUMP_CHEAT_OFF[];
+extern char far WARP_LEVEL_PROMPT[];
+extern char far PRACTICE_LEVEL_PROMPT[];
 
 //===========================================================================
 
@@ -437,6 +453,218 @@ void WallDebug(void)
 
 boolean DebugKeys(void)
 {
+#ifdef FREEWARE
+  Sint16 level, i, esc;
+  char buffer[50];
+
+  if (Keyboard[sc_B] && ingame)   // B = border color
+  {
+    VW_FixRefreshBuffer();
+    US_CenterWindow(24, 3);
+    PrintY += 6;
+    US_Print(" Border color (0-15):");
+    VW_UpdateScreen();
+    esc = !US_LineInput(px, py, buffer, NULL, true, 2, 0);
+    if (!esc)
+    {
+      level = atoi(buffer);
+      if (level >= 0 && level <= 15)
+      {
+        VW_ColorBorder(level);
+      }
+    }
+    return true;
+  }
+
+  if (Keyboard[sc_C] && ingame)   // C = count objects
+  {
+    CountObjects();
+    return true;
+  }
+
+  if (Keyboard[sc_D] && ingame)   // D = start / end demo record
+  {
+    if (DemoMode == demo_Off)
+    {
+      StartDemoRecord();
+    }
+    else if (DemoMode == demo_Record)
+    {
+      EndDemoRecord();
+      playstate = ex_completed;
+      gamestate.mapon--;
+    }
+    return true;
+  }
+
+  if (Keyboard[sc_E] && ingame)   // E = quit level
+  {
+    if (tedlevel)
+    {
+      TEDDeath();
+    }
+    playstate = ex_completed;
+    //BUG? there is no return in this branch (should return false)
+  }
+
+  if (Keyboard[sc_G] && ingame)   // G = god mode
+  {
+    VW_FixRefreshBuffer();
+    US_CenterWindow(12, 2);
+    if (godmode)
+    {
+      _fstrcpy(buffer, GOD_MODE_OFF);
+      US_PrintCentered(buffer);
+    }
+    else
+    {
+      _fstrcpy(buffer, GOD_MODE_ON);
+      US_PrintCentered(buffer);
+    }
+    VW_UpdateScreen();
+    IN_Ack();
+    godmode ^= true;
+    return true;
+  }
+  else if (Keyboard[sc_I])      // I = item cheat
+  {
+    gamestate.ammoinclip = 90;
+    gamestate.rapidfire = true;
+    gamestate.explosives.grenades = 99;
+    gamestate.keyitems.keycards = 99;
+    gamestate.keyitems.keys = 99;
+    gamestate.blueshard = true;
+    gamestate.greenshard = true;
+    gamestate.redshard = true;
+    gamestate.cyanshard = true;
+    gamestate.specialkey = true;
+    gamestate.nukestate = ns_collected;
+    gamestate.radpill = true;
+    gamestate.exitkey = true;
+    gamestate.trianglekeys = true;
+    gamestate.lives++;
+  }
+  else if (Keyboard[sc_J])      // J = jump cheat
+  {
+    jumpcheat ^= true;
+    VW_FixRefreshBuffer();
+    US_CenterWindow(18, 3);
+    if (jumpcheat)
+    {
+      _fstrcpy(buffer, JUMP_CHEAT_ON);
+      US_PrintCentered(buffer);
+    }
+    else
+    {
+      _fstrcpy(buffer, JUMP_CHEAT_OFF);
+      US_PrintCentered(buffer);
+    }
+    VW_UpdateScreen();
+    IN_Ack();
+    return true;
+  }
+  else if (Keyboard[sc_M])      // M = memory info
+  {
+    DebugMemory();
+    return true;
+  }
+  else if (Keyboard[sc_N])      // N = no clip
+  {
+    VW_FixRefreshBuffer();
+    US_CenterWindow(18, 3);
+    if (player->needtoclip)
+    {
+      US_PrintCentered("No clipping ON");
+      player->needtoclip = cl_noclip;
+    }
+    else
+    {
+      US_PrintCentered("No clipping OFF");
+      player->needtoclip = cl_midclip;
+    }
+    VW_UpdateScreen();
+    IN_Ack();
+    return true;
+  }
+  else if (Keyboard[sc_P])      // P = pause with no screen disruptioon
+  {
+    IN_ClearKeysDown();
+    PicturePause();
+    return true;
+  }
+  else if (Keyboard[sc_S] && ingame)  // S = slow motion
+  {
+    singlestep ^= true;
+    VW_FixRefreshBuffer();
+    US_CenterWindow(18, 3);
+    if (singlestep)
+    {
+      US_PrintCentered("Slow motion ON");
+    }
+    else
+    {
+      US_PrintCentered("Slow motion OFF");
+    }
+    VW_UpdateScreen();
+    IN_Ack();
+    return true;
+  }
+  else if (Keyboard[sc_T])      // T = sprite test
+  {
+    TestSprites();
+    return true;
+  }
+  else if (Keyboard[sc_V])      // V = extra VBLs
+  {
+    VW_FixRefreshBuffer();
+    US_CenterWindow(30, 3);
+    PrintY += 6;
+    US_Print("  Add how many extra VBLs(0-8):");
+    VW_UpdateScreen();
+    esc = !US_LineInput(px, py, buffer, NULL, true, 2, 0);
+    if (!esc)
+    {
+      level = atoi(buffer);
+      if (level >= 0 && level <= 8)
+      {
+        extravbls = level;
+      }
+    }
+    return true;
+  }
+  else if (Keyboard[sc_W] && ingame)  // W = warp to level
+  {
+    VW_FixRefreshBuffer();
+    US_CenterWindow(26, 3);
+    PrintY += 6;
+    _fstrcpy(buffer, WARP_LEVEL_PROMPT);
+    US_Print(buffer);
+    VW_UpdateScreen();
+    esc = !US_LineInput(px, py, buffer, NULL, true, 2, 0);
+    if (!esc)
+    {
+      level = atoi(buffer);
+      if (level > 0 && level <= GAMELEVELS-1)
+      {
+        gamestate.mapon = level - 1;
+        playstate = ex_warped;
+      }
+    }
+    return true;
+  }
+  else if (Keyboard[sc_Y])      // Y = wall debug
+  {
+    WallDebug();
+    return true;
+  }
+  else if (Keyboard[sc_Z])      // Z = game over
+  {
+    gamestate.lives = 0;
+    KillPlayer();
+    return false;
+  }
+  return false;
+#endif
 }
 
 //===========================================================================
@@ -451,6 +679,32 @@ boolean DebugKeys(void)
 
 void UserCheat(void)
 {
+#ifdef FREEWARE
+  Sint16 i;
+
+  for (i=sc_A; i<=sc_Z; i++)  //Note: this does NOT check the keys in alphabetical order!
+  {
+    if (i != sc_C && i != sc_A && i != sc_T && Keyboard[i])
+    {
+      return;
+    }
+  }
+  US_CenterWindow(20, 9);
+  PrintY += 2;
+  US_CPrint(
+    "Cheat Option!\n"
+    "\n"
+    "You now have:\n"
+    "The machine gun\n"
+    " with 90 shots,\n"
+    "and 99 Grenades!");
+  VW_UpdateScreen();
+  IN_Ack();
+  RF_ForceRefresh();
+  gamestate.rapidfire = true;
+  gamestate.ammoinclip = 90;
+  gamestate.explosives.grenades = 99;
+#endif
 }
 
 //===========================================================================
@@ -467,6 +721,9 @@ extern char far PAUSED_LABEL[];
 
 void CheckKeys(void)
 {
+#ifdef FREEWARE
+  boolean esc;
+#endif
   char buffer[50];
 
   if (screenfaded)      // don't do anything with a faded screen
@@ -630,6 +887,29 @@ void CheckKeys(void)
   {
     UserCheat();
   }
+
+#ifdef FREEWARE
+  if (Keyboard[sc_C] && Keyboard[sc_O] && Keyboard[sc_D])
+  {
+    VW_FixRefreshBuffer();
+    US_CenterWindow(17, 3);
+    PrintY += 6;
+
+    _fstrcpy(buffer, "  CODE: ");
+    US_Print(buffer);
+    VW_UpdateScreen();
+    esc = !US_LineInput(px, py, buffer, NULL, true, 10, 0);
+    if (!esc)
+    {
+      if (strcmp(buffer, "91827") == 0)
+      {
+        debugcodeentered = true;
+      }
+    }
+
+    RF_ForceRefresh();
+  }
+#endif
 
   //
   // F10-? debug keys

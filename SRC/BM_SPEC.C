@@ -335,6 +335,15 @@ char far BOSSDIALOG12[] =
   "Prepare to die, sub-creature!\n\n";
 
 
+#ifdef FREEWARE
+typedef enum
+{
+  at_none,
+  at_player,
+} actortype;
+#endif
+
+
 void ScanInfoPlane(void)
 {
   objtype *ob;
@@ -356,7 +365,11 @@ void ScanInfoPlane(void)
       if (info == 0)
         continue;
 
-      switch (info)
+#ifdef FREEWARE
+      switch ((actortype)info)
+#else
+      switch(info)
+#endif
       {
         case 1:
           SpawnPlayer(x, y, -1);

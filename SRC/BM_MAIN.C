@@ -365,6 +365,11 @@ void DemoLoop(void)
         donefirstrun = true;
         ShowScreen(SCR_TECHHELP);
       }
+
+#ifndef SHAREWARE
+      StartMusic(TECHHELPMUSIC);
+      ShowScreen(SCR_NOTSHAREWARE);
+#endif
       break;
 
     case 1:
@@ -574,6 +579,10 @@ static boolean CheckCopyProtection(void)
 void main(void)
 {
   static char *ParmStrings[] = {"sewerman", ""};
+
+#ifndef SHAREWARE
+  copyprotectionfailed = CheckCopyProtection();
+#endif
 
   CheckCutFile();
 
