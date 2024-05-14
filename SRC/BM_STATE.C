@@ -615,10 +615,12 @@ void FullClipToWalls(objtype *ob)
     h = 16*PIXGLOBAL;
     break;
 
+#if EPISODE == 1
   case skullmanhandobj:
     w = 40*PIXGLOBAL;
     h = 24*PIXGLOBAL;
     break;
+#endif
 
   default:
     w = 16*PIXGLOBAL;
