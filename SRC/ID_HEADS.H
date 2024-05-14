@@ -47,6 +47,14 @@
 #define FREEWARE
 //#define SHAREWARE
 
+#ifndef EPISODE
+#define EPISODE 1
+#endif
+
+#if EPISODE != 1
+#undef SHAREWARE
+#endif
+
 extern  char far introscn;
 
 #include "AUDIOBM1.H"

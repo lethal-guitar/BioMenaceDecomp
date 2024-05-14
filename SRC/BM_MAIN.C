@@ -359,12 +359,14 @@ void DemoLoop(void)
       IN_ClearKeysDown();
       LastScan = 0;
 
+#if EPISODE == 1
       if (!donefirstrun)
       {
         StartMusic(TECHHELPMUSIC);
         donefirstrun = true;
         ShowScreen(SCR_TECHHELP);
       }
+#endif
 
 #ifndef SHAREWARE
       StartMusic(TECHHELPMUSIC);
@@ -388,6 +390,7 @@ void DemoLoop(void)
       ShowScreen(SCR_CREDITS);
       break;
 
+#if EPISODE == 1
     case 3:
       if (curmusic != DEMOLOOPMUSIC)
       {
@@ -395,11 +398,13 @@ void DemoLoop(void)
       }
       ShowScreen(SCR_PREVIEW);
       break;
+#endif
 
     case 4:
       ShowHighScores();
       break;
 
+#if EPISODE == 1
     case 5:
       RunDemo(2);
       break;
@@ -408,6 +413,11 @@ void DemoLoop(void)
       RunDemo(3);
       state = 0;
       break;
+#else
+    case 5:
+      state = 0;
+      break;
+#endif
     }
 
     CheckLastScan();
