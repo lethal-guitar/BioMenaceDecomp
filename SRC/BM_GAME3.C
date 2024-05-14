@@ -453,7 +453,7 @@ void WallDebug(void)
 
 boolean DebugKeys(void)
 {
-#ifdef FREEWARE
+#if defined(FREEWARE) && EPISODE == 1
   Sint16 level, i, esc;
   char buffer[50];
 
@@ -888,7 +888,7 @@ void CheckKeys(void)
     UserCheat();
   }
 
-#ifdef FREEWARE
+#if defined(FREEWARE) && EPISODE == 1
   if (Keyboard[sc_C] && Keyboard[sc_O] && Keyboard[sc_D])
   {
     VW_FixRefreshBuffer();
