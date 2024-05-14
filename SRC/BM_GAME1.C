@@ -625,6 +625,7 @@ loaded:
     {
       switch (gamestate.mapon)
       {
+#if EPISODE == 1
         case 20:
           gamestate.mapon = 2;
           break;
@@ -640,6 +641,19 @@ loaded:
         case 23:
           gamestate.mapon = 10;
           break;
+#elif EPISODE == 2
+        case 20:
+          gamestate.mapon = 1;
+          break;
+
+        case 21:
+          gamestate.mapon = 3;
+          break;
+
+        case 22:
+          gamestate.mapon = 9;
+          break;
+#endif
       }
     }
 
@@ -648,6 +662,7 @@ loaded:
     {
       switch (gamestate.mapon)
       {
+#if EPISODE == 1
         case 2:
           ENTER_SECRET_LEVEL(20);
           break;
@@ -663,6 +678,19 @@ loaded:
         case 10:
           ENTER_SECRET_LEVEL(23);
           break;
+#elif EPISODE == 2
+        case 1:
+          ENTER_SECRET_LEVEL(20);
+          break;
+
+        case 3:
+          ENTER_SECRET_LEVEL(21);
+          break;
+
+        case 9:
+          ENTER_SECRET_LEVEL(22);
+          break;
+#endif
       }
     }
 
