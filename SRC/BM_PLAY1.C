@@ -478,12 +478,28 @@ boolean CheckInteraction(objtype* ob)
     return true;
   }
 
-  if (intile == INTILE_TRIGGER_DRMANGLE || intile == INTILE_TRIGGER_UNKNOWN)
+#if EPISODE == 1
+  if (intile == INTILE_TRIGGER_BOSS || intile == INTILE_TRIGGER_UNKNOWN)
   {
     ob->state = &s_player_activated_trigger;
     upheld = true;
     return true;
   }
+#elif EPISODE == 2
+  if (intile == INTILE_TRIGGER_BOSS)
+  {
+    ob->state = &s_player_activated_trigger;
+    upheld = true;
+    return true;
+  }
+
+  if (intile == INTILE_TRIGGER_UNKNOWN && unknown)
+  {
+    ob->state = &s_player_activated_trigger;
+    upheld = true;
+    return true;
+  }
+#endif
 
   return false;
 }
@@ -773,7 +789,7 @@ void SnakeInteractThink(objtype* ob)
       RF_ForceRefresh();
       break;
 
-    case INTILE_TRIGGER_DRMANGLE:
+    case INTILE_TRIGGER_BOSS:
       RF_MemToMap(&newtile, 1, ob->tilemidx, ob->tiletop + 1, 1, 1);
       if (drmangleactive)
       {
@@ -810,9 +826,16 @@ found:
         {
           if (otherobj->obclass == drmangleobj)
           {
+#if EPISODE == 1
             otherobj->state = &s_drmangle_monster_jumping;
+#endif
             otherobj->shootable = true;
             drmangleactive = true;
+
+#if EPISODE == 2
+            otherobj->health = bosshealth = lastbosshealth = 100;
+            hbardivisor = bosshealth / 20;
+#endif
             return;
           }
         }
@@ -885,6 +908,10 @@ found:
       RF_MemToMap(&tile, 1, sx, y, 1, 1);
     }
 
+#if EPISODE == 1
+    // Hack for map "Computer Core": Disable the animating mouths of the
+    // robot thingies on top of the force fields along with disabling
+    // the force fields
     if (gamestate.mapon == 10 &&
         (intile == INTILE_SHARD_SLOT_BLUE || intile == INTILE_SHARD_SLOT_CYAN))
     {
@@ -894,6 +921,7 @@ found:
 
       RF_MapToMap(x, y, sx-1, sy-5, 3, 2);
     }
+#endif
 
     return;
   }
@@ -2247,7 +2275,7 @@ void CheckInTiles(objtype *ob)
             }
             break;
 
-          case INTILE_TRIGGER_DRMANGLE:
+          case INTILE_TRIGGER_BOSS:
             if (ob->hitnorth == 1)
             {
               CheckInteraction(ob);

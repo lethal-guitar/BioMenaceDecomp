@@ -42,8 +42,6 @@
 
 //--------------------------------------------------------------------------
 
-#define EXTENSION "BM1"
-
 #define FREEWARE
 //#define SHAREWARE
 
@@ -60,8 +58,10 @@ extern  char far introscn;
 #include "AUDIOBM1.H"
 
 #if EPISODE == 1
+#define EXTENSION "BM1"
 #include "GRAPHBM1.H"
 #elif EPISODE == 2
+#define EXTENSION "BM2"
 #include "GRAPHBM2.H"
 #endif
 
