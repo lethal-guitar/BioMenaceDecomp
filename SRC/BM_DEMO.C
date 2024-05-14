@@ -125,8 +125,10 @@ void ShowScreen(Sint16 num)
 
   if (num == 0)
   {
+#if EPISODE == 1
     CA_CacheGrChunk(PREVIEWPIC);
     VWB_DrawPic(0, 0, PREVIEWPIC);
+#endif
   }
   else if (num == 1)
   {
@@ -138,11 +140,13 @@ void ShowScreen(Sint16 num)
     CA_CacheGrChunk(NOTSHAREWAREPIC);
     VWB_DrawPic(0, 0, NOTSHAREWAREPIC);
   }
+#if EPISODE == 1
   else if (num == 3)
   {
     CA_CacheGrChunk(TECHHELPPIC);
     VWB_DrawPic(0, 0, TECHHELPPIC);
   }
+#endif
 
   VW_SetScreen(displayofs, 0);
   VW_ScreenToScreen(bufferofs, displayofs, 42, 224);
