@@ -496,7 +496,9 @@ static void DrawNagScreenTimer(void)
   {
     itoa(nagtimer, str2, 10);
     strcat(str, str2);
+#if EPISODE == 1
     SD_PlaySound(SND_NAGTIMERTICK);
+#endif
   }
 
   fontcolor = LIGHTMAGENTA;
@@ -1001,8 +1003,22 @@ void EpisodeEndScreens(void)
   CA_CacheGrChunk(H_FLASHARROW2PIC);
   CA_CacheGrChunk(H_FLASHARROW1PIC);
 
+#if EPISODE == 2
+  if (gamestate.nukestate != ns_placed)
+  {
+    // Bad ending
+    CA_CacheGrChunk(T_BADENDART);
+    textseg = grsegs[T_BADENDART];
+  }
+  else
+  {
+    CA_CacheGrChunk(T_ENDART);
+    textseg = grsegs[T_ENDART];
+  }
+#else
   CA_CacheGrChunk(T_ENDART);
   textseg = grsegs[T_ENDART];
+#endif
 
   text = textseg;
   CacheLayoutGraphics();
@@ -1044,7 +1060,19 @@ nextpage:
 
   StopMusic();
 
+#if EPISODE == 2
+  if (gamestate.nukestate != ns_placed)
+  {
+    MM_FreePtr(&grsegs[T_BADENDART]);
+  }
+  else
+  {
+    MM_FreePtr(&grsegs[T_ENDART]);
+  }
+#else
   MM_FreePtr(&grsegs[T_ENDART]);
+#endif
+
   MM_FreePtr(&grsegs[H_FLASHARROW1PIC]);
   MM_FreePtr(&grsegs[H_FLASHARROW2PIC]);
   CA_DownLevel();

@@ -58,7 +58,12 @@
 extern  char far introscn;
 
 #include "AUDIOBM1.H"
+
+#if EPISODE == 1
 #include "GRAPHBM1.H"
+#elif EPISODE == 2
+#include "GRAPHBM2.H"
+#endif
 
 //--------------------------------------------------------------------------
 
