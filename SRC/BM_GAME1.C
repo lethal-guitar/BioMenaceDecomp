@@ -49,7 +49,7 @@ Sint16 mapon;
 =============================================================================
 */
 
-const char FILE_ID_MISSING[] =
+char FILE_ID_MISSING[] =
   "Critical file FILE_ID.DIZ missing\n"
   "or modified.  If you purchased the\n"
   "game from Apogee simply reinstall\n"
