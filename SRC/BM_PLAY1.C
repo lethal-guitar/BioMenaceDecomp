@@ -2099,6 +2099,10 @@ void R_OnGround(objtype* ob)
   PLACESPRITE;
 }
 
+#if EPISODE == 2
+// TODO
+#endif
+
 
 void R_Walking(objtype* ob)
 {
@@ -2269,6 +2273,10 @@ void CheckInTiles(objtype *ob)
               return;
             }
             break;
+
+#if EPISODE == 2
+          // TODO slug transform triggers
+#endif
 
           case INTILE_RADIATION:
             if (gamestate.radpill == true)
