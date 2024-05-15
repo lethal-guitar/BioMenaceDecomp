@@ -136,6 +136,7 @@ boolean lumpneeded[NUMLUMPS];
 boolean firerobopal;
 
 
+#if EPISODE == 1
 char* levelnames[GAMELEVELS] = {
   "DownTown Metro",
   "High Rise",
@@ -333,6 +334,205 @@ char far BOSSDIALOG12[] =
   "you and collect your skull as I\n"
   "have with all these others!\n"
   "Prepare to die, sub-creature!\n\n";
+#elif EPISODE == 2
+char* levelnames[GAMELEVELS] = {
+  "Outer Woods",
+  "Main Corridor",
+  "Ant Caves",
+  "Ant Town",
+  "The Queen",
+  "Trash Dump",
+  "Trash Boss",
+  "Electronics Lab",
+  "Genetics Lab",
+  "Specimens Lab",
+  "Killer Pillers",
+  "The Enforcer",
+};
+
+
+char far HOSTAGEDLG1[] =
+  "Somewhere in each level, there\n"
+  "is someone like me who holds a key\n"
+  "to each exit.  You must find them!\n";
+
+char far HOSTAGEDLG2[] =
+  "Thanks for the key.  I'll use\n"
+  "this to go on to the next level\n"
+  "and rescue your friends.\n\n";
+
+char far HOSTAGEDLG3[] =
+  "Thank you. Dr. Mangle has captured\n"
+  "others like me. He said it would be\n"
+  "a trail for you to follow so that\n"
+  "you could find him and meet your\n"
+  "final fate. Be careful!\n\n";
+
+char far HOSTAGEDLG4[] =
+  "I'm gonna dust that little dweeb!\n"
+  "He can't do this and escape!\n\n";
+
+char far HOSTAGEDLG5[] =
+  "Thank you, Sir!\n"
+  "I can't believe what has\n"
+  "happened to our beautiful city!\n"
+  "They've destroyed everything!\n"
+  "Please!  You have to stop them!\n\n";
+
+char far HOSTAGEDLG6[] =
+  "Ya, it's really a pile!  I'll do\n"
+  "my best to clear these mutants out\n"
+  "of here. Mangle WON'T succeed!\n\n";
+
+char far HOSTAGEDLG7[] =
+  "Hey, be careful buddy! These\n"
+  "buildings are, excuse the pun,\n"
+  "crawling with, like, these weird\n"
+  "creature-things, man! Hey, WOW!\n"
+  "What a cool gun! Can I try it out?\n\n";
+
+char far HOSTAGEDLG8[] =
+  "Na, you'd probably shoot your foot\n"
+  "off or something. You'd better get\n"
+  "out of here before the mutants\n"
+  "come creeping back this way....\n\n";
+
+char far HOSTAGEDLG9[] =
+  "Aaaaaaaahhhhhhh! AAAAAAaaaahhhh!\n"
+  "Help! Those green things spit\n"
+  "slime on me!  I just know I will\n"
+  "dissolve or something, right?\n\n";
+
+char far HOSTAGEDLG10[] =
+  "Geez, take a valium or something!\n"
+  "You look all right to me....\n\n";
+
+char far HOSTAGEDLG11[] =
+  "Thank you, Mr. Logan!  I can't\n"
+  "wait to get home and take a nice,\n"
+  "hot bath!  I've been locked in\n"
+  "here for days waiting for\n"
+  "someone to show up and get\n"
+  "me out of here.\n\n";
+
+char far HOSTAGEDLG12[] =
+  "Heh...Um, well, I hate to be the\n"
+  "one to give you the news...but...\n"
+  "there are no houses left in this\n"
+  "entire city.  Sorry...\n\n";
+
+char far HOSTAGEDLG13[] =
+  "WOW! What a light show!  I saw you\n"
+  "kick'n robotic butt a mile away!\n"
+  "I love this destruction stuff!\n\n";
+
+char far HOSTAGEDLG14[] =
+  "Ya, me too.  Those parachuting\n"
+  "robots were a new one on me.\n"
+  "Fun to kill though.\n\n";
+
+char far HOSTAGEDLG15[] =
+  "Mangle is somewhere in this\n"
+  "complex. Be very careful!  I've\n"
+  "seen him setting up all kinds of\n"
+  "traps around here.\n"
+  "He must be expecting you.\n\n";
+
+char far HOSTAGEDLG16[] =
+  "Yes, he knows I'm coming for him.\n"
+  "But he's not expecting what I'm\n"
+  "going to do to him when I\n"
+  "get my hands on him!\n\n";
+
+char far HOSTAGEDLG17[] =
+  "Thank God you're here!  I know\n"
+  "that Dr. Mangle is in the next\n"
+  "room waiting for you.  But be\n"
+  "careful!  Not everything is as\n"
+  "it seems.  I think it's a trap!\n\n";
+
+char far HOSTAGEDLG18[] =
+  "Thanks for the tip....  But I've\n"
+  "learned the way this creep works.\n"
+  "He's not going to get away with\n"
+  "this!  His luck's just run out!\n\n";
+
+char far COMPATIBILITYINFO[] =
+  "If you have a SuperVGA graphics card\n"
+  "and experience video problems such\n"
+  "as garbage on the screen, select\n"
+  "the <compatability mode> option from\n"
+  "the main menu CONFIGURE/OPTIONS.\n\n";
+;
+
+char far BOSSDIALOG1[] =
+  "Greetings Mr. Logan!\n"
+  "You will never stop me!\n"
+  "I will kill you and toss\n"
+  "your bones to my critters.\n\n";
+
+char far BOSSDIALOG2[] =
+  "And then the world will bow to the\n"
+  "will of Master Cain and Dr. Mangle!\n"
+  "Ha ha ha ha ha....\n\n";
+
+char far BOSSDIALOG3[] =
+  "Well, well, well....Here we are,\n"
+  "Mr. Logan.  It has come down to just\n"
+  "you...and to me.  I hope you have\n"
+  "enjoyed the little party I've thrown\n\n";
+
+char far BOSSDIALOG4[] =
+  "for you today.  I hope you've had fun\n"
+  "with my little friends. But now, I'm\n"
+  "afraid, it is time for you to die!\n\n";
+
+char far BOSSDIALOG5[] =
+  "Mr. Logan, listen to me carefully.\n"
+  " *-COUGH-* I am beaten, I'm going to\n"
+  "die. *-ACK!-*, so I have nothing to\n"
+  "hide and I owe nothing to that creep,\n";
+
+char far BOSSDIALOG6[] =
+  "Master Cain. I only did this because\n"
+  "he promised me wealth and power, and\n"
+  "he also said he'd kill me if I didn't\n"
+  "help him. So you can see how I might\n";
+
+char far BOSSDIALOG7[] =
+  "be compelled to create these mutants\n"
+  "for him.  *-COUGH-* I have gotten\n"
+  "what I deserve for my crimes. But you\n"
+  "must stop Cain to stop this madness!\n";
+
+char far BOSSDIALOG8[] =
+  "There is an escape jet just through\n"
+  "that door. I've uploaded navigation\n"
+  "coordinates to get you to the next\n"
+  "lab.  Enter and destroy it to stop\n";
+
+char far BOSSDIALOG9[] =
+  "the production of the mutant army.\n"
+  "But be careful, a deadly computer\n"
+  "guards the whole complex.\n"
+  "You must then go on and find Cain's\n";
+
+char far BOSSDIALOG10[] =
+  "secret fortress. Seek him out and\n"
+  "destroy him or he will be a plague\n"
+  "of destruction to this earth!\n"
+  "Goodbye, Snake Logan, *-Hack-*,\n";
+
+char far BOSSDIALOG11[] =
+  "and good luck...you will need it.\n"
+  "*-Aaaaaarrrggg!-*  <sigh>.......\n\n";
+
+char far BOSSDIALOG12[] =
+  "I am Skullman!  I shall kill\n"
+  "you and collect your skull as I\n"
+  "have with all these others!\n"
+  "Prepare to die, sub-creature!\n\n";
+#endif
 
 
 #ifdef FREEWARE
