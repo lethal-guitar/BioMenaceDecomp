@@ -1304,6 +1304,11 @@ void PollControls(void)
 }
 
 
+#if EPISODE == 2
+// TODO: 
+#endif
+
+
 void Jump(objtype* ob)
 {
   unused4 = 0;
@@ -2074,6 +2079,12 @@ void SnakeContact2(objtype* ob, objtype* hit)
   SnakeContact(ob, hit);
 }
 
+
+#if EPISODE == 2
+extern Sint16 bonuspoints[];
+
+#include "contact.c"
+#endif
 
 void R_OnGround(objtype* ob)
 {
