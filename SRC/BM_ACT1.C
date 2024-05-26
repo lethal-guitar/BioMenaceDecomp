@@ -48,12 +48,12 @@ void R_DrMangleJumping();
 
 
 statetype far s_platform = { /* 32250 */
-  PLATFORMSPR, PLATFORMSPR,
+  PLATFORM_SPR, PLATFORM_SPR,
   think, false, ps_none, 0, 0, 0,
   T_Platform, NULL, R_Draw, NULL};
 
 statetype far s_apogeelogo = { /* 32270 */
-  APOGEELOGOSPR, APOGEELOGOSPR,
+  APOGEELOGO_SPR, APOGEELOGO_SPR,
   think, false, ps_none, 0, 0, 0,
   T_Platform, NULL, R_Draw, NULL};
 

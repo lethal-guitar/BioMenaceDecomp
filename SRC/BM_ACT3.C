@@ -207,32 +207,32 @@ statetype far s_drmangleshot2 = { /* 33250 */
   T_Velocity, C_EnemyLaserShot, R_EnemyLaserShot, &s_drmangleshot1};
 
 statetype far s_pushblock = { /* 33270 */
-  PUSHBLOCKSPR, PUSHBLOCKSPR,
+  PUSHBLOCK_SPR, PUSHBLOCK_SPR,
   stepthink, false, ps_tofloor, 6, 0, 1,
   NULL, C_PushBlock, R_PushBlock_OnGround, &s_pushblock};
 
 statetype far s_pushblock_falling = { /* 33290 */
-  PUSHBLOCKSPR, PUSHBLOCKSPR,
+  PUSHBLOCK_SPR, PUSHBLOCK_SPR,
   stepthink, false, ps_none, 0, 0, 0,
   T_Projectile, C_PushBlock, R_PushBlock_Falling, &s_pushblock};
 
 statetype far s_fallingblock_idle = { /* 332b0 */
-  FALLINGBLOCKSPR, FALLINGBLOCKSPR,
+  FALLINGBLOCK_SPR, FALLINGBLOCK_SPR,
   stepthink, false, ps_none, 1, 0, 0,
   T_FallingBlock, C_FallingBlock, R_Draw, &s_fallingblock_idle};
 
 statetype far s_fallingblock_falling = { /* 332d0 */
-  FALLINGBLOCKSPR, FALLINGBLOCKSPR,
+  FALLINGBLOCK_SPR, FALLINGBLOCK_SPR,
   stepthink, false, ps_none, 0, 0, 0,
   T_Projectile, NULL, R_FallingBlock, &s_fallingblock_falling};
 
 statetype far s_crusher_idle = { /* 332f0 */
-  CRUSHERBLOCKSPR, CRUSHERBLOCKSPR,
+  CRUSHERBLOCK_SPR, CRUSHERBLOCK_SPR,
   stepthink, false, ps_none, 6, 0, 0,
   T_Crusher_Waiting, NULL, R_Draw, &s_crusher_idle};
 
 statetype far s_crusher_moving = { /* 33310 */
-  CRUSHERBLOCKSPR, CRUSHERBLOCKSPR,
+  CRUSHERBLOCK_SPR, CRUSHERBLOCK_SPR,
   stepthink, false, ps_none, 5, 0, 8,
   T_Crusher_Moving, C_Crusher, R_Crusher, &s_crusher_moving};
 

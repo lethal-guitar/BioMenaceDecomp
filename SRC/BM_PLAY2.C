@@ -946,8 +946,8 @@ void ShiftScore (void)
   spritetabletype far *spr;
   spritetype _seg *dest;
 
-  spr = &spritetable[SCOREBOXSPR-STARTSPRITES];
-  dest = (spritetype _seg *)grsegs[SCOREBOXSPR];
+  spr = &spritetable[SCOREBOX_SPR-STARTSPRITES];
+  dest = (spritetype _seg *)grsegs[SCOREBOX_SPR];
 
   CAL_ShiftSprite (FP_SEG(dest),dest->sourceoffset[0],
     dest->sourceoffset[1],spr->width,spr->height,2);
@@ -992,10 +992,10 @@ void UpdateScoreBox(objtype *ob)
     (Uint16)gamestate.score != ob->temp2 ||
     practicetimer > 0)
   {
-    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
     width = block->width[0];
     planesize = block->planesize[0];
-    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+    dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
       planesize + width*4;
 
     if (practicetimer > 0)
@@ -1020,7 +1020,7 @@ void UpdateScoreBox(objtype *ob)
     // draw "TIME LEFT" label
     if (practicetimer > 0)
     {
-      dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
         planesize + width*4 + CHARWIDTH;
       dest -= CHARWIDTH;
 
@@ -1044,10 +1044,10 @@ void UpdateScoreBox(objtype *ob)
     if (number > 8)
       number = 8;
 
-    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
     width = block->width[0];
     planesize = block->planesize[0];
-    dest2 = dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+    dest2 = dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
       planesize + width*4 + 8*CHARWIDTH;
 
     for (i=4; i > 0; i--)
@@ -1091,10 +1091,10 @@ void UpdateScoreBox(objtype *ob)
     number = gamestate.explosives.grenades;
   if (number != ob->temp3)
   {
-    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
     width = block->width[0];
     planesize = block->planesize[0];
-    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+    dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
       + planesize + width*20 + 4*CHARWIDTH;
 
     if (gamestate.explosives.landmines > 0)
@@ -1120,10 +1120,10 @@ void UpdateScoreBox(objtype *ob)
     number = gamestate.explosives.grenades;
   if (number != ob->temp3)
   {
-    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
     width = block->width[0];
     planesize = block->planesize[0];
-    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+    dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
       + planesize + width*20 + 5*CHARWIDTH;
 
     if (number > 99)
@@ -1159,10 +1159,10 @@ void UpdateScoreBox(objtype *ob)
   //
   if (gamestate.ammotype != ob->temp7)
   {
-    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
     width = block->width[0];
     planesize = block->planesize[0];
-    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+    dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
       + planesize + width*20 + 9*CHARWIDTH;
 
     if (gamestate.ammotype == AMMO_REGULAR)
@@ -1190,10 +1190,10 @@ void UpdateScoreBox(objtype *ob)
 
   if (number != ob->temp5)
   {
-    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
     width = block->width[0];
     planesize = block->planesize[0];
-    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+    dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
       + planesize + width*20 + 10*CHARWIDTH;
 
     if (number > 99)
@@ -1240,10 +1240,10 @@ void UpdateScoreBox(objtype *ob)
   //
   if (gamestate.lives != ob->temp4)
   {
-    block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+    block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
     width = block->width[0];
     planesize = block->planesize[0];
-    dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+    dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
       + planesize + width*20 + 2*CHARWIDTH;
 
     if (gamestate.lives > 9)
@@ -1279,10 +1279,10 @@ void UpdateScoreBox(objtype *ob)
       if (number <= 0)
         number = 1;
 
-      block = (spritetype _seg *)grsegs[SCOREBOXSPR];
+      block = (spritetype _seg *)grsegs[SCOREBOX_SPR];
       width = block->width[0];
       planesize = block->planesize[0];
-      dest2 = dest = (Uint8 far*)grsegs[SCOREBOXSPR] + block->sourceoffset[0] +
+      dest2 = dest = (Uint8 far*)grsegs[SCOREBOX_SPR] + block->sourceoffset[0] +
         + planesize + width*32 - 1*CHARWIDTH;
       dest2 += 3*CHARWIDTH;
 
@@ -1355,7 +1355,7 @@ void UpdateScoreBox(objtype *ob)
        &ob->sprite,
        ob->x + 4*PIXGLOBAL,
        ob->y + 4*PIXGLOBAL,
-       SCOREBOXSPR,
+       SCOREBOX_SPR,
        spritedraw,
        3);
   }
