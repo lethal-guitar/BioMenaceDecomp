@@ -83,66 +83,66 @@ typedef enum {
   //
 
   START_LUMP(CONTROLS_LUMP_START, __CONTROLSSTART)
-  CP_MAINMENUPIC,              // 5
-  CP_NEWGAMEMENUPIC,           // 6
-  CP_LOADMENUPIC,              // 7
-  CP_SAVEMENUPIC,              // 8
-  CP_CONFIGMENUPIC,            // 9
-  CP_SOUNDMENUPIC,             // 10
-  CP_MUSICMENUPIC,             // 11
-  CP_KEYBOARDMENUPIC,          // 12
-  CP_KEYMOVEMENTPIC,           // 13
-  CP_KEYBUTTONPIC,             // 14
-  CP_JOYSTICKMENUPIC,          // 15
-  CP_OPTIONSMENUPIC,           // 16
-  CP_QUITPIC,                  // 17
-  CP_JOYSTICKPIC,              // 18
-  CP_MENUSCREENPIC,            // 19
+  CP_MAINMENU_PIC,             // 5
+  CP_NEWGAMEMENU_PIC,          // 6
+  CP_LOADMENU_PIC,             // 7
+  CP_SAVEMENU_PIC,             // 8
+  CP_CONFIGMENU_PIC,           // 9
+  CP_SOUNDMENU_PIC,            // 10
+  CP_MUSICMENU_PIC,            // 11
+  CP_KEYBOARDMENU_PIC,         // 12
+  CP_KEYMOVEMENT_PIC,          // 13
+  CP_KEYBUTTON_PIC,            // 14
+  CP_JOYSTICKMENU_PIC,         // 15
+  CP_OPTIONSMENU_PIC,          // 16
+  CP_QUIT_PIC,                 // 17
+  CP_JOYSTICK_PIC,             // 18
+  CP_MENUSCREEN_PIC,           // 19
   END_LUMP(CONTROLS_LUMP_END, __CONTROLSEND)
 
-  TITLESHAREWAREPIC,           // 20
-  H_HELPPIC,                   // 21
-  H_HANDPIC,                   // 22
-  H_FLASHARROW1PIC,            // 23
-  H_FLASHARROW2PIC,            // 24
-  H_TOPWINDOWPIC,              // 25
-  H_LEFTWINDOWPIC,             // 26
-  H_RIGHTWINDOWPIC,            // 27
-  H_BOTTOMINFOPIC,             // 28
-  H_ESCPIC,                    // 29
-  H_LARROWPIC,                 // 30
-  H_RARROWPIC,                 // 31
-  H_ENTERPIC,                  // 32
-  ENDOFTEXTPIC,                // 33
-  H_VISAPIC,                   // 34
-  H_MCPIC,                     // 35
-  HOSTAGE1PIC,                 // 36
-  HOSTAGE2PIC,                 // 37
-  HOSTAGE3PIC,                 // 38
-  SNAKETALKPIC,                // 39
-  H_ITEMSPIC,                  // 40
-  STORY1PIC,                   // 41
-  STORY2PIC,                   // 42
-  STORY3PIC,                   // 43
-  STORY4PIC,                   // 44
-  STORY5PIC,                   // 45
-  STORY6PIC,                   // 46
-  STORY7PIC,                   // 47
-  STORY8PIC,                   // 48
-  STORY9PIC,                   // 49
-  CREDITSPIC,                  // 50
-  PREVIEWPIC,                  // 51
-  TITLEPIC,                    // 52
-  NOTSHAREWAREPIC,             // 53
-  TECHHELPPIC,                 // 54
+  TITLESHAREWARE_PIC,          // 20
+  H_HELP_PIC,                  // 21
+  H_HAND_PIC,                  // 22
+  H_FLASHARROW1_PIC,           // 23
+  H_FLASHARROW2_PIC,           // 24
+  H_TOPWINDOW_PIC,             // 25
+  H_LEFTWINDOW_PIC,            // 26
+  H_RIGHTWINDOW_PIC,           // 27
+  H_BOTTOMINFO_PIC,            // 28
+  H_ESC_PIC,                   // 29
+  H_LARROW_PIC,                // 30
+  H_RARROW_PIC,                // 31
+  H_ENTER_PIC,                 // 32
+  ENDOFTEXT_PIC,               // 33
+  H_VISA_PIC,                  // 34
+  H_MC_PIC,                    // 35
+  HOSTAGE1_PIC,                // 36
+  HOSTAGE2_PIC,                // 37
+  HOSTAGE3_PIC,                // 38
+  SNAKETALK_PIC,               // 39
+  H_ITEMS_PIC,                 // 40
+  STORY1_PIC,                  // 41
+  STORY2_PIC,                  // 42
+  STORY3_PIC,                  // 43
+  STORY4_PIC,                  // 44
+  STORY5_PIC,                  // 45
+  STORY6_PIC,                  // 46
+  STORY7_PIC,                  // 47
+  STORY8_PIC,                  // 48
+  STORY9_PIC,                  // 49
+  CREDITS_PIC,                 // 50
+  PREVIEW_PIC,                 // 51
+  TITLE_PIC,                   // 52
+  NOTSHAREWARE_PIC,            // 53
+  TECHHELP_PIC,                // 54
 
-  CP_MENUMASKPICM,             // 55
+  CP_MENUMASK_PICM,            // 55
 
   //
   // SPRITES
   //
 
-  HANDCURSORSPR,               // 56
+  HANDCURSOR_SPR,              // 56
 
   START_LUMP(PLAYER_LUMP_START, __PLAYERSTART)
   SHOT_EXPLODE1_SPR,           // 57
@@ -352,24 +352,24 @@ typedef enum {
   END_LUMP(BRAWLER_LUMP_END, __BRAWLEREND)
 
   START_LUMP(CEILWALKER_LUMP_START, __CEILWALKERSTART)
-  CEILWALKER_WALK_CEIL1_L,     // 249
-  CEILWALKER_WALK_CEIL2_L,     // 250
-  CEILWALKER_WALK_CEIL3_L,     // 251
-  CEILWALKER_WALK_CEIL4_L,     // 252
-  CEILWALKER_FALL_L,           // 253
-  CEILWALKER_WALK_CEIL1_R,     // 254
-  CEILWALKER_WALK_CEIL2_R,     // 255
-  CEILWALKER_WALK_CEIL3_R,     // 256
-  CEILWALKER_WALK_CEIL4_R,     // 257
-  CEILWALKER_FALL_R,           // 258
-  CEILWALKER_WALK1_L,          // 259
-  CEILWALKER_WALK2_L,          // 260
-  CEILWALKER_WALK3_L,          // 261
-  CEILWALKER_WALK4_L,          // 262
-  CEILWALKER_WALK1_R,          // 263
-  CEILWALKER_WALK2_R,          // 264
-  CEILWALKER_WALK3_R,          // 265
-  CEILWALKER_WALK4_R,          // 266
+  CEILWALKER_WALK_CEIL1_L_SPR, // 249
+  CEILWALKER_WALK_CEIL2_L_SPR, // 250
+  CEILWALKER_WALK_CEIL3_L_SPR, // 251
+  CEILWALKER_WALK_CEIL4_L_SPR, // 252
+  CEILWALKER_FALL_L_SPR,       // 253
+  CEILWALKER_WALK_CEIL1_R_SPR, // 254
+  CEILWALKER_WALK_CEIL2_R_SPR, // 255
+  CEILWALKER_WALK_CEIL3_R_SPR, // 256
+  CEILWALKER_WALK_CEIL4_R_SPR, // 257
+  CEILWALKER_FALL_R_SPR,       // 258
+  CEILWALKER_WALK1_L_SPR,      // 259
+  CEILWALKER_WALK2_L_SPR,      // 260
+  CEILWALKER_WALK3_L_SPR,      // 261
+  CEILWALKER_WALK4_L_SPR,      // 262
+  CEILWALKER_WALK1_R_SPR,      // 263
+  CEILWALKER_WALK2_R_SPR,      // 264
+  CEILWALKER_WALK3_R_SPR,      // 265
+  CEILWALKER_WALK4_R_SPR,      // 266
   END_LUMP(CEILWALKER_LUMP_END, __CEILWALKEREND)
 
   START_LUMP(BOMB_LUMP_START, __BOMBSTART)
@@ -517,7 +517,7 @@ typedef enum {
   END_LUMP(BOUNCEBOT_LUMP_END, __BOUNCEBOTEND)
 
   START_LUMP(PLATFORM_LUMP_START, __PLATFORMSTART)
-  PLATFORMSPR,                 // 369
+  PLATFORM_SPR,                // 369
   END_LUMP(PLATFORM_LUMP_END, __PLATFORMEND)
 
   START_LUMP(UNUSED3_LUMP_START, __UNUSED3START)
@@ -552,7 +552,7 @@ typedef enum {
   END_LUMP(SPARKSHOT_LUMP_END, __SPARKSHOTEND)
 
   START_LUMP(PUSHBLOCK_LUMP_START, __PUSHBLOCKSTART)
-  PUSHBLOCKSPR,                // 386
+  PUSHBLOCK_SPR,               // 386
   END_LUMP(PUSHBLOCK_LUMP_END, __PUSHBLOCKEND)
 
   START_LUMP(ROBOPAL_LUMP_START, __ROBOPALSTART)
@@ -569,11 +569,11 @@ typedef enum {
   END_LUMP(ROBOPAL_LUMP_END, __ROBOPALEND)
 
   START_LUMP(CRUSHERBLOCK_LUMP_START, __CRUSHERBLOCKSTART)
-  CRUSHERBLOCKSPR,             // 397
+  CRUSHERBLOCK_SPR,            // 397
   END_LUMP(CRUSHERBLOCK_LUMP_END, __CRUSHERBLOCKEND)
 
   START_LUMP(FALLINGBLOCK_LUMP_START, __FALLINGBLOCKSTART)
-  FALLINGBLOCKSPR,             // 398
+  FALLINGBLOCK_SPR,            // 398
   END_LUMP(FALLINGBLOCK_LUMP_END, __FALLINGBLOCKEND)
 
   START_LUMP(TANKBOT_LUMP_START, __TANKBOTSTART)
@@ -585,10 +585,10 @@ typedef enum {
   TANKBOT_SHOT_LANDING_SPR,    // 404
   END_LUMP(TANKBOT_LUMP_END, __TANKBOTEND)
 
-  SCOREBOXSPR,                 // 405
+  SCOREBOX_SPR,                // 405
 
   START_LUMP(INTRO_LUMP_START, __INTROSTART)
-  APOGEELOGOSPR,               // 406
+  APOGEELOGO_SPR,              // 406
   ASTEROID1_SPR,               // 407
   ASTEROID2_SPR,               // 408
   ASTEROID3_SPR,               // 409

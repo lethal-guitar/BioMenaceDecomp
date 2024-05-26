@@ -172,7 +172,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefButton(sc_None,"DEBUG")},
     {uii_Bad}
   };
-  UserItemGroup   far holdergroup = {0,0,CP_MAINMENUPIC,sc_None,holder};
+  UserItemGroup   far holdergroup = {0,0,CP_MAINMENU_PIC,sc_None,holder};
 
   // Sound menu
   UserItem far soundi[] =
@@ -183,7 +183,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefRButton(sc_Q,"QUIET ADLIB/SOUNDBLASTER")},
     {uii_Bad}
   };
-  UserItemGroup   far soundgroup = {8,0,CP_SOUNDMENUPIC,sc_None,soundi};
+  UserItemGroup   far soundgroup = {8,0,CP_SOUNDMENU_PIC,sc_None,soundi};
 
   // Music menu
   UserItem far musici[] =
@@ -192,7 +192,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefRButton(sc_A,"ADLIB/SOUNDBLASTER")},
     {uii_Bad}
   };
-  UserItemGroup   far musicgroup = {8,0,CP_MUSICMENUPIC,sc_None,musici};
+  UserItemGroup   far musicgroup = {8,0,CP_MUSICMENU_PIC,sc_None,musici};
 
   // New game menu
   UserItem far newgamei[] =
@@ -203,7 +203,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefButton(sc_P,"PRACTICE A LEVEL (15 sec)"),uc_SPractice},
     {uii_Bad}
   };
-  UserItemGroup   far newgamegroup = {8,0,CP_NEWGAMEMENUPIC,sc_None,newgamei,0,1};
+  UserItemGroup   far newgamegroup = {8,0,CP_NEWGAMEMENU_PIC,sc_None,newgamei,0,1};
 
   // Load/Save game menu
   UserItem far loadsavegamei[] =
@@ -216,8 +216,8 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {uii_Button,ui_Normal,sc_6},
     {uii_Bad}
   };
-  UserItemGroup   far loadgamegroup = {4,3,CP_LOADMENUPIC,sc_None,loadsavegamei,USL_LoadCustom};
-  UserItemGroup   far savegamegroup = {4,3,CP_SAVEMENUPIC,sc_None,loadsavegamei,USL_SaveCustom};
+  UserItemGroup   far loadgamegroup = {4,3,CP_LOADMENU_PIC,sc_None,loadsavegamei,USL_LoadCustom};
+  UserItemGroup   far savegamegroup = {4,3,CP_SAVEMENU_PIC,sc_None,loadsavegamei,USL_SaveCustom};
 
   // Options menu
   UserItemGroup   far compgroup = {0,0,0,sc_None,0,USL_CompCustom};
@@ -231,7 +231,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefFolder(sc_H,"",&helpgroup)},
     {uii_Bad}
   };
-  UserItemGroup   far optionsgroup = {8,0,CP_OPTIONSMENUPIC,sc_None,optionsi};
+  UserItemGroup   far optionsgroup = {8,0,CP_OPTIONSMENU_PIC,sc_None,optionsi};
 
   // Keyboard menu
   UserItem far keyi[] =
@@ -246,7 +246,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefButton(sc_None,"LEFT")},
     {uii_Bad}
   };
-  UserItemGroup   far keygroup = {0,0,CP_KEYMOVEMENTPIC,sc_None,keyi,USL_KeyCustom};
+  UserItemGroup   far keygroup = {0,0,CP_KEYMOVEMENT_PIC,sc_None,keyi,USL_KeyCustom};
   UserItem far keybi[] =
   {
     {DefButton(sc_J,"JUMP")},
@@ -254,18 +254,18 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefButton(sc_G,"GRENADE")},
     {uii_Bad}
   };
-  UserItemGroup   far keybgroup = {0,0,CP_KEYBUTTONPIC,sc_None,keybi,USL_KeyCustom};
+  UserItemGroup   far keybgroup = {0,0,CP_KEYBUTTON_PIC,sc_None,keybi,USL_KeyCustom};
   UserItem far keysi[] =
   {
     {DefFolder(sc_M,"MOVEMENT",&keygroup)},
     {DefFolder(sc_B,"BUTTONS",&keybgroup)},
     {uii_Bad}
   };
-  UserItemGroup   far keysgroup = {8,0,CP_KEYBOARDMENUPIC,sc_None,keysi,USL_KeySCustom};
+  UserItemGroup   far keysgroup = {8,0,CP_KEYBOARDMENU_PIC,sc_None,keysi,USL_KeySCustom};
 
   // Joystick #1 & #2
-  UserItemGroup   far joy1group = {CustomGroup(CP_JOYSTICKMENUPIC,sc_None,USL_Joy1Custom)};
-  UserItemGroup   far joy2group = {CustomGroup(CP_JOYSTICKMENUPIC,sc_None,USL_Joy2Custom)};
+  UserItemGroup   far joy1group = {CustomGroup(CP_JOYSTICKMENU_PIC,sc_None,USL_Joy1Custom)};
+  UserItemGroup   far joy2group = {CustomGroup(CP_JOYSTICKMENU_PIC,sc_None,USL_Joy2Custom)};
 
   // Config menu
   UserItem far configi[] =
@@ -278,7 +278,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefFolder(sc_2,"USE JOYSTICK #2",&joy2group)},
     {uii_Bad}
   };
-  UserItemGroup   far configgroup = {8,0,CP_CONFIGMENUPIC,sc_None,configi,USL_ConfigCustom};
+  UserItemGroup   far configgroup = {8,0,CP_CONFIGMENU_PIC,sc_None,configi,USL_ConfigCustom};
 
   // Main menu
   UserItem far rooti[] =
@@ -292,7 +292,7 @@ static  boolean USL_ConfigCustom(UserCall call,struct UserItem far *item),
     {DefButton(sc_Q,"QUIT"),uc_Quit},
     {uii_Bad}
   };
-  UserItemGroup   far rootgroup = {32,4,CP_MAINMENUPIC,sc_None,rooti};
+  UserItemGroup   far rootgroup = {32,4,CP_MAINMENU_PIC,sc_None,rooti};
 #undef  DefButton
 #undef  DefFolder
 
@@ -456,7 +456,7 @@ USL_DrawCtlPanel(void)
   if (topcard->items || topcard->title)
   {
     // Draw the backdrop
-    VWB_DrawPic(0,0,CP_MENUSCREENPIC);
+    VWB_DrawPic(0,0,CP_MENUSCREEN_PIC);
 
     // Draw the contents
     USL_DrawCtlPanelContents();
@@ -469,7 +469,7 @@ USL_DrawCtlPanel(void)
 static void
 USL_DialogSetup(word w,word h,word *x,word *y)
 {
-  VWB_DrawMPic(CtlPanelSX,CtlPanelSY,CP_MENUMASKPICM);
+  VWB_DrawMPic(CtlPanelSX,CtlPanelSY,CP_MENUMASK_PICM);
 
   *x = CtlPanelSX + ((CtlPanelW - w) / 2);
   *y = CtlPanelSY + ((CtlPanelH - h) / 2);
@@ -933,7 +933,7 @@ USL_ConfigJoystick(word joy)
   USL_DrawCtlPanel();
   x = CtlPanelSX + 60;
   y = CtlPanelSY + 19;
-  VWB_DrawPic(x,y,CP_JOYSTICKPIC);
+  VWB_DrawPic(x,y,CP_JOYSTICK_PIC);
 
   USL_CJDraw("Move Joystick to upper left","and press button #1");
   VWB_DrawTile8(x + 24,y + 8,TileBase + 6);
@@ -1406,7 +1406,7 @@ USL_SetUpCtlPanel(void)
   for (i = CONTROLS_LUMP_START;i <= CONTROLS_LUMP_END;i++)
     CA_MarkGrChunk(i);
   CA_MarkGrChunk(STARTFONT+1);            // Little font
-  CA_MarkGrChunk(CP_MENUMASKPICM);        // Mask for dialogs
+  CA_MarkGrChunk(CP_MENUMASK_PICM);       // Mask for dialogs
   CA_CacheMarks("Control Panel");
   CA_LoadAllSounds();
 

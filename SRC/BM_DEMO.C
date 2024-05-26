@@ -89,11 +89,11 @@ void ShowTitle(Uint16 timeout)
   panadjust = 0;
 
 #ifdef SHAREWARE
-  CA_CacheGrChunk(TITLESHAREWAREPIC);
-  VWB_DrawPic(0, 0, TITLESHAREWAREPIC);
+  CA_CacheGrChunk(TITLESHAREWARE_PIC);
+  VWB_DrawPic(0, 0, TITLESHAREWARE_PIC);
 #else
-  CA_CacheGrChunk(TITLEPIC);
-  VWB_DrawPic(0, 0, TITLEPIC);
+  CA_CacheGrChunk(TITLE_PIC);
+  VWB_DrawPic(0, 0, TITLE_PIC);
 #endif
 
   VW_SetScreen(displayofs, 0);
@@ -125,23 +125,23 @@ void ShowScreen(Sint16 num)
 
   if (num == 0)
   {
-    CA_CacheGrChunk(PREVIEWPIC);
-    VWB_DrawPic(0, 0, PREVIEWPIC);
+    CA_CacheGrChunk(PREVIEW_PIC);
+    VWB_DrawPic(0, 0, PREVIEW_PIC);
   }
   else if (num == 1)
   {
-    CA_CacheGrChunk(CREDITSPIC);
-    VWB_DrawPic(0, 0, CREDITSPIC);
+    CA_CacheGrChunk(CREDITS_PIC);
+    VWB_DrawPic(0, 0, CREDITS_PIC);
   }
   else if (num == 2)
   {
-    CA_CacheGrChunk(NOTSHAREWAREPIC);
-    VWB_DrawPic(0, 0, NOTSHAREWAREPIC);
+    CA_CacheGrChunk(NOTSHAREWARE_PIC);
+    VWB_DrawPic(0, 0, NOTSHAREWARE_PIC);
   }
   else if (num == 3)
   {
-    CA_CacheGrChunk(TECHHELPPIC);
-    VWB_DrawPic(0, 0, TECHHELPPIC);
+    CA_CacheGrChunk(TECHHELP_PIC);
+    VWB_DrawPic(0, 0, TECHHELP_PIC);
   }
 
   VW_SetScreen(displayofs, 0);

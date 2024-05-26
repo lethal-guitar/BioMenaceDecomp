@@ -293,47 +293,47 @@ statetype far s_brawler_attack2 = { /* 32d50 */
   NULL, NULL, R_Draw, &s_brawler_walk1};
 
 statetype far s_ceilwalker_walkceil1 = { /* 32d70 */
-  CEILWALKER_WALK_CEIL1_L, CEILWALKER_WALK_CEIL1_R,
+  CEILWALKER_WALK_CEIL1_L_SPR, CEILWALKER_WALK_CEIL1_R_SPR,
   step, false, ps_toceiling, 10, 128, 0,
   T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil2};
 
 statetype far s_ceilwalker_walkceil2 = { /* 32d90 */
-  CEILWALKER_WALK_CEIL2_L, CEILWALKER_WALK_CEIL2_R,
+  CEILWALKER_WALK_CEIL2_L_SPR, CEILWALKER_WALK_CEIL2_R_SPR,
   step, false, ps_toceiling, 10, 128, 0,
   T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil3};
 
 statetype far s_ceilwalker_walkceil3 = { /* 32db0 */
-  CEILWALKER_WALK_CEIL3_L, CEILWALKER_WALK_CEIL3_R,
+  CEILWALKER_WALK_CEIL3_L_SPR, CEILWALKER_WALK_CEIL3_R_SPR,
   step, false, ps_toceiling, 10, 128, 0,
   T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil4};
 
 statetype far s_ceilwalker_walkceil4 = { /* 32dd0 */
-  CEILWALKER_WALK_CEIL4_L, CEILWALKER_WALK_CEIL4_R,
+  CEILWALKER_WALK_CEIL4_L_SPR, CEILWALKER_WALK_CEIL4_R_SPR,
   step, false, ps_toceiling, 10, 128, 0,
   T_CeilingWalkerOnCeiling, NULL, R_WalkCeiling, &s_ceilwalker_walkceil1};
 
 statetype far s_ceilwalker_walkfloor1 = { /* 32df0 */
-  CEILWALKER_WALK1_L, CEILWALKER_WALK1_R,
+  CEILWALKER_WALK1_L_SPR, CEILWALKER_WALK1_R_SPR,
   step, false, ps_tofloor, 6, 128, 0,
   T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor2};
 
 statetype far s_ceilwalker_walkfloor2 = { /* 32e10 */
-  CEILWALKER_WALK2_L, CEILWALKER_WALK2_R,
+  CEILWALKER_WALK2_L_SPR, CEILWALKER_WALK2_R_SPR,
   step, false, ps_tofloor, 6, 128, 0,
   T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor3};
 
 statetype far s_ceilwalker_walkfloor3 = { /* 32e30 */
-  CEILWALKER_WALK3_L, CEILWALKER_WALK3_R,
+  CEILWALKER_WALK3_L_SPR, CEILWALKER_WALK3_R_SPR,
   step, false, ps_tofloor, 6, 128, 0,
   T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor4};
 
 statetype far s_ceilwalker_walkfloor4 = { /* 32e50 */
-  CEILWALKER_WALK4_L, CEILWALKER_WALK4_R,
+  CEILWALKER_WALK4_L_SPR, CEILWALKER_WALK4_R_SPR,
   step, false, ps_tofloor, 6, 128, 0,
   T_CeilingWalkerOnFloor, NULL, R_Walk, &s_ceilwalker_walkfloor1};
 
 statetype far s_ceilwalker_falling = { /* 32e70 */
-  CEILWALKER_FALL_L, CEILWALKER_FALL_R,
+  CEILWALKER_FALL_L_SPR, CEILWALKER_FALL_R_SPR,
   think, false, ps_none, 0, 0, 0,
   T_Projectile, NULL, R_CeilingWalkerFalling, &s_ceilwalker_falling};
 

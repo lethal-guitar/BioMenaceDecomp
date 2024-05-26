@@ -710,7 +710,7 @@ void ScanInfoPlane(void)
   }
 
 
-  CA_MarkGrChunk(SCOREBOXSPR);
+  CA_MarkGrChunk(SCOREBOX_SPR);
   SpawnScoreBox();
 
   for (i = 0; i < NUMLUMPS; i++)
@@ -750,10 +750,10 @@ void HostageDialog(void)
   }
 
   CA_UpLevel();
-  CA_MarkGrChunk(HOSTAGE1PIC);
-  CA_MarkGrChunk(HOSTAGE2PIC);
-  CA_MarkGrChunk(HOSTAGE3PIC);
-  CA_MarkGrChunk(SNAKETALKPIC);
+  CA_MarkGrChunk(HOSTAGE1_PIC);
+  CA_MarkGrChunk(HOSTAGE2_PIC);
+  CA_MarkGrChunk(HOSTAGE3_PIC);
+  CA_MarkGrChunk(SNAKETALK_PIC);
   CA_CacheMarks(0);
 
   VW_FixRefreshBuffer();
@@ -765,24 +765,24 @@ void HostageDialog(void)
 
     switch (i)
     {
-      case  0: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE1PIC); break;
-      case  1: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case  2: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE3PIC); break;
-      case  3: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case  4: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2PIC); break;
-      case  5: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case  6: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE1PIC); break;
-      case  7: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case  8: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE3PIC); break;
-      case  9: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case 10: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2PIC); break;
-      case 11: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case 12: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE1PIC); break;
-      case 13: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case 14: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2PIC); break;
-      case 15: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
-      case 16: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2PIC); break;
-      case 17: VWB_DrawPic(WindowX, WindowY+4, SNAKETALKPIC); break;
+      case  0: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE1_PIC); break;
+      case  1: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case  2: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE3_PIC); break;
+      case  3: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case  4: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2_PIC); break;
+      case  5: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case  6: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE1_PIC); break;
+      case  7: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case  8: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE3_PIC); break;
+      case  9: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case 10: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2_PIC); break;
+      case 11: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case 12: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE1_PIC); break;
+      case 13: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case 14: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2_PIC); break;
+      case 15: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
+      case 16: VWB_DrawPic(WindowX, WindowY+4, HOSTAGE2_PIC); break;
+      case 17: VWB_DrawPic(WindowX, WindowY+4, SNAKETALK_PIC); break;
     }
 
     PrintY += 6;

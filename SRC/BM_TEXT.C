@@ -481,7 +481,7 @@ static void DrawNagScreenTimer(void)
   Sint16 oldcolor;
   oldcolor = fontcolor;
 
-  VWB_DrawPic(16, 176, H_BOTTOMINFOPIC);
+  VWB_DrawPic(16, 176, H_BOTTOMINFO_PIC);
 
   strcpy(str, "Timer= ");
 
@@ -532,16 +532,16 @@ void PageLayout(boolean shownumber)
 // clear the screen
 //
   VWB_Bar(0, 0, 320, 200, BACKCOLOR);
-  VWB_DrawPic( 16, 0, H_TOPWINDOWPIC);
-  VWB_DrawPic(  0, 0, H_LEFTWINDOWPIC);
-  VWB_DrawPic(304, 0, H_RIGHTWINDOWPIC);
+  VWB_DrawPic( 16, 0, H_TOPWINDOW_PIC);
+  VWB_DrawPic(  0, 0, H_LEFTWINDOW_PIC);
+  VWB_DrawPic(304, 0, H_RIGHTWINDOW_PIC);
   if (shownumber)
   {
-    VWB_DrawPic(16, 176, H_BOTTOMINFOPIC);
+    VWB_DrawPic(16, 176, H_BOTTOMINFO_PIC);
   }
   else
   {
-    VWB_DrawPic(16, 192, H_TOPWINDOWPIC);
+    VWB_DrawPic(16, 192, H_TOPWINDOW_PIC);
   }
 
   for (i=0; i<TEXTROWS; i++)
@@ -655,10 +655,10 @@ void CacheLayoutGraphics(void)
   bombpoint = text+30000;
   numpages = pagenum = 0;
 
-  CA_MarkGrChunk(H_TOPWINDOWPIC);
-  CA_MarkGrChunk(H_LEFTWINDOWPIC);
-  CA_MarkGrChunk(H_RIGHTWINDOWPIC);
-  CA_MarkGrChunk(H_BOTTOMINFOPIC);
+  CA_MarkGrChunk(H_TOPWINDOW_PIC);
+  CA_MarkGrChunk(H_LEFTWINDOW_PIC);
+  CA_MarkGrChunk(H_RIGHTWINDOW_PIC);
+  CA_MarkGrChunk(H_BOTTOMINFO_PIC);
 
   do
   {
@@ -714,17 +714,17 @@ Sint16 HelpMenu(void)
 
   VWB_Bar(0, 0, 320, 200, BACKCOLOR);
 
-  CA_CacheGrChunk(H_HELPPIC);
-  CA_CacheGrChunk(H_HANDPIC);
-  CA_CacheGrChunk(H_TOPWINDOWPIC);
-  CA_CacheGrChunk(H_LEFTWINDOWPIC);
-  CA_CacheGrChunk(H_RIGHTWINDOWPIC);
+  CA_CacheGrChunk(H_HELP_PIC);
+  CA_CacheGrChunk(H_HAND_PIC);
+  CA_CacheGrChunk(H_TOPWINDOW_PIC);
+  CA_CacheGrChunk(H_LEFTWINDOW_PIC);
+  CA_CacheGrChunk(H_RIGHTWINDOW_PIC);
 
-  VWB_DrawPic( 16,   0, H_TOPWINDOWPIC);
-  VWB_DrawPic(  0,   0, H_LEFTWINDOWPIC);
-  VWB_DrawPic(304,   0, H_RIGHTWINDOWPIC);
-  VWB_DrawPic( 16, 192, H_TOPWINDOWPIC);
-  VWB_DrawPic( 88,   8, H_HELPPIC);
+  VWB_DrawPic( 16,   0, H_TOPWINDOW_PIC);
+  VWB_DrawPic(  0,   0, H_LEFTWINDOW_PIC);
+  VWB_DrawPic(304,   0, H_RIGHTWINDOW_PIC);
+  VWB_DrawPic( 16, 192, H_TOPWINDOW_PIC);
+  VWB_DrawPic( 88,   8, H_HELP_PIC);
 
   ydelta = 0;
   IN_ClearKeysDown();
@@ -738,7 +738,7 @@ Sint16 HelpMenu(void)
     {
       myhelpmenupos = 4;
     }
-    VWB_DrawPic(56, 24*myhelpmenupos+56, H_HANDPIC);
+    VWB_DrawPic(56, 24*myhelpmenupos+56, H_HAND_PIC);
     VW_UpdateScreen();
     VWB_Bar(56, 24*myhelpmenupos+56, 31, 24, BACKCOLOR);
     IN_ReadControl(0, &control);
@@ -998,8 +998,8 @@ void EpisodeEndScreens(void)
   RF_FixOfs();
   CA_UpLevel();
   CA_SetGrPurge();
-  CA_CacheGrChunk(H_FLASHARROW2PIC);
-  CA_CacheGrChunk(H_FLASHARROW1PIC);
+  CA_CacheGrChunk(H_FLASHARROW2_PIC);
+  CA_CacheGrChunk(H_FLASHARROW1_PIC);
 
   CA_CacheGrChunk(T_ENDART);
   textseg = grsegs[T_ENDART];
@@ -1017,7 +1017,7 @@ void EpisodeEndScreens(void)
 
     do
     {
-      VWB_DrawPic(298, 184, H_FLASHARROW1PIC);
+      VWB_DrawPic(298, 184, H_FLASHARROW1_PIC);
       for (i=0; i<TickBase; i++)
       {
         if (IN_IsUserInput())
@@ -1027,7 +1027,7 @@ void EpisodeEndScreens(void)
         VW_WaitVBL(1);
       }
 
-      VWB_DrawPic(298, 184, H_FLASHARROW2PIC);
+      VWB_DrawPic(298, 184, H_FLASHARROW2_PIC);
       for (i=0; i<TickBase; i++)
       {
         if (IN_IsUserInput())
@@ -1045,8 +1045,8 @@ nextpage:
   StopMusic();
 
   MM_FreePtr(&grsegs[T_ENDART]);
-  MM_FreePtr(&grsegs[H_FLASHARROW1PIC]);
-  MM_FreePtr(&grsegs[H_FLASHARROW2PIC]);
+  MM_FreePtr(&grsegs[H_FLASHARROW1_PIC]);
+  MM_FreePtr(&grsegs[H_FLASHARROW2_PIC]);
   CA_DownLevel();
   IN_ClearKeysDown();
   VW_ClearVideo(BACKCOLOR);
